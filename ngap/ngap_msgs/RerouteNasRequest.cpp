@@ -219,16 +219,15 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_RerouteNASRequestIes->protocolIEs->list.count; i++) {
     Ngap_RerouteNASRequest_IEs_t* ngap_ie =
-        (Ngap_RerouteNASRequest_IEs_t*) m_RerouteNASRequestIes->protocolIEs->list.array[i];
+        (Ngap_RerouteNASRequest_IEs_t*)
+            m_RerouteNASRequestIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AMF_UE_NGAP_ID) {
           AmfUeNgapId tmp = {};
-          if (!tmp.decode(ngap_ie
-                              ->value.choice.AMF_UE_NGAP_ID)) {
+          if (!tmp.decode(ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -241,13 +240,10 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!m_RanUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+          if (!m_RanUeNgapId.decode(ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -260,25 +256,20 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_NGAP_Message: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_OCTET_STRING) {
-          m_NgapMessage = ngap_ie
-                              ->value.choice.OCTET_STRING;
+          m_NgapMessage = ngap_ie->value.choice.OCTET_STRING;
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP Message IE error");
         }
       } break;
 
       case Ngap_ProtocolIE_ID_id_AMFSetID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AMFSetID) {
-          if (!m_AmfSetId.decode(
-                  ngap_ie
-                      ->value.choice.AMFSetID)) {
+          if (!m_AmfSetId.decode(ngap_ie->value.choice.AMFSetID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMFSetID error");
             return false;
@@ -291,14 +282,11 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_AllowedNSSAI: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AllowedNSSAI) {
           AllowedNSSAI tmp = {};
-          if (!m_AllowedNssai->decode(
-                  ngap_ie
-                      ->value.choice.AllowedNSSAI)) {
+          if (!m_AllowedNssai->decode(ngap_ie->value.choice.AllowedNSSAI)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AllowedNSSAI IE error");
             return false;

@@ -91,17 +91,16 @@ bool NgResetAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_NgResetAckIes =
           &ngapPdu->choice.successfulOutcome->value.choice.NGResetAcknowledge;
       for (int i = 0; i < m_NgResetAckIes->protocolIEs->list.count; i++) {
-    Ngap_NGResetAcknowledgeIEs_t* ngap_ie =
-        (Ngap_NGResetAcknowledgeIEs_t*) m_NgResetAckIes->protocolIEs->list.array[i];
+        Ngap_NGResetAcknowledgeIEs_t* ngap_ie =
+            (Ngap_NGResetAcknowledgeIEs_t*)
+                m_NgResetAckIes->protocolIEs->list.array[i];
         switch (ngap_ie->id) {
           case Ngap_ProtocolIE_ID_id_UE_associatedLogicalNG_connectionList: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_ignore &&
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
                 ngap_ie->value.present ==
                     Ngap_NGResetAcknowledgeIEs__value_PR_UE_associatedLogicalNG_connectionList) {
               UeAssociatedLogicalNgConnectionList tmp = {};
-              if (!tmp.decode(ngap_ie
-                                  ->value.choice
+              if (!tmp.decode(ngap_ie->value.choice
                                   .UE_associatedLogicalNG_connectionList)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP UE_associatedLogicalNG_connectionList IE "

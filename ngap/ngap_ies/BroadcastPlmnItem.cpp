@@ -74,8 +74,8 @@ bool BroadcastPlmnItem::encode(Ngap_BroadcastPLMNItem_t& plmnItem) const {
     if (!slice->s_NSSAI) return false;
     if (!it->encode(*slice->s_NSSAI)) return false;
     if (!plmnItem.tAISliceSupportList) {
-      plmnItem.tAISliceSupportList = (Ngap_SliceSupportList_t*) calloc(
-          1, sizeof(Ngap_SliceSupportList_t));
+      plmnItem.tAISliceSupportList =
+          (Ngap_SliceSupportList_t*) calloc(1, sizeof(Ngap_SliceSupportList_t));
       if (!plmnItem.tAISliceSupportList) return false;
     }
     if (ASN_SEQUENCE_ADD(&plmnItem.tAISliceSupportList->list, slice) != 0)

@@ -18,8 +18,7 @@ BroadcastSessionSetupFailureMsg::BroadcastSessionSetupFailureMsg()
   m_BroadcastSessionSetupFailureIes = nullptr;
   m_CriticalityDiag                 = std::nullopt;
 
-  NgapMessage::setMessageType(
-      NgapMessageType::BROADCAST_SESSION_SETUP_FAILURE);
+  NgapMessage::setMessageType(NgapMessageType::BROADCAST_SESSION_SETUP_FAILURE);
   initialize();
 }
 
@@ -31,8 +30,7 @@ void BroadcastSessionSetupFailureMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-bool BroadcastSessionSetupFailureMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool BroadcastSessionSetupFailureMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }
@@ -71,8 +69,7 @@ bool BroadcastSessionSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_BroadcastSessionSetupFailureIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionSetupFailureIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionSetupFailureIEs_t* ie =
         (Ngap_BroadcastSessionSetupFailureIEs_t*)
             m_BroadcastSessionSetupFailureIes->protocolIEs->list.array[i];

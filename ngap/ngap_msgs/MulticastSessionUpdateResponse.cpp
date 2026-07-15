@@ -32,8 +32,7 @@ void MulticastSessionUpdateResponseMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-bool MulticastSessionUpdateResponseMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool MulticastSessionUpdateResponseMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }

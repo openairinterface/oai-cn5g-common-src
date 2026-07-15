@@ -25,9 +25,7 @@ class MbsSessionReleaseResponseTransfer {
   int encode(uint8_t* buf, int bufSize) const;
   bool decode(const uint8_t* buf, int bufSize);
 
-  const Ngap_MBSSessionReleaseResponseTransfer_t* getIe() const {
-    return m_Ie;
-  }
+  const Ngap_MBSSessionReleaseResponseTransfer_t* getIe() const { return m_Ie; }
 
  private:
   Ngap_MBSSessionReleaseResponseTransfer_t* m_Ie;

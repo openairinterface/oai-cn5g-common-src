@@ -60,7 +60,7 @@ class NgSetupResponseMsg : public NgapMessage {
   PlmnSupportList m_PlmnSupportList;          // Mandatory
   // TODO: CriticalityDiagnostics //Optional
   std::optional<UeRetentionInformation> m_UeRetentionInformation;  // Optional
-  std::optional<IabSupported> m_IabSupported;      // Optional, Rel-17
+  std::optional<IabSupported> m_IabSupported;        // Optional, Rel-17
   std::optional<ExtendedAmfName> m_ExtendedAmfName;  // Optional, Rel-17
 };
 

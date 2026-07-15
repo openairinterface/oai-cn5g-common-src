@@ -31,12 +31,18 @@ void QosFlowPerTnlInformation::get(
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformation::encode(
     Ngap_QosFlowPerTNLInformation_t& qosFlowPerTnlInformation) const {
-  if (!qosFlowPerTnlInformation.uPTransportLayerInformation) qosFlowPerTnlInformation.uPTransportLayerInformation = (Ngap_UPTransportLayerInformation_t*) calloc(1, sizeof(Ngap_UPTransportLayerInformation_t));
+  if (!qosFlowPerTnlInformation.uPTransportLayerInformation)
+    qosFlowPerTnlInformation.uPTransportLayerInformation =
+        (Ngap_UPTransportLayerInformation_t*) calloc(
+            1, sizeof(Ngap_UPTransportLayerInformation_t));
   if (!m_UpTransportLayerInformation.encode(
           *qosFlowPerTnlInformation.uPTransportLayerInformation))
     return false;
 
-  if (!qosFlowPerTnlInformation.associatedQosFlowList) qosFlowPerTnlInformation.associatedQosFlowList = (Ngap_AssociatedQosFlowList_t*) calloc(1, sizeof(Ngap_AssociatedQosFlowList_t));
+  if (!qosFlowPerTnlInformation.associatedQosFlowList)
+    qosFlowPerTnlInformation.associatedQosFlowList =
+        (Ngap_AssociatedQosFlowList_t*) calloc(
+            1, sizeof(Ngap_AssociatedQosFlowList_t));
   if (!m_AssociatedQosFlowList.encode(
           *qosFlowPerTnlInformation.associatedQosFlowList))
     return false;

@@ -49,11 +49,17 @@ void QosFlowLevelQosParameters::get(
 //------------------------------------------------------------------------------
 bool QosFlowLevelQosParameters::encode(
     Ngap_QosFlowLevelQosParameters_t& qosFlowLevelQosParameters) const {
-  if (!qosFlowLevelQosParameters.qosCharacteristics) qosFlowLevelQosParameters.qosCharacteristics = (Ngap_QosCharacteristics_t*) calloc(1, sizeof(Ngap_QosCharacteristics_t));
+  if (!qosFlowLevelQosParameters.qosCharacteristics)
+    qosFlowLevelQosParameters.qosCharacteristics =
+        (Ngap_QosCharacteristics_t*) calloc(
+            1, sizeof(Ngap_QosCharacteristics_t));
   if (!m_QosCharacteristics.encode(
           *qosFlowLevelQosParameters.qosCharacteristics))
     return false;
-  if (!qosFlowLevelQosParameters.allocationAndRetentionPriority) qosFlowLevelQosParameters.allocationAndRetentionPriority = (Ngap_AllocationAndRetentionPriority_t*) calloc(1, sizeof(Ngap_AllocationAndRetentionPriority_t));
+  if (!qosFlowLevelQosParameters.allocationAndRetentionPriority)
+    qosFlowLevelQosParameters.allocationAndRetentionPriority =
+        (Ngap_AllocationAndRetentionPriority_t*) calloc(
+            1, sizeof(Ngap_AllocationAndRetentionPriority_t));
   if (!m_AllocationAndRetentionPriority.encode(
           *qosFlowLevelQosParameters.allocationAndRetentionPriority))
     return false;

@@ -146,7 +146,8 @@ bool PduSessionResourceSetupUnsuccessfulTransfer::decode(
   // m_PduSessionResourceSetupUnsuccessfulTransferIe);
 
   if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause) return false;
-  if (!m_Cause.decode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)) {
+  if (!m_Cause.decode(
+          *m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)) {
     oai::logger::logger_common::ngap().error("Decode Cause IE error");
     return false;
   }

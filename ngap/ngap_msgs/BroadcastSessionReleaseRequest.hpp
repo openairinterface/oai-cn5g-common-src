@@ -34,7 +34,7 @@ class BroadcastSessionReleaseRequestMsg : public NgapMessage {
   Ngap_BroadcastSessionReleaseRequest_t* m_BroadcastSessionReleaseRequestIes;
 
   MbsSessionId m_MbsSessionId;  // Mandatory
-  Cause m_Cause;                 // Mandatory
+  Cause m_Cause;                // Mandatory
 };
 
 }  // namespace oai::ngap

@@ -166,7 +166,8 @@ class InitialContextSetupRequestMsg : public NgapUeMessage {
   std::optional<FiveGProSeUePC5AggregateMaximumBitRate>
       m_FiveGProSeUePC5AggregateMaximumBitRate;
   std::optional<FiveGProSePC5QoSParameters> m_FiveGProSePC5QoSParameters;
-  std::optional<NgapUeRadioCapabilityId> m_UeRadioCapabilityId;  // Optional, Rel-16
+  std::optional<NgapUeRadioCapabilityId>
+      m_UeRadioCapabilityId;  // Optional, Rel-16
 };
 
 }  // namespace oai::ngap

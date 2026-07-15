@@ -172,17 +172,15 @@ bool UeContextReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   for (int i = 0; i < m_UEContextReleaseCommandIes->protocolIEs->list.count;
        i++) {
     Ngap_UEContextReleaseCommand_IEs_t* ngap_ie =
-        (Ngap_UEContextReleaseCommand_IEs_t*) m_UEContextReleaseCommandIes->protocolIEs->list.array[i];
+        (Ngap_UEContextReleaseCommand_IEs_t*)
+            m_UEContextReleaseCommandIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_reject &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_UEContextReleaseCommand_IEs__value_PR_UE_NGAP_IDs) {
           if (!m_AmfUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.UE_NGAP_IDs.choice.aMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.UE_NGAP_IDs.choice.aMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -195,18 +193,15 @@ bool UeContextReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_UE_NGAP_IDs: {
-        if (!m_AmfUeNgapId.decode(
-                ngap_ie
-                    ->value.choice.UE_NGAP_IDs.choice.uE_NGAP_ID_pair
-                    ->aMF_UE_NGAP_ID)) {
+        if (!m_AmfUeNgapId.decode(ngap_ie->value.choice.UE_NGAP_IDs.choice
+                                      .uE_NGAP_ID_pair->aMF_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP AMF_UE_NGAP_ID IE error");
           return false;
         }
         RanUeNgapId tmp = {};
-        if (!tmp.decode(ngap_ie
-                            ->value.choice.UE_NGAP_IDs.choice.uE_NGAP_ID_pair
-                            ->rAN_UE_NGAP_ID)) {
+        if (!tmp.decode(ngap_ie->value.choice.UE_NGAP_IDs.choice
+                            .uE_NGAP_ID_pair->rAN_UE_NGAP_ID)) {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP RAN_UE_NGAP_ID IE error");
           return false;
@@ -215,14 +210,10 @@ bool UeContextReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
       } break;
       case Ngap_ProtocolIE_ID_id_Cause: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_ignore &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_UEContextReleaseCommand_IEs__value_PR_Cause) {
-          if (!m_CauseValue.decode(
-                  ngap_ie
-                      ->value.choice.Cause)) {
+          if (!m_CauseValue.decode(ngap_ie->value.choice.Cause)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP Cause IE error");
             return false;

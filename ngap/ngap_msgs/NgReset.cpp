@@ -102,16 +102,13 @@ bool NgResetMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             Ngap_InitiatingMessage__value_PR_NGReset) {
       m_NgResetIes = &ngapPdu->choice.initiatingMessage->value.choice.NGReset;
       for (int i = 0; i < m_NgResetIes->protocolIEs->list.count; i++) {
-    Ngap_NGResetIEs_t* ngap_ie =
-        (Ngap_NGResetIEs_t*) m_NgResetIes->protocolIEs->list.array[i];
+        Ngap_NGResetIEs_t* ngap_ie =
+            (Ngap_NGResetIEs_t*) m_NgResetIes->protocolIEs->list.array[i];
         switch (ngap_ie->id) {
           case Ngap_ProtocolIE_ID_id_Cause: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_ignore &&
-                ngap_ie->value.present ==
-                    Ngap_NGResetIEs__value_PR_Cause) {
-              if (!m_Cause.decode(ngap_ie
-                                      ->value.choice.Cause)) {
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+                ngap_ie->value.present == Ngap_NGResetIEs__value_PR_Cause) {
+              if (!m_Cause.decode(ngap_ie->value.choice.Cause)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP Cause IE error");
                 return false;
@@ -123,12 +120,9 @@ bool NgResetMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           case Ngap_ProtocolIE_ID_id_ResetType: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_reject &&
-                ngap_ie->value.present ==
-                    Ngap_NGResetIEs__value_PR_ResetType) {
-              if (!m_ResetType.decode(ngap_ie
-                                          ->value.choice.ResetType)) {
+            if (ngap_ie->criticality == Ngap_Criticality_reject &&
+                ngap_ie->value.present == Ngap_NGResetIEs__value_PR_ResetType) {
+              if (!m_ResetType.decode(ngap_ie->value.choice.ResetType)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP ResetType IE error");
                 return false;

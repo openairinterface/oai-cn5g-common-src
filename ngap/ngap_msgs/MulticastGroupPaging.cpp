@@ -32,13 +32,11 @@ void MulticastGroupPagingMsg::initialize() {
 void MulticastGroupPagingMsg::setMbsSessionId(const MbsSessionId& v) {
   m_MbsSessionId = v;
 
-  Ngap_MulticastGroupPagingIEs_t* ie =
-      (Ngap_MulticastGroupPagingIEs_t*) calloc(
-          1, sizeof(Ngap_MulticastGroupPagingIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_MBS_SessionID;
-  ie->criticality = Ngap_Criticality_ignore;
-  ie->value.present =
-      Ngap_MulticastGroupPagingIEs__value_PR_MBS_SessionID;
+  Ngap_MulticastGroupPagingIEs_t* ie = (Ngap_MulticastGroupPagingIEs_t*) calloc(
+      1, sizeof(Ngap_MulticastGroupPagingIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_MBS_SessionID;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_MulticastGroupPagingIEs__value_PR_MBS_SessionID;
 
   if (!m_MbsSessionId.encode(ie->value.choice.MBS_SessionID)) {
     oai::logger::logger_common::ngap().error(
@@ -47,8 +45,7 @@ void MulticastGroupPagingMsg::setMbsSessionId(const MbsSessionId& v) {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_MulticastGroupPagingIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_MulticastGroupPagingIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-SessionID IE error");
@@ -64,13 +61,11 @@ bool MulticastGroupPagingMsg::getMbsSessionId(MbsSessionId& v) const {
 void MulticastGroupPagingMsg::setMbsServiceArea(const MbsServiceArea& v) {
   m_MbsServiceArea = std::make_optional<MbsServiceArea>(v);
 
-  Ngap_MulticastGroupPagingIEs_t* ie =
-      (Ngap_MulticastGroupPagingIEs_t*) calloc(
-          1, sizeof(Ngap_MulticastGroupPagingIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_MBS_ServiceArea;
-  ie->criticality = Ngap_Criticality_ignore;
-  ie->value.present =
-      Ngap_MulticastGroupPagingIEs__value_PR_MBS_ServiceArea;
+  Ngap_MulticastGroupPagingIEs_t* ie = (Ngap_MulticastGroupPagingIEs_t*) calloc(
+      1, sizeof(Ngap_MulticastGroupPagingIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_MBS_ServiceArea;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_MulticastGroupPagingIEs__value_PR_MBS_ServiceArea;
 
   if (!m_MbsServiceArea.value().encode(ie->value.choice.MBS_ServiceArea)) {
     oai::logger::logger_common::ngap().error(
@@ -79,8 +74,7 @@ void MulticastGroupPagingMsg::setMbsServiceArea(const MbsServiceArea& v) {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_MulticastGroupPagingIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_MulticastGroupPagingIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-ServiceArea IE error");
@@ -111,8 +105,7 @@ bool MulticastGroupPagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     return false;
   }
 
-  for (int i = 0;
-       i < m_MulticastGroupPagingIes->protocolIEs->list.count; i++) {
+  for (int i = 0; i < m_MulticastGroupPagingIes->protocolIEs->list.count; i++) {
     Ngap_MulticastGroupPagingIEs_t* ie =
         (Ngap_MulticastGroupPagingIEs_t*)
             m_MulticastGroupPagingIes->protocolIEs->list.array[i];

@@ -32,8 +32,7 @@ void MulticastSessionUpdateRequestMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void MulticastSessionUpdateRequestMsg::setMbsSessionId(
-    const MbsSessionId& v) {
+void MulticastSessionUpdateRequestMsg::setMbsSessionId(const MbsSessionId& v) {
   m_MbsSessionId = v;
 
   Ngap_MulticastSessionUpdateRequestIEs_t* ie =
@@ -59,8 +58,7 @@ void MulticastSessionUpdateRequestMsg::setMbsSessionId(
 }
 
 //------------------------------------------------------------------------------
-bool MulticastSessionUpdateRequestMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool MulticastSessionUpdateRequestMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }
@@ -78,8 +76,7 @@ void MulticastSessionUpdateRequestMsg::setMbsAreaSessionId(
   ie->value.present =
       Ngap_MulticastSessionUpdateRequestIEs__value_PR_MBS_AreaSessionID;
 
-  if (!m_MbsAreaSessionId.value().encode(
-          ie->value.choice.MBS_AreaSessionID)) {
+  if (!m_MbsAreaSessionId.value().encode(ie->value.choice.MBS_AreaSessionID)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
@@ -152,8 +149,7 @@ bool MulticastSessionUpdateRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_MulticastSessionUpdateRequestIes->protocolIEs->list.count;
-       i++) {
+       i < m_MulticastSessionUpdateRequestIes->protocolIEs->list.count; i++) {
     Ngap_MulticastSessionUpdateRequestIEs_t* ie =
         (Ngap_MulticastSessionUpdateRequestIEs_t*)
             m_MulticastSessionUpdateRequestIes->protocolIEs->list.array[i];

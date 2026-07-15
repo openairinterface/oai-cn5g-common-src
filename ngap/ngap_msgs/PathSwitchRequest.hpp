@@ -40,8 +40,8 @@ class PathSwitchRequestMsg : public NgapUeMessage {
   Ngap_PathSwitchRequest_t* m_PathSwitchRequestIes;
   // RAN_UE_NGAP_ID (Mandatory)
   // AMF_UE_NGAP_ID (Mandatory)
-  UserLocationInformation m_UserLocationInformation;      // Mandatory
-  std::optional<RedCapIndication> m_RedCapIndication;     // Rel-17
+  UserLocationInformation m_UserLocationInformation;   // Mandatory
+  std::optional<RedCapIndication> m_RedCapIndication;  // Rel-17
   // UESecurityCapabilities (Mandatory) — raw, not decoded at this stage
   // PDUSessionResourceToBeSwitchedDLList (Mandatory) — raw, not decoded
   // PDUSessionResourceFailedToSetupListPSReq (Optional)

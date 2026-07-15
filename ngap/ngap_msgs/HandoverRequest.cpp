@@ -75,16 +75,14 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_HandoverRequestIes->protocolIEs->list.count; i++) {
     Ngap_HandoverRequestIEs_t* ngap_ie =
-        (Ngap_HandoverRequestIEs_t*) m_HandoverRequestIes->protocolIEs->list.array[i];
+        (Ngap_HandoverRequestIEs_t*)
+            m_HandoverRequestIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequestIEs__value_PR_AMF_UE_NGAP_ID) {
-          if (!m_AmfUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+          if (!m_AmfUeNgapId.decode(ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -96,12 +94,10 @@ bool HandoverRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_HandoverType: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequestIEs__value_PR_HandoverType) {
-          m_HandoverType = ngap_ie
-                               ->value.choice.HandoverType;
+          m_HandoverType = ngap_ie->value.choice.HandoverType;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP Handover Type IE error");
@@ -288,7 +284,8 @@ void HandoverRequest::setAllowedNssai(const std::vector<SNssai>& list) {
   for (auto& it : list) {
     Ngap_AllowedNSSAI_Item_t* item =
         (Ngap_AllowedNSSAI_Item_t*) calloc(1, sizeof(Ngap_AllowedNSSAI_Item_t));
-    if (!item->s_NSSAI) item->s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+    if (!item->s_NSSAI)
+      item->s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
     it.encode(*item->s_NSSAI);
     int ret = ASN_SEQUENCE_ADD(&m_AllowedNssai.list, item);
     if (ret != 0)
@@ -398,8 +395,9 @@ void HandoverRequest::setMobilityRestrictionList(const PlmnId& plmn_id) {
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_MobilityRestrictionList;
 
   if (!ie->value.choice.MobilityRestrictionList)
-    ie->value.choice.MobilityRestrictionList = (Ngap_MobilityRestrictionList_t*) calloc(
-        1, sizeof(Ngap_MobilityRestrictionList_t));
+    ie->value.choice.MobilityRestrictionList =
+        (Ngap_MobilityRestrictionList_t*) calloc(
+            1, sizeof(Ngap_MobilityRestrictionList_t));
   m_MobilityRestrictionList.value().encode(
       *ie->value.choice.MobilityRestrictionList);
   int ret = ASN_SEQUENCE_ADD(&m_HandoverRequestIes->protocolIEs->list, ie);
@@ -413,10 +411,10 @@ void HandoverRequest::setManagementBasedMdtPlmnList(
     const ManagementBasedMdtPlmnList& value) {
   m_ManagementBasedMdtPlmnList =
       std::make_optional<ManagementBasedMdtPlmnList>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNList;
-  ie->criticality = Ngap_Criticality_ignore;
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNList;
+  ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_MDTPLMNList;
   if (!m_ManagementBasedMdtPlmnList.value().encode(
           ie->value.choice.MDTPLMNList)) {
@@ -436,10 +434,10 @@ void HandoverRequest::setTimeSynchronisationAssistanceInfo(
     const TimeSynchronisationAssistanceInfo& value) {
   m_TimeSynchronisationAssistanceInfo =
       std::make_optional<TimeSynchronisationAssistanceInfo>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_TimeSyncAssistanceInfo;
-  ie->criticality = Ngap_Criticality_ignore;
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_TimeSyncAssistanceInfo;
+  ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_TimeSyncAssistanceInfo;
   if (!m_TimeSynchronisationAssistanceInfo.value().encode(
           ie->value.choice.TimeSyncAssistanceInfo)) {
@@ -459,8 +457,8 @@ void HandoverRequest::setUeSliceMaximumBitRateList(
     const UeSliceMaximumBitRateList& value) {
   m_UeSliceMaximumBitRateList =
       std::make_optional<UeSliceMaximumBitRateList>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
   ie->id          = Ngap_ProtocolIE_ID_id_UESliceMaximumBitRateList;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
@@ -479,12 +477,13 @@ void HandoverRequest::setUeSliceMaximumBitRateList(
 }
 
 //------------------------------------------------------------------------------
-void HandoverRequest::setFiveGProSeAuthorized(const FiveGProSeAuthorized& value) {
+void HandoverRequest::setFiveGProSeAuthorized(
+    const FiveGProSeAuthorized& value) {
   m_FiveGProSeAuthorized = std::make_optional<FiveGProSeAuthorized>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_FiveG_ProSeAuthorized;
-  ie->criticality = Ngap_Criticality_ignore;
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_FiveG_ProSeAuthorized;
+  ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_FiveG_ProSeAuthorized;
   if (!m_FiveGProSeAuthorized.value().encode(
           ie->value.choice.FiveG_ProSeAuthorized)) {
@@ -504,9 +503,9 @@ void HandoverRequest::setFiveGProSeUePC5AggregateMaximumBitRate(
     const FiveGProSeUePC5AggregateMaximumBitRate& value) {
   m_FiveGProSeUePC5AggregateMaximumBitRate =
       std::make_optional<FiveGProSeUePC5AggregateMaximumBitRate>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
+  ie->id = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_HandoverRequestIEs__value_PR_NRUESidelinkAggregateMaximumBitrate_1;
@@ -528,8 +527,8 @@ void HandoverRequest::setFiveGProSePC5QoSParameters(
     const FiveGProSePC5QoSParameters& value) {
   m_FiveGProSePC5QoSParameters =
       std::make_optional<FiveGProSePC5QoSParameters>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
   ie->id          = Ngap_ProtocolIE_ID_id_FiveG_ProSePC5QoSParameters;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
@@ -550,10 +549,10 @@ void HandoverRequest::setFiveGProSePC5QoSParameters(
 //------------------------------------------------------------------------------
 void HandoverRequest::setIabAuthorized(const IabAuthorized& value) {
   m_IabAuthorized = std::make_optional<IabAuthorized>(value);
-  Ngap_HandoverRequestIEs_t* ie = (Ngap_HandoverRequestIEs_t*) calloc(
-      1, sizeof(Ngap_HandoverRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_IAB_Authorized;
-  ie->criticality = Ngap_Criticality_ignore;
+  Ngap_HandoverRequestIEs_t* ie =
+      (Ngap_HandoverRequestIEs_t*) calloc(1, sizeof(Ngap_HandoverRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_IAB_Authorized;
+  ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverRequestIEs__value_PR_IAB_Authorized;
   if (!m_IabAuthorized.value().encode(ie->value.choice.IAB_Authorized)) {
     oai::logger::logger_common::ngap().error("Encode IabAuthorized IE error");

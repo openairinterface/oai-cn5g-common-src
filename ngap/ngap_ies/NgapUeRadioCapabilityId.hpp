@@ -19,7 +19,8 @@ namespace oai::ngap {
  * The IE is an OCTET STRING carrying an opaque capability identifier
  * assigned by the AMF and stored in the UE context.
  *
- * Named NgapUeRadioCapabilityId to avoid collision with oai::nas::UeRadioCapabilityId.
+ * Named NgapUeRadioCapabilityId to avoid collision with
+ * oai::nas::UeRadioCapabilityId.
  */
 class NgapUeRadioCapabilityId {
  public:

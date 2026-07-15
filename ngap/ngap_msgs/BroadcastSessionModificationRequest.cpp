@@ -14,8 +14,7 @@ extern "C" {
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-BroadcastSessionModificationRequestMsg::
-    BroadcastSessionModificationRequestMsg()
+BroadcastSessionModificationRequestMsg::BroadcastSessionModificationRequestMsg()
     : NgapMessage() {
   m_BroadcastSessionModificationRequestIes = nullptr;
   m_MbsServiceArea                         = std::nullopt;

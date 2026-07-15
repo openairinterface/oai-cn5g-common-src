@@ -65,7 +65,7 @@ class DownLinkNasTransportMsg : public NgapUeMessage {
   std::optional<IndexToRfsp> m_IndexToRfsp;                          // Optional
   std::optional<UeAggregateMaxBitRate> m_UeAggregateMaxBitRate;      // Optional
   std::optional<AllowedNSSAI> m_AllowedNssai;                        // Optional
-  std::optional<TargetNssaiInformation> m_TargetNssaiInformation;   // Rel-17
+  std::optional<TargetNssaiInformation> m_TargetNssaiInformation;    // Rel-17
   // TODO: SRVCC Operation Possible (Optional, Rel 16.14.0)
   // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)
   // TODO: Extended Connected Time (Optional, Rel 16.14.0)

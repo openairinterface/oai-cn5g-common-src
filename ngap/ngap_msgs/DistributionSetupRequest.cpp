@@ -23,8 +23,8 @@ DistributionSetupRequestMsg::DistributionSetupRequestMsg() : NgapMessage() {
 
 //------------------------------------------------------------------------------
 void DistributionSetupRequestMsg::initialize() {
-  m_DistributionSetupRequestIes =
-      &(ngapPdu->choice.initiatingMessage->value.choice.DistributionSetupRequest);
+  m_DistributionSetupRequestIes = &(
+      ngapPdu->choice.initiatingMessage->value.choice.DistributionSetupRequest);
 }
 
 //------------------------------------------------------------------------------
@@ -51,8 +51,8 @@ bool DistributionSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           Ngap_ProcedureCode_id_DistributionSetup &&
       ngapPdu->choice.initiatingMessage->value.present ==
           Ngap_InitiatingMessage__value_PR_DistributionSetupRequest) {
-    m_DistributionSetupRequestIes =
-        &ngapPdu->choice.initiatingMessage->value.choice.DistributionSetupRequest;
+    m_DistributionSetupRequestIes = &ngapPdu->choice.initiatingMessage->value
+                                         .choice.DistributionSetupRequest;
   } else {
     oai::logger::logger_common::ngap().error(
         "Check DistributionSetupRequest message error");
@@ -60,8 +60,7 @@ bool DistributionSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   bool hasMbsSessionId = false;
-  for (int i = 0;
-       i < m_DistributionSetupRequestIes->protocolIEs->list.count;
+  for (int i = 0; i < m_DistributionSetupRequestIes->protocolIEs->list.count;
        i++) {
     Ngap_DistributionSetupRequestIEs_t* ie =
         (Ngap_DistributionSetupRequestIEs_t*)

@@ -25,9 +25,8 @@ DistributionSetupFailureMsg::DistributionSetupFailureMsg() : NgapMessage() {
 
 //------------------------------------------------------------------------------
 void DistributionSetupFailureMsg::initialize() {
-  m_DistributionSetupFailureIes =
-      &(ngapPdu->choice.unsuccessfulOutcome->value.choice
-            .DistributionSetupFailure);
+  m_DistributionSetupFailureIes = &(ngapPdu->choice.unsuccessfulOutcome->value
+                                        .choice.DistributionSetupFailure);
 }
 
 //------------------------------------------------------------------------------
@@ -37,10 +36,9 @@ void DistributionSetupFailureMsg::setMbsSessionId(const MbsSessionId& v) {
   Ngap_DistributionSetupFailureIEs_t* ie =
       (Ngap_DistributionSetupFailureIEs_t*) calloc(
           1, sizeof(Ngap_DistributionSetupFailureIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_MBS_SessionID;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_DistributionSetupFailureIEs__value_PR_MBS_SessionID;
+  ie->id            = Ngap_ProtocolIE_ID_id_MBS_SessionID;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_DistributionSetupFailureIEs__value_PR_MBS_SessionID;
 
   if (!m_MbsSessionId.encode(ie->value.choice.MBS_SessionID)) {
     oai::logger::logger_common::ngap().error(
@@ -49,8 +47,8 @@ void DistributionSetupFailureMsg::setMbsSessionId(const MbsSessionId& v) {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupFailureIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-SessionID IE error");
@@ -75,16 +73,15 @@ void DistributionSetupFailureMsg::setMbsAreaSessionId(
   ie->value.present =
       Ngap_DistributionSetupFailureIEs__value_PR_MBS_AreaSessionID;
 
-  if (!m_MbsAreaSessionId.value().encode(
-          ie->value.choice.MBS_AreaSessionID)) {
+  if (!m_MbsAreaSessionId.value().encode(ie->value.choice.MBS_AreaSessionID)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupFailureIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
@@ -122,8 +119,8 @@ void DistributionSetupFailureMsg::setMbsDistributionSetupUnsuccessfulTransfer(
            .OCTET_STRING_CONTAINING_MBS_DistributionSetupUnsuccessfulTransfer_,
       (const char*) buf, len);
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupFailureIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS_DistributionSetupUnsuccessfulTransfer IE error");
@@ -136,8 +133,8 @@ void DistributionSetupFailureMsg::setCause(const Cause& v) {
   Ngap_DistributionSetupFailureIEs_t* ie =
       (Ngap_DistributionSetupFailureIEs_t*) calloc(
           1, sizeof(Ngap_DistributionSetupFailureIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_Cause;
-  ie->criticality = Ngap_Criticality_ignore;
+  ie->id            = Ngap_ProtocolIE_ID_id_Cause;
+  ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_DistributionSetupFailureIEs__value_PR_Cause;
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
@@ -146,8 +143,8 @@ void DistributionSetupFailureMsg::setCause(const Cause& v) {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupFailureIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NGAP Cause IE error");
 }
@@ -168,17 +165,15 @@ bool DistributionSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           Ngap_ProcedureCode_id_DistributionSetup &&
       ngapPdu->choice.unsuccessfulOutcome->value.present ==
           Ngap_UnsuccessfulOutcome__value_PR_DistributionSetupFailure) {
-    m_DistributionSetupFailureIes =
-        &ngapPdu->choice.unsuccessfulOutcome->value.choice
-             .DistributionSetupFailure;
+    m_DistributionSetupFailureIes = &ngapPdu->choice.unsuccessfulOutcome->value
+                                         .choice.DistributionSetupFailure;
   } else {
     oai::logger::logger_common::ngap().error(
         "Check DistributionSetupFailure message error");
     return false;
   }
 
-  for (int i = 0;
-       i < m_DistributionSetupFailureIes->protocolIEs->list.count;
+  for (int i = 0; i < m_DistributionSetupFailureIes->protocolIEs->list.count;
        i++) {
     Ngap_DistributionSetupFailureIEs_t* ie =
         (Ngap_DistributionSetupFailureIEs_t*)

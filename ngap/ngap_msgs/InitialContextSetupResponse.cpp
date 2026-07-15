@@ -52,8 +52,8 @@ void InitialContextSetupResponseMsg::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupResponseIes->protocolIEs->list, ie);
+  ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -79,8 +79,8 @@ void InitialContextSetupResponseMsg::setRanUeNgapId(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupResponseIes->protocolIEs->list, ie);
+  ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -121,8 +121,8 @@ void InitialContextSetupResponseMsg::setPduSessionResourceSetupResponseList(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupResponseIes->protocolIEs->list, ie);
+  ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionResourceSetupListCxtRes IE error");
@@ -166,8 +166,8 @@ void InitialContextSetupResponseMsg::setPduSessionResourceFailedToSetupList(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupResponseIes->protocolIEs->list, ie);
+  ret = ASN_SEQUENCE_ADD(
+      &m_InitialContextSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionResourceFailedToSetupListCxtRes IE error");
@@ -200,18 +200,17 @@ bool InitialContextSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   for (int i = 0; i < m_InitialContextSetupResponseIes->protocolIEs->list.count;
        i++) {
     Ngap_InitialContextSetupResponseIEs_t* ngap_ie =
-        (Ngap_InitialContextSetupResponseIEs_t*) m_InitialContextSetupResponseIes->protocolIEs->list.array[i];
+        (Ngap_InitialContextSetupResponseIEs_t*)
+            m_InitialContextSetupResponseIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
         // TODO: to be verified
         if (/*ngap_ie
                     ->criticality == Ngap_Criticality_ignore &&*/
-            ngap_ie
-                ->value.present ==
+            ngap_ie->value.present ==
             Ngap_InitialContextSetupResponseIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
 
@@ -227,12 +226,10 @@ bool InitialContextSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         // TODO: to be verified
         if (/*ngap_ie
                     ->criticality == Ngap_Criticality_ignore &&*/
-            ngap_ie
-                ->value.present ==
+            ngap_ie->value.present ==
             Ngap_InitialContextSetupResponseIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -244,15 +241,12 @@ bool InitialContextSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceSetupListCxtRes: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_ignore &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_InitialContextSetupResponseIEs__value_PR_PDUSessionResourceSetupListCxtRes) {
           PduSessionResourceSetupListCxtRes tmp = {};
           if (!tmp.decode(
-                  ngap_ie
-                      ->value.choice.PDUSessionResourceSetupListCxtRes)) {
+                  ngap_ie->value.choice.PDUSessionResourceSetupListCxtRes)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
 
@@ -268,16 +262,12 @@ bool InitialContextSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceFailedToSetupListCxtRes: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_ignore &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_InitialContextSetupResponseIEs__value_PR_PDUSessionResourceFailedToSetupListCxtRes) {
           PduSessionResourceFailedToSetupListCxtRes tmp = {};
-          if (!tmp.decode(
-                  ngap_ie
-                      ->value.choice
-                      .PDUSessionResourceFailedToSetupListCxtRes)) {
+          if (!tmp.decode(ngap_ie->value.choice
+                              .PDUSessionResourceFailedToSetupListCxtRes)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PDUSessionResourceFailedToSetupListCxtRes IE "
                 "error");

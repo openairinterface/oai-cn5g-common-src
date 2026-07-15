@@ -36,7 +36,7 @@ class HandoverNotifyMsg : public NgapUeMessage {
   Ngap_HandoverNotify_t* m_HandoverNotifyIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
-  UserLocationInformation m_UserLocationInformation;           // Mandatory
+  UserLocationInformation m_UserLocationInformation;             // Mandatory
   std::optional<NotifySourceNgRanNode> m_NotifySourceNgRanNode;  // Rel-17
 };
 

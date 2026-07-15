@@ -67,17 +67,15 @@ bool AmfStatusIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
   for (int i = 0; i < m_AmfStatusIndicationIEs->protocolIEs->list.count; i++) {
     Ngap_AMFStatusIndicationIEs_t* ngap_ie =
-        (Ngap_AMFStatusIndicationIEs_t*) m_AmfStatusIndicationIEs->protocolIEs->list.array[i];
+        (Ngap_AMFStatusIndicationIEs_t*)
+            m_AmfStatusIndicationIEs->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_UnavailableGUAMIList: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_AMFStatusIndicationIEs__value_PR_UnavailableGUAMIList) {
           if (!m_UnavailableGuamiList.decode(
-                  ngap_ie
-                      ->value.choice.UnavailableGUAMIList)) {
+                  ngap_ie->value.choice.UnavailableGUAMIList)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UnavailableGUAMIList error");
             return false;

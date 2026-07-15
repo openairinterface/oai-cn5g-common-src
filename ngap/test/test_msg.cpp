@@ -25,8 +25,9 @@ extern "C" {
 class NgapLoggerEnvironment : public ::testing::Environment {
  public:
   void SetUp() override {
-    static oai::logger::logger_common s_logger("NgapTest", /*stdout=*/false,
-                                               /*rotfile=*/false);
+    static oai::logger::logger_common s_logger(
+        "NgapTest", /*stdout=*/false,
+        /*rotfile=*/false);
   }
 };
 
@@ -184,7 +185,7 @@ TEST(TestSuiteNGAPMsg, NgapMbsSessionIdRoundTrip) {
   ASSERT_TRUE(dst.decode(ie));
 
   uint8_t* buf = nullptr;
-  size_t   len = 0;
+  size_t len   = 0;
   ASSERT_TRUE(dst.getTmgi(buf, len));
   ASSERT_EQ(len, sizeof(tmgi));
   EXPECT_EQ(memcmp(buf, tmgi, len), 0);

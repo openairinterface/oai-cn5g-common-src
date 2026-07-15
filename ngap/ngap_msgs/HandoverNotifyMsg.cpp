@@ -95,7 +95,10 @@ void HandoverNotifyMsg::setUserLocationInfoNr(
   ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_HandoverNotifyIEs__value_PR_UserLocationInformation;
 
-  if (!ie->value.choice.UserLocationInformation) ie->value.choice.UserLocationInformation = (Ngap_UserLocationInformation_t*) calloc(1, sizeof(Ngap_UserLocationInformation_t));
+  if (!ie->value.choice.UserLocationInformation)
+    ie->value.choice.UserLocationInformation =
+        (Ngap_UserLocationInformation_t*) calloc(
+            1, sizeof(Ngap_UserLocationInformation_t));
   int ret = m_UserLocationInformation.encode(
       *ie->value.choice.UserLocationInformation);
   if (!ret) {
@@ -156,16 +159,15 @@ bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_HandoverNotifyIes->protocolIEs->list.count; i++) {
     Ngap_HandoverNotifyIEs_t* ngap_ie =
-        (Ngap_HandoverNotifyIEs_t*) m_HandoverNotifyIes->protocolIEs->list.array[i];
+        (Ngap_HandoverNotifyIEs_t*)
+            m_HandoverNotifyIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverNotifyIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -177,13 +179,11 @@ bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverNotifyIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -231,8 +231,7 @@ bool HandoverNotifyMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
       default: {
         oai::logger::logger_common::ngap().warn(
-            "Not decoded IE %d",
-            ngap_ie->id);
+            "Not decoded IE %d", ngap_ie->id);
         break;
       }
     }

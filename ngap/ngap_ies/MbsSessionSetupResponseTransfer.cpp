@@ -21,8 +21,7 @@ MbsSessionSetupResponseTransfer::~MbsSessionSetupResponseTransfer() {
 }
 
 //------------------------------------------------------------------------------
-int MbsSessionSetupResponseTransfer::encode(
-    uint8_t* buf, int bufSize) const {
+int MbsSessionSetupResponseTransfer::encode(uint8_t* buf, int bufSize) const {
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_MBSSessionSetupOrModResponseTransfer, nullptr, m_Ie, buf,
       bufSize);
@@ -30,8 +29,7 @@ int MbsSessionSetupResponseTransfer::encode(
 }
 
 //------------------------------------------------------------------------------
-bool MbsSessionSetupResponseTransfer::decode(
-    const uint8_t* buf, int bufSize) {
+bool MbsSessionSetupResponseTransfer::decode(const uint8_t* buf, int bufSize) {
   if (m_Ie) {
     ASN_STRUCT_FREE(asn_DEF_Ngap_MBSSessionSetupOrModResponseTransfer, m_Ie);
     m_Ie = nullptr;

@@ -24,7 +24,9 @@ HandoverPreparationUnsuccessfulTransfer::
 //------------------------------------------------------------------------------
 void HandoverPreparationUnsuccessfulTransfer::setCause(const Cause& cause) {
   m_Cause = cause;
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
@@ -39,7 +41,9 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseRadioNetwork(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
 
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
@@ -54,7 +58,9 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseTransport(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
 
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseTransport IE error");
@@ -68,7 +74,9 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseNas(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
 
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseNas IE error");
@@ -82,7 +90,9 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseProtocol(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
 
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseProtocol IE error");
@@ -96,7 +106,9 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseMisc(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
 
-  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) m_HandoverPreparationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseMisc IE error");

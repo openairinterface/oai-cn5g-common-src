@@ -53,12 +53,16 @@ bool DrbSubjectToStatusTransferItem::encode(
     Ngap_DRBsSubjectToStatusTransferItem_t& drbItem) const {
   drbItem.dRB_ID = m_DrbId;
 
-  if (!drbItem.dRBStatusUL) drbItem.dRBStatusUL = (Ngap_DRBStatusUL_t*) calloc(1, sizeof(Ngap_DRBStatusUL_t));
+  if (!drbItem.dRBStatusUL)
+    drbItem.dRBStatusUL =
+        (Ngap_DRBStatusUL_t*) calloc(1, sizeof(Ngap_DRBStatusUL_t));
   if (!m_DrbUl.encode(*drbItem.dRBStatusUL)) {
     return false;
   }
 
-  if (!drbItem.dRBStatusDL) drbItem.dRBStatusDL = (Ngap_DRBStatusDL_t*) calloc(1, sizeof(Ngap_DRBStatusDL_t));
+  if (!drbItem.dRBStatusDL)
+    drbItem.dRBStatusDL =
+        (Ngap_DRBStatusDL_t*) calloc(1, sizeof(Ngap_DRBStatusDL_t));
   if (!m_DrbDl.encode(*drbItem.dRBStatusDL)) {
     return false;
   }

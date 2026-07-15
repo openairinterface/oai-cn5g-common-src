@@ -31,8 +31,7 @@ void BroadcastSessionSetupResponseMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-bool BroadcastSessionSetupResponseMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool BroadcastSessionSetupResponseMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }
@@ -65,8 +64,7 @@ bool BroadcastSessionSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_BroadcastSessionSetupResponseIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionSetupResponseIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionSetupResponseIEs_t* ie =
         (Ngap_BroadcastSessionSetupResponseIEs_t*)
             m_BroadcastSessionSetupResponseIes->protocolIEs->list.array[i];

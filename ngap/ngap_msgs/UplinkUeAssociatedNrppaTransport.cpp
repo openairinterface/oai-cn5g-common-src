@@ -111,7 +111,8 @@ bool UplinkUeAssociatedNrppaTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_UplinkUeAssociatedNrppaTransportIes->protocolIEs->list.count; i++) {
+       i < m_UplinkUeAssociatedNrppaTransportIes->protocolIEs->list.count;
+       i++) {
     Ngap_UplinkUEAssociatedNRPPaTransportIEs_t* ngap_ie =
         (Ngap_UplinkUEAssociatedNRPPaTransportIEs_t*)
             m_UplinkUeAssociatedNrppaTransportIes->protocolIEs->list.array[i];
@@ -150,14 +151,10 @@ bool UplinkUeAssociatedNrppaTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_RoutingID: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_reject &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_UplinkUEAssociatedNRPPaTransportIEs__value_PR_RoutingID) {
-          m_RoutingId =
-              ngap_ie
-                  ->value.choice.RoutingID;
+          m_RoutingId = ngap_ie->value.choice.RoutingID;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP RoutingID IE error");
@@ -166,14 +163,10 @@ bool UplinkUeAssociatedNrppaTransportMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
 
       } break;
       case Ngap_ProtocolIE_ID_id_NRPPa_PDU: {
-        if (ngap_ie
-                    ->criticality == Ngap_Criticality_reject &&
-            ngap_ie
-                    ->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_UplinkUEAssociatedNRPPaTransportIEs__value_PR_NRPPa_PDU) {
-          m_NrppaPdu =
-              ngap_ie
-                  ->value.choice.NRPPa_PDU;
+          m_NrppaPdu = ngap_ie->value.choice.NRPPa_PDU;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decode NGAP NRPPa PDU IE error");

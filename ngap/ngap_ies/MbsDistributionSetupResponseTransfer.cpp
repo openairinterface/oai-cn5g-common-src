@@ -13,8 +13,7 @@ MbsDistributionSetupResponseTransfer::MbsDistributionSetupResponseTransfer() {
 }
 
 //------------------------------------------------------------------------------
-MbsDistributionSetupResponseTransfer::
-    ~MbsDistributionSetupResponseTransfer() {
+MbsDistributionSetupResponseTransfer::~MbsDistributionSetupResponseTransfer() {
   if (m_Ie) {
     ASN_STRUCT_FREE(asn_DEF_Ngap_MBS_DistributionSetupResponseTransfer, m_Ie);
     m_Ie = nullptr;

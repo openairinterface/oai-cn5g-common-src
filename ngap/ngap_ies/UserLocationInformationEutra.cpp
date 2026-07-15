@@ -30,12 +30,15 @@ void UserLocationInformationEutra::get(EutraCgi& eutraCgi, Tai& tai) const {
 //------------------------------------------------------------------------------
 bool UserLocationInformationEutra::encode(
     Ngap_UserLocationInformationEUTRA_t& userLocationInformation) const {
-  if (!userLocationInformation.eUTRA_CGI) userLocationInformation.eUTRA_CGI = (Ngap_EUTRA_CGI_t*) calloc(1, sizeof(Ngap_EUTRA_CGI_t));
+  if (!userLocationInformation.eUTRA_CGI)
+    userLocationInformation.eUTRA_CGI =
+        (Ngap_EUTRA_CGI_t*) calloc(1, sizeof(Ngap_EUTRA_CGI_t));
   if (!m_EutraCgi.encode(*userLocationInformation.eUTRA_CGI)) {
     oai::logger::logger_common::ngap().warn("Encode eUTRA_CGI IE error");
     return false;
   }
-  if (!userLocationInformation.tAI) userLocationInformation.tAI = (Ngap_TAI_t*) calloc(1, sizeof(Ngap_TAI_t));
+  if (!userLocationInformation.tAI)
+    userLocationInformation.tAI = (Ngap_TAI_t*) calloc(1, sizeof(Ngap_TAI_t));
   if (!m_Tai.encode(*userLocationInformation.tAI)) {
     oai::logger::logger_common::ngap().warn("Encode Tai IE error");
     return false;

@@ -34,7 +34,9 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_CauseValue.set(causeValue);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -50,7 +52,9 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::setCauseTransport(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_CauseValue.set(causeValue);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -65,7 +69,9 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::setCauseNas(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_CauseValue.set(causeValue);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -80,7 +86,9 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::setCauseProtocol(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_CauseValue.set(causeValue);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -95,7 +103,9 @@ void PduSessionResourceModifyIndicationUnsuccessfulTransfer::setCauseMisc(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_CauseValue.set(causeValue);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -143,7 +153,8 @@ bool PduSessionResourceModifyIndicationUnsuccessfulTransfer::decode(
   // &asn_DEF_Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer,
   // m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe);
 
-  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause) return false;
+  if (!m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)
+    return false;
   if (!m_CauseValue.decode(
           *m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe->cause)) {
     oai::logger::logger_common::ngap().error("Decode Cause IE error");

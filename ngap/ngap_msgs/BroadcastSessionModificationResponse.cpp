@@ -67,8 +67,7 @@ bool BroadcastSessionModificationResponseMsg::decode(
   }
 
   for (int i = 0;
-       i <
-       m_BroadcastSessionModificationResponseIes->protocolIEs->list.count;
+       i < m_BroadcastSessionModificationResponseIes->protocolIEs->list.count;
        i++) {
     Ngap_BroadcastSessionModificationResponseIEs_t* ie =
         (Ngap_BroadcastSessionModificationResponseIEs_t*)

@@ -168,7 +168,10 @@ void PduSessionResourceReleaseResponseMsg::setUserLocationInfoNr(
   ie->value.present =
       Ngap_PDUSessionResourceReleaseResponseIEs__value_PR_UserLocationInformation;
 
-  if (!ie->value.choice.UserLocationInformation) ie->value.choice.UserLocationInformation = (Ngap_UserLocationInformation_t*) calloc(1, sizeof(Ngap_UserLocationInformation_t));
+  if (!ie->value.choice.UserLocationInformation)
+    ie->value.choice.UserLocationInformation =
+        (Ngap_UserLocationInformation_t*) calloc(
+            1, sizeof(Ngap_UserLocationInformation_t));
   int ret = m_UserLocationInformation.value().encode(
       *ie->value.choice.UserLocationInformation);
   if (!ret) {

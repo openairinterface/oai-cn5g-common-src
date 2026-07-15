@@ -97,8 +97,7 @@ void MulticastSessionActivationRequestMsg::
 }
 
 //------------------------------------------------------------------------------
-bool MulticastSessionActivationRequestMsg::decode(
-    Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool MulticastSessionActivationRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage &&

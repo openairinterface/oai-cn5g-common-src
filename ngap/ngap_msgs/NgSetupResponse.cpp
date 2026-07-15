@@ -31,8 +31,8 @@ NgSetupResponseMsg::~NgSetupResponseMsg() {}
 void NgSetupResponseMsg::initialize() {
   m_NgSetupResponsIes =
       &(ngapPdu->choice.successfulOutcome->value.choice.NGSetupResponse);
-  m_IabSupported      = std::nullopt;
-  m_ExtendedAmfName   = std::nullopt;
+  m_IabSupported    = std::nullopt;
+  m_ExtendedAmfName = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -172,15 +172,14 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_NgSetupResponsIes->protocolIEs->list.count; i++) {
     Ngap_NGSetupResponseIEs_t* ngap_ie =
-        (Ngap_NGSetupResponseIEs_t*) m_NgSetupResponsIes->protocolIEs->list.array[i];
+        (Ngap_NGSetupResponseIEs_t*)
+            m_NgSetupResponsIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMFName: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_NGSetupResponseIEs__value_PR_AMFName) {
-          if (!m_AmfName.decode(ngap_ie
-                                    ->value.choice.AMFName)) {
+          if (!m_AmfName.decode(ngap_ie->value.choice.AMFName)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMFName error");
             return false;
@@ -192,13 +191,11 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_ServedGUAMIList: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_NGSetupResponseIEs__value_PR_ServedGUAMIList) {
           if (!m_ServedGuamiList.decode(
-                  ngap_ie
-                      ->value.choice.ServedGUAMIList)) {
+                  ngap_ie->value.choice.ServedGUAMIList)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP ServedGUAMIList error");
             return false;
@@ -210,13 +207,11 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RelativeAMFCapacity: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_NGSetupResponseIEs__value_PR_RelativeAMFCapacity) {
           if (!m_RelativeAmfCapacity.decode(
-                  ngap_ie
-                      ->value.choice.RelativeAMFCapacity)) {
+                  ngap_ie->value.choice.RelativeAMFCapacity)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RelativeAMFCapacity error");
             return false;
@@ -228,13 +223,11 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PLMNSupportList: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_NGSetupResponseIEs__value_PR_PLMNSupportList) {
           if (!m_PlmnSupportList.decode(
-                  ngap_ie
-                      ->value.choice.PLMNSupportList)) {
+                  ngap_ie->value.choice.PLMNSupportList)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PLMNSupportList error");
             return false;
@@ -246,13 +239,11 @@ bool NgSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_UERetentionInformation: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_NGSetupResponseIEs__value_PR_UERetentionInformation) {
           UeRetentionInformation tmp = {};
-          if (!tmp.decode(ngap_ie
-                              ->value.choice.UERetentionInformation)) {
+          if (!tmp.decode(ngap_ie->value.choice.UERetentionInformation)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UeRetentionInformation IE error");
             return false;

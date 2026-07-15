@@ -586,16 +586,14 @@ void NgapMessage::setMessageType(NgapMessageType messageType) {
           Ngap_UnsuccessfulOutcome__value_PR_DistributionSetupFailure);
     } break;
     case NgapMessageType::DISTRIBUTION_RELEASE_REQUEST: {
-      messageTypeIE.setProcedureCode(
-          Ngap_ProcedureCode_id_DistributionRelease);
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionRelease);
       messageTypeIE.setCriticality(Ngap_Criticality_reject);
       messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
       messageTypeIE.setValuePresent(
           Ngap_InitiatingMessage__value_PR_DistributionReleaseRequest);
     } break;
     case NgapMessageType::DISTRIBUTION_RELEASE_RESPONSE: {
-      messageTypeIE.setProcedureCode(
-          Ngap_ProcedureCode_id_DistributionRelease);
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionRelease);
       messageTypeIE.setCriticality(Ngap_Criticality_reject);
       messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
       messageTypeIE.setValuePresent(

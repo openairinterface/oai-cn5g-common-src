@@ -37,7 +37,9 @@ bool PduSessionResourceSetupItemHoReq::encode(
           resourceSetupItem.handoverRequestTransfer))
     return false;
 
-  if (!resourceSetupItem.s_NSSAI) resourceSetupItem.s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+  if (!resourceSetupItem.s_NSSAI)
+    resourceSetupItem.s_NSSAI =
+        (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
   if (!m_SNssai.encode(*resourceSetupItem.s_NSSAI)) return false;
 
   return true;

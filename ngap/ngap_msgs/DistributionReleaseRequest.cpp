@@ -13,8 +13,7 @@ extern "C" {
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-DistributionReleaseRequestMsg::DistributionReleaseRequestMsg()
-    : NgapMessage() {
+DistributionReleaseRequestMsg::DistributionReleaseRequestMsg() : NgapMessage() {
   m_DistributionReleaseRequestIes = nullptr;
   m_MbsAreaSessionId              = std::nullopt;
 
@@ -24,9 +23,8 @@ DistributionReleaseRequestMsg::DistributionReleaseRequestMsg()
 
 //------------------------------------------------------------------------------
 void DistributionReleaseRequestMsg::initialize() {
-  m_DistributionReleaseRequestIes =
-      &(ngapPdu->choice.initiatingMessage->value.choice
-            .DistributionReleaseRequest);
+  m_DistributionReleaseRequestIes = &(ngapPdu->choice.initiatingMessage->value
+                                          .choice.DistributionReleaseRequest);
 }
 
 //------------------------------------------------------------------------------
@@ -59,9 +57,8 @@ bool DistributionReleaseRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           Ngap_ProcedureCode_id_DistributionRelease &&
       ngapPdu->choice.initiatingMessage->value.present ==
           Ngap_InitiatingMessage__value_PR_DistributionReleaseRequest) {
-    m_DistributionReleaseRequestIes =
-        &ngapPdu->choice.initiatingMessage->value.choice
-             .DistributionReleaseRequest;
+    m_DistributionReleaseRequestIes = &ngapPdu->choice.initiatingMessage->value
+                                           .choice.DistributionReleaseRequest;
   } else {
     oai::logger::logger_common::ngap().error(
         "Check DistributionReleaseRequest message error");
@@ -69,8 +66,7 @@ bool DistributionReleaseRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   bool hasMbsSessionId = false;
-  for (int i = 0;
-       i < m_DistributionReleaseRequestIes->protocolIEs->list.count;
+  for (int i = 0; i < m_DistributionReleaseRequestIes->protocolIEs->list.count;
        i++) {
     Ngap_DistributionReleaseRequestIEs_t* ie =
         (Ngap_DistributionReleaseRequestIEs_t*)

@@ -7,15 +7,13 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-bool NpnAccessInformation::encode(
-    Ngap_NPN_AccessInformation_t& value) const {
+bool NpnAccessInformation::encode(Ngap_NPN_AccessInformation_t& value) const {
   value = m_Value;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool NpnAccessInformation::decode(
-    const Ngap_NPN_AccessInformation_t& value) {
+bool NpnAccessInformation::decode(const Ngap_NPN_AccessInformation_t& value) {
   m_Value = value;
   return true;
 }

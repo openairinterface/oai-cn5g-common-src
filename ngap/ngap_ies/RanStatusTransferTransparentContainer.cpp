@@ -31,7 +31,10 @@ void RanStatusTransferTransparentContainer::setDrbSubjectList(
 //------------------------------------------------------------------------------
 bool RanStatusTransferTransparentContainer::encode(
     Ngap_RANStatusTransfer_TransparentContainer_t& ranStatusTransfer) const {
-  if (!ranStatusTransfer.dRBsSubjectToStatusTransferList) ranStatusTransfer.dRBsSubjectToStatusTransferList = (Ngap_DRBsSubjectToStatusTransferList_t*) calloc(1, sizeof(Ngap_DRBsSubjectToStatusTransferList_t));
+  if (!ranStatusTransfer.dRBsSubjectToStatusTransferList)
+    ranStatusTransfer.dRBsSubjectToStatusTransferList =
+        (Ngap_DRBsSubjectToStatusTransferList_t*) calloc(
+            1, sizeof(Ngap_DRBsSubjectToStatusTransferList_t));
   if (!m_DrbList.encode(*ranStatusTransfer.dRBsSubjectToStatusTransferList)) {
     oai::logger::logger_common::ngap().error(
         "Encode RANStatusTransferTransparentContainer IE error!");

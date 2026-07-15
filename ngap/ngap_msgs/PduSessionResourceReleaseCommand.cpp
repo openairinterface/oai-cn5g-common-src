@@ -244,7 +244,8 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_PduSessionResourceReleaseCommandIes->protocolIEs->list.count; i++) {
+       i < m_PduSessionResourceReleaseCommandIes->protocolIEs->list.count;
+       i++) {
     Ngap_PDUSessionResourceReleaseCommandIEs_t* ngap_ie =
         (Ngap_PDUSessionResourceReleaseCommandIEs_t*)
             m_PduSessionResourceReleaseCommandIes->protocolIEs->list.array[i];
@@ -324,7 +325,8 @@ bool PduSessionResourceReleaseCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             ngap_ie->value.present ==
                 Ngap_PDUSessionResourceReleaseCommandIEs__value_PR_PDUSessionResourceToReleaseListRelCmd) {
           if (!m_PduSessionResourceToReleaseList.decode(
-                  ngap_ie->value.choice.PDUSessionResourceToReleaseListRelCmd)) {
+                  ngap_ie->value.choice
+                      .PDUSessionResourceToReleaseListRelCmd)) {
             oai::logger::logger_common::ngap().warn(
                 "Decoded NGAP PDUSessionResourceToReleaseListRelCmd IE "
                 "error");

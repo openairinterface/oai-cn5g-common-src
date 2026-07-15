@@ -68,7 +68,9 @@ bool Dynamic5qiDescriptor::encode(
     return false;
   if (!m_PacketDelayBudget.encode(dynamic5QIDescriptor.packetDelayBudget))
     return false;
-  if (!dynamic5QIDescriptor.packetErrorRate) dynamic5QIDescriptor.packetErrorRate = (Ngap_PacketErrorRate_t*) calloc(1, sizeof(Ngap_PacketErrorRate_t));
+  if (!dynamic5QIDescriptor.packetErrorRate)
+    dynamic5QIDescriptor.packetErrorRate =
+        (Ngap_PacketErrorRate_t*) calloc(1, sizeof(Ngap_PacketErrorRate_t));
   if (!m_PacketErrorRate.encode(*dynamic5QIDescriptor.packetErrorRate))
     return false;
 

@@ -35,8 +35,8 @@ class MulticastGroupPagingMsg : public NgapMessage {
  private:
   Ngap_MulticastGroupPaging_t* m_MulticastGroupPagingIes;
 
-  MbsSessionId m_MbsSessionId;                          // Mandatory
-  std::optional<MbsServiceArea> m_MbsServiceArea;        // Optional
+  MbsSessionId m_MbsSessionId;                     // Mandatory
+  std::optional<MbsServiceArea> m_MbsServiceArea;  // Optional
 };
 
 }  // namespace oai::ngap

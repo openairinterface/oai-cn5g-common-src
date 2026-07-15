@@ -27,7 +27,10 @@ void QosFlowPerTnlInformationItem::get(
 //------------------------------------------------------------------------------
 bool QosFlowPerTnlInformationItem::encode(
     Ngap_QosFlowPerTNLInformationItem_t& qosFlowPerTnlInformationItem) const {
-  if (!qosFlowPerTnlInformationItem.qosFlowPerTNLInformation) qosFlowPerTnlInformationItem.qosFlowPerTNLInformation = (Ngap_QosFlowPerTNLInformation_t*) calloc(1, sizeof(Ngap_QosFlowPerTNLInformation_t));
+  if (!qosFlowPerTnlInformationItem.qosFlowPerTNLInformation)
+    qosFlowPerTnlInformationItem.qosFlowPerTNLInformation =
+        (Ngap_QosFlowPerTNLInformation_t*) calloc(
+            1, sizeof(Ngap_QosFlowPerTNLInformation_t));
   if (!m_QosFlowPerTnlInformation.encode(
           *qosFlowPerTnlInformationItem.qosFlowPerTNLInformation))
     return false;

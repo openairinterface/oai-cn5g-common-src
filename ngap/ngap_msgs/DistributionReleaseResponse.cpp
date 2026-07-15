@@ -26,9 +26,8 @@ DistributionReleaseResponseMsg::DistributionReleaseResponseMsg()
 
 //------------------------------------------------------------------------------
 void DistributionReleaseResponseMsg::initialize() {
-  m_DistributionReleaseResponseIes =
-      &(ngapPdu->choice.successfulOutcome->value.choice
-            .DistributionReleaseResponse);
+  m_DistributionReleaseResponseIes = &(ngapPdu->choice.successfulOutcome->value
+                                           .choice.DistributionReleaseResponse);
 }
 
 //------------------------------------------------------------------------------
@@ -76,8 +75,7 @@ void DistributionReleaseResponseMsg::setMbsAreaSessionId(
   ie->value.present =
       Ngap_DistributionReleaseResponseIEs__value_PR_MBS_AreaSessionID;
 
-  if (!m_MbsAreaSessionId.value().encode(
-          ie->value.choice.MBS_AreaSessionID)) {
+  if (!m_MbsAreaSessionId.value().encode(ie->value.choice.MBS_AreaSessionID)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
@@ -109,17 +107,15 @@ bool DistributionReleaseResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           Ngap_ProcedureCode_id_DistributionRelease &&
       ngapPdu->choice.successfulOutcome->value.present ==
           Ngap_SuccessfulOutcome__value_PR_DistributionReleaseResponse) {
-    m_DistributionReleaseResponseIes =
-        &ngapPdu->choice.successfulOutcome->value.choice
-             .DistributionReleaseResponse;
+    m_DistributionReleaseResponseIes = &ngapPdu->choice.successfulOutcome->value
+                                            .choice.DistributionReleaseResponse;
   } else {
     oai::logger::logger_common::ngap().error(
         "Check DistributionReleaseResponse message error");
     return false;
   }
 
-  for (int i = 0;
-       i < m_DistributionReleaseResponseIes->protocolIEs->list.count;
+  for (int i = 0; i < m_DistributionReleaseResponseIes->protocolIEs->list.count;
        i++) {
     Ngap_DistributionReleaseResponseIEs_t* ie =
         (Ngap_DistributionReleaseResponseIEs_t*)

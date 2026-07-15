@@ -37,7 +37,7 @@ class DistributionReleaseRequestMsg : public NgapMessage {
 
   MbsSessionId m_MbsSessionId;                         // Mandatory
   std::optional<MbsAreaSessionId> m_MbsAreaSessionId;  // Optional
-  Cause m_Cause;                                        // Mandatory
+  Cause m_Cause;                                       // Mandatory
 };
 
 }  // namespace oai::ngap

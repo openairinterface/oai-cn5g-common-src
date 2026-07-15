@@ -56,7 +56,7 @@ class HandoverRequestAck : public NgapUeMessage {
       m_PduSessionResourceFailedToSetupList;                // Optional
   OCTET_STRING_t m_TargetToSourceTransparentContainer;      // TODO: Mandatory
   Ngap_CriticalityDiagnostics_t* m_CriticalityDiagnostics;  // TODO: Optional
-  std::optional<RedCapIndication> m_RedCapIndication;        // Rel-17
+  std::optional<RedCapIndication> m_RedCapIndication;       // Rel-17
   std::optional<NpnAccessInformation> m_NpnAccessInformation;  // Rel-17
 };
 

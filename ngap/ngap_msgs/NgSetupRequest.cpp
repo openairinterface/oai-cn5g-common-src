@@ -53,7 +53,9 @@ void NgSetupRequestMsg::setGlobalRanNodeId(
   ie->criticality   = Ngap_Criticality_reject;
   ie->value.present = Ngap_NGSetupRequestIEs__value_PR_GlobalRANNodeID;
 
-  if (!ie->value.choice.GlobalRANNodeID) ie->value.choice.GlobalRANNodeID = (Ngap_GlobalRANNodeID_t*) calloc(1, sizeof(Ngap_GlobalRANNodeID_t));
+  if (!ie->value.choice.GlobalRANNodeID)
+    ie->value.choice.GlobalRANNodeID =
+        (Ngap_GlobalRANNodeID_t*) calloc(1, sizeof(Ngap_GlobalRANNodeID_t));
   if (!globalRanNodeIdIE.encode(*ie->value.choice.GlobalRANNodeID)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP GlobalRANNodeID IE error");
@@ -199,18 +201,17 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       m_NgSetupRequestIes =
           &ngapPdu->choice.initiatingMessage->value.choice.NGSetupRequest;
       for (int i = 0; i < m_NgSetupRequestIes->protocolIEs->list.count; i++) {
-    Ngap_NGSetupRequestIEs_t* ngap_ie =
-        (Ngap_NGSetupRequestIEs_t*) m_NgSetupRequestIes->protocolIEs->list.array[i];
+        Ngap_NGSetupRequestIEs_t* ngap_ie =
+            (Ngap_NGSetupRequestIEs_t*)
+                m_NgSetupRequestIes->protocolIEs->list.array[i];
         switch (ngap_ie->id) {
           case Ngap_ProtocolIE_ID_id_GlobalRANNodeID: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_reject &&
+            if (ngap_ie->criticality == Ngap_Criticality_reject &&
                 ngap_ie->value.present ==
                     Ngap_NGSetupRequestIEs__value_PR_GlobalRANNodeID) {
               if (!ngap_ie->value.choice.GlobalRANNodeID) return false;
               if (!m_GlobalRanNodeId.decode(
-                      *ngap_ie
-                          ->value.choice.GlobalRANNodeID)) {
+                      *ngap_ie->value.choice.GlobalRANNodeID)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP GlobalRanNodeId IE error");
                 return false;
@@ -222,14 +223,12 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           case Ngap_ProtocolIE_ID_id_RANNodeName: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_ignore &&
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
                 ngap_ie->value.present ==
                     Ngap_NGSetupRequestIEs__value_PR_RANNodeName) {
               m_RanNodeName = std::make_optional<RanNodeName>();
               if (!m_RanNodeName.value().decode(
-                      ngap_ie
-                          ->value.choice.RANNodeName)) {
+                      ngap_ie->value.choice.RANNodeName)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP RanNodeName IE error");
                 return false;
@@ -241,13 +240,11 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           case Ngap_ProtocolIE_ID_id_SupportedTAList: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_reject &&
+            if (ngap_ie->criticality == Ngap_Criticality_reject &&
                 ngap_ie->value.present ==
                     Ngap_NGSetupRequestIEs__value_PR_SupportedTAList) {
               if (!m_SupportedTaList.decode(
-                      ngap_ie
-                          ->value.choice.SupportedTAList)) {
+                      ngap_ie->value.choice.SupportedTAList)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP SupportedTAList IE error");
                 return false;
@@ -259,13 +256,10 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           case Ngap_ProtocolIE_ID_id_DefaultPagingDRX: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_ignore &&
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
                 ngap_ie->value.present ==
                     Ngap_NGSetupRequestIEs__value_PR_PagingDRX) {
-              if (!m_DefaultPagingDrx.decode(
-                      ngap_ie
-                          ->value.choice.PagingDRX)) {
+              if (!m_DefaultPagingDrx.decode(ngap_ie->value.choice.PagingDRX)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP DefaultPagingDRX IE error");
                 return false;
@@ -277,13 +271,11 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           case Ngap_ProtocolIE_ID_id_UERetentionInformation: {
-            if (ngap_ie->criticality ==
-                    Ngap_Criticality_ignore &&
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
                 ngap_ie->value.present ==
                     Ngap_NGSetupRequestIEs__value_PR_UERetentionInformation) {
               UeRetentionInformation tmp = {};
-              if (!tmp.decode(ngap_ie
-                                  ->value.choice.UERetentionInformation)) {
+              if (!tmp.decode(ngap_ie->value.choice.UERetentionInformation)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP UERetentionInformation IE error");
                 return false;
@@ -297,8 +289,7 @@ bool NgSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             }
           } break;
           default: {
-            if (ngap_ie->criticality !=
-                Ngap_Criticality_ignore) {
+            if (ngap_ie->criticality != Ngap_Criticality_ignore) {
               oai::logger::logger_common::ngap().error(
                   "Decoded NGAP message PDU error");
               return false;

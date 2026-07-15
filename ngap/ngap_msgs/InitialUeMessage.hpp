@@ -70,9 +70,9 @@ class InitialUeMessageMsg : public NgapMessage {
   std::optional<FiveGSTmsi> m_FiveGSTmsi;              // 5G-S-TMSI (Optional)
   std::optional<AmfSetId> m_AmfSetId;                  // Optional
   std::optional<UeContextRequest> m_UeContextRequest;  // Optional
-  std::optional<AllowedNSSAI> m_AllowedNssai;                       // Optional
-  std::optional<RedCapIndication> m_RedCapIndication;               // Rel-17
-  std::optional<NpnAccessInformation> m_NpnAccessInformation;      // Rel-17
+  std::optional<AllowedNSSAI> m_AllowedNssai;          // Optional
+  std::optional<RedCapIndication> m_RedCapIndication;  // Rel-17
+  std::optional<NpnAccessInformation> m_NpnAccessInformation;  // Rel-17
   // TODO: Source to Target AMF Information Reroute (Optional)
   // TODO: Selected PLMN Identity (Optional, Rel 16.14.0)
   // TODO: IAB Node Indication (Optional, Rel 16.14.0)

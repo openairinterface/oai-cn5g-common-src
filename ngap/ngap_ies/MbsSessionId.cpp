@@ -22,8 +22,7 @@ bool MbsSessionId::getTmgi(uint8_t*& buf, size_t& len) const {
 }
 
 //------------------------------------------------------------------------------
-void MbsSessionId::setNid(
-    const uint8_t* buf, size_t len, uint8_t bitsUnused) {
+void MbsSessionId::setNid(const uint8_t* buf, size_t len, uint8_t bitsUnused) {
   m_NidBuf.assign(buf, buf + len);
   m_NidBitsUnused = bitsUnused;
   m_HasNid        = true;
@@ -51,8 +50,8 @@ bool MbsSessionId::encode(Ngap_MBS_SessionID_t& ie) const {
     ie.nID->buf = (uint8_t*) calloc(m_NidBuf.size(), sizeof(uint8_t));
     if (!ie.nID->buf) return false;
     memcpy(ie.nID->buf, m_NidBuf.data(), m_NidBuf.size());
-    ie.nID->size         = m_NidBuf.size();
-    ie.nID->bits_unused  = m_NidBitsUnused;
+    ie.nID->size        = m_NidBuf.size();
+    ie.nID->bits_unused = m_NidBitsUnused;
   }
   return true;
 }

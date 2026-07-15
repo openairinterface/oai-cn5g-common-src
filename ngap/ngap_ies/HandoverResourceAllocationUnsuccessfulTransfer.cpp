@@ -32,7 +32,9 @@ void HandoverResourceAllocationUnsuccessfulTransfer::setCauseRadioNetwork(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_CauseValue.set(causeValue);
 
-  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause) m_HandoverResourceAllocationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause)
+    m_HandoverResourceAllocationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_HandoverResourceAllocationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -48,7 +50,9 @@ void HandoverResourceAllocationUnsuccessfulTransfer::setCauseTransport(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_CauseValue.set(causeValue);
 
-  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause) m_HandoverResourceAllocationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause)
+    m_HandoverResourceAllocationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_HandoverResourceAllocationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -63,7 +67,9 @@ void HandoverResourceAllocationUnsuccessfulTransfer::setCauseNas(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_CauseValue.set(causeValue);
 
-  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause) m_HandoverResourceAllocationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause)
+    m_HandoverResourceAllocationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_HandoverResourceAllocationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -78,7 +84,9 @@ void HandoverResourceAllocationUnsuccessfulTransfer::setCauseProtocol(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_CauseValue.set(causeValue);
 
-  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause) m_HandoverResourceAllocationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause)
+    m_HandoverResourceAllocationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_HandoverResourceAllocationUnsuccessfulTransferIe->cause);
   if (!ret) {
@@ -93,7 +101,9 @@ void HandoverResourceAllocationUnsuccessfulTransfer::setCauseMisc(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_CauseValue.set(causeValue);
 
-  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause) m_HandoverResourceAllocationUnsuccessfulTransferIe->cause = (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_HandoverResourceAllocationUnsuccessfulTransferIe->cause)
+    m_HandoverResourceAllocationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret = m_CauseValue.encode(
       *m_HandoverResourceAllocationUnsuccessfulTransferIe->cause);
   if (!ret) {

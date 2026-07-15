@@ -34,8 +34,8 @@ void PathSwitchRequestUnsuccessfulTransfer::setCauseRadioNetwork(
   if (!m_PathSwitchRequestUnsuccessfulTransferIe->cause)
     m_PathSwitchRequestUnsuccessfulTransferIe->cause =
         (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
-  int ret = m_CauseValue.encode(
-      *m_PathSwitchRequestUnsuccessfulTransferIe->cause);
+  int ret =
+      m_CauseValue.encode(*m_PathSwitchRequestUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode CauseRadioNetwork IE error");
@@ -52,8 +52,8 @@ void PathSwitchRequestUnsuccessfulTransfer::setCauseTransport(
   if (!m_PathSwitchRequestUnsuccessfulTransferIe->cause)
     m_PathSwitchRequestUnsuccessfulTransferIe->cause =
         (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
-  int ret = m_CauseValue.encode(
-      *m_PathSwitchRequestUnsuccessfulTransferIe->cause);
+  int ret =
+      m_CauseValue.encode(*m_PathSwitchRequestUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseTransport IE error");
     return;
@@ -69,8 +69,8 @@ void PathSwitchRequestUnsuccessfulTransfer::setCauseNas(
   if (!m_PathSwitchRequestUnsuccessfulTransferIe->cause)
     m_PathSwitchRequestUnsuccessfulTransferIe->cause =
         (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
-  int ret = m_CauseValue.encode(
-      *m_PathSwitchRequestUnsuccessfulTransferIe->cause);
+  int ret =
+      m_CauseValue.encode(*m_PathSwitchRequestUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseNas IE error");
     return;
@@ -86,8 +86,8 @@ void PathSwitchRequestUnsuccessfulTransfer::setCauseProtocol(
   if (!m_PathSwitchRequestUnsuccessfulTransferIe->cause)
     m_PathSwitchRequestUnsuccessfulTransferIe->cause =
         (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
-  int ret = m_CauseValue.encode(
-      *m_PathSwitchRequestUnsuccessfulTransferIe->cause);
+  int ret =
+      m_CauseValue.encode(*m_PathSwitchRequestUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseProtocol IE error");
     return;
@@ -103,8 +103,8 @@ void PathSwitchRequestUnsuccessfulTransfer::setCauseMisc(
   if (!m_PathSwitchRequestUnsuccessfulTransferIe->cause)
     m_PathSwitchRequestUnsuccessfulTransferIe->cause =
         (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
-  int ret = m_CauseValue.encode(
-      *m_PathSwitchRequestUnsuccessfulTransferIe->cause);
+  int ret =
+      m_CauseValue.encode(*m_PathSwitchRequestUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseMisc IE error");
     return;

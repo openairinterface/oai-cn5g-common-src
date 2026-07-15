@@ -14,8 +14,7 @@ extern "C" {
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-MulticastSessionDeactivationRequestMsg::
-    MulticastSessionDeactivationRequestMsg()
+MulticastSessionDeactivationRequestMsg::MulticastSessionDeactivationRequestMsg()
     : NgapMessage() {
   m_MulticastSessionDeactivationRequestIes = nullptr;
 

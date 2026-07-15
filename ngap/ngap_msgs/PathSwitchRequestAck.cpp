@@ -18,14 +18,14 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 PathSwitchRequestAckMsg::PathSwitchRequestAckMsg() : NgapUeMessage() {
-  m_PathSwitchRequestAckIes               = nullptr;
-  m_ManagementBasedMdtPlmnList            = std::nullopt;
+  m_PathSwitchRequestAckIes                = nullptr;
+  m_ManagementBasedMdtPlmnList             = std::nullopt;
   m_ManagementBasedMdtPlmnModificationList = std::nullopt;
-  m_TimeSynchronisationAssistanceInfo     = std::nullopt;
-  m_FiveGProSeAuthorized                  = std::nullopt;
+  m_TimeSynchronisationAssistanceInfo      = std::nullopt;
+  m_FiveGProSeAuthorized                   = std::nullopt;
   m_FiveGProSeUePC5AggregateMaximumBitRate = std::nullopt;
-  m_FiveGProSePC5QoSParameters            = std::nullopt;
-  m_IabAuthorized                         = std::nullopt;
+  m_FiveGProSePC5QoSParameters             = std::nullopt;
+  m_IabAuthorized                          = std::nullopt;
   setMessageType(NgapMessageType::PATH_SWITCH_REQUEST_ACKNOWLEDGE);
   initialize();
 }
@@ -35,9 +35,8 @@ PathSwitchRequestAckMsg::~PathSwitchRequestAckMsg() {}
 
 //------------------------------------------------------------------------------
 void PathSwitchRequestAckMsg::initialize() {
-  m_PathSwitchRequestAckIes =
-      &(ngapPdu->choice.successfulOutcome->value.choice
-            .PathSwitchRequestAcknowledge);
+  m_PathSwitchRequestAckIes = &(ngapPdu->choice.successfulOutcome->value.choice
+                                    .PathSwitchRequestAcknowledge);
 }
 
 //------------------------------------------------------------------------------
@@ -107,9 +106,8 @@ bool PathSwitchRequestAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             Ngap_Criticality_reject &&
         ngapPdu->choice.successfulOutcome->value.present ==
             Ngap_SuccessfulOutcome__value_PR_PathSwitchRequestAcknowledge) {
-      m_PathSwitchRequestAckIes =
-          &ngapPdu->choice.successfulOutcome->value.choice
-               .PathSwitchRequestAcknowledge;
+      m_PathSwitchRequestAckIes = &ngapPdu->choice.successfulOutcome->value
+                                       .choice.PathSwitchRequestAcknowledge;
     } else {
       oai::logger::logger_common::ngap().error(
           "Check PathSwitchRequestAck message error!");
@@ -121,8 +119,7 @@ bool PathSwitchRequestAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     return false;
   }
 
-  for (int i = 0;
-       i < m_PathSwitchRequestAckIes->protocolIEs->list.count; i++) {
+  for (int i = 0; i < m_PathSwitchRequestAckIes->protocolIEs->list.count; i++) {
     Ngap_PathSwitchRequestAcknowledgeIEs_t* ngap_ie =
         (Ngap_PathSwitchRequestAcknowledgeIEs_t*)
             m_PathSwitchRequestAckIes->protocolIEs->list.array[i];
@@ -216,8 +213,7 @@ void PathSwitchRequestAckMsg::setManagementBasedMdtPlmnList(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode ManagementBasedMdtPlmnList IE error");
@@ -231,7 +227,7 @@ void PathSwitchRequestAckMsg::setManagementBasedMdtPlmnModificationList(
   Ngap_PathSwitchRequestAcknowledgeIEs_t* ie =
       (Ngap_PathSwitchRequestAcknowledgeIEs_t*) calloc(
           1, sizeof(Ngap_PathSwitchRequestAcknowledgeIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNModificationList;
+  ie->id = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNModificationList;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_PathSwitchRequestAcknowledgeIEs__value_PR_MDTPLMNModificationList;
@@ -242,8 +238,7 @@ void PathSwitchRequestAckMsg::setManagementBasedMdtPlmnModificationList(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode ManagementBasedMdtPlmnModificationList IE error");
@@ -268,8 +263,7 @@ void PathSwitchRequestAckMsg::setTimeSynchronisationAssistanceInfo(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode TimeSynchronisationAssistanceInfo IE error");
@@ -293,8 +287,7 @@ void PathSwitchRequestAckMsg::setFiveGProSeAuthorized(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSeAuthorized IE error");
@@ -308,7 +301,7 @@ void PathSwitchRequestAckMsg::setFiveGProSeUePC5AggregateMaximumBitRate(
   Ngap_PathSwitchRequestAcknowledgeIEs_t* ie =
       (Ngap_PathSwitchRequestAcknowledgeIEs_t*) calloc(
           1, sizeof(Ngap_PathSwitchRequestAcknowledgeIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
+  ie->id = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_PathSwitchRequestAcknowledgeIEs__value_PR_NRUESidelinkAggregateMaximumBitrate_1;
@@ -319,8 +312,7 @@ void PathSwitchRequestAckMsg::setFiveGProSeUePC5AggregateMaximumBitRate(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSeUePC5AggregateMaximumBitRate IE error");
@@ -345,8 +337,7 @@ void PathSwitchRequestAckMsg::setFiveGProSePC5QoSParameters(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSePC5QoSParameters IE error");
@@ -367,8 +358,7 @@ void PathSwitchRequestAckMsg::setIabAuthorized(const IabAuthorized& value) {
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_PathSwitchRequestAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode IabAuthorized IE error");
 }

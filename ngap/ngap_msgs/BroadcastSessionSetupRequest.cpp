@@ -19,8 +19,7 @@ BroadcastSessionSetupRequestMsg::BroadcastSessionSetupRequestMsg()
   m_BroadcastSessionSetupRequestIes = nullptr;
   m_MbsServiceArea                  = std::nullopt;
 
-  NgapMessage::setMessageType(
-      NgapMessageType::BROADCAST_SESSION_SETUP_REQUEST);
+  NgapMessage::setMessageType(NgapMessageType::BROADCAST_SESSION_SETUP_REQUEST);
   initialize();
 }
 
@@ -32,8 +31,7 @@ void BroadcastSessionSetupRequestMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void BroadcastSessionSetupRequestMsg::setMbsSessionId(
-    const MbsSessionId& v) {
+void BroadcastSessionSetupRequestMsg::setMbsSessionId(const MbsSessionId& v) {
   m_MbsSessionId = v;
 
   Ngap_BroadcastSessionSetupRequestIEs_t* ie =
@@ -51,16 +49,15 @@ void BroadcastSessionSetupRequestMsg::setMbsSessionId(
     return;
   }
 
-  int ret =
-      ASN_SEQUENCE_ADD(&m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(
+      &m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-SessionID IE error");
 }
 
 //------------------------------------------------------------------------------
-bool BroadcastSessionSetupRequestMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool BroadcastSessionSetupRequestMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }
@@ -85,8 +82,8 @@ void BroadcastSessionSetupRequestMsg::setMbsServiceArea(
     return;
   }
 
-  int ret =
-      ASN_SEQUENCE_ADD(&m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(
+      &m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-ServiceArea IE error");
@@ -125,8 +122,8 @@ void BroadcastSessionSetupRequestMsg::
            .OCTET_STRING_CONTAINING_MBSSessionSetupOrModRequestTransfer_,
       (const char*) buf, len);
 
-  int ret =
-      ASN_SEQUENCE_ADD(&m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
+  int ret = ASN_SEQUENCE_ADD(
+      &m_BroadcastSessionSetupRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBSSessionSetupRequestTransfer IE error");
@@ -161,9 +158,7 @@ bool BroadcastSessionSetupRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i <
-       m_BroadcastSessionSetupRequestIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionSetupRequestIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionSetupRequestIEs_t* ie =
         (Ngap_BroadcastSessionSetupRequestIEs_t*)
             m_BroadcastSessionSetupRequestIes->protocolIEs->list.array[i];

@@ -19,10 +19,10 @@ namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 PagingMsg::PagingMsg() {
-  m_PagingIes                   = nullptr;
-  m_NrPagingEDrxInformation     = std::nullopt;
-  m_PagingCause                 = std::nullopt;
-  m_PeipsAssistanceInformation  = std::nullopt;
+  m_PagingIes                  = nullptr;
+  m_NrPagingEDrxInformation    = std::nullopt;
+  m_PagingCause                = std::nullopt;
+  m_PeipsAssistanceInformation = std::nullopt;
 
   NgapMessage::setMessageType(NgapMessageType::PAGING);
   initialize();
@@ -62,12 +62,11 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         (Ngap_PagingIEs_t*) m_PagingIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_UEPagingIdentity: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_PagingIEs__value_PR_UEPagingIdentity) {
-          if (!m_UePagingIdentity.decode(ngap_ie
-                                             ->value.choice.UEPagingIdentity)) {
+          if (!m_UePagingIdentity.decode(
+                  ngap_ie->value.choice.UEPagingIdentity)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UEPagingIdentity IE error");
             return false;
@@ -79,13 +78,10 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PagingDRX: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
-            ngap_ie->value.present ==
-                Ngap_PagingIEs__value_PR_PagingDRX) {
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present == Ngap_PagingIEs__value_PR_PagingDRX) {
           PagingDrx paging_drx = {};
-          if (!paging_drx.decode(ngap_ie
-                                     ->value.choice.PagingDRX)) {
+          if (!paging_drx.decode(ngap_ie->value.choice.PagingDRX)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PagingDRX IE error");
             return false;
@@ -98,12 +94,11 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_TAIListForPaging: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_PagingIEs__value_PR_TAIListForPaging) {
-          if (!m_TaiListForPaging.decode(ngap_ie
-                                             ->value.choice.TAIListForPaging)) {
+          if (!m_TaiListForPaging.decode(
+                  ngap_ie->value.choice.TAIListForPaging)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP TAIListForPaging IE error");
             return false;
@@ -116,13 +111,10 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_PagingPriority: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
-            ngap_ie->value.present ==
-                Ngap_PagingIEs__value_PR_PagingPriority) {
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present == Ngap_PagingIEs__value_PR_PagingPriority) {
           PagingPriority paging_priority = {};
-          if (!paging_priority.decode(ngap_ie
-                                          ->value.choice.PagingPriority)) {
+          if (!paging_priority.decode(ngap_ie->value.choice.PagingPriority)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PagingPriority IE error");
             return false;
@@ -297,7 +289,8 @@ void PagingMsg::setNrPagingEDrxInformation(
     const NrPagingEDrxInformation& value) {
   m_NrPagingEDrxInformation =
       std::make_optional<NrPagingEDrxInformation>(value);
-  Ngap_PagingIEs_t* ie = (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
   if (!ie) {
     oai::logger::logger_common::ngap().error(
         "calloc failed for NrPagingEDrxInformation IE");
@@ -322,7 +315,8 @@ void PagingMsg::setNrPagingEDrxInformation(
 //------------------------------------------------------------------------------
 void PagingMsg::setPagingCause(const PagingCause& value) {
   m_PagingCause = std::make_optional<PagingCause>(value);
-  Ngap_PagingIEs_t* ie = (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
   if (!ie) {
     oai::logger::logger_common::ngap().error(
         "calloc failed for PagingCause IE");
@@ -346,7 +340,8 @@ void PagingMsg::setPeipsAssistanceInformation(
     const PeipsAssistanceInformation& value) {
   m_PeipsAssistanceInformation =
       std::make_optional<PeipsAssistanceInformation>(value);
-  Ngap_PagingIEs_t* ie = (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
   if (!ie) {
     oai::logger::logger_common::ngap().error(
         "calloc failed for PeipsAssistanceInformation IE");

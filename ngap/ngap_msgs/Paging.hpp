@@ -65,10 +65,11 @@ class PagingMsg : public NgapMessage {
   UePagingIdentity m_UePagingIdentity;             // Mandatory
   std::optional<PagingDrx> m_pagingDRX;            // Optional
   TaiListForPaging m_TaiListForPaging;             // Mandatory
-  std::optional<PagingPriority> m_pagingPriority;               // Optional
+  std::optional<PagingPriority> m_pagingPriority;  // Optional
   std::optional<NrPagingEDrxInformation> m_NrPagingEDrxInformation;  // Rel-17
-  std::optional<PagingCause> m_PagingCause;                     // Rel-17
-  std::optional<PeipsAssistanceInformation> m_PeipsAssistanceInformation;  // Rel-17
+  std::optional<PagingCause> m_PagingCause;                          // Rel-17
+  std::optional<PeipsAssistanceInformation>
+      m_PeipsAssistanceInformation;  // Rel-17
   // TODO: UE Radio Capability for Paging (Optional)
   // TODO: PagingOrigin not set (3GPP-only paging, current scope)
   // TODO: Assistance Data for Paging (Optional)

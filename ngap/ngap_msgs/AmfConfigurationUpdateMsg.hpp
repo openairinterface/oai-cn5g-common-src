@@ -56,14 +56,14 @@ class AmfConfigurationUpdateMsg : public NgapMessage {
  private:
   Ngap_AMFConfigurationUpdate_t* m_AmfConfigurationUpdateIes;
 
-  std::optional<AmfName> m_AmfName;                    // Optional
-  std::optional<ServedGuamiList> m_ServedGuamiList;    // Optional
+  std::optional<AmfName> m_AmfName;                          // Optional
+  std::optional<ServedGuamiList> m_ServedGuamiList;          // Optional
   std::optional<RelativeAmfCapacity> m_RelativeAmfCapacity;  // Optional
-  std::optional<PlmnSupportList> m_PlmnSupportList;    // Optional
+  std::optional<PlmnSupportList> m_PlmnSupportList;          // Optional
   // TODO: id-AMFTNLAssociationToAddList (Optional) — deferred to Stage 8
   // TODO: id-AMFTNLAssociationToRemoveList (Optional) — deferred to Stage 8
   // TODO: id-AMFTNLAssociationToUpdateList (Optional) — deferred to Stage 8
-  std::optional<ExtendedAmfName> m_ExtendedAmfName;    // Optional, Rel-17
+  std::optional<ExtendedAmfName> m_ExtendedAmfName;  // Optional, Rel-17
 };
 
 }  // namespace oai::ngap

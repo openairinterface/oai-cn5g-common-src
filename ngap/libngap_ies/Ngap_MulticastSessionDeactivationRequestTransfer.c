@@ -86,41 +86,36 @@ static asn_SEQUENCE_specifics_t
         0, /* Root/Additions */
         2, /* First extension addition */
 };
-asn_TYPE_descriptor_t asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer =
+asn_TYPE_descriptor_t asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer = {
+    "MulticastSessionDeactivationRequestTransfer",
+    "MulticastSessionDeactivationRequestTransfer",
+    &asn_OP_SEQUENCE,
+    asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1,
+    sizeof(asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1) /
+        sizeof(asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1
+                   [0]),                                             /* 1 */
+    asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1, /* Same
+                                                                        as
+                                                                        above
+                                                                      */
+    sizeof(asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1) /
+        sizeof(asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1
+                   [0]), /* 1 */
     {
-        "MulticastSessionDeactivationRequestTransfer",
-        "MulticastSessionDeactivationRequestTransfer",
-        &asn_OP_SEQUENCE,
-        asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1,
-        sizeof(
-            asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1) /
-            sizeof(
-                asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1
-                    [0]),                                                /* 1 */
-        asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1, /* Same
-                                                                            as
-                                                                            above
-                                                                          */
-        sizeof(
-            asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1) /
-            sizeof(
-                asn_DEF_Ngap_MulticastSessionDeactivationRequestTransfer_tags_1
-                    [0]), /* 1 */
-        {
 #if !defined(ASN_DISABLE_OER_SUPPORT)
-            0,
+        0,
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-            0,
+        0,
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
-            0,
+        0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
-            SEQUENCE_constraint},
-        asn_MBR_Ngap_MulticastSessionDeactivationRequestTransfer_1,
-        2, /* Elements count */
-        &asn_SPC_Ngap_MulticastSessionDeactivationRequestTransfer_specs_1 /* Additional
-                                                                             specs
-                                                                           */
+        SEQUENCE_constraint},
+    asn_MBR_Ngap_MulticastSessionDeactivationRequestTransfer_1,
+    2, /* Elements count */
+    &asn_SPC_Ngap_MulticastSessionDeactivationRequestTransfer_specs_1 /* Additional
+                                                                         specs
+                                                                       */
 };

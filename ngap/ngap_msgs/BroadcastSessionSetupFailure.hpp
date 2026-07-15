@@ -35,7 +35,7 @@ class BroadcastSessionSetupFailureMsg : public NgapMessage {
   Ngap_BroadcastSessionSetupFailure_t* m_BroadcastSessionSetupFailureIes;
 
   MbsSessionId m_MbsSessionId;                              // Mandatory
-  Cause m_Cause;                                             // Mandatory
+  Cause m_Cause;                                            // Mandatory
   std::optional<CriticalityDiagnostics> m_CriticalityDiag;  // Optional
 };
 

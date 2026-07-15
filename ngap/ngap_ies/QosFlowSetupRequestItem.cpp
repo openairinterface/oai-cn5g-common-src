@@ -35,7 +35,10 @@ bool QosFlowSetupRequestItem::encode(
     Ngap_QosFlowSetupRequestItem_t& qosFlowSetupRequestItem) const {
   if (!m_QosFlowIdentifier.encode(qosFlowSetupRequestItem.qosFlowIdentifier))
     return false;
-  if (!qosFlowSetupRequestItem.qosFlowLevelQosParameters) qosFlowSetupRequestItem.qosFlowLevelQosParameters = (Ngap_QosFlowLevelQosParameters_t*) calloc(1, sizeof(Ngap_QosFlowLevelQosParameters_t));
+  if (!qosFlowSetupRequestItem.qosFlowLevelQosParameters)
+    qosFlowSetupRequestItem.qosFlowLevelQosParameters =
+        (Ngap_QosFlowLevelQosParameters_t*) calloc(
+            1, sizeof(Ngap_QosFlowLevelQosParameters_t));
   if (!m_QosFlowLevelQosParameters.encode(
           *qosFlowSetupRequestItem.qosFlowLevelQosParameters))
     return false;

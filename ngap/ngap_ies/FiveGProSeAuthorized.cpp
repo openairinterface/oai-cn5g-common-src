@@ -7,15 +7,13 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-bool FiveGProSeAuthorized::encode(
-    Ngap_FiveG_ProSeAuthorized_t& value) const {
+bool FiveGProSeAuthorized::encode(Ngap_FiveG_ProSeAuthorized_t& value) const {
   value = m_Value;
   return true;
 }
 
 //------------------------------------------------------------------------------
-bool FiveGProSeAuthorized::decode(
-    const Ngap_FiveG_ProSeAuthorized_t& value) {
+bool FiveGProSeAuthorized::decode(const Ngap_FiveG_ProSeAuthorized_t& value) {
   m_Value = value;
   return true;
 }

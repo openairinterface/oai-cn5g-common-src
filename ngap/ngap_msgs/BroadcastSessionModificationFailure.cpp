@@ -13,8 +13,7 @@ extern "C" {
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-BroadcastSessionModificationFailureMsg::
-    BroadcastSessionModificationFailureMsg()
+BroadcastSessionModificationFailureMsg::BroadcastSessionModificationFailureMsg()
     : NgapMessage() {
   m_BroadcastSessionModificationFailureIes = nullptr;
   m_CriticalityDiag                        = std::nullopt;
@@ -73,8 +72,7 @@ bool BroadcastSessionModificationFailureMsg::decode(
   }
 
   for (int i = 0;
-       i <
-       m_BroadcastSessionModificationFailureIes->protocolIEs->list.count;
+       i < m_BroadcastSessionModificationFailureIes->protocolIEs->list.count;
        i++) {
     Ngap_BroadcastSessionModificationFailureIEs_t* ie =
         (Ngap_BroadcastSessionModificationFailureIEs_t*)

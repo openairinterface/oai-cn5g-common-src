@@ -32,7 +32,8 @@ bool ServedGuamiItem::getBackupAmfName(AmfName& amfName) const {
 }
 //------------------------------------------------------------------------------
 bool ServedGuamiItem::encode(Ngap_ServedGUAMIItem& servedGUAMIItem) const {
-  if (!servedGUAMIItem.gUAMI) servedGUAMIItem.gUAMI = (Ngap_GUAMI_t*) calloc(1, sizeof(Ngap_GUAMI_t));
+  if (!servedGUAMIItem.gUAMI)
+    servedGUAMIItem.gUAMI = (Ngap_GUAMI_t*) calloc(1, sizeof(Ngap_GUAMI_t));
   if (!m_GuamiGroup.encode(*servedGUAMIItem.gUAMI)) return false;
   if (m_BackupAmfName.has_value()) {
     servedGUAMIItem.backupAMFName =

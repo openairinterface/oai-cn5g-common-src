@@ -54,7 +54,9 @@ void PlmnSupportItem::getSliceSupportList(
 //------------------------------------------------------------------------------
 bool PlmnSupportItem::encode(Ngap_PLMNSupportItem_t& plmnSupportItem) const {
   if (!m_PlmnId.encode(plmnSupportItem.pLMNIdentity)) return false;
-  if (!plmnSupportItem.sliceSupportList) plmnSupportItem.sliceSupportList = (Ngap_SliceSupportList_t*) calloc(1, sizeof(Ngap_SliceSupportList_t));
+  if (!plmnSupportItem.sliceSupportList)
+    plmnSupportItem.sliceSupportList =
+        (Ngap_SliceSupportList_t*) calloc(1, sizeof(Ngap_SliceSupportList_t));
   if (!m_SliceSupportList.encode(*plmnSupportItem.sliceSupportList))
     return false;
   return true;

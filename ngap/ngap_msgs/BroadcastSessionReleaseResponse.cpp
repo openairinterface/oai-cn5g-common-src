@@ -65,8 +65,7 @@ bool BroadcastSessionReleaseResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_BroadcastSessionReleaseResponseIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionReleaseResponseIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionReleaseResponseIEs_t* ie =
         (Ngap_BroadcastSessionReleaseResponseIEs_t*)
             m_BroadcastSessionReleaseResponseIes->protocolIEs->list.array[i];

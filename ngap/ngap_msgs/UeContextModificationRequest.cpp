@@ -29,9 +29,8 @@ UeContextModificationRequestMsg::~UeContextModificationRequestMsg() {}
 
 //------------------------------------------------------------------------------
 void UeContextModificationRequestMsg::initialize() {
-  m_UeContextModificationRequestIes =
-      &ngapPdu->choice.initiatingMessage->value.choice
-           .UEContextModificationRequest;
+  m_UeContextModificationRequestIes = &ngapPdu->choice.initiatingMessage->value
+                                           .choice.UEContextModificationRequest;
 }
 
 //------------------------------------------------------------------------------
@@ -172,7 +171,8 @@ bool UeContextModificationRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         // decode UESecurityCapabilities (Optional) — not yet implemented
       } break;
       case Ngap_ProtocolIE_ID_id_CoreNetworkAssistanceInformationForInactive: {
-        // decode CoreNetworkAssistanceInformationForInactive (Optional) — not yet implemented
+        // decode CoreNetworkAssistanceInformationForInactive (Optional) — not
+        // yet implemented
       } break;
       case Ngap_ProtocolIE_ID_id_EmergencyFallbackIndicator: {
         // decode EmergencyFallbackIndicator (Optional) — not yet implemented
@@ -384,7 +384,7 @@ bool UeContextModificationRequestMsg::setCoreNetworkAssistanceInformation(
   Ngap_UEContextModificationRequestIEs_t* ie =
       (Ngap_UEContextModificationRequestIEs_t*) calloc(
           1, sizeof(Ngap_UEContextModificationRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_CoreNetworkAssistanceInformationForInactive;
+  ie->id = Ngap_ProtocolIE_ID_id_CoreNetworkAssistanceInformationForInactive;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UEContextModificationRequestIEs__value_PR_CoreNetworkAssistanceInformationForInactive;
@@ -495,7 +495,7 @@ void UeContextModificationRequestMsg::setFiveGProSeUePC5AggregateMaximumBitRate(
   Ngap_UEContextModificationRequestIEs_t* ie =
       (Ngap_UEContextModificationRequestIEs_t*) calloc(
           1, sizeof(Ngap_UEContextModificationRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
+  ie->id = Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UEContextModificationRequestIEs__value_PR_NRUESidelinkAggregateMaximumBitrate_1;
@@ -595,7 +595,7 @@ void UeContextModificationRequestMsg::setManagementBasedMdtPlmnModificationList(
   Ngap_UEContextModificationRequestIEs_t* ie =
       (Ngap_UEContextModificationRequestIEs_t*) calloc(
           1, sizeof(Ngap_UEContextModificationRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNModificationList;
+  ie->id = Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNModificationList;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_UEContextModificationRequestIEs__value_PR_MDTPLMNModificationList;

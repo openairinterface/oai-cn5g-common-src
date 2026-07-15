@@ -71,8 +71,7 @@ bool CoreNetworkAssistanceInformationForInactive::encode(
         (Ngap_TAIListForInactiveItem_t*) calloc(
             1, sizeof(Ngap_TAIListForInactiveItem_t));
     if (!taiListForInactiveItem) return false;
-    taiListForInactiveItem->tAI =
-        (Ngap_TAI_t*) calloc(1, sizeof(Ngap_TAI_t));
+    taiListForInactiveItem->tAI = (Ngap_TAI_t*) calloc(1, sizeof(Ngap_TAI_t));
     if (!taiListForInactiveItem->tAI) return false;
     if (!it->encode(*taiListForInactiveItem->tAI)) return false;
     if (!coreNetworkAssistanceInformation.tAIListForInactive) {

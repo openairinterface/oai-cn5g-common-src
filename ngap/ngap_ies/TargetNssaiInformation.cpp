@@ -14,7 +14,8 @@ bool TargetNssaiInformation::encode(
 }
 
 //------------------------------------------------------------------------------
-bool TargetNssaiInformation::decode(const Ngap_TargetNSSAIInformation_t& value) {
+bool TargetNssaiInformation::decode(
+    const Ngap_TargetNSSAIInformation_t& value) {
   m_Value = value;
   return true;
 }

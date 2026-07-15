@@ -21,8 +21,7 @@ MbsSessionReleaseResponseTransfer::~MbsSessionReleaseResponseTransfer() {
 }
 
 //------------------------------------------------------------------------------
-int MbsSessionReleaseResponseTransfer::encode(
-    uint8_t* buf, int bufSize) const {
+int MbsSessionReleaseResponseTransfer::encode(uint8_t* buf, int bufSize) const {
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_MBSSessionReleaseResponseTransfer, nullptr, m_Ie, buf,
       bufSize);

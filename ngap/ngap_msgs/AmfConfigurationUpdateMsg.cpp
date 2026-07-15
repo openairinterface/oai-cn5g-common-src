@@ -47,8 +47,9 @@ bool AmfConfigurationUpdateMsg::setAmfName(const std::string& name) {
   }
   m_AmfName = std::make_optional<AmfName>(amfName);
 
-  Ngap_AMFConfigurationUpdateIEs_t* ie = (Ngap_AMFConfigurationUpdateIEs_t*)
-      calloc(1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
+  Ngap_AMFConfigurationUpdateIEs_t* ie =
+      (Ngap_AMFConfigurationUpdateIEs_t*) calloc(
+          1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
   ie->id            = Ngap_ProtocolIE_ID_id_AMFName;
   ie->criticality   = Ngap_Criticality_reject;
   ie->value.present = Ngap_AMFConfigurationUpdateIEs__value_PR_AMFName;
@@ -92,12 +93,12 @@ void AmfConfigurationUpdateMsg::setGuamiList(
   }
   m_ServedGuamiList = std::make_optional<ServedGuamiList>(servedGuamiList);
 
-  Ngap_AMFConfigurationUpdateIEs_t* ie = (Ngap_AMFConfigurationUpdateIEs_t*)
-      calloc(1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_ServedGUAMIList;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_AMFConfigurationUpdateIEs__value_PR_ServedGUAMIList;
+  Ngap_AMFConfigurationUpdateIEs_t* ie =
+      (Ngap_AMFConfigurationUpdateIEs_t*) calloc(
+          1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_ServedGUAMIList;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_AMFConfigurationUpdateIEs__value_PR_ServedGUAMIList;
 
   if (!m_ServedGuamiList.value().encode(ie->value.choice.ServedGUAMIList)) {
     oai::logger::logger_common::ngap().error(
@@ -120,8 +121,9 @@ void AmfConfigurationUpdateMsg::setRelativeAmfCapacity(uint8_t capacity) {
   m_RelativeAmfCapacity =
       std::make_optional<RelativeAmfCapacity>(relativeAmfCapacity);
 
-  Ngap_AMFConfigurationUpdateIEs_t* ie = (Ngap_AMFConfigurationUpdateIEs_t*)
-      calloc(1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
+  Ngap_AMFConfigurationUpdateIEs_t* ie =
+      (Ngap_AMFConfigurationUpdateIEs_t*) calloc(
+          1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
   ie->id          = Ngap_ProtocolIE_ID_id_RelativeAMFCapacity;
   ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
@@ -147,12 +149,12 @@ void AmfConfigurationUpdateMsg::setPlmnSupportList(
     const PlmnSupportList& list) {
   m_PlmnSupportList = std::make_optional<PlmnSupportList>(list);
 
-  Ngap_AMFConfigurationUpdateIEs_t* ie = (Ngap_AMFConfigurationUpdateIEs_t*)
-      calloc(1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_PLMNSupportList;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_AMFConfigurationUpdateIEs__value_PR_PLMNSupportList;
+  Ngap_AMFConfigurationUpdateIEs_t* ie =
+      (Ngap_AMFConfigurationUpdateIEs_t*) calloc(
+          1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_PLMNSupportList;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_AMFConfigurationUpdateIEs__value_PR_PLMNSupportList;
 
   if (!m_PlmnSupportList.value().encode(ie->value.choice.PLMNSupportList)) {
     oai::logger::logger_common::ngap().error(
@@ -173,12 +175,12 @@ void AmfConfigurationUpdateMsg::setExtendedAmfName(
     const ExtendedAmfName& value) {
   m_ExtendedAmfName = std::make_optional<ExtendedAmfName>(value);
 
-  Ngap_AMFConfigurationUpdateIEs_t* ie = (Ngap_AMFConfigurationUpdateIEs_t*)
-      calloc(1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_Extended_AMFName;
-  ie->criticality = Ngap_Criticality_ignore;
-  ie->value.present =
-      Ngap_AMFConfigurationUpdateIEs__value_PR_Extended_AMFName;
+  Ngap_AMFConfigurationUpdateIEs_t* ie =
+      (Ngap_AMFConfigurationUpdateIEs_t*) calloc(
+          1, sizeof(Ngap_AMFConfigurationUpdateIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_Extended_AMFName;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_AMFConfigurationUpdateIEs__value_PR_Extended_AMFName;
 
   if (!m_ExtendedAmfName.value().encode(ie->value.choice.Extended_AMFName)) {
     oai::logger::logger_common::ngap().error(
@@ -204,9 +206,8 @@ bool AmfConfigurationUpdateMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             Ngap_ProcedureCode_id_AMFConfigurationUpdate &&
         ngapPdu->choice.initiatingMessage->value.present ==
             Ngap_InitiatingMessage__value_PR_AMFConfigurationUpdate) {
-      m_AmfConfigurationUpdateIes =
-          &ngapPdu->choice.initiatingMessage->value.choice
-               .AMFConfigurationUpdate;
+      m_AmfConfigurationUpdateIes = &ngapPdu->choice.initiatingMessage->value
+                                         .choice.AMFConfigurationUpdate;
     } else {
       oai::logger::logger_common::ngap().error(
           "Check AMFConfigurationUpdate message error");
@@ -218,8 +219,8 @@ bool AmfConfigurationUpdateMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     return false;
   }
 
-  for (int i = 0;
-       i < m_AmfConfigurationUpdateIes->protocolIEs->list.count; i++) {
+  for (int i = 0; i < m_AmfConfigurationUpdateIes->protocolIEs->list.count;
+       i++) {
     Ngap_AMFConfigurationUpdateIEs_t* ngap_ie =
         (Ngap_AMFConfigurationUpdateIEs_t*)
             m_AmfConfigurationUpdateIes->protocolIEs->list.array[i];
@@ -244,7 +245,8 @@ bool AmfConfigurationUpdateMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             m_ServedGuamiList = std::make_optional<ServedGuamiList>(tmp);
           } else {
             oai::logger::logger_common::ngap().warn(
-                "Decoded NGAP ServedGUAMIList IE error (AmfConfigurationUpdate)");
+                "Decoded NGAP ServedGUAMIList IE error "
+                "(AmfConfigurationUpdate)");
           }
         }
       } break;

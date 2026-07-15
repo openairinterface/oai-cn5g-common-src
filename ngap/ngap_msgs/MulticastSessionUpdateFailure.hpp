@@ -38,7 +38,7 @@ class MulticastSessionUpdateFailureMsg : public NgapMessage {
 
   MbsSessionId m_MbsSessionId;                              // Mandatory
   std::optional<MbsAreaSessionId> m_MbsAreaSessionId;       // Optional
-  Cause m_Cause;                                             // Mandatory
+  Cause m_Cause;                                            // Mandatory
   std::optional<CriticalityDiagnostics> m_CriticalityDiag;  // Optional
 };
 

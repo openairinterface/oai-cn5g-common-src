@@ -74,20 +74,20 @@ int CriticalityDiagnostics::encode(
   if (m_ProcedureCodeIsSet) {
     Ngap_ProcedureCode_t* procedureCodeIE =
         (Ngap_ProcedureCode_t*) calloc(1, sizeof(Ngap_ProcedureCode_t));
-    *procedureCodeIE   = m_ProcedureCode;
-    cd.procedureCode   = procedureCodeIE;
+    *procedureCodeIE = m_ProcedureCode;
+    cd.procedureCode = procedureCodeIE;
   }
   if (m_TriggeringMessageIsSet) {
     Ngap_TriggeringMessage_t* triggeringMessageIE =
         (Ngap_TriggeringMessage_t*) calloc(1, sizeof(Ngap_TriggeringMessage_t));
-    *triggeringMessageIE  = m_TriggeringMessage;
-    cd.triggeringMessage  = triggeringMessageIE;
+    *triggeringMessageIE = m_TriggeringMessage;
+    cd.triggeringMessage = triggeringMessageIE;
   }
   if (m_ProcedureCriticalityIsSet) {
     Ngap_Criticality_t* procedureCriticalityIE =
         (Ngap_Criticality_t*) calloc(1, sizeof(Ngap_Criticality_t));
-    *procedureCriticalityIE  = m_ProcedureCriticality;
-    cd.procedureCriticality  = procedureCriticalityIE;
+    *procedureCriticalityIE = m_ProcedureCriticality;
+    cd.procedureCriticality = procedureCriticalityIE;
   }
 
   if (m_IEsCriticalityDiagnostics.size() > 0) {
@@ -103,7 +103,8 @@ int CriticalityDiagnostics::encode(
     }
     cd.iEsCriticalityDiagnostics = ieList;
   }
-  // protocolIEs is managed by the ASN.1 runtime; pass it directly to SEQUENCE_ADD
+  // protocolIEs is managed by the ASN.1 runtime; pass it directly to
+  // SEQUENCE_ADD
   int ret = ASN_SEQUENCE_ADD(ngSetupFailure.protocolIEs, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(

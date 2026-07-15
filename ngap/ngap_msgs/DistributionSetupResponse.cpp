@@ -25,9 +25,8 @@ DistributionSetupResponseMsg::DistributionSetupResponseMsg() : NgapMessage() {
 
 //------------------------------------------------------------------------------
 void DistributionSetupResponseMsg::initialize() {
-  m_DistributionSetupResponseIes =
-      &(ngapPdu->choice.successfulOutcome->value.choice
-            .DistributionSetupResponse);
+  m_DistributionSetupResponseIes = &(ngapPdu->choice.successfulOutcome->value
+                                         .choice.DistributionSetupResponse);
 }
 
 //------------------------------------------------------------------------------
@@ -37,10 +36,9 @@ void DistributionSetupResponseMsg::setMbsSessionId(const MbsSessionId& v) {
   Ngap_DistributionSetupResponseIEs_t* ie =
       (Ngap_DistributionSetupResponseIEs_t*) calloc(
           1, sizeof(Ngap_DistributionSetupResponseIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_MBS_SessionID;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_DistributionSetupResponseIEs__value_PR_MBS_SessionID;
+  ie->id            = Ngap_ProtocolIE_ID_id_MBS_SessionID;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_DistributionSetupResponseIEs__value_PR_MBS_SessionID;
 
   if (!m_MbsSessionId.encode(ie->value.choice.MBS_SessionID)) {
     oai::logger::logger_common::ngap().error(
@@ -49,8 +47,8 @@ void DistributionSetupResponseMsg::setMbsSessionId(const MbsSessionId& v) {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupResponseIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-SessionID IE error");
@@ -75,16 +73,15 @@ void DistributionSetupResponseMsg::setMbsAreaSessionId(
   ie->value.present =
       Ngap_DistributionSetupResponseIEs__value_PR_MBS_AreaSessionID;
 
-  if (!m_MbsAreaSessionId.value().encode(
-          ie->value.choice.MBS_AreaSessionID)) {
+  if (!m_MbsAreaSessionId.value().encode(ie->value.choice.MBS_AreaSessionID)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
     oai::utils::utils::free_wrapper((void**) &ie);
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupResponseIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS-AreaSessionID IE error");
@@ -122,8 +119,8 @@ void DistributionSetupResponseMsg::setMbsDistributionSetupResponseTransfer(
            .OCTET_STRING_CONTAINING_MBS_DistributionSetupResponseTransfer_,
       (const char*) buf, len);
 
-  int ret = ASN_SEQUENCE_ADD(
-      &m_DistributionSetupResponseIes->protocolIEs->list, ie);
+  int ret =
+      ASN_SEQUENCE_ADD(&m_DistributionSetupResponseIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP MBS_DistributionSetupResponseTransfer IE error");
@@ -139,16 +136,15 @@ bool DistributionSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
           Ngap_ProcedureCode_id_DistributionSetup &&
       ngapPdu->choice.successfulOutcome->value.present ==
           Ngap_SuccessfulOutcome__value_PR_DistributionSetupResponse) {
-    m_DistributionSetupResponseIes =
-        &ngapPdu->choice.successfulOutcome->value.choice.DistributionSetupResponse;
+    m_DistributionSetupResponseIes = &ngapPdu->choice.successfulOutcome->value
+                                          .choice.DistributionSetupResponse;
   } else {
     oai::logger::logger_common::ngap().error(
         "Check DistributionSetupResponse message error");
     return false;
   }
 
-  for (int i = 0;
-       i < m_DistributionSetupResponseIes->protocolIEs->list.count;
+  for (int i = 0; i < m_DistributionSetupResponseIes->protocolIEs->list.count;
        i++) {
     Ngap_DistributionSetupResponseIEs_t* ie =
         (Ngap_DistributionSetupResponseIEs_t*)

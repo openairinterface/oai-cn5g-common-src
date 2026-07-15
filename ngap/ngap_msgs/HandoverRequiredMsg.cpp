@@ -155,16 +155,15 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
   for (int i = 0; i < m_HandoverRequiredIes->protocolIEs->list.count; i++) {
     Ngap_HandoverRequiredIEs_t* ngap_ie =
-        (Ngap_HandoverRequiredIEs_t*) m_HandoverRequiredIes->protocolIEs->list.array[i];
+        (Ngap_HandoverRequiredIEs_t*)
+            m_HandoverRequiredIes->protocolIEs->list.array[i];
     switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -176,13 +175,11 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  ngap_ie
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -194,12 +191,10 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_HandoverType: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_HandoverType) {
-          m_HandoverType = ngap_ie
-                               ->value.choice.HandoverType;
+          m_HandoverType = ngap_ie->value.choice.HandoverType;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP Handover Type error");
@@ -207,12 +202,10 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_Cause: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_Cause) {
-          if (!m_Cause.decode(ngap_ie
-                                  ->value.choice.Cause)) {
+          if (!m_Cause.decode(ngap_ie->value.choice.Cause)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP Cause IE error");
             return false;
@@ -224,12 +217,10 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_TargetID: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_TargetID) {
-          m_TargetId = ngap_ie
-                           ->value.choice.TargetID;
+          m_TargetId = ngap_ie->value.choice.TargetID;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP TargetID IE error");
@@ -237,14 +228,12 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_DirectForwardingPathAvailability: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_ignore &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_DirectForwardingPathAvailability) {
           m_DirectForwardingPathAvailability =
               std::optional<Ngap_DirectForwardingPathAvailability_t>(
-                  ngap_ie
-                      ->value.choice.DirectForwardingPathAvailability);
+                  ngap_ie->value.choice.DirectForwardingPathAvailability);
         } else {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP DirectForwardingPathAvailability IE error");
@@ -252,13 +241,11 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceListHORqd: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_PDUSessionResourceListHORqd) {
           if (!m_PduSessionResourceList.decode(
-                  ngap_ie
-                      ->value.choice.PDUSessionResourceListHORqd)) {
+                  ngap_ie->value.choice.PDUSessionResourceListHORqd)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP PDUSessionResourceSetupListCxtRes IE error");
             return false;
@@ -270,14 +257,12 @@ bool HandoverRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_SourceToTarget_TransparentContainer: {
-        if (ngap_ie->criticality ==
-                Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
             ngap_ie->value.present ==
                 Ngap_HandoverRequiredIEs__value_PR_SourceToTarget_TransparentContainer) {
           ngap_utils::octet_string_copy(
               m_SourceToTargetTransparentContainer,
-              ngap_ie
-                  ->value.choice.SourceToTarget_TransparentContainer);
+              ngap_ie->value.choice.SourceToTarget_TransparentContainer);
         } else {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP SourceToTarget_TransparentContainer IE error");

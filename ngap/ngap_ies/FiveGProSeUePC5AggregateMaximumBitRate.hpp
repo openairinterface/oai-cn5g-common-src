@@ -27,9 +27,7 @@ class FiveGProSeUePC5AggregateMaximumBitRate {
   const Ngap_NRUESidelinkAggregateMaximumBitrate_t& get() const {
     return m_Value;
   }
-  void set(const Ngap_NRUESidelinkAggregateMaximumBitrate_t& v) {
-    m_Value = v;
-  }
+  void set(const Ngap_NRUESidelinkAggregateMaximumBitrate_t& v) { m_Value = v; }
 
  private:
   Ngap_NRUESidelinkAggregateMaximumBitrate_t m_Value{};

@@ -62,8 +62,7 @@ bool BroadcastSessionReleaseRequiredMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_BroadcastSessionReleaseRequiredIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionReleaseRequiredIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionReleaseRequiredIEs_t* ie =
         (Ngap_BroadcastSessionReleaseRequiredIEs_t*)
             m_BroadcastSessionReleaseRequiredIes->protocolIEs->list.array[i];

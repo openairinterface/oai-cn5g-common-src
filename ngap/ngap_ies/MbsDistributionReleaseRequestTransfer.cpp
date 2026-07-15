@@ -7,8 +7,7 @@
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
-MbsDistributionReleaseRequestTransfer::
-    MbsDistributionReleaseRequestTransfer() {
+MbsDistributionReleaseRequestTransfer::MbsDistributionReleaseRequestTransfer() {
   m_Ie = static_cast<Ngap_MBS_DistributionReleaseRequestTransfer_t*>(
       calloc(1, sizeof(Ngap_MBS_DistributionReleaseRequestTransfer_t)));
 }

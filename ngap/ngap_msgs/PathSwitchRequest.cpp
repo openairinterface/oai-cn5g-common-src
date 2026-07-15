@@ -36,13 +36,11 @@ void PathSwitchRequestMsg::initialize() {
 void PathSwitchRequestMsg::setAmfUeNgapId(const uint64_t& id) {
   NgapUeMessage::m_AmfUeNgapId.set(id);
 
-  Ngap_PathSwitchRequestIEs_t* ie =
-      (Ngap_PathSwitchRequestIEs_t*) calloc(
-          1, sizeof(Ngap_PathSwitchRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PathSwitchRequestIEs__value_PR_AMF_UE_NGAP_ID;
+  Ngap_PathSwitchRequestIEs_t* ie = (Ngap_PathSwitchRequestIEs_t*) calloc(
+      1, sizeof(Ngap_PathSwitchRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_PathSwitchRequestIEs__value_PR_AMF_UE_NGAP_ID;
 
   int ret =
       NgapUeMessage::m_AmfUeNgapId.encode(ie->value.choice.AMF_UE_NGAP_ID);
@@ -63,13 +61,11 @@ void PathSwitchRequestMsg::setAmfUeNgapId(const uint64_t& id) {
 void PathSwitchRequestMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
   NgapUeMessage::m_RanUeNgapId.set(ranUeNgapId);
 
-  Ngap_PathSwitchRequestIEs_t* ie =
-      (Ngap_PathSwitchRequestIEs_t*) calloc(
-          1, sizeof(Ngap_PathSwitchRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
-  ie->criticality = Ngap_Criticality_reject;
-  ie->value.present =
-      Ngap_PathSwitchRequestIEs__value_PR_RAN_UE_NGAP_ID;
+  Ngap_PathSwitchRequestIEs_t* ie = (Ngap_PathSwitchRequestIEs_t*) calloc(
+      1, sizeof(Ngap_PathSwitchRequestIEs_t));
+  ie->id            = Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID;
+  ie->criticality   = Ngap_Criticality_reject;
+  ie->value.present = Ngap_PathSwitchRequestIEs__value_PR_RAN_UE_NGAP_ID;
 
   int ret =
       NgapUeMessage::m_RanUeNgapId.encode(ie->value.choice.RAN_UE_NGAP_ID);

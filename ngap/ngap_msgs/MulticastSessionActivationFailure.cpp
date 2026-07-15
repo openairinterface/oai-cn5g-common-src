@@ -52,8 +52,7 @@ bool MulticastSessionActivationFailureMsg::getCriticalityDiagnostics(
 }
 
 //------------------------------------------------------------------------------
-bool MulticastSessionActivationFailureMsg::decode(
-    Ngap_NGAP_PDU_t* ngapMsgPdu) {
+bool MulticastSessionActivationFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
 
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_unsuccessfulOutcome &&

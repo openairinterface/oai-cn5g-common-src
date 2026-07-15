@@ -31,8 +31,7 @@ void BroadcastSessionReleaseRequestMsg::initialize() {
 }
 
 //------------------------------------------------------------------------------
-void BroadcastSessionReleaseRequestMsg::setMbsSessionId(
-    const MbsSessionId& v) {
+void BroadcastSessionReleaseRequestMsg::setMbsSessionId(const MbsSessionId& v) {
   m_MbsSessionId = v;
 
   Ngap_BroadcastSessionReleaseRequestIEs_t* ie =
@@ -58,8 +57,7 @@ void BroadcastSessionReleaseRequestMsg::setMbsSessionId(
 }
 
 //------------------------------------------------------------------------------
-bool BroadcastSessionReleaseRequestMsg::getMbsSessionId(
-    MbsSessionId& v) const {
+bool BroadcastSessionReleaseRequestMsg::getMbsSessionId(MbsSessionId& v) const {
   v = m_MbsSessionId;
   return true;
 }
@@ -71,10 +69,9 @@ void BroadcastSessionReleaseRequestMsg::setCause(const Cause& v) {
   Ngap_BroadcastSessionReleaseRequestIEs_t* ie =
       (Ngap_BroadcastSessionReleaseRequestIEs_t*) calloc(
           1, sizeof(Ngap_BroadcastSessionReleaseRequestIEs_t));
-  ie->id          = Ngap_ProtocolIE_ID_id_Cause;
-  ie->criticality = Ngap_Criticality_ignore;
-  ie->value.present =
-      Ngap_BroadcastSessionReleaseRequestIEs__value_PR_Cause;
+  ie->id            = Ngap_ProtocolIE_ID_id_Cause;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_BroadcastSessionReleaseRequestIEs__value_PR_Cause;
 
   if (!m_Cause.encode(ie->value.choice.Cause)) {
     oai::logger::logger_common::ngap().error("Encode NGAP Cause IE error");
@@ -114,8 +111,7 @@ bool BroadcastSessionReleaseRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   }
 
   for (int i = 0;
-       i < m_BroadcastSessionReleaseRequestIes->protocolIEs->list.count;
-       i++) {
+       i < m_BroadcastSessionReleaseRequestIes->protocolIEs->list.count; i++) {
     Ngap_BroadcastSessionReleaseRequestIEs_t* ie =
         (Ngap_BroadcastSessionReleaseRequestIEs_t*)
             m_BroadcastSessionReleaseRequestIes->protocolIEs->list.array[i];

@@ -11,29 +11,25 @@
 extern "C" {
 #endif
 
-struct asn_TYPE_descriptor_s;  /* Forward declaration */
+struct asn_TYPE_descriptor_s; /* Forward declaration */
 
 /*
  * The CBOR encoder of any ASN.1 type. May be invoked by the application.
  * Produces canonical CBOR output per RFC 7049.
  */
 asn_enc_rval_t cbor_encode(
-    const struct asn_TYPE_descriptor_s *type_descriptor,
-    const void *struct_ptr,
-    asn_app_consume_bytes_f *consume_bytes_cb,
-    void *app_key);
+    const struct asn_TYPE_descriptor_s* type_descriptor, const void* struct_ptr,
+    asn_app_consume_bytes_f* consume_bytes_cb, void* app_key);
 
 /*
  * Type of the generic CBOR encoder.
  */
 typedef asn_enc_rval_t(cbor_type_encoder_f)(
-    const struct asn_TYPE_descriptor_s *type_descriptor,
-    const void *struct_ptr,
-    asn_app_consume_bytes_f *consume_bytes_cb,
-    void *app_key);
+    const struct asn_TYPE_descriptor_s* type_descriptor, const void* struct_ptr,
+    asn_app_consume_bytes_f* consume_bytes_cb, void* app_key);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif  /* _CBOR_ENCODER_H_ */
+#endif /* _CBOR_ENCODER_H_ */

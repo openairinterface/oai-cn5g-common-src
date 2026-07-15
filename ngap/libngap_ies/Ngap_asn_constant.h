@@ -150,7 +150,6 @@ extern "C" {
 #define Ngap_maxnoofTAforQMC (8)
 #define Ngap_maxnoofThresholdsForExcessPacketDelay (255)
 
-
 #ifdef __cplusplus
 }
 #endif

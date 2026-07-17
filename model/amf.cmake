@@ -101,6 +101,8 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/CagInfo.cpp
     ${AMF_MODEL_DIR}/CancelPosInfo.cpp
     ${AMF_MODEL_DIR}/CandidateForReplacement.cpp
+    ${AMF_MODEL_DIR}/Cause.cpp
+    ${AMF_MODEL_DIR}/Cause_anyOf.cpp
     ${AMF_MODEL_DIR}/CeModeBInd.cpp
     ${AMF_MODEL_DIR}/CellGlobalId.cpp
     ${AMF_MODEL_DIR}/ChangeItem.cpp
@@ -601,6 +603,8 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/RequestTrigger_anyOf.cpp
     ${AMF_MODEL_DIR}/ReservPriority.cpp
     ${AMF_MODEL_DIR}/ReservPriority_anyOf.cpp
+    ${AMF_MODEL_DIR}/ResourceStatus.cpp
+    ${AMF_MODEL_DIR}/ResourceStatus_anyOf.cpp
     ${AMF_MODEL_DIR}/ResourceUsage.cpp
     ${AMF_MODEL_DIR}/ResponseTime.cpp
     ${AMF_MODEL_DIR}/ResponseTime_anyOf.cpp
@@ -678,6 +682,7 @@ file(GLOB AMF_MODEL_SRC_FILES
     ${AMF_MODEL_DIR}/StationaryIndication_anyOf.cpp
     ${AMF_MODEL_DIR}/StatusChange.cpp
     ${AMF_MODEL_DIR}/StatusChange_anyOf.cpp
+    ${AMF_MODEL_DIR}/StatusInfo.cpp
     ${AMF_MODEL_DIR}/SteeringContainer.cpp
     ${AMF_MODEL_DIR}/SteeringInfo.cpp
     ${AMF_MODEL_DIR}/SubscribedSnssai.cpp
@@ -884,5 +889,5 @@ if (TARGET ${NF_TARGET})
     target_include_directories(${NF_TARGET} PUBLIC ${AMF_MODEL_DIR})
     target_sources(${NF_TARGET} PRIVATE
             ${AMF_MODEL_SRC_FILES}
-            )
+    )
 endif()

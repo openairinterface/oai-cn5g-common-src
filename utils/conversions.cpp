@@ -354,11 +354,10 @@ std::string conv::tmsi_to_string(const uint32_t tmsi) {
 
 //------------------------------------------------------------------------------
 void conv::get_tmsi_from_guti(const std::string& guti, uint32_t& tmsi) {
-  // Get 8 last characters of GUTI
   uint8_t len = guti.length();
-  if (len <= kUint32Length) return;
-  std::string tmsi_str = guti.substr(len - kUint32Length);
-  tmsi                 = string_hex_to_int(tmsi_str);
+  if (len <= 10) return;
+  std::string tmsi_str = guti.substr(len - 10);
+  tmsi                 = static_cast<uint32_t>(std::stoul(tmsi_str));
 }
 
 //------------------------------------------------------------------------------

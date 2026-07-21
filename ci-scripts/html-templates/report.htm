@@ -1,0 +1,117 @@
+<!-- SPDX-License-Identifier: MIT -->
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>OAI-CN5G-COMMON-SRC Build Results -- JOB_NAME build #BUILD_ID</title>
+  <style>
+    code { color: #337ab7; background-color: transparent; padding: 0; }
+    h4.section-title {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 600; color: #2c3e50; letter-spacing: .3px; margin: 18px 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid" style="margin-left:1em; margin-right:1em">
+  <table width = "100%" style="border-collapse: collapse; border: none;">
+   <tr style="border-collapse: collapse; border: none;">
+   <td style="border-collapse: collapse; border: none;">
+     <a href="http://www.openairinterface.org/">
+        <img src="http://www.openairinterface.org/wp-content/uploads/2016/03/cropped-oai_final_logo2.png" alt="" border="none" height=50 width=150>
+     </a>
+   </td>
+   <td style="border-collapse: collapse; border: none; vertical-align: center;">
+     <b><font size = "6">Job Summary -- Job: JOB_NAME -- Build-ID: <a href="BUILD_URL">BUILD_ID</a></font></b>
+   </td>
+   </tr>
+  </table>
+  <br>
+
+  <table class="table-bordered" width = "80%" align = "center" border = "1">
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-time"></span> Build Start Time</td>
+      <td>TEMPLATE_TIME</td>
+    </tr>
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-wrench"></span> Build Trigger</td>
+      <td>Pull Request</td>
+    </tr>
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-cloud-upload"></span> GIT Repository</td>
+      <td><a href="GIT_URL">GIT_URL</a></td>
+    </tr>
+     <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-log-out"></span> Pull Request URL</td>
+       <td><a href="TEMPLATE_PULL_REQUEST_LINK">TEMPLATE_PULL_REQUEST_LINK</a></td>
+     </tr>
+     <tr>
+       <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-header"></span> Pull Request Title</td>
+       <td>TEMPLATE_PULL_REQUEST_TITLE</td>
+     </tr>
+     <tr>
+       <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-log-out"></span> Source Branch</td>
+      <td>SRC_BRANCH</td>
+    </tr>
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-tag"></span> Source Commit ID</td>
+      <td>SRC_COMMIT</td>
+    </tr>
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-log-in"></span> Target Branch</td>
+      <td>DST_BRANCH</td>
+    </tr>
+    <tr>
+      <td bgcolor="lightcyan" > <span class="glyphicon glyphicon-tag"></span> Target Commit ID</td>
+      <td>DST_COMMIT</td>
+    </tr>
+  </table>
+  <br>
+
+<h2>CHAPTER_NAME</h2>
+<div class="alert alert-ALERT_LEVEL">
+  <strong>MESSAGE</strong>
+</div>
+
+  <h4 class="section-title">Build Configuration</h4>
+  <table class="table-bordered" width="100%" border="1">
+    <tr bgcolor="#33CCFF">
+      <th>NF</th>
+      <th>NF branch</th>
+      <th>NF commit</th>
+      <th>common-src branch</th>
+      <th>common-src commit</th>
+      <th>Dockerfile</th>
+    </tr>
+BUILD_REFS_ROWS
+  </table>
+  <br>
+
+  <h4 class="section-title">Build Status</h4>
+  <table class="table-bordered" width="100%" border="1">
+    <tr bgcolor="#33CCFF">
+      <th>NF</th>
+      <th>Status</th>
+      <th>Image tag</th>
+      <th>Size</th>
+      <th>Build time</th>
+      <th>Details</th>
+    </tr>
+BUILD_STATUS_ROWS
+  </table>
+  <br>
+
+  <table class="table table-condensed" width="100%">
+    <tr>
+      <th colspan="5" bgcolor="#33CCFF">Final Status</th>
+      <th colspan="3" align="center" bgcolor="FINAL_STATUS_BG"><font color="white">FINAL_STATUS_TXT <span class="glyphicon FINAL_STATUS_ICON"></span> </font></th>
+    </tr>
+  </table>
+  <br>
+
+  <div class="well well-lg">End of Test Report -- Copyright <span class="glyphicon glyphicon-copyright-mark"></span> 2026 <a href="http://www.openairinterface.org/">OpenAirInterface</a>. All Rights Reserved.</div>
+</div></body>
+</html>

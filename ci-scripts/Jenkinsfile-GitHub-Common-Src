@@ -1,0 +1,501 @@
+#!/bin/groovy
+/*
+ * SPDX-License-Identifier: MIT
+ */
+
+import groovy.transform.Field
+
+@Field def ubuntuBuildResource              // Ubuntu build lock
+@Field def PrivateRegistryURL               // internal registry URL
+@Field def enabledNFs                       // NFs to build against this common-src change (from do<NF> params)
+@Field def defaultNFBranch                  // Default NF branch for NFs not coupled to this change
+
+// Canonical NF set. Each entry is gated by a do<NF> boolean job parameter
+// (default true), so an NF can be dropped from a manual run via the UI.
+@Field def ALL_NFS = ['amf', 'ausf', 'lmf', 'nef', 'nrf', 'nssf', 'pcf', 'smf', 'udm', 'udr', 'upf']
+
+@Field def githubCredentialsId = 'github-jenkins-oai-cn'  // GitHub checkout creds
+
+@Field def isPullRequest    = false      // true if triggered by a PR
+@Field def doBuild          = true       // gate for the NF build sweep (see 'Check PR Labels')
+@Field def common_src_branch = ''        // source branch
+@Field def targetBranch     = ''         // PR target branch
+@Field def shortenShaOne    = ''         // short commit SHA
+@Field def failingStages    = ''         // markdown bullet list of stages that failed, for the PR comment
+@Field def mrValidationWarning = ''      // Signed-off-by/merge-commit guideline message, for the PR comment
+@Field def preBuildFailureMessage = ''   // pre-build stage failure note for the PR comment
+
+//-------------------------------------------------------------------------------
+pipeline {
+  agent {
+    label params.UbuntuBuildNode
+  }
+  options {
+    disableConcurrentBuilds()
+    timestamps()
+    ansiColor('xterm')
+  }
+
+  stages {
+    // Load + validate job params; fail early on missing config.
+    stage('Initialize Pipeline Configuration') {
+      steps {
+        script {
+          // Detect PR early so pre-build stage failures still post a PR comment.
+          isPullRequest = !!env.GITHUB_PR_NUMBER?.trim()
+
+          ubuntuBuildResource    = params.UbuntuBuildResource
+          PrivateRegistryURL     = params.PrivateRegistryURL
+
+          defaultNFBranch     = params.defaultNFBranch ?: 'develop'
+
+          // Build the enabled NF set from the per-NF do<NF> booleans. A missing
+          // param defaults to true, so newly added NFs are included until a job
+          // explicitly disables them.
+          enabledNFs = ALL_NFS.findAll { nf ->
+            def flag = params["do${nf.toUpperCase()}"]
+            (flag != null) ? flag : true
+          }
+
+          echo 'Pipeline configuration loaded for OAI-CN5G-COMMON-SRC'
+          echo "NFs enabled for this run: ${enabledNFs.collect { it.toUpperCase() }.join(', ')}"
+
+          if (enabledNFs.isEmpty()) {
+            error 'No NFs enabled -- every do<NF> parameter is false. Nothing to build.'
+          }
+
+          if (!params.UbuntuBuildNode) {
+            echo 'No Ubuntu build node is specified!'
+            error 'Stopping pipeline!'
+          }
+
+          env.JOB_TIMESTAMP = sh(returnStdout: true, script: 'date --utc --rfc-3339=seconds | sed -e "s#+00:00##"').trim()
+          echo "Current UTC Date/Time: ${env.JOB_TIMESTAMP}"
+        }
+      }
+      post {
+        failure {
+          script {
+            preBuildFailureMessage = 'Invalid or missing parameters, or internal CI error'
+            echo preBuildFailureMessage
+            recordFailure()
+          }
+        }
+      }
+    }
+
+    // Derive PR-vs-push, branch, SHA, and image tag for later stages, then check out source.
+    stage('Prepare Source Metadata') {
+      steps {
+        lock(ubuntuBuildResource) {
+          script {
+            def gitLocalBranch = env.GIT_BRANCH ? env.GIT_BRANCH.replace('origin/', '') : ''
+            isPullRequest = !!env.GITHUB_PR_NUMBER?.trim()
+            echo 'Preparing build Metadata for OAI-CN5G-COMMON-SRC'
+
+            if (isPullRequest) {
+              def prHeadSha = env.GITHUB_PR_HEAD_SHA
+              if (!prHeadSha) {
+                error "GITHUB_PR_HEAD_SHA is missing -- cannot identify the commit to build for PR #${env.GITHUB_PR_NUMBER}"
+              }
+              common_src_branch = env.GITHUB_PR_SOURCE_BRANCH
+              targetBranch      = env.GITHUB_PR_TARGET_BRANCH
+              shortenShaOne     = prHeadSha.take(8)
+              src_tag           = "ci-tmp-common-src-${env.GITHUB_PR_NUMBER}-${shortenShaOne}"
+
+              echo "PR number           :   ${env.GITHUB_PR_NUMBER}"
+              echo "Source Repository   :   ${env.GITHUB_PR_URL}"
+              echo "Source Branch       :   ${common_src_branch}"
+              echo "Commit ID           :   ${prHeadSha}"
+              echo "Target Repo         :   ${env.GIT_URL}"
+              echo "Target Branch       :   ${targetBranch}"
+              echo "Label               :   ${env.GITHUB_PR_LABELS}"
+            } else {
+              if (!env.GIT_COMMIT) {
+                error "GIT_COMMIT is missing -- cannot identify the commit to build for branch '${gitLocalBranch}'"
+              }
+              common_src_branch = gitLocalBranch
+              shortenShaOne     = env.GIT_COMMIT.take(8)
+              // The NF build sweep validates a *proposed* change, so it only
+              // runs on PRs; a develop push is already merged.
+              doBuild = false
+              echo "Branch              :   ${gitLocalBranch}"
+              echo "Commit ID           :   ${env.GIT_COMMIT}"
+            }
+
+            prepareWorkspace()
+          }
+        }
+      }
+      post {
+        failure {
+          script {
+            preBuildFailureMessage = 'Git operation failure or internal CI error'
+            echo preBuildFailureMessage
+            recordFailure()
+          }
+        }
+      }
+    }
+
+    // Documentation related PR changes don't need to build the NFs. Guidelines still run.
+    stage('Verify Labels') {
+      when {
+        expression { return isPullRequest }
+      }
+      steps {
+        script {
+          def prLabels = (env.GITHUB_PR_LABELS ?: '').toLowerCase()
+          if (prLabels.contains('documentation')) {
+            doBuild = false
+            echo "Found 'documentation' label -- skipping the NF builds."
+          }
+          echo "doBuild = ${doBuild}"
+        }
+      }
+    }
+
+    stage('Verify Guidelines') {
+      when {
+        expression { return isPullRequest }
+      }
+      steps {
+        lock(ubuntuBuildResource) {
+          script {
+            withCredentials([
+              [$class: 'UsernamePasswordMultiBinding', credentialsId: githubCredentialsId, usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN']
+            ]) {
+              sh "git -c credential.helper='!f() { echo \"username=\$GITHUB_USERNAME\"; echo \"password=\$GITHUB_TOKEN\"; }; f' fetch --no-tags ${env.GIT_URL} +refs/heads/${targetBranch}:refs/remotes/origin/${targetBranch}"
+            }
+
+            def mrValidationLog = "signedCommit_${env.BUILD_NUMBER}.log"
+            def mrValidationExitCode = sh(
+              script: "bash ./ci-scripts/pre-ci-check.sh -s ${env.GITHUB_PR_HEAD_SHA} -t origin/${targetBranch} > ${mrValidationLog} 2>&1",
+              returnStatus: true
+            )
+            def mrValidationMessage = readFile(mrValidationLog).trim()
+            sh "rm -f ${mrValidationLog}"
+
+            if (mrValidationExitCode >= 1) {
+              mrValidationWarning = mrValidationMessage
+            }
+            if (mrValidationExitCode >= 2) {
+              error("${mrValidationMessage}")
+            }
+          }
+        }
+      }
+      post {
+        failure {
+          script {
+            if (mrValidationWarning) {
+              echo "Guideline verification failed for OAI-CN5G-COMMON-SRC: ${mrValidationWarning}"
+            } else {
+              preBuildFailureMessage = 'Git operation failure or internal CI error'
+              echo preBuildFailureMessage
+            }
+            recordFailure()
+          }
+        }
+      }
+    }
+
+    // Prepare the NF build configuration (defaults to develop when unspecified).
+    stage('Prepare NF Configuration') {
+      when {
+        expression { return doBuild }
+      }
+      steps {
+        script {
+          def nfMapJson = prepareNfMap()
+          writeFile file: 'archives/nf_map.json', text: nfMapJson
+          echo "Generated NF configuration:\n${nfMapJson}"
+        }
+      }
+      post {
+        failure {
+          script {
+            preBuildFailureMessage = 'Failed to build the NF configuration from the PR description'
+            echo preBuildFailureMessage
+            recordFailure()
+          }
+        }
+      }
+    }
+
+    // Build the Ubuntu core images for every NF
+    // PR-only, and skipped for documentation PRs.
+    stage('Build Ubuntu Images') {
+      when {
+        expression { return doBuild }
+      }
+      steps {
+        lock(ubuntuBuildResource) {
+          script {
+            withCredentials([
+              [$class: 'UsernamePasswordMultiBinding', credentialsId: params.DockerHubReadOnlyCredentials, usernameVariable: 'DH_Username', passwordVariable: 'DH_Token']
+            ]) {
+              sh 'echo $DH_Token | docker login --username $DH_Username --password-stdin'
+            }
+            sh "docker login -u oaicicd -p oaicicd ${PrivateRegistryURL}"
+
+            echo "Common-src ref: ${shortenShaOne}"
+            // GitHub creds for cloning/fetching the NF repos (and their
+            // submodules) inside the build script.
+            withCredentials([gitUsernamePassword(credentialsId: githubCredentialsId)]) {
+              sh "PRIVATE_REGISTRY=${PrivateRegistryURL} bash ./ci-scripts/build_ubuntu_core_images.sh archives/nf_map.json archives"
+            }
+          }
+        }
+      }
+      post {
+        success {
+          echo 'OAI-COMMON-SRC UBUNTU IMAGES BUILD: OK'
+        }
+        failure {
+          script {
+            echo 'OAI-COMMON-SRC UBUNTU IMAGES BUILD: KO'
+            // Link the HTML report (archived in cleanup) in the PR comment's failing-stages list.
+            recordFailure("${env.BUILD_URL}artifact/archives/test_results_oai_cn5g_common_src.html")
+          }
+        }
+        cleanup {
+          script {
+            sh "docker logout ${PrivateRegistryURL}"
+            sh 'docker logout'
+            sh 'docker image prune --force'
+            // HTML build report (PR only).
+            if (isPullRequest) {
+              withEnv(["PR_TITLE=${env.GITHUB_PR_TITLE}"]) {
+                sh "python3 ./ci-scripts/generateHTMLReport.py --archives archives --all-nfs ${ALL_NFS.join(',')} --job-name ${JOB_NAME} --build-id ${BUILD_ID} --build-url ${env.BUILD_URL} --git-url ${env.GIT_URL} --git-src-branch ${common_src_branch} --git-src-commit ${env.GITHUB_PR_HEAD_SHA} --git-dst-branch ${targetBranch} --git-dst-commit ${env.GIT_COMMIT} --build-time \"${env.JOB_TIMESTAMP}\" --pr-url ${env.GITHUB_PR_URL} --pr-title \"\$PR_TITLE\""
+              }
+              archiveArtifacts artifacts: 'archives/test_results_oai_cn5g_common_src.html', allowEmptyArchive: true
+              sh 'zip -r -qq cn_common_src_logs.zip archives'
+              if (fileExists('cn_common_src_logs.zip')) {
+                archiveArtifacts artifacts: 'cn_common_src_logs.zip'
+              }
+            }
+          }
+        }
+      }
+    }
+  } // End of Stages
+
+  post {
+    always {
+      echo "Build finished for OAI-CN5G-COMMON-SRC: ${currentBuild.currentResult}"
+    }
+    success {
+      script {
+        if (isPullRequest) {
+          def message = "**CI Build:** [#${env.BUILD_NUMBER}](${BUILD_URL}) | **Passed**"
+          if (mrValidationWarning) {
+            message += "\n\n**Validation:** ${mrValidationWarning}"
+          }
+          githubPRComment comment: githubPRMessage(message)
+        }
+        notifyGitHub('SUCCESS', 'Build success', 'Jenkins OAI CI')
+        echo "Pipeline is SUCCESSFUL"
+      }
+    }
+    failure {
+      script {
+        if (isPullRequest) {
+          def message = "**CI Build:** [#${env.BUILD_NUMBER}](${BUILD_URL}) | **Failed**"
+          if (failingStages) {
+            message += " on the following stages:\n${failingStages}"
+          } else {
+            message += "\nThe pipeline may have failed due to CI, validation, or scripting error. See the build for more details."
+          }
+          if (preBuildFailureMessage) {
+            message += "\n\n${preBuildFailureMessage}"
+          }
+          if (mrValidationWarning) {
+            message += "\n\n**Validation:** ${mrValidationWarning}"
+          }
+          githubPRComment comment: githubPRMessage(message)
+        }
+        notifyGitHub('FAILURE', 'Build failed', 'Jenkins OAI CI')
+        echo "Pipeline FAILED"
+      }
+    }
+  } // End of post
+} // End of Pipeline
+
+// --- Helper Functions ---
+
+// Check out GitHub's precomputed PR-merge ref (refs/pull/<N>/merge) so we build
+// exactly what GitHub considers mergeable; a missing ref means a conflict.
+def checkoutSource() {
+  if (isPullRequest) {
+    echo "PR triggered - checking out merge ref for PR #${env.GITHUB_PR_NUMBER}"
+    try {
+      checkout([
+        $class: 'GitSCM',
+        branches: [[name: "refs/remotes/origin/pr/${env.GITHUB_PR_NUMBER}/merge"]],
+        userRemoteConfigs: [[
+          url: env.GIT_URL,
+          refspec: "+refs/pull/${env.GITHUB_PR_NUMBER}/merge:refs/remotes/origin/pr/${env.GITHUB_PR_NUMBER}/merge",
+          credentialsId: githubCredentialsId
+        ]]
+      ])
+    } catch (e) {
+      error("Checkout failed for PR #${env.GITHUB_PR_NUMBER} -- merge ref not found. " +
+            "The PR likely has a conflict with ${targetBranch} that must be resolved before CI can run. (${e.message})")
+    }
+  } else {
+    echo "Push triggered - checking out ${env.GIT_COMMIT} on branch ${common_src_branch}"
+    try {
+      checkout([
+        $class: 'GitSCM',
+        branches: [[name: env.GIT_COMMIT]],
+        userRemoteConfigs: [[
+          url: env.GIT_URL,
+          credentialsId: githubCredentialsId
+        ]]
+      ])
+    } catch (e) {
+      error("Checkout failed for commit ${env.GIT_COMMIT} on branch ${common_src_branch} from ${env.GIT_URL}. (${e.message})")
+    }
+  }
+}
+
+// emitCheck=false: record in the PR comment only, let a parent stage emit one rolled-up check.
+def recordFailure(String reportLink = null, boolean emitCheck = true) {
+  failingStages += reportLink ? "\n * [${env.STAGE_NAME}](${reportLink})" : "\n * ${env.STAGE_NAME}"
+  if (emitCheck) {
+    notifyStageStatus('FAILURE', 'Failed')
+  }
+}
+
+// Post a GitHub commit status; PR builds target the PR head, push builds the triggering commit.
+def notifyGitHub(String status, String description, String context, String targetUrl = null) {
+  githubNotify account: params.gitAccount,
+               repo: params.gitRepo,
+               credentialsId: githubCredentialsId,
+               sha: isPullRequest ? env.GITHUB_PR_HEAD_SHA : env.GIT_COMMIT,
+               status: status,
+               description: description,
+               targetUrl: targetUrl ?: BUILD_URL,
+               context: context
+}
+
+// Per-stage GitHub check (context = stage name), linking to this build.
+def notifyStageStatus(String status, String description) {
+  notifyGitHub(status, description, env.STAGE_NAME)
+}
+
+def prepareWorkspace() {
+  checkoutSource()
+  sh 'git config user.email "oaicicdteam@openairinterface.org"'
+  sh 'git config user.name "OAI Jenkins"'
+  sh "git clean -x -d -f > /dev/null 2>&1"
+  sh "mkdir -p archives"
+}
+
+// Build the nf_map.json body: coupled NFs from the PR description, every other
+// enabled NF at develop.
+def prepareNfMap() {
+  def nfCouplingJson = ''
+  withCredentials([
+    [$class: 'UsernamePasswordMultiBinding', credentialsId: githubCredentialsId, usernameVariable: 'GITHUB_USERNAME', passwordVariable: 'GITHUB_TOKEN']
+  ]) {
+    nfCouplingJson = sh(
+      returnStdout: true,
+      script: """
+        curl --silent -H "Authorization: token \$GITHUB_TOKEN" \
+        "https://api.github.com/repos/${params.gitAccount}/${params.gitRepo}/pulls/${env.GITHUB_PR_NUMBER}" \
+        | jq -r '.body' \
+        | awk '/```json/{flag=1; next} /```/{flag=0} flag' \
+        | sed -n '/^{/,/^}/p'
+      """
+    ).trim()
+  }
+
+  def nfNames = [] // list of NF names to build
+  def nfRefs = [] // list of each NF's branch/commit ref
+  def commonSrcRefByNf = [:] // map: NF name --> its common-src ref
+
+  if (nfCouplingJson) {
+    echo "NF coupling found in PR description:\n${nfCouplingJson}"
+    def parsedNfCoupling = parseNfCoupling(nfCouplingJson)
+    nfNames = parsedNfCoupling.nfNames
+    nfRefs = parsedNfCoupling.nfRefs
+    commonSrcRefByNf = parsedNfCoupling.commonSrcRefByNf
+  } else {
+    echo "No NF coupling JSON in PR description -- building all enabled NFs at '${defaultNFBranch}' against common-src '${env.GITHUB_PR_SOURCE_BRANCH}'."
+  }
+
+  enabledNFs.each { nf ->
+    if (!nfNames.contains(nf)) {
+      nfNames.add(nf)
+      nfRefs.add(defaultNFBranch)
+    }
+  }
+
+  def jsonEntries = [] // assembled nf_map.json entries
+  nfNames.eachWithIndex { nf, idx ->
+    // do<NF>=false is authoritative: skip a disabled NF even if the PR body couples it.
+    if (!enabledNFs.contains(nf)) {
+      echo "Skipping ${nf.toUpperCase()} -- disabled for this job (do${nf.toUpperCase()}=false)"
+      return
+    }
+    def commonSrcRef = commonSrcRefByNf.get(nf, env.GITHUB_PR_SOURCE_BRANCH)
+    jsonEntries << "\"${nf}\":{\"nf\":\"${nfRefs[idx]}\",\"common-src\":\"${commonSrcRef}\"}"
+  }
+  return "{${jsonEntries.join(',')}}"
+}
+
+// Validate and parse the coupled-NF JSON block. Fails the build on invalid JSON,
+// unknown NF names, duplicate entries, malformed arrays, or a missing NF ref.
+// Returns [nfNames: [...], nfRefs: [...], commonSrcRefByNf: [:]].
+def parseNfCoupling(String nfCouplingJson) {
+  // Fail if the declared block isn't syntactically valid JSON. Passed via an env
+  // var so jq can read it from stdin -- no temp file, no shell-quoting issues.
+  def validJson = false
+  withEnv(["NF_COUPLING_JSON=${nfCouplingJson}"]) {
+    validJson = sh(returnStatus: true, script: 'printf "%s" "$NF_COUPLING_JSON" | jq empty') == 0
+  }
+  if (!validJson) {
+    error 'The JSON block in the PR description is not valid JSON.'
+  }
+
+  def nfNames = []
+  def nfRefs = []
+  def commonSrcRefByNf = [:]
+  def problems = []
+
+  nfCouplingJson.split('\n').each { line ->
+    line = line.trim()
+    if (line && line.contains(':')) {
+      def keyValue = line.split(':', 2) // the key : value split of one line
+      def nf = keyValue[0].replaceAll(/["{}]/, '').trim().toLowerCase()
+      // Drop a trailing ',' or '}' left by the surrounding object before parsing.
+      def rawValue = keyValue[1].trim().replaceAll(/[,}]\s*$/, '')
+      def branchRefs = rawValue.replaceAll(/[\[\]"]/, '').trim().split(',') // the [nf-ref, common-src-ref] values
+
+      if (!(rawValue.contains('[') && rawValue.contains(']'))) {
+        problems << "NF '${nf}': value must be an array, e.g. [\"nf-ref\", \"common-src-ref\"]"
+      } else if (!ALL_NFS.contains(nf)) {
+        problems << "unknown NF '${nf}' (valid: ${ALL_NFS.join(', ')})"
+      } else if (nfNames.contains(nf)) {
+        problems << "duplicate entry for NF '${nf}'"
+      } else if (!branchRefs[0]?.trim()) {
+        problems << "NF '${nf}': missing NF branch/commit ref"
+      } else {
+        nfNames.add(nf)
+        nfRefs.add(branchRefs[0].trim())
+        commonSrcRefByNf[nf] = (branchRefs.size() > 1 && branchRefs[1]?.trim()) ? branchRefs[1].trim() : env.GITHUB_PR_SOURCE_BRANCH
+      }
+    }
+  }
+
+  if (problems) {
+    error "Invalid NF coupling JSON in PR description:\n - ${problems.join('\n - ')}"
+  }
+
+  echo "Network Functions extracted from PR description: \n \n ${nfNames}"
+  echo "Branches/Commit SHAs extracted from PR description: \n \n ${nfRefs}"
+  echo "Common-src refs extracted from PR description: ${commonSrcRefByNf}"
+  return [nfNames: nfNames, nfRefs: nfRefs, commonSrcRefByNf: commonSrcRefByNf]
+}

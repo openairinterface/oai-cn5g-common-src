@@ -125,9 +125,33 @@ def _fill(text, mapping):
 # ---------------------------------------------------------------------------
 # HTML rendering
 # ---------------------------------------------------------------------------
-def _build_rows(nf_map, failed, per_nf, skipped):
-    """Render one summary-table row per NF (built NFs and SKIPPED ones), sorted."""
-    row_tpl = _load('build-summary-table-row.htm')
+def _short_sha(sha):
+    """Return the leading 7 chars of a commit SHA, or '-' when unknown."""
+    return sha[:7] if sha else '-'
+
+
+def _build_refs_rows(nf_map, per_nf):
+    """Render the build-config table (NF, branch/commit for the NF and common-src,
+    Dockerfile) for the built NFs only -- skipped NFs have no refs, so they are
+    left out here."""
+    row_tpl = _load('build-summary-refs-row.htm')
+    rows = []
+    for nf in sorted(nf_map):
+        info = per_nf[nf]
+        rows.append(_fill(row_tpl, {
+            'NF_NAME': _esc(nf.upper()),
+            'NF_BRANCH': _esc(nf_map[nf]['nf'] or '-'),
+            'NF_COMMIT': _esc(_short_sha(info['nf_sha'])),
+            'COMMON_SRC_BRANCH': _esc(nf_map[nf]['common-src'] or '-'),
+            'COMMON_SRC_COMMIT': _esc(_short_sha(info['common_src_sha'])),
+            'DOCKERFILE': _esc(info['dockerfile']),
+        }))
+    return ''.join(rows)
+
+
+def _build_status_rows(nf_map, failed, per_nf, skipped):
+    """Render the status table (NF, status, tag, size, build time, details), sorted."""
+    row_tpl = _load('build-summary-status-row.htm')
     rows = []
     for nf in sorted(set(nf_map) | skipped):
         if nf in skipped:
@@ -135,7 +159,6 @@ def _build_rows(nf_map, failed, per_nf, skipped):
             rows.append(_fill(row_tpl, {
                 'NF_NAME': _esc(nf.upper()),
                 'STATUS_BG': 'lightgray', 'STATUS_TXT': 'SKIPPED',
-                'NF_REF': '&mdash;', 'COMMON_SRC_REF': '&mdash;', 'DOCKERFILE': '&mdash;',
                 'TAG_CELL': '&mdash;', 'SIZE_CELL': '&mdash;', 'BUILD_TIME': '&mdash;',
                 'DETAILS': '&mdash;',
             }))
@@ -157,9 +180,6 @@ def _build_rows(nf_map, failed, per_nf, skipped):
             'NF_NAME': _esc(nf.upper()),
             'STATUS_BG': status_bg,
             'STATUS_TXT': status_txt,
-            'NF_REF': _esc(nf_map[nf]['nf'] or '-'),
-            'COMMON_SRC_REF': _esc(nf_map[nf]['common-src'] or '-'),
-            'DOCKERFILE': _esc(info['dockerfile']),
             'TAG_CELL': tag_cell,
             'SIZE_CELL': size_cell,
             'BUILD_TIME': _esc(info['build_time']),
@@ -179,7 +199,10 @@ def render_report(args, nf_map, failed, per_nf):
     message = (f'NF Image Builds: {n_ok} succeeded, {n_failed} failed, '
                f'{len(skipped)} skipped ({built + len(skipped)} total).')
     git_url = _esc(args.git_url) if args.git_url else '-'
-    # BUILD_SUMMARY_ROWS is filled last so arbitrary row content (error lines) is
+    final_bg, final_txt, final_icon = (
+        ('red', 'FAIL', 'glyphicon-remove') if n_failed
+        else ('green', 'SUCCESS', 'glyphicon-ok'))
+    # BUILD_STATUS_ROWS is filled last so arbitrary row content (error lines) is
     # never re-scanned for other tokens.
     return _fill(_load('report.htm'), {
         'JOB_NAME': _esc(args.job_name),
@@ -196,7 +219,11 @@ def render_report(args, nf_map, failed, per_nf):
         'CHAPTER_NAME': 'Container Images Build Summary',
         'ALERT_LEVEL': alert_level,
         'MESSAGE': message,
-        'BUILD_SUMMARY_ROWS': _build_rows(nf_map, failed, per_nf, skipped),
+        'FINAL_STATUS_BG': final_bg,
+        'FINAL_STATUS_TXT': final_txt,
+        'FINAL_STATUS_ICON': final_icon,
+        'BUILD_REFS_ROWS': _build_refs_rows(nf_map, per_nf),
+        'BUILD_STATUS_ROWS': _build_status_rows(nf_map, failed, per_nf, skipped),
     })
 
 

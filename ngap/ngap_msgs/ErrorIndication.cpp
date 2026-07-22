@@ -47,7 +47,7 @@ void ErrorIndication::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -70,7 +70,7 @@ void ErrorIndication::setRanUeNgapId(const uint32_t& ranUeNgapId) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -96,7 +96,7 @@ void ErrorIndication::setCause(const Cause& cause) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode Cause IE error");
 }
@@ -123,7 +123,7 @@ void ErrorIndication::setCause(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode Cause IE error");
 }
@@ -144,7 +144,7 @@ void ErrorIndication::setCriticalityDiagnostics(
 
   // TODO: set value of IE
 
-  int ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode CriticalityDiagnostics IE error");
@@ -174,7 +174,7 @@ void ErrorIndication::setFiveGSTmsi(const FiveGSTmsi& fiveGSTmsi) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_ErrorIndicationIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode FiveG_S_TMSI IE error");
 }
@@ -208,15 +208,15 @@ bool ErrorIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         "Decode NGAP MessageType IE error");
     return false;
   }
-  for (int i = 0; i < m_ErrorIndicationIes->protocolIEs.list.count; i++) {
-    switch (m_ErrorIndicationIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_ErrorIndicationIes->protocolIEs->list.count; i++) {
+    switch (m_ErrorIndicationIes->protocolIEs->list.array[i]->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_ErrorIndicationIes->protocolIEs.list.array[i]->criticality ==
+        if (m_ErrorIndicationIes->protocolIEs->list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
-            m_ErrorIndicationIes->protocolIEs.list.array[i]->value.present ==
+            m_ErrorIndicationIes->protocolIEs->list.array[i]->value.present ==
                 Ngap_ErrorIndicationIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_ErrorIndicationIes->protocolIEs.list.array[i]
+                  m_ErrorIndicationIes->protocolIEs->list.array[i]
                       ->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP AMF_UE_NGAP_ID IE error");
@@ -229,12 +229,12 @@ bool ErrorIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_ErrorIndicationIes->protocolIEs.list.array[i]->criticality ==
+        if (m_ErrorIndicationIes->protocolIEs->list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
-            m_ErrorIndicationIes->protocolIEs.list.array[i]->value.present ==
+            m_ErrorIndicationIes->protocolIEs->list.array[i]->value.present ==
                 Ngap_ErrorIndicationIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_ErrorIndicationIes->protocolIEs.list.array[i]
+                  m_ErrorIndicationIes->protocolIEs->list.array[i]
                       ->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP RAN_UE_NGAP_ID IE error");
@@ -247,12 +247,12 @@ bool ErrorIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_Cause: {
-        if (m_ErrorIndicationIes->protocolIEs.list.array[i]->criticality ==
+        if (m_ErrorIndicationIes->protocolIEs->list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
-            m_ErrorIndicationIes->protocolIEs.list.array[i]->value.present ==
+            m_ErrorIndicationIes->protocolIEs->list.array[i]->value.present ==
                 Ngap_ErrorIndicationIEs__value_PR_Cause) {
           Cause tmp = {};
-          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs.list.array[i]
+          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs->list.array[i]
                               ->value.choice.Cause)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP Cause IE error");
@@ -266,12 +266,12 @@ bool ErrorIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        if (m_ErrorIndicationIes->protocolIEs.list.array[i]->criticality ==
+        if (m_ErrorIndicationIes->protocolIEs->list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
-            m_ErrorIndicationIes->protocolIEs.list.array[i]->value.present ==
+            m_ErrorIndicationIes->protocolIEs->list.array[i]->value.present ==
                 Ngap_ErrorIndicationIEs__value_PR_CriticalityDiagnostics) {
           CriticalityDiagnostics tmp = {};
-          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs.list.array[i]
+          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs->list.array[i]
                               ->value.choice.CriticalityDiagnostics)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP CriticalityDiagnostics IE error");
@@ -285,12 +285,12 @@ bool ErrorIndication::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_FiveG_S_TMSI: {
-        if (m_ErrorIndicationIes->protocolIEs.list.array[i]->criticality ==
+        if (m_ErrorIndicationIes->protocolIEs->list.array[i]->criticality ==
                 Ngap_Criticality_ignore &&
-            m_ErrorIndicationIes->protocolIEs.list.array[i]->value.present ==
+            m_ErrorIndicationIes->protocolIEs->list.array[i]->value.present ==
                 Ngap_ErrorIndicationIEs__value_PR_FiveG_S_TMSI) {
           FiveGSTmsi tmp = {};
-          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs.list.array[i]
+          if (!tmp.decode(m_ErrorIndicationIes->protocolIEs->list.array[i]
                               ->value.choice.FiveG_S_TMSI)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP FiveGSTmsi IE error");

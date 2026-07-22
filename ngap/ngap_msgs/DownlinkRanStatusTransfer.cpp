@@ -27,6 +27,11 @@ DownlinkRanStatusTransfer::~DownlinkRanStatusTransfer() {}
 void DownlinkRanStatusTransfer::initialize() {
   m_DownlinkranstatustransferIes = &(ngapPdu->choice.initiatingMessage->value
                                          .choice.DownlinkRANStatusTransfer);
+  if (!m_DownlinkranstatustransferIes->protocolIEs) {
+    m_DownlinkranstatustransferIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

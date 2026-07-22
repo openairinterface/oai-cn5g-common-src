@@ -26,6 +26,11 @@ AmfStatusIndication::~AmfStatusIndication() {}
 void AmfStatusIndication::initialize() {
   m_AmfStatusIndicationIEs =
       &(ngapPdu->choice.initiatingMessage->value.choice.AMFStatusIndication);
+  if (!m_AmfStatusIndicationIEs->protocolIEs) {
+    m_AmfStatusIndicationIEs->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

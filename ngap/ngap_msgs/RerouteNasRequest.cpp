@@ -31,6 +31,11 @@ RerouteNasRequest::~RerouteNasRequest() {}
 void RerouteNasRequest::initialize() {
   m_RerouteNASRequestIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.RerouteNASRequest);
+  if (!m_RerouteNASRequestIes->protocolIEs) {
+    m_RerouteNASRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

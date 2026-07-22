@@ -32,6 +32,10 @@ NgResetAckMsg::~NgResetAckMsg() {
 void NgResetAckMsg::initialize() {
   m_NgResetAckIes =
       &(ngapPdu->choice.successfulOutcome->value.choice.NGResetAcknowledge);
+  if (!m_NgResetAckIes->protocolIEs) {
+    m_NgResetAckIes->protocolIEs = (struct Ngap_ProtocolIE_Container*) calloc(
+        1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

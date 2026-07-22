@@ -30,6 +30,11 @@ void PduSessionResourceModifyRequestMsg::initialize() {
   m_PduSessionResourceModifyRequestIes =
       &(ngapPdu->choice.initiatingMessage->value.choice
             .PDUSessionResourceModifyRequest);
+  if (!m_PduSessionResourceModifyRequestIes->protocolIEs) {
+    m_PduSessionResourceModifyRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

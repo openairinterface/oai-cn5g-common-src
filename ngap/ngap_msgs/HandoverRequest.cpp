@@ -43,6 +43,11 @@ HandoverRequest::~HandoverRequest() {}
 void HandoverRequest::initialize() {
   m_HandoverRequestIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.HandoverRequest);
+  if (!m_HandoverRequestIes->protocolIEs) {
+    m_HandoverRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

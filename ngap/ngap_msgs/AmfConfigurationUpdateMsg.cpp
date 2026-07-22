@@ -30,6 +30,11 @@ AmfConfigurationUpdateMsg::~AmfConfigurationUpdateMsg() {}
 void AmfConfigurationUpdateMsg::initialize() {
   m_AmfConfigurationUpdateIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.AMFConfigurationUpdate);
+  if (!m_AmfConfigurationUpdateIes->protocolIEs) {
+    m_AmfConfigurationUpdateIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
   m_AmfName             = std::nullopt;
   m_ServedGuamiList     = std::nullopt;
   m_RelativeAmfCapacity = std::nullopt;

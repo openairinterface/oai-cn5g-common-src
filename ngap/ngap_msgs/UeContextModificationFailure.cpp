@@ -29,6 +29,11 @@ void UeContextModificationFailureMsg::initialize() {
   m_UeContextModificationFailureIes =
       &(ngapPdu->choice.unsuccessfulOutcome->value.choice
             .UEContextModificationFailure);
+  if (!m_UeContextModificationFailureIes->protocolIEs) {
+    m_UeContextModificationFailureIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

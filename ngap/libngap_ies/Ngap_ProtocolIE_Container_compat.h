@@ -14,10 +14,13 @@ extern "C" {
 #include <asn_SEQUENCE_OF.h>
 /* Complete definition of the opaque struct used in message headers.
  * All Ngap_ProtocolIE_Container_12874Pxx structs share this layout. */
+#ifndef NGAP_PROTOCOLIE_CONTAINER_GENERIC_STRUCT_DEFINED
+#define NGAP_PROTOCOLIE_CONTAINER_GENERIC_STRUCT_DEFINED
 struct Ngap_ProtocolIE_Container {
   asn_anonymous_sequence_ list;
   asn_struct_ctx_t _asn_ctx;
 };
+#endif
 #ifdef __cplusplus
 }
 #endif

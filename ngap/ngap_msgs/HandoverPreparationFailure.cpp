@@ -28,6 +28,11 @@ HandoverPreparationFailure::~HandoverPreparationFailure() {}
 void HandoverPreparationFailure::initialize() {
   m_HOPreparationFailureIes = &(ngapPdu->choice.unsuccessfulOutcome->value
                                     .choice.HandoverPreparationFailure);
+  if (!m_HOPreparationFailureIes->protocolIEs) {
+    m_HOPreparationFailureIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

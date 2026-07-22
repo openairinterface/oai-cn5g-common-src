@@ -30,6 +30,11 @@ InitialContextSetupFailureMsg::~InitialContextSetupFailureMsg() {
 void InitialContextSetupFailureMsg::initialize() {
   m_InitialContextSetupFailureIes = &(ngapPdu->choice.unsuccessfulOutcome->value
                                           .choice.InitialContextSetupFailure);
+  if (!m_InitialContextSetupFailureIes->protocolIEs) {
+    m_InitialContextSetupFailureIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

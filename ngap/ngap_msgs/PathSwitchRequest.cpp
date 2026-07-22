@@ -30,6 +30,11 @@ PathSwitchRequestMsg::~PathSwitchRequestMsg() {}
 void PathSwitchRequestMsg::initialize() {
   m_PathSwitchRequestIes =
       &ngapPdu->choice.initiatingMessage->value.choice.PathSwitchRequest;
+  if (!m_PathSwitchRequestIes->protocolIEs) {
+    m_PathSwitchRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

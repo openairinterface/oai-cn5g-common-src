@@ -34,6 +34,11 @@ DownLinkNasTransportMsg::~DownLinkNasTransportMsg() {}
 void DownLinkNasTransportMsg::initialize() {
   m_DownLinkNasTransportIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.DownlinkNASTransport);
+  if (!m_DownLinkNasTransportIes->protocolIEs) {
+    m_DownLinkNasTransportIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

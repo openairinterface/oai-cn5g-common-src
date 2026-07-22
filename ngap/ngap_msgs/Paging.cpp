@@ -34,6 +34,10 @@ PagingMsg::~PagingMsg() {}
 //------------------------------------------------------------------------------
 void PagingMsg::initialize() {
   m_PagingIes = &(ngapPdu->choice.initiatingMessage->value.choice.Paging);
+  if (!m_PagingIes->protocolIEs) {
+    m_PagingIes->protocolIEs = (struct Ngap_ProtocolIE_Container*) calloc(
+        1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

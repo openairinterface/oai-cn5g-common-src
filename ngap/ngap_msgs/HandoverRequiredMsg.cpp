@@ -30,6 +30,11 @@ HandoverRequiredMsg::~HandoverRequiredMsg() {}
 void HandoverRequiredMsg::initialize() {
   m_HandoverRequiredIes =
       &ngapPdu->choice.initiatingMessage->value.choice.HandoverRequired;
+  if (!m_HandoverRequiredIes->protocolIEs) {
+    m_HandoverRequiredIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

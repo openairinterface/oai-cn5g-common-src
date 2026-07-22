@@ -31,6 +31,11 @@ UeContextReleaseCommandMsg::~UeContextReleaseCommandMsg() {}
 void UeContextReleaseCommandMsg::initialize() {
   m_UEContextReleaseCommandIes = &(
       ngapPdu->choice.initiatingMessage->value.choice.UEContextReleaseCommand);
+  if (!m_UEContextReleaseCommandIes->protocolIEs) {
+    m_UEContextReleaseCommandIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

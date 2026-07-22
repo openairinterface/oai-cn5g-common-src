@@ -31,6 +31,11 @@ UeContextModificationRequestMsg::~UeContextModificationRequestMsg() {}
 void UeContextModificationRequestMsg::initialize() {
   m_UeContextModificationRequestIes = &ngapPdu->choice.initiatingMessage->value
                                            .choice.UEContextModificationRequest;
+  if (!m_UeContextModificationRequestIes->protocolIEs) {
+    m_UeContextModificationRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

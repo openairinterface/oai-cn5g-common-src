@@ -32,6 +32,11 @@ void DownlinkNonUeAssociatedNrppaTransportMsg::initialize() {
   m_DownlinkNonUeAssociatedNrppaTransportIes =
       &(ngapPdu->choice.initiatingMessage->value.choice
             .DownlinkNonUEAssociatedNRPPaTransport);
+  if (!m_DownlinkNonUeAssociatedNrppaTransportIes->protocolIEs) {
+    m_DownlinkNonUeAssociatedNrppaTransportIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

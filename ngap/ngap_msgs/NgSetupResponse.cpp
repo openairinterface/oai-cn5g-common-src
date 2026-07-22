@@ -31,6 +31,11 @@ NgSetupResponseMsg::~NgSetupResponseMsg() {}
 void NgSetupResponseMsg::initialize() {
   m_NgSetupResponsIes =
       &(ngapPdu->choice.successfulOutcome->value.choice.NGSetupResponse);
+  if (!m_NgSetupResponsIes->protocolIEs) {
+    m_NgSetupResponsIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
   m_IabSupported    = std::nullopt;
   m_ExtendedAmfName = std::nullopt;
 }

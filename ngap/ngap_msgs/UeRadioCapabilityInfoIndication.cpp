@@ -31,6 +31,11 @@ void UeRadioCapabilityInfoIndicationMsg::initialize() {
   m_UeRadioCapabilityInfoIndicationIes =
       &(ngapPdu->choice.initiatingMessage->value.choice
             .UERadioCapabilityInfoIndication);
+  if (!m_UeRadioCapabilityInfoIndicationIes->protocolIEs) {
+    m_UeRadioCapabilityInfoIndicationIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

@@ -29,6 +29,11 @@ void UplinkUeAssociatedNrppaTransportMsg::initialize() {
   m_UplinkUeAssociatedNrppaTransportIes =
       &(ngapPdu->choice.initiatingMessage->value.choice
             .UplinkUEAssociatedNRPPaTransport);
+  if (!m_UplinkUeAssociatedNrppaTransportIes->protocolIEs) {
+    m_UplinkUeAssociatedNrppaTransportIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

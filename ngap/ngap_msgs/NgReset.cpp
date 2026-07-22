@@ -26,6 +26,10 @@ NgResetMsg::~NgResetMsg() {}
 //------------------------------------------------------------------------------
 void NgResetMsg::initialize() {
   m_NgResetIes = &(ngapPdu->choice.initiatingMessage->value.choice.NGReset);
+  if (!m_NgResetIes->protocolIEs) {
+    m_NgResetIes->protocolIEs = (struct Ngap_ProtocolIE_Container*) calloc(
+        1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

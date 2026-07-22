@@ -29,6 +29,11 @@ HandoverNotifyMsg::~HandoverNotifyMsg(){};
 void HandoverNotifyMsg::initialize() {
   m_HandoverNotifyIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.HandoverNotify);
+  if (!m_HandoverNotifyIes->protocolIEs) {
+    m_HandoverNotifyIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
   m_NotifySourceNgRanNode = std::nullopt;
 }
 

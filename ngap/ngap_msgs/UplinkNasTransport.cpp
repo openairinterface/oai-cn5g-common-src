@@ -27,6 +27,11 @@ UplinkNasTransportMsg::~UplinkNasTransportMsg() {}
 void UplinkNasTransportMsg::initialize() {
   m_UplinkNasTransportIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.UplinkNASTransport);
+  if (!m_UplinkNasTransportIes->protocolIEs) {
+    m_UplinkNasTransportIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

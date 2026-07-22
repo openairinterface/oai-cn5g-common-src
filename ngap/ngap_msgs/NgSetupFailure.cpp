@@ -28,6 +28,11 @@ NgSetupFailureMsg::~NgSetupFailureMsg() {}
 void NgSetupFailureMsg::initialize() {
   m_NgSetupFailureIes =
       &(ngapPdu->choice.unsuccessfulOutcome->value.choice.NGSetupFailure);
+  if (!m_NgSetupFailureIes->protocolIEs) {
+    m_NgSetupFailureIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

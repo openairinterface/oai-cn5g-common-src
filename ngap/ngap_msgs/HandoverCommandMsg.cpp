@@ -38,6 +38,11 @@ HandoverCommandMsg::~HandoverCommandMsg() {
 void HandoverCommandMsg::initialize() {
   m_HandoverCommandIes =
       &ngapPdu->choice.successfulOutcome->value.choice.HandoverCommand;
+  if (!m_HandoverCommandIes->protocolIEs) {
+    m_HandoverCommandIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

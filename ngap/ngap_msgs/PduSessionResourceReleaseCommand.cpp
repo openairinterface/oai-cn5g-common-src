@@ -31,6 +31,11 @@ void PduSessionResourceReleaseCommandMsg::initialize() {
   m_PduSessionResourceReleaseCommandIes =
       &(ngapPdu->choice.initiatingMessage->value.choice
             .PDUSessionResourceReleaseCommand);
+  if (!m_PduSessionResourceReleaseCommandIes->protocolIEs) {
+    m_PduSessionResourceReleaseCommandIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------

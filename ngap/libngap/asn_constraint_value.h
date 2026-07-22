@@ -20,31 +20,31 @@
 #ifndef ASN_CONSTRAINT_VALUE_H
 #define ASN_CONSTRAINT_VALUE_H
 
-#include <INTEGER.h>    /* INTEGER_t and conversion helpers */
+#include <INTEGER.h> /* INTEGER_t and conversion helpers */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 typedef enum asn_cval_kind_e {
-    ACV_ABSENT = 0,
-    ACV_SINT,
-    ACV_UINT,
-    ACV_INTEGER_BYTES
+  ACV_ABSENT = 0,
+  ACV_SINT,
+  ACV_UINT,
+  ACV_INTEGER_BYTES
 } asn_cval_kind_e;
 
 typedef struct asn_cval_bytes_s {
-    const uint8_t *buf;     /* canonical INTEGER content octets */
-    size_t size;
+  const uint8_t* buf; /* canonical INTEGER content octets */
+  size_t size;
 } asn_cval_bytes_t;
 
 typedef struct asn_cval_s {
-    asn_cval_kind_e kind;
-    union {
-        intmax_t s;
-        uintmax_t u;
-        asn_cval_bytes_t b;
-    } value;
+  asn_cval_kind_e kind;
+  union {
+    intmax_t s;
+    uintmax_t u;
+    asn_cval_bytes_t b;
+  } value;
 } asn_cval_t;
 
 /*
@@ -55,29 +55,29 @@ typedef struct asn_cval_s {
  * ACV_ABSENT must not be passed to these comparison helpers; the range-check
  * helpers below handle absent (open) bounds.
  */
-int asn_cval_cmp(const asn_cval_t *a, const asn_cval_t *b);
-int asn_cval_cmp_sint(intmax_t a, const asn_cval_t *b);
-int asn_cval_cmp_uint(uintmax_t a, const asn_cval_t *b);
+int asn_cval_cmp(const asn_cval_t* a, const asn_cval_t* b);
+int asn_cval_cmp_sint(intmax_t a, const asn_cval_t* b);
+int asn_cval_cmp_uint(uintmax_t a, const asn_cval_t* b);
 
 /*
  * Compare an INTEGER_t against a constraint value.  a_is_unsigned indicates
  * that the INTEGER_t encodes a non-negative value whose magnitude may exceed
  * INTMAX_MAX (e.g. a uint64_t-backed field round-tripped through INTEGER_t).
  */
-int asn_INTEGER_cmp_cval(const INTEGER_t *a, const asn_cval_t *b,
-                         int a_is_unsigned);
+int asn_INTEGER_cmp_cval(
+    const INTEGER_t* a, const asn_cval_t* b, int a_is_unsigned);
 
 /*
  * Range membership checks.  An ACV_ABSENT bound denotes an open side.
  * Return 0 if value is within [lb, ub], non-zero (-1) if out of range.
  */
-int asn_check_integer_range_sint(intmax_t value,
-                                 const asn_cval_t *lb, const asn_cval_t *ub);
-int asn_check_integer_range_uint(uintmax_t value,
-                                 const asn_cval_t *lb, const asn_cval_t *ub);
-int asn_check_INTEGER_range(const INTEGER_t *value,
-                            const asn_cval_t *lb, const asn_cval_t *ub,
-                            int value_is_unsigned);
+int asn_check_integer_range_sint(
+    intmax_t value, const asn_cval_t* lb, const asn_cval_t* ub);
+int asn_check_integer_range_uint(
+    uintmax_t value, const asn_cval_t* lb, const asn_cval_t* ub);
+int asn_check_INTEGER_range(
+    const INTEGER_t* value, const asn_cval_t* lb, const asn_cval_t* ub,
+    int value_is_unsigned);
 
 /* ===================================================================
  * v2 integer constraint descriptor (additive; ABI-compatible).
@@ -90,25 +90,25 @@ int asn_check_INTEGER_range(const INTEGER_t *value,
  * incrementally alongside the existing asn_per_constraint_t.
  * =================================================================== */
 typedef struct asn_integer_constraint_s {
-    asn_cval_t lower_bound;
-    asn_cval_t upper_bound;
-    int range_bits;             /* ceil(log2(range)); -1 if not applicable */
-    int effective_bits;         /* effective per-element bits; -1 if N/A */
-    unsigned range_is_native:1; /* range fits uint64_t */
-    unsigned range_is_big:1;    /* range exceeds uint64_t */
+  asn_cval_t lower_bound;
+  asn_cval_t upper_bound;
+  int range_bits;               /* ceil(log2(range)); -1 if not applicable */
+  int effective_bits;           /* effective per-element bits; -1 if N/A */
+  unsigned range_is_native : 1; /* range fits uint64_t */
+  unsigned range_is_big : 1;    /* range exceeds uint64_t */
 } asn_integer_constraint_t;
 
 typedef enum asn_range_kind_e {
-    ASN_RANGE_UNCONSTRAINED,
-    ASN_RANGE_NATIVE_U64,
-    ASN_RANGE_BIG
+  ASN_RANGE_UNCONSTRAINED,
+  ASN_RANGE_NATIVE_U64,
+  ASN_RANGE_BIG
 } asn_range_kind_e;
 
 typedef struct asn_range_info_s {
-    asn_range_kind_e kind;
-    uint64_t u64_range;         /* valid when kind == ASN_RANGE_NATIVE_U64 */
-    int range_bits;
-    int effective_bits;
+  asn_range_kind_e kind;
+  uint64_t u64_range; /* valid when kind == ASN_RANGE_NATIVE_U64 */
+  int range_bits;
+  int effective_bits;
 } asn_range_info_t;
 
 /*
@@ -118,8 +118,8 @@ typedef struct asn_range_info_s {
  * (returns 0) when both bounds are concrete and the resulting range fits
  * uint64_t, filling *out; otherwise it reports ASN_RANGE_BIG / returns -1.
  */
-int asn_cval_compute_range(const asn_cval_t *lb, const asn_cval_t *ub,
-                           asn_range_info_t *out);
+int asn_cval_compute_range(
+    const asn_cval_t* lb, const asn_cval_t* ub, asn_range_info_t* out);
 
 #ifdef __cplusplus
 }

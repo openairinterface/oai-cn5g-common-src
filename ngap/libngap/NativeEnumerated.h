@@ -9,8 +9,8 @@
  * will do).
  * This type may be used when integer range is limited by subtype constraints.
  */
-#ifndef	_NativeEnumerated_H_
-#define	_NativeEnumerated_H_
+#ifndef _NativeEnumerated_H_
+#define _NativeEnumerated_H_
 
 #include <NativeInteger.h>
 #include <ENUMERATED.h>
@@ -26,10 +26,10 @@ extern asn_TYPE_operation_t asn_OP_NativeEnumerated;
 
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
 #define NativeEnumerated_print NativeInteger_print
-#endif  /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 #define NativeEnumerated_compare NativeInteger_compare
-#define NativeEnumerated_copy    NativeInteger_copy
+#define NativeEnumerated_copy NativeInteger_copy
 
 asn_constr_check_f NativeEnumerated_constraint;
 
@@ -43,43 +43,42 @@ xer_type_decoder_f NativeEnumerated_decode_xer;
 xer_type_decoder_f NativeEnumerated_decode_xer_text;
 xer_type_encoder_f NativeEnumerated_encode_xer;
 xer_type_encoder_f NativeEnumerated_encode_xer_text;
-#endif  /* !defined(ASN_DISABLE_XER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
 jer_type_decoder_f NativeEnumerated_decode_jer;
 jer_type_encoder_f NativeEnumerated_encode_jer;
-#endif  /* !defined(ASN_DISABLE_JER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_CBOR_SUPPORT)
 cbor_type_decoder_f NativeEnumerated_decode_cbor;
 cbor_type_encoder_f NativeEnumerated_encode_cbor;
-#endif  /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 
 #if !defined(ASN_DISABLE_OER_SUPPORT)
 oer_type_decoder_f NativeEnumerated_decode_oer;
 oer_type_encoder_f NativeEnumerated_encode_oer;
-#endif  /* !defined(ASN_DISABLE_OER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
 per_type_decoder_f NativeEnumerated_decode_uper;
 per_type_encoder_f NativeEnumerated_encode_uper;
-#endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_UPER_SUPPORT) */
 #if !defined(ASN_DISABLE_APER_SUPPORT)
 per_type_decoder_f NativeEnumerated_decode_aper;
 per_type_encoder_f NativeEnumerated_encode_aper;
-#endif  /* !defined(ASN_DISABLE_APER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_APER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_RFILL_SUPPORT)
 #define NativeEnumerated_random_fill NativeInteger_random_fill
-#endif  /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
-int NativeEnumerated__compar_value2enum(
-        const void *ap,
-        const void *bp);
-#endif  /* !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT) */
+int NativeEnumerated__compar_value2enum(const void* ap, const void* bp);
+#endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
+          !defined(ASN_DISABLE_APER_SUPPORT) */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* _NativeEnumerated_H_ */
+#endif /* _NativeEnumerated_H_ */

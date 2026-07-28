@@ -1230,13 +1230,12 @@ pfcp_msg::pfcp_msg(const pfcp_session_modification_request& pfcp_ies)
     std::shared_ptr<pfcp_remove_qer_ie> sie(new pfcp_remove_qer_ie(it));
     add_ie(sie);
   }
-  for (auto it : pfcp_ies.remove_bars) {
-    std::shared_ptr<pfcp_remove_bar_ie> sie(
-        new pfcp_remove_bar_ie(it));  // §7.5.4.12
-    add_ie(sie);
-  }
-  // TODO §7.5.4.x  for (auto it : pfcp_ies.remove_mars) — pfcp_remove_mar_ie
-  // not in lib (§8.2.123)
+  // if (pfcp_ies.remove_bar.first) {std::shared_ptr<pfcp_remove_bar_ie> sie(new
+  // pfcp_remove_bar_ie(pfcp_ies.remove_bar.second)); add_ie(sie);} if
+  // (pfcp_ies.remove_traffic_endpoint.first)
+  // {std::shared_ptr<pfcp_remove_traffic_endpoint_ie> sie(new
+  // pfcp_remove_traffic_endpoint_ie(pfcp_ies.remove_traffic_endpoint.second));
+  // add_ie(sie);}
   for (auto it : pfcp_ies.create_pdrs) {
     std::shared_ptr<pfcp_create_pdr_ie> sie(new pfcp_create_pdr_ie(it));
     add_ie(sie);
@@ -1253,13 +1252,8 @@ pfcp_msg::pfcp_msg(const pfcp_session_modification_request& pfcp_ies)
     std::shared_ptr<pfcp_create_qer_ie> sie(new pfcp_create_qer_ie(it));
     add_ie(sie);
   }
-  for (auto it : pfcp_ies.create_bars) {
-    std::shared_ptr<pfcp_create_bar_ie> sie(
-        new pfcp_create_bar_ie(it));  // §7.5.2.6
-    add_ie(sie);
-  }
-  // TODO §7.5.2.8  for (auto it : pfcp_ies.create_mars) — pfcp_create_mar_ie
-  // not in lib (§8.2.123)
+  // if (pfcp_ies.create_bar.first) {std::shared_ptr<pfcp_create_bar_ie> sie(new
+  // pfcp_create_bar_ie(pfcp_ies.create_bar.second)); add_ie(sie);}
   if (pfcp_ies.create_traffic_endpoint.first) {
     std::shared_ptr<pfcp_create_traffic_endpoint_ie> sie(
         new pfcp_create_traffic_endpoint_ie(
@@ -1282,26 +1276,33 @@ pfcp_msg::pfcp_msg(const pfcp_session_modification_request& pfcp_ies)
     std::shared_ptr<pfcp_update_qer_ie> sie(new pfcp_update_qer_ie(it));
     add_ie(sie);
   }
-  for (auto it : pfcp_ies.update_bars) {
-    std::shared_ptr<pfcp_update_bar_within_pfcp_session_modification_request_ie>
-        sie(new pfcp_update_bar_within_pfcp_session_modification_request_ie(
-            it));  // §7.5.4.11
-    add_ie(sie);
-  }
-  // TODO §7.5.4.x  for (auto it : pfcp_ies.update_mars) — pfcp_update_mar_ie
-  // not in lib (§8.2.123)
+
   for (auto it : pfcp_ies.query_urrs) {
     std::shared_ptr<pfcp_query_urr_ie> sie(new pfcp_query_urr_ie(it));
     add_ie(sie);
   }
 
-  // update_bars already serialized above via for (auto it :
-  // pfcp_ies.update_bars)
-  // TODO §7.5.4.13 Update Traffic Endpoint — pfcp_update_traffic_endpoint_ie
-  // not in lib
-  // TODO §8.2.94   PFCPSMREQ-Flags — pfcp_pfcpsmreq_flags_ie not in lib
-  // TODO §8.2.x    FQ-CSID (pgw-c/sgw-c/mme/epdg/twan) — pfcp_fq_csid_ie not in
-  // lib
+  //  if (pfcp_ies.update_bar.first) {std::shared_ptr<pfcp_update_bar_ie>
+  //  sie(new pfcp_update_bar_ie(pfcp_ies.update_bar.second)); add_ie(sie);} if
+  //  (pfcp_ies.update_traffic_endpoint.first)
+  //  {std::shared_ptr<pfcp_update_traffic_endpoint_ie> sie(new
+  //  pfcp_update_traffic_endpoint_ie(pfcp_ies.update_traffic_endpoint.second));
+  //  add_ie(sie);} if (pfcp_ies.pfcpsmreq_flags.first)
+  //  {std::shared_ptr<pfcp_pfcpsmreq_flags_ie> sie(new
+  //  pfcp_pfcpsmreq_flags_ie(pfcp_ies.pfcp_pfcpsmreq_flags.second));
+  //  add_ie(sie);} if (pfcp_ies.query_urr.first)
+  //  {std::shared_ptr<pfcp_query_urr_ie> sie(new
+  //  pfcp_query_urr_ie(pfcp_ies.query_urr.second)); add_ie(sie);} if
+  //  (pfcp_ies.pgw_c_fq_csid.first) {std::shared_ptr<pfcp_fq_csid_ie> sie(new
+  //  pfcp_fq_csid_ie(pfcp_ies.pgw_c_fq_csid.second)); add_ie(sie);} if
+  //  (pfcp_ies.sgw_c_fq_csid.first) {std::shared_ptr<pfcp_fq_csid_ie> sie(new
+  //  pfcp_fq_csid_ie(pfcp_ies.sgw_c_fq_csid.second)); add_ie(sie);} if
+  //  (pfcp_ies.mme_fq_csid.first) {std::shared_ptr<pfcp_fq_csid_ie> sie(new
+  //  pfcp_fq_csid_ie(pfcp_ies.mme_fq_csid.second)); add_ie(sie);} if
+  //  (pfcp_ies.epdg_fq_csid.first) {std::shared_ptr<pfcp_fq_csid_ie> sie(new
+  //  pfcp_fq_csid_ie(pfcp_ies.epdg_fq_csid.second)); add_ie(sie);} if
+  //  (pfcp_ies.twan_fq_csid.first) {std::shared_ptr<pfcp_fq_csid_ie> sie(new
+  //  pfcp_fq_csid_ie(pfcp_ies.twan_fq_csid.second)); add_ie(sie);}
   if (pfcp_ies.user_plane_inactivity_timer.first) {
     std::shared_ptr<pfcp_user_plane_inactivity_timer_ie> sie(
         new pfcp_user_plane_inactivity_timer_ie(
@@ -1426,11 +1427,16 @@ pfcp_msg::pfcp_msg(const pfcp_session_report_request& pfcp_ies)
             pfcp_ies.usage_report.second));
     add_ie(sie);
   }
-  // TODO §7.5.8.1  pfcp_ies.error_indication_report —
-  // pfcp_error_indication_report_ie not in lib
-  // TODO §8.2.x    pfcp_ies.load_control_information —
-  // pfcp_load_control_information_ie not in lib
-  // TODO §8.2.x    pfcp_ies.additional_usage_reports_information — not in lib
+  // TODO std::pair<bool, pfcp::usage_report_within_pfcp_session_report_request>
+  // usage_report;
+  // TODO std::pair<bool, pfcp::error_indication_report>
+  // error_indication_report;
+  // TODO std::pair<bool, pfcp::load_control_information>
+  // load_control_information;
+  // TODO std::pair<bool, pfcp::overload_control_information>
+  // overload_control_information;
+  // TODO std::pair<bool, pfcp::additional_usage_reports_information_t>
+  // additional_usage_reports_information;
 }
 //------------------------------------------------------------------------------
 // §7.5.9.1 — PFCP Session Report Response

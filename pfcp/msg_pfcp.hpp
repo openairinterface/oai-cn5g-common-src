@@ -4873,10 +4873,10 @@ class remove_bar : public pfcp::pfcp_ies_container {
 // Access Forwarding Action Information (used in MAR)
 class access_forwarding_action_information : public pfcp::pfcp_ies_container {
  public:
-  std::pair<bool, pfcp::far_id_t> far_id;
-  std::pair<bool, pfcp::urr_id_t> urr_id;
-  std::pair<bool, uint8_t> weight;
-  std::pair<bool, uint8_t> priority;
+  std::pair<bool, pfcp::far_id_t> far_id;      ///< M — §8.2.74
+  std::pair<bool, pfcp::urr_id_t> urr_id;      ///< C — §8.2.54
+  std::pair<bool, pfcp::weight_t> weight;      ///< C — §8.2.126
+  std::pair<bool, pfcp::priority_t> priority;  ///< C — §8.2.127
 
   access_forwarding_action_information()
       : far_id(), urr_id(), weight(), priority() {}
@@ -4933,13 +4933,14 @@ class access_forwarding_action_information : public pfcp::pfcp_ies_container {
 // clang-format on
 class create_mar : public pfcp::pfcp_ies_container {
  public:
-  std::pair<bool, pfcp::mar_id_t> mar_id;
-  std::pair<bool, pfcp::steering_functionality_t> steering_functionality;
-  std::pair<bool, pfcp::steering_mode_t> steering_mode;
+  std::pair<bool, pfcp::mar_id_t> mar_id;  ///< M — §8.2.123
+  std::pair<bool, pfcp::steering_functionality_t>
+      steering_functionality;                            ///< M — §8.2.124
+  std::pair<bool, pfcp::steering_mode_t> steering_mode;  ///< M — §8.2.125
   std::pair<bool, pfcp::access_forwarding_action_information>
-      access_forwarding_action_information_1;
+      access_forwarding_action_information_1;  ///< C — §8.2.129
   std::pair<bool, pfcp::access_forwarding_action_information>
-      access_forwarding_action_information_2;
+      access_forwarding_action_information_2;  ///< C — §8.2.130
 
   /** @brief Default constructor — all fields absent. */
   create_mar()
@@ -5024,13 +5025,14 @@ class create_mar : public pfcp::pfcp_ies_container {
 // clang-format on
 class update_mar : public pfcp::pfcp_ies_container {
  public:
-  std::pair<bool, pfcp::mar_id_t> mar_id;
-  std::pair<bool, pfcp::steering_functionality_t> steering_functionality;
-  std::pair<bool, pfcp::steering_mode_t> steering_mode;
+  std::pair<bool, pfcp::mar_id_t> mar_id;  ///< M — §8.2.123
+  std::pair<bool, pfcp::steering_functionality_t>
+      steering_functionality;                            ///< C — §8.2.124
+  std::pair<bool, pfcp::steering_mode_t> steering_mode;  ///< C — §8.2.125
   std::pair<bool, pfcp::access_forwarding_action_information>
-      access_forwarding_action_information_1;
+      access_forwarding_action_information_1;  ///< C — §8.2.129
   std::pair<bool, pfcp::access_forwarding_action_information>
-      access_forwarding_action_information_2;
+      access_forwarding_action_information_2;  ///< C — §8.2.130
 
   /** @brief Default constructor — all fields absent. */
   update_mar()
@@ -7571,7 +7573,7 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   std::vector<pfcp::remove_far> remove_fars;
   std::vector<pfcp::remove_urr> remove_urrs;
   std::vector<pfcp::remove_qer> remove_qers;
-  std::vector<pfcp::remove_bar> remove_bars;
+  std::pair<bool, pfcp::remove_bar> remove_bar;
   std::vector<pfcp::remove_mar> remove_mars;
   std::pair<bool, pfcp::remove_traffic_endpoint> remove_traffic_endpoint;
   std::vector<pfcp::create_pdr> create_pdrs;
@@ -7581,15 +7583,15 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   std::vector<pfcp::query_urr> query_urrs;
 
   std::vector<pfcp::create_qer> create_qers;
-  std::vector<pfcp::create_bar> create_bars;
+  std::pair<bool, pfcp::create_bar> create_bar;
   std::vector<pfcp::create_mar> create_mars;
   std::pair<bool, pfcp::create_traffic_endpoint> create_traffic_endpoint;
   std::vector<pfcp::update_pdr> update_pdrs;
   std::vector<pfcp::update_far> update_fars;
   std::vector<pfcp::update_urr> update_urrs;
   std::vector<pfcp::update_qer> update_qers;
-  std::vector<pfcp::update_bar_within_pfcp_session_modification_request>
-      update_bars;
+  std::pair<bool, pfcp::update_bar_within_pfcp_session_modification_request>
+      update_bar;
   std::vector<pfcp::update_mar> update_mars;
   std::pair<bool, pfcp::update_traffic_endpoint> update_traffic_endpoint;
   std::pair<bool, pfcp::pfcpsmreq_flags_t> pfcpsmreq_flags;
@@ -7609,7 +7611,7 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         remove_fars(),
         remove_urrs(),
         remove_qers(),
-        remove_bars(),
+        remove_bar(),
         remove_mars(),
         remove_traffic_endpoint(),
         create_pdrs(),
@@ -7617,14 +7619,14 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         create_urrs(),
         create_qers(),
         query_urrs(),
-        create_bars(),
+        create_bar(),
         create_mars(),
         create_traffic_endpoint(),
         update_pdrs(),
         update_fars(),
         update_urrs(),
         update_qers(),
-        update_bars(),
+        update_bar(),
         update_mars(),
         update_traffic_endpoint(),
         pfcpsmreq_flags(),
@@ -7643,7 +7645,7 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         remove_fars(i.remove_fars),
         remove_urrs(i.remove_urrs),
         remove_qers(i.remove_qers),
-        remove_bars(i.remove_bars),
+        remove_bar(i.remove_bar),
         remove_mars(i.remove_mars),
         remove_traffic_endpoint(i.remove_traffic_endpoint),
         create_pdrs(i.create_pdrs),
@@ -7651,14 +7653,14 @@ class pfcp_session_modification_request : public pfcp_ies_container {
         create_urrs(i.create_urrs),
         create_qers(i.create_qers),
         query_urrs(i.query_urrs),
-        create_bars(i.create_bars),
+        create_bar(i.create_bar),
         create_mars(i.create_mars),
         create_traffic_endpoint(i.create_traffic_endpoint),
         update_pdrs(i.update_pdrs),
         update_fars(i.update_fars),
         update_urrs(i.update_urrs),
         update_qers(i.update_qers),
-        update_bars(i.update_bars),
+        update_bar(i.update_bar),
         update_mars(i.update_mars),
         update_traffic_endpoint(i.update_traffic_endpoint),
         pfcpsmreq_flags(i.pfcpsmreq_flags),
@@ -7683,8 +7685,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::remove_bar& v) const {
-    if (!remove_bars.empty()) {
-      v = remove_bars.front();
+    if (remove_bar.first) {
+      v = remove_bar.second;
       return true;
     }
     return false;
@@ -7697,8 +7699,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::create_bar& v) const {
-    if (!create_bars.empty()) {
-      v = create_bars.front();
+    if (create_bar.first) {
+      v = create_bar.second;
       return true;
     }
     return false;
@@ -7711,8 +7713,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
     return false;
   }
   bool get(pfcp::update_bar_within_pfcp_session_modification_request& v) const {
-    if (!update_bars.empty()) {
-      v = update_bars.front();
+    if (update_bar.first) {
+      v = update_bar.second;
       return true;
     }
     return false;
@@ -7806,7 +7808,10 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::remove_urr& v) { remove_urrs.push_back(v); }
   void set(const pfcp::remove_qer& v) { remove_qers.push_back(v); }
   void set(const pfcp::query_urr& v) { query_urrs.push_back(v); }
-  void set(const pfcp::remove_bar& v) { remove_bars.push_back(v); }
+  void set(const pfcp::remove_bar& v) {
+    remove_bar.first  = true;
+    remove_bar.second = v;
+  }
   void set(const pfcp::remove_mar& v) { remove_mars.push_back(v); }
   void set(const pfcp::remove_traffic_endpoint& v) {
     remove_traffic_endpoint.first  = true;
@@ -7816,7 +7821,10 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::create_far& v) { create_fars.push_back(v); }
   void set(const pfcp::create_urr& v) { create_urrs.push_back(v); }
   void set(const pfcp::create_qer& v) { create_qers.push_back(v); }
-  void set(const pfcp::create_bar& v) { create_bars.push_back(v); }
+  void set(const pfcp::create_bar& v) {
+    create_bar.first  = true;
+    create_bar.second = v;
+  }
   void set(const pfcp::create_mar& v) { create_mars.push_back(v); }
   void set(const pfcp::create_traffic_endpoint& v) {
     create_traffic_endpoint.first  = true;
@@ -7827,7 +7835,8 @@ class pfcp_session_modification_request : public pfcp_ies_container {
   void set(const pfcp::update_urr& v) { update_urrs.push_back(v); }
   void set(const pfcp::update_qer& v) { update_qers.push_back(v); }
   void set(const pfcp::update_bar_within_pfcp_session_modification_request& v) {
-    update_bars.push_back(v);
+    update_bar.first  = true;
+    update_bar.second = v;
   }
   void set(const pfcp::update_mar& v) { update_mars.push_back(v); }
   void set(const pfcp::update_traffic_endpoint& v) {

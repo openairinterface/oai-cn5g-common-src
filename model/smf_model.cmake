@@ -160,6 +160,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/EpsInterworkingInfo.cpp
     ${SMF_MODEL_DIR}/EpsIwkPgw.cpp
     ${SMF_MODEL_DIR}/EpsPdnCnxInfo.cpp
+    ${SMF_MODEL_DIR}/ErrorReport.cpp
     ${SMF_MODEL_DIR}/EthFlowDescription.cpp
     ${SMF_MODEL_DIR}/EutraLocation.cpp
     ${SMF_MODEL_DIR}/EventForMdt_anyOf.cpp

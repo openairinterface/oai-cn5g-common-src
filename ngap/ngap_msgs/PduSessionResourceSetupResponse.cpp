@@ -342,10 +342,22 @@ bool PduSessionResourceSetupResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             "implemented");
       } break;
       default: {
-        oai::logger::logger_common::ngap().error(
-            "Decoded NGAP message PDU error!");
-        return false;
-      }
+        // Handle unknown/optional IEs based on criticality
+        if (m_PduSessionResourceSetupResponseIes->protocolIEs.list.array[i]
+                ->criticality == Ngap_Criticality_ignore) {
+          oai::logger::logger_common::ngap().debug(
+              "Decoded NGAP PDUSessionResourceSetupResponse - ignoring unknown "
+              "IE with ID %ld (criticality: ignore)",
+              m_PduSessionResourceSetupResponseIes->protocolIEs.list.array[i]
+                  ->id);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP message PDU error - unknown IE with ID %ld",
+              m_PduSessionResourceSetupResponseIes->protocolIEs.list.array[i]
+                  ->id);
+          return false;
+        }
+      } break;
     }
   }
 

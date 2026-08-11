@@ -49,10 +49,18 @@ const std::string AUSF_CONFIG_NAME = "ausf";
 const std::string UDSF_CONFIG_NAME = "udsf";
 const std::string LMF_CONFIG_NAME  = "lmf";
 const std::string NEF_CONFIG_NAME  = "nef";
+const std::string SEPP_CONFIG_NAME = "sepp";
 
 const std::string LOG_LEVEL_CONFIG_NAME   = "log_level";
 const std::string REGISTER_NF_CONFIG_NAME = "register_nf";
 const std::string NF_LIST_CONFIG_NAME     = "nfs";
+
+const std::string ROAMING_CONFIG_NAME = "enable_roaming";
+
+const std::string ROAMING_CONFIG_LABEL   = "Enable Roaming";
+const std::string ROAMING_PARTNERS       = "roaming_partners";
+const std::string ROAMING_PARTNERS_LABEL = "Roaming Partners";
+constexpr auto CONFIG_ROAMING_LABLE      = "Roaming";
 
 // NF
 constexpr auto NF_CONFIG_HOST_NAME       = "host";
@@ -196,6 +204,9 @@ class config : public config_iface {
   [[nodiscard]] int get_http_version() const override;
   [[nodiscard]] uint32_t get_http_request_timeout() const;
 
+  [[nodiscard]] bool enable_roaming() const;
+  [[nodiscard]] const roaming_config& get_roaming_config() const;
+
   bool init() override;
 
   void display() const override;
@@ -226,6 +237,8 @@ class config : public config_iface {
   std::shared_ptr<nf> m_local_nf;
 
   database_config m_database;
+
+  roaming_config m_roaming_config;
 
   std::unordered_map<std::string, std::shared_ptr<nf>> m_nf_map;
 

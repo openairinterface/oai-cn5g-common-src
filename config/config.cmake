@@ -17,4 +17,3 @@ target_sources(${NF_TARGET} PRIVATE
         ${CONFIG_SRC_FILES}
         )
 endif()
-

@@ -249,6 +249,18 @@ typedef struct udsf_info_s {
   std::map<std::string, std::vector<identity_range_t>> storage_id_ranges;
 } udsf_info_t;
 
+typedef struct sepp_info_s {
+  // ToDo
+  std::string m_SeppPrefix;
+  std::map<std::string, int32_t> m_SeppPorts;
+  std::vector<plmn_t> m_RemotePlmnList;
+  std::vector<plmn_nid_t> m_RemoteSnpnList;
+  std::vector<std::string> m_n32Purposes;
+
+  // std::vector<oai::_3gpp::model::PlmnId> m_RemotePlmnList;
+  // std::vector<oai::_3gpp::model::PlmnIdNid> m_RemoteSnpnList;
+} sepp_info_t;
+
 enum subscr_condition_type_e {  // TODO: use enum class
   UNKNOWN_CONDITION   = 0,
   NF_INSTANCE_ID_COND = 1,

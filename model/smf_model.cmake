@@ -182,6 +182,8 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/ExternalUnrelatedClass.cpp
     ${SMF_MODEL_DIR}/ExtProblemDetails.cpp
     ${SMF_MODEL_DIR}/ExtSnssai.cpp
+    ${SMF_MODEL_DIR}/FailureCause.cpp
+    ${SMF_MODEL_DIR}/FailureCause_anyOf.cpp
     ${SMF_MODEL_DIR}/FailureCode_anyOf.cpp
     ${SMF_MODEL_DIR}/FailureCode.cpp
     ${SMF_MODEL_DIR}/FinalUnitAction_anyOf.cpp
@@ -323,6 +325,8 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/NcgiTai.cpp
     ${SMF_MODEL_DIR}/NefCond.cpp
     ${SMF_MODEL_DIR}/NefInfo.cpp
+    ${SMF_MODEL_DIR}/NetLocAccessSupport.cpp
+    ${SMF_MODEL_DIR}/NetLocAccessSupport_anyOf.cpp
     ${SMF_MODEL_DIR}/NetworkAreaInfo.cpp
     ${SMF_MODEL_DIR}/NetworkNodeDiameterAddress.cpp
     ${SMF_MODEL_DIR}/NetworkPerfInfo.cpp
@@ -420,6 +424,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/PacketFilterInfo.cpp
     ${SMF_MODEL_DIR}/PartialRecordMethod_anyOf.cpp
     ${SMF_MODEL_DIR}/PartialRecordMethod.cpp
+    ${SMF_MODEL_DIR}/PartialSuccessReport.cpp
     ${SMF_MODEL_DIR}/PartitioningCriteria_anyOf.cpp
     ${SMF_MODEL_DIR}/PartitioningCriteria.cpp
     ${SMF_MODEL_DIR}/PatchItem.cpp
@@ -774,6 +779,7 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/UdsfInfo.cpp
     ${SMF_MODEL_DIR}/UeAuth_anyOf.cpp
     ${SMF_MODEL_DIR}/UeAuth.cpp
+    ${SMF_MODEL_DIR}/UeCampingRep.cpp
     ${SMF_MODEL_DIR}/UeCommunication.cpp
     ${SMF_MODEL_DIR}/UeContextInAmfData.cpp
     ${SMF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp

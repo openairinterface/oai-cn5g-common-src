@@ -41,13 +41,11 @@ std::shared_ptr<http_client> http_client::create_instance(
     const oai::logger::printf_logger& logger, int timeout_ms,
     const std::string& interface, uint8_t http_version, bool enable_tls,
     request_type_e request_type) {
-  // If instance does not exits, create a new one
   if (!instance) {
     instance = std::make_shared<http_client>(
         logger, timeout_ms, interface, http_version, enable_tls, request_type);
     return instance;
   }
-  // otherwise return the existing one
   return instance;
 }
 
@@ -64,9 +62,6 @@ response http_client::send_http_request(
     } break;
 
     case request_type_e::MULTI_PERFORM: {
-      // TODO: Should declare a MultiPerform as a class member so that we can
-      // actually support multiple sessions per MultiPerform (causing issue when
-      // using multi-threading, similar issue with Curl Multi Interface)
       std::shared_ptr<cpr::MultiPerform> multi_perform =
           std::make_shared<cpr::MultiPerform>();
       add_session_to_multi_peform(method, request, multi_perform);
@@ -74,11 +69,10 @@ response http_client::send_http_request(
       return resp[0];
     } break;
     case request_type_e::SIMPLE:
-    default: {  // Use simple HTTP request
+    default: {
     }
   };
 
-  // By default using a simple HTTP request
   auto resp = send_simple_http_request(method, request);
   return resp;
 }
@@ -104,7 +98,6 @@ response http_client::send_simple_http_request(
 
   prepare_session(method, request, session);
 
-  // set HTTP method
   switch (method) {
     case method_e::POST: {
       cpr_resp = session->Post();
@@ -124,6 +117,12 @@ response http_client::send_simple_http_request(
   }
 
   get_response_info(cpr_resp, resp);
+
+  if (cpr_resp.error) {
+    m_sbi_logger.error(
+        "HTTP request failed: %s (error code: %d)",
+        cpr_resp.error.message.c_str(), static_cast<int>(cpr_resp.error.code));
+  }
 
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
@@ -165,6 +164,13 @@ response http_client::send_async_http_request(
   }
 
   get_response_info(cpr_resp, resp);
+
+  if (cpr_resp.error) {
+    m_sbi_logger.error(
+        "Async HTTP request failed: %s (error code: %d)",
+        cpr_resp.error.message.c_str(), static_cast<int>(cpr_resp.error.code));
+  }
+
   m_sbi_logger.trace(request.to_string() + " (%s)", method_to_string(method));
 
   return resp;
@@ -178,7 +184,6 @@ std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
 
   prepare_session(method, request, session);
 
-  // set HTTP method
   switch (method) {
     case method_e::POST: {
       session->SetBody(cpr::Body{request.body});
@@ -196,7 +201,6 @@ std::shared_ptr<cpr::Session> http_client::add_session_to_multi_peform(
     } break;
     case method_e::PATCH: {
       session->SetBody(cpr::Body{request.body});
-
       multi_perform->AddSession(
           session, cpr::MultiPerform::HttpMethod::PATCH_REQUEST);
     } break;
@@ -232,6 +236,8 @@ std::vector<response> http_client::execute_http_request(
 void http_client::prepare_session(
     const method_e& method, const request& request,
     std::shared_ptr<cpr::Session>& session) {
+  bool is_https = (request.uri.rfind("https://", 0) == 0);
+
   // Set HTTP version
   switch (m_http_version) {
     case 1:
@@ -239,13 +245,20 @@ void http_client::prepare_session(
           cpr::HttpVersion(cpr::HttpVersionCode::VERSION_1_1));
       break;
     case 2:
-      session->SetHttpVersion(
-          cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
+      if (is_https || m_enable_tls) {
+        session->SetHttpVersion(
+            cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_TLS));
+      } else {
+        session->SetHttpVersion(
+            cpr::HttpVersion(cpr::HttpVersionCode::VERSION_2_0_PRIOR_KNOWLEDGE));
+      }
       break;
   }
 
   // Set Interface
-  session->SetInterface(cpr::Interface{m_interface});
+  if (!m_interface.empty()) {
+    session->SetInterface(cpr::Interface{m_interface});
+  }
 
   // Set URL
   cpr::Url url = cpr::Url{request.uri};
@@ -280,22 +293,17 @@ void http_client::prepare_session(
     }
   }
 
-  // Enable SSL/TLS
-  if (m_enable_tls) {
-    // TODO: fix this for U24
+  // Enable SSL/TLS options for HTTPS
+  if (m_enable_tls || is_https) {
     cpr::SslOptions sslOpts =
-        cpr::Ssl(cpr::ssl::ALPN{false}, cpr::ssl::NPN{false});
-    sslOpts.SetOption(cpr::ssl::TLSv1_0{});
+        cpr::Ssl(cpr::ssl::ALPN{true}, cpr::ssl::NPN{false});
+
     sslOpts.SetOption(cpr::ssl::VerifyHost{false});
     sslOpts.SetOption(cpr::ssl::VerifyPeer{false});
     sslOpts.SetOption(cpr::ssl::VerifyStatus{false});
 
-    // TODO: Use public key
-    // session->SetSslOptions(sslOpts);
-
-    session->SetVerbose(cpr::Verbose{true});
-    session->SetVerifySsl(false);  // TODO: Don't verify SSL for the moment, but
-                                   // should enable this in the future
+    session->SetSslOptions(sslOpts);
+    session->SetVerifySsl(false);
   }
 }
 
@@ -321,7 +329,6 @@ request http_client::prepare_json_request(
     const std::string& content_type) {
   request req;
   req.uri = uri;
-  // Check whether body is valid JSON
   if (json::json::accept(body)) {
     req.body = body;
     req.headers.insert({"content-type", content_type});
@@ -340,8 +347,3 @@ request http_client::prepare_multipart_request(
        "multipart/related;boundary=" + std::string(MIME_BOUNDARY)});
   return req;
 }
-
-//---------------------------------------------------------------------------------------------
-/*void http_client::enable_tls(std::string public_key_path){
-
-}*/

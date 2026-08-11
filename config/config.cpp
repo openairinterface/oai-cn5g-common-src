@@ -42,7 +42,8 @@ config::config(
       m_tls_config(),
       m_http_version(),
       m_http_request_timeout(),
-      m_database(DATABASE_CONFIG) {
+      m_database(DATABASE_CONFIG),
+      m_roaming_config() {
   logger::logger_registry::register_logger(
       nf_name, LOGGER_NAME, log_stdout, log_rot_file);
 
@@ -71,6 +72,8 @@ void config::read_from_file(const std::string& file_path) {
           m_tls_config.from_yaml(elem.second);
         } else if (key == NF_CONFIG_HTTP_REQUEST_TIMEOUT) {
           m_http_request_timeout.from_yaml(elem.second);
+        } else if (key == ROAMING_CONFIG_NAME) {;
+          m_roaming_config.from_yaml(elem.second);
         } else if (key == m_nf_name) {
           const auto nf_ptr = m_nf_map.find(m_nf_name);
           if (nf_ptr == m_nf_map.end()) {
@@ -155,6 +158,7 @@ void config::to_json(nlohmann::json& json_data) {
   if (m_database.is_set()) {
     json_data[m_database.get_config_name()] = m_database.to_json();
   }
+  json_data[m_roaming_config.get_config_name()] = m_roaming_config.to_json();
 }
 
 bool config::from_json(const nlohmann::json& json_data) {
@@ -182,6 +186,10 @@ bool config::from_json(const nlohmann::json& json_data) {
         json_data.end()) {
       m_http_request_timeout.from_json(
           json_data[m_http_request_timeout.get_config_name()]);
+    }
+
+    if (json_data.find(m_roaming_config.get_config_name()) != json_data.end()) {
+      m_roaming_config.from_json(json_data[m_roaming_config.get_config_name()]);
     }
 
   } catch (nlohmann::detail::exception& e) {
@@ -213,6 +221,7 @@ bool config::validate() {
   }
 
   success &= safe_validate_field(m_database);
+  success &= safe_validate_field(m_roaming_config);
 
   return success;
 }
@@ -249,6 +258,7 @@ std::string config::to_string() const {
   out.append(m_http_version.to_string(indent));
   out.append(m_tls_config.to_string(indent));
   out.append(m_http_request_timeout.to_string(indent));
+  out.append(m_roaming_config.to_string(indent));
 
   out.append(m_local_nf->to_string(indent));
   if (m_database.is_set()) {
@@ -424,4 +434,12 @@ std::string oai::config::get_title_formatter(int level) {
         (level + 1) % 2 == 0 ? INNER_LIST_ELEM : OUTER_LIST_ELEM;
     return base_indent + indent_char + " {}\n";
   }
+}
+
+bool config::enable_roaming() const {
+  return m_roaming_config.enable_roaming();
+}
+
+const roaming_config& config::get_roaming_config() const {
+  return m_roaming_config;
 }

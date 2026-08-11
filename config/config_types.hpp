@@ -11,6 +11,7 @@
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <yaml-cpp/yaml.h>
+#include <fmt/format.h>
 
 namespace oai::config {
 const std::string INNER_LIST_ELEM = "+";
@@ -32,7 +33,7 @@ class config_type {
    * Validates the configuration
    * @throws std::runtime_error if validation is not successful
    */
-  virtual void validate(){};
+  virtual void validate() {};
 
   /**
    * Overwrites the values from a YAML node
@@ -230,6 +231,33 @@ class sbi_interface : public local_interface {
   [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };
 
+class nbi_interface : public local_interface {
+  friend class nf;
+
+ private:
+  string_config_value m_api_version;
+  std::string m_url;
+
+  void set_url(bool enable_tls = false);
+
+ public:
+  explicit nbi_interface(
+      const std::string& name, const std::string& host, uint16_t port,
+      const std::string& api_version, const std::string& interface_name);
+
+  nbi_interface() = default;
+  // nbi_interface& operator=(const struct nbi_interface& s);
+
+  void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+
+  [[nodiscard]] const std::string& get_api_version() const;
+  [[nodiscard]] std::string get_url(bool enable_tls = false) const;
+};
+
 enum class interface_type_e { n1, n4 };
 
 class nf : public config_type {
@@ -237,12 +265,19 @@ class nf : public config_type {
 
  private:
   sbi_interface m_sbi;
+  nbi_interface m_nbi;
   string_config_value m_host;
 
  public:
   explicit nf(
       const std::string& name, const std::string& host,
-      const sbi_interface& sbi);
+      const sbi_interface& sbi, const nbi_interface& nbi = nbi_interface());
+  // explicit nf(
+  //     const std::string& name, const std::string& host,
+  //     const sbi_interface& sbi);
+  // explicit nf(
+  //     const std::string& name, const std::string& host,
+  //     const sbi_interface& sbi, const nbi_interface nbi);
   explicit nf() = default;
 
   void from_yaml(const YAML::Node& node) override;
@@ -252,6 +287,7 @@ class nf : public config_type {
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
+  [[nodiscard]] const nbi_interface& get_nbi() const;
   [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };
@@ -297,6 +333,41 @@ class nf_features_config : public config_type {
   void set_validation_regex(const std::string& regex);
   [[nodiscard]] bool get_option() const;
   [[nodiscard]] const std::string& get_string() const;
+};
+
+struct plmn_config : public config_type {
+  string_config_value mcc;
+  string_config_value mnc;
+
+  plmn_config() = default;
+
+  void from_yaml(const YAML::Node& node) override {
+    if (node["mcc"]) mcc.from_yaml(node["mcc"]);
+    if (node["mnc"]) mnc.from_yaml(node["mnc"]);
+    m_set = true;
+  }
+
+  std::string to_string(const std::string& indent) const override {
+    return fmt::format(
+        "{}MCC: {}, MNC: {}\n", indent, mcc.get_value(), mnc.get_value());
+  }
+};
+
+class roaming_config : public config_type {
+ private:
+  option_config_value m_enable_roaming;
+  std::vector<plmn_config> m_roaming_partners;
+
+ public:
+  roaming_config();
+  void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
+  std::string to_string(const std::string& indent) const override;
+  void validate() override;
+
+  [[nodiscard]] bool enable_roaming() const;
+  [[nodiscard]] const std::vector<plmn_config>& get_roaming_partners() const;
 };
 
 class database_config : public config_type {

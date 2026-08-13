@@ -4444,8 +4444,7 @@ class update_urr : public pfcp::pfcp_ies_container {
 // clang-format on
 class update_qer : public pfcp::pfcp_ies_container {
  public:
-  /// QER ID is Mandatory (§8.2.75) — plain type, no presence flag needed.
-  pfcp::qer_id_t qer_id;
+  std::pair<bool, pfcp::qer_id_t> qer_id;
   std::pair<bool, pfcp::qer_correlation_id_t> qer_correlation_id;
   std::pair<bool, pfcp::gate_status_t> gate_status;
   std::pair<bool, pfcp::mbr_t> maximum_bitrate;
@@ -4484,8 +4483,10 @@ class update_qer : public pfcp::pfcp_ies_container {
         averaging_window(u.averaging_window) {}
 
   // virtual ~update_qer() {};
-  /// QER ID is mandatory — set directly (no presence pair).
-  void set(const pfcp::qer_id_t& v) { qer_id = v; }
+  void set(const pfcp::qer_id_t& v) {
+    qer_id.first  = true;
+    qer_id.second = v;
+  }
   void set(const pfcp::qer_correlation_id_t& v) {
     qer_correlation_id.first  = true;
     qer_correlation_id.second = v;
@@ -4527,10 +4528,12 @@ class update_qer : public pfcp::pfcp_ies_container {
     averaging_window.second = v;
   }
 
-  /// QER ID is mandatory — always returns true.
   bool get(pfcp::qer_id_t& v) const {
-    v = qer_id;
-    return true;
+    if (qer_id.first) {
+      v = qer_id.second;
+      return true;
+    }
+    return false;
   }
   bool get(pfcp::qer_correlation_id_t& v) const {
     if (qer_correlation_id.first) {

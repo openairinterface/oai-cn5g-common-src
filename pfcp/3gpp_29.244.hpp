@@ -10694,10 +10694,9 @@ class pfcp_update_qer_ie : public pfcp_grouped_ie {
       : pfcp_grouped_ie(PFCP_IE_UPDATE_QER) {
     tlv.set_length(0);
 
-    // QER ID — Mandatory, stored as plain type in update_qer (§8.2.75)
-    {
+    if (b.qer_id.first) {
       std::shared_ptr<pfcp_qer_id_ie> sie =
-          std::make_shared<pfcp_qer_id_ie>(b.qer_id);
+          std::make_shared<pfcp_qer_id_ie>(b.qer_id.second);
       add_ie(sie);
     }
 

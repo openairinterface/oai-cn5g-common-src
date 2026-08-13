@@ -1252,8 +1252,11 @@ pfcp_msg::pfcp_msg(const pfcp_session_modification_request& pfcp_ies)
     std::shared_ptr<pfcp_create_qer_ie> sie(new pfcp_create_qer_ie(it));
     add_ie(sie);
   }
-  // if (pfcp_ies.create_bar.first) {std::shared_ptr<pfcp_create_bar_ie> sie(new
-  // pfcp_create_bar_ie(pfcp_ies.create_bar.second)); add_ie(sie);}
+  if (pfcp_ies.create_bar.first) {
+    std::shared_ptr<pfcp_create_bar_ie> sie(
+        new pfcp_create_bar_ie(pfcp_ies.create_bar.second));  // §7.5.2.6
+    add_ie(sie);
+  }
   if (pfcp_ies.create_traffic_endpoint.first) {
     std::shared_ptr<pfcp_create_traffic_endpoint_ie> sie(
         new pfcp_create_traffic_endpoint_ie(

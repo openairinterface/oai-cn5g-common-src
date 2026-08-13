@@ -24,6 +24,7 @@ set (LOGGER_DIR     ${SRC_TOP_DIR}/logger)
 set (MODEL_DIR      ${SRC_TOP_DIR}/model)
 set (NAS_DIR        ${SRC_TOP_DIR}/nas)
 set (NGAP_DIR       ${SRC_TOP_DIR}/ngap)
+set (PFCP_DIR       ${SRC_TOP_DIR}/pfcp)
 set (TEST_DIR       ${SRC_TOP_DIR}/test)
 set (UTILS_DIR      ${SRC_TOP_DIR}/utils)
 

@@ -308,7 +308,11 @@ void NgapMessage::setMessageType(NgapMessageType messageType) {
           Ngap_InitiatingMessage__value_PR_DownlinkNASTransport);
     } break;
     case NgapMessageType::ERROR_INDICATION: {
-      // TODO:
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_ErrorIndication);
+      messageTypeIE.setCriticality(Ngap_Criticality_ignore);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_ErrorIndication);
     } break;
     case NgapMessageType::UPLINK_RAN_CONFIGURATION_TRANSFER: {
       // TODO:

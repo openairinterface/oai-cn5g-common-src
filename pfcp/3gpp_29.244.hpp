@@ -10207,9 +10207,8 @@ class pfcp_update_pdr_ie : public pfcp_grouped_ie {
   explicit pfcp_update_pdr_ie(const pfcp::update_pdr& b)
       : pfcp_grouped_ie(PFCP_IE_UPDATE_PDR) {
     tlv.set_length(0);
-    // PDR ID — Mandatory, stored as plain type in update_pdr
-    {
-      std::shared_ptr<pfcp_pdr_id_ie> sie(new pfcp_pdr_id_ie(b.pdr_id));
+    if (b.pdr_id.first) {
+      std::shared_ptr<pfcp_pdr_id_ie> sie(new pfcp_pdr_id_ie(b.pdr_id.second));
       add_ie(sie);
     }
     if (b.outer_header_removal.first) {

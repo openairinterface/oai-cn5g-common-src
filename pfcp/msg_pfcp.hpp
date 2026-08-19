@@ -3819,7 +3819,7 @@ class overload_control_information : public pfcp::pfcp_ies_container {
 // clang-format on
 class update_pdr : public pfcp::pfcp_ies_container {
  public:
-  pfcp::pdr_id_t pdr_id;
+  std::pair<bool, pfcp::pdr_id_t> pdr_id;
   std::pair<bool, pfcp::outer_header_removal_t> outer_header_removal;
   std::pair<bool, pfcp::precedence_t> precedence;
   std::pair<bool, pfcp::pdi> pdi;
@@ -3852,7 +3852,10 @@ class update_pdr : public pfcp::pfcp_ies_container {
         deactivate_predefined_rules(u.deactivate_predefined_rules) {}
 
   // virtual ~update_pdr() {};
-  void set(const pfcp::pdr_id_t& v) { pdr_id = v; }
+  void set(const pfcp::pdr_id_t& v) {
+    pdr_id.first  = true;
+    pdr_id.second = v;
+  }
   void set(const pfcp::outer_header_removal_t& v) {
     outer_header_removal.first  = true;
     outer_header_removal.second = v;
@@ -3885,9 +3888,13 @@ class update_pdr : public pfcp::pfcp_ies_container {
   }
 
   bool get(pfcp::pdr_id_t& v) const {
-    v = pdr_id;
-    return true;
+    if (pdr_id.first) {
+      v = pdr_id.second;
+      return true;
+    }
+    return false;
   }
+
   bool get(pfcp::outer_header_removal_t& v) const {
     if (outer_header_removal.first) {
       v = outer_header_removal.second;

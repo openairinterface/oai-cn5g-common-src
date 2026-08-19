@@ -249,9 +249,7 @@ struct pfcp_ie_value_exception : public pfcp_ie_exception {
 #define PFCP_IE_PDN_TYPE (113)
 #define PFCP_IE_FAILED_RULE_ID (114)
 #define PFCP_IE_TIME_QUOTA_MECHANISM (115)
-
 #define PFCP_IE_USER_PLANE_IP_RESOURCE_INFORMATION (116)
-
 #define PFCP_IE_USER_PLANE_INACTIVITY_TIMER (117)
 #define PFCP_IE_AGGREGATED_URRS (118)
 #define PFCP_IE_MULTIPLIER (119)

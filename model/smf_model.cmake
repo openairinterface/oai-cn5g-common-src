@@ -309,6 +309,9 @@ file(GLOB SMF_MODEL_SRC_FILES
     ${SMF_MODEL_DIR}/MulticastAccessControl.cpp
     ${SMF_MODEL_DIR}/N1MessageClass_anyOf.cpp
     ${SMF_MODEL_DIR}/N1MessageClass.cpp
+    ${SMF_MODEL_DIR}/N1N2MessageTransferCause_anyOf.cpp
+    ${SMF_MODEL_DIR}/N1N2MessageTransferCause.cpp
+    ${SMF_MODEL_DIR}/N1N2MsgTxfrFailureNotification.cpp  
     ${SMF_MODEL_DIR}/N2InformationClass_anyOf.cpp
     ${SMF_MODEL_DIR}/N2InformationClass.cpp
     ${SMF_MODEL_DIR}/N2InterfaceAmfInfo.cpp

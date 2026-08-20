@@ -141,8 +141,8 @@ void to_json(nlohmann::json& j, const FailureCode_anyOf& o) {
     case FailureCode_anyOf::eFailureCode_anyOf::DNAI_STEERING_ERROR:
       j = "DNAI_STEERING_ERROR";
       break;
-    case FailureCode_anyOf::eFailureCode_anyOf::AN_GW_FAILE:
-      j = "AN_GW_FAILE";
+    case FailureCode_anyOf::eFailureCode_anyOf::AN_GW_FAILED:
+      j = "AN_GW_FAILED";
       break;
     case FailureCode_anyOf::eFailureCode_anyOf::MAX_NR_PACKET_FILTERS_EXCEEDED:
       j = "MAX_NR_PACKET_FILTERS_EXCEEDED";
@@ -211,8 +211,8 @@ void from_json(const nlohmann::json& j, FailureCode_anyOf& o) {
     o.setValue(FailureCode_anyOf::eFailureCode_anyOf::TRAFFIC_STEERING_ERROR);
   } else if (s == "DNAI_STEERING_ERROR") {
     o.setValue(FailureCode_anyOf::eFailureCode_anyOf::DNAI_STEERING_ERROR);
-  } else if (s == "AN_GW_FAILE") {
-    o.setValue(FailureCode_anyOf::eFailureCode_anyOf::AN_GW_FAILE);
+  } else if (s == "AN_GW_FAILED") {
+    o.setValue(FailureCode_anyOf::eFailureCode_anyOf::AN_GW_FAILED);
   } else if (s == "MAX_NR_PACKET_FILTERS_EXCEEDED") {
     o.setValue(
         FailureCode_anyOf::eFailureCode_anyOf::MAX_NR_PACKET_FILTERS_EXCEEDED);

@@ -1095,6 +1095,7 @@ struct up_function_features_s {
     spare_12_1 = i.spare_12_1;
     dbdm       = i.dbdm;
     tscts      = i.tscts;
+    spare      = i.spare;
   }
 };
 // typedef struct up_function_features_s up_function_features_t;

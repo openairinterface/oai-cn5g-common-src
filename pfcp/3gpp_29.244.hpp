@@ -2362,7 +2362,6 @@ class pfcp_up_function_features_ie : public pfcp_ie {
       uint8_t quoac : 1;
       uint8_t trace : 1;
       uint8_t frrt : 1;
-      //      uint8_t spare : 2;
       uint8_t pfde : 1;
       uint8_t epfar : 1;
     } bf;
@@ -2411,10 +2410,39 @@ class pfcp_up_function_features_ie : public pfcp_ie {
   union {
     struct {
       uint8_t rttwp : 1;
-      uint8_t spare : 7;
+      uint8_t quasf : 1;
+      uint8_t nspoc : 1;
+      uint8_t l2tp : 1;
+      uint8_t upber : 1;
+      uint8_t resps : 1;
+      uint8_t iprep : 1;
+      uint8_t dnsts : 1;
     } bf;
     uint8_t b;
   } u6;
+
+  union {
+    struct {
+      uint8_t drqos : 1;
+      uint8_t mbsn4 : 1;
+      uint8_t psuprm : 1;
+      uint8_t epppi : 1;
+      uint8_t ratp : 1;
+      uint8_t upidp : 1;
+      uint8_t spare_11 : 2;
+    } bf;
+    uint8_t b;
+  } u7;
+
+  union {
+    struct {
+      uint8_t spare_12_1 : 1;
+      uint8_t dbdm : 1;
+      uint8_t tscts : 1;
+      uint8_t spare : 5;
+    } bf;
+    uint8_t b;
+  } u8;
 
   //--------
   explicit pfcp_up_function_features_ie(const pfcp::up_function_features_s& b)
@@ -2425,6 +2453,8 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u4.b = 0;
     u5.b = 0;
     u6.b = 0;
+    u7.b = 0;
+    u8.b = 0;
 
     u1.bf.bucp = b.bucp;
     u1.bf.ddnd = b.ddnd;
@@ -2472,9 +2502,28 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u5.bf.rds      = b.rds;
 
     u6.bf.rttwp = b.rttwp;
+    u6.bf.quasf = b.quasf;
+    u6.bf.nspoc = b.nspoc;
+    u6.bf.l2tp  = b.l2tp;
+    u6.bf.upber = b.upber;
+    u6.bf.resps = b.resps;
+    u6.bf.iprep = b.iprep;
+    u6.bf.dnsts = b.dnsts;
 
-    //    tlv.set_length(2);
-    tlv.set_length(6);
+    u7.bf.drqos    = b.drqos;
+    u7.bf.mbsn4    = b.mbsn4;
+    u7.bf.psuprm   = b.psuprm;
+    u7.bf.epppi    = b.epppi;
+    u7.bf.ratp     = b.ratp;
+    u7.bf.upidp    = b.upidp;
+    u7.bf.spare_11 = b.spare_11;
+
+    u8.bf.spare_12_1 = b.spare_12_1;
+    u8.bf.dbdm       = b.dbdm;
+    u8.bf.tscts      = b.tscts;
+    u8.bf.spare      = b.spare;
+
+    tlv.set_length(8);
   }
   //--------
   pfcp_up_function_features_ie() : pfcp_ie(PFCP_IE_UP_FUNCTION_FEATURES) {
@@ -2484,9 +2533,10 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u4.b = 0;
     u5.b = 0;
     u6.b = 0;
+    u7.b = 0;
+    u8.b = 0;
 
-    //   tlv.set_length(2);
-    tlv.set_length(6);
+    tlv.set_length(8);
   }
   //--------
   explicit pfcp_up_function_features_ie(const pfcp_tlv& t) : pfcp_ie(t) {
@@ -2496,6 +2546,8 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u4.b = 0;
     u5.b = 0;
     u6.b = 0;
+    u7.b = 0;
+    u8.b = 0;
   };
   //--------
   void to_core_type(pfcp::up_function_features_s& b) {
@@ -2514,7 +2566,6 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     b.quoac = u2.bf.quoac;
     b.trace = u2.bf.trace;
     b.frrt  = u2.bf.frrt;
-    //    b.spare = 0;
     b.pfde  = u2.bf.pfde;
     b.epfar = u2.bf.epfar;
 
@@ -2547,12 +2598,30 @@ class pfcp_up_function_features_ie : public pfcp_ie {
 
     b.rttwp = u6.bf.rttwp;
 
-    b.spare = 0;
+    b.quasf = u6.bf.quasf;
+    b.nspoc = u6.bf.nspoc;
+    b.l2tp  = u6.bf.l2tp;
+    b.upber = u6.bf.upber;
+    b.resps = u6.bf.resps;
+    b.iprep = u6.bf.iprep;
+    b.dnsts = u6.bf.dnsts;
+
+    b.drqos    = u7.bf.drqos;
+    b.mbsn4    = u7.bf.mbsn4;
+    b.psuprm   = u7.bf.psuprm;
+    b.epppi    = u7.bf.epppi;
+    b.ratp     = u7.bf.ratp;
+    b.upidp    = u7.bf.upidp;
+    b.spare_11 = u7.bf.spare_11;
+
+    b.spare_12_1 = u8.bf.spare_12_1;
+    b.dbdm       = u8.bf.dbdm;
+    b.tscts      = u8.bf.tscts;
+    b.spare      = u8.bf.spare;
   }
   //--------
   void dump_to(std::ostream& os) {
-    //    tlv.set_length(2);
-    tlv.set_length(6);
+    tlv.set_length(8);
 
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
@@ -2561,12 +2630,12 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     os.write(reinterpret_cast<const char*>(&u4.b), sizeof(u4.b));
     os.write(reinterpret_cast<const char*>(&u5.b), sizeof(u5.b));
     os.write(reinterpret_cast<const char*>(&u6.b), sizeof(u6.b));
+    os.write(reinterpret_cast<const char*>(&u7.b), sizeof(u7.b));
+    os.write(reinterpret_cast<const char*>(&u8.b), sizeof(u8.b));
   }
   //--------
   void load_from(std::istream& is) {
-    // tlv.load_from(is);
-    //    if (tlv.get_length() != 2) {
-    if (tlv.get_length() > 6) {
+    if (tlv.get_length() > 8) {
       throw pfcp_tlv_bad_length_exception(
           tlv.type, tlv.get_length(), __FILE__, __LINE__);
     }
@@ -2577,6 +2646,10 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     if (tlv.get_length() > 4) {
       is.read(reinterpret_cast<char*>(&u5.b), sizeof(u5.b));
       is.read(reinterpret_cast<char*>(&u6.b), sizeof(u6.b));
+    }
+    if (tlv.get_length() > 6) {
+      is.read(reinterpret_cast<char*>(&u7.b), sizeof(u7.b));
+      is.read(reinterpret_cast<char*>(&u8.b), sizeof(u8.b));
     }
   }
   //--------

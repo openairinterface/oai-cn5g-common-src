@@ -2641,7 +2641,7 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     }
     is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
     is.read(reinterpret_cast<char*>(&u2.b), sizeof(u2.b));
-    (tlv.get_length() > 2) {
+    if (tlv.get_length() > 2) {
       is.read(reinterpret_cast<char*>(&u3.b), sizeof(u3.b));
       is.read(reinterpret_cast<char*>(&u4.b), sizeof(u4.b));
     }

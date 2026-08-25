@@ -2548,8 +2548,6 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u6.b = 0;
     u7.b = 0;
     u8.b = 0;
-
-    tlv.set_length(8);
   };
   //--------
   void to_core_type(pfcp::up_function_features_s& b) {
@@ -2637,14 +2635,16 @@ class pfcp_up_function_features_ie : public pfcp_ie {
   }
   //--------
   void load_from(std::istream& is) {
-    if (tlv.get_length() > 8) {
+    if ((tlv.get_length() > 8) or (tlv.get_length() < 2)) {
       throw pfcp_tlv_bad_length_exception(
           tlv.type, tlv.get_length(), __FILE__, __LINE__);
     }
     is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
     is.read(reinterpret_cast<char*>(&u2.b), sizeof(u2.b));
-    is.read(reinterpret_cast<char*>(&u3.b), sizeof(u3.b));
-    is.read(reinterpret_cast<char*>(&u4.b), sizeof(u4.b));
+    (tlv.get_length() > 2) {
+      is.read(reinterpret_cast<char*>(&u3.b), sizeof(u3.b));
+      is.read(reinterpret_cast<char*>(&u4.b), sizeof(u4.b));
+    }
     if (tlv.get_length() > 4) {
       is.read(reinterpret_cast<char*>(&u5.b), sizeof(u5.b));
       is.read(reinterpret_cast<char*>(&u6.b), sizeof(u6.b));

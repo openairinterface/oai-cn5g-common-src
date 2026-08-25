@@ -2548,6 +2548,8 @@ class pfcp_up_function_features_ie : public pfcp_ie {
     u6.b = 0;
     u7.b = 0;
     u8.b = 0;
+
+    tlv.set_length(8);
   };
   //--------
   void to_core_type(pfcp::up_function_features_s& b) {

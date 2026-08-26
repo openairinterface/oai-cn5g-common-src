@@ -308,7 +308,11 @@ void NgapMessage::setMessageType(NgapMessageType messageType) {
           Ngap_InitiatingMessage__value_PR_DownlinkNASTransport);
     } break;
     case NgapMessageType::ERROR_INDICATION: {
-      // TODO:
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_ErrorIndication);
+      messageTypeIE.setCriticality(Ngap_Criticality_ignore);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_ErrorIndication);
     } break;
     case NgapMessageType::UPLINK_RAN_CONFIGURATION_TRANSFER: {
       // TODO:
@@ -491,6 +495,185 @@ void NgapMessage::setMessageType(NgapMessageType messageType) {
     } break;
     case NgapMessageType::DOWNLINK_RAN_EARLY_STATUS_TRANSFER: {
       // TODO:
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_SETUP_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_BroadcastSessionSetupRequest);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_SETUP_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_BroadcastSessionSetupResponse);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_SETUP_FAILURE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_unsuccessfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_UnsuccessfulOutcome__value_PR_BroadcastSessionSetupFailure);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_MODIFICATION_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionModification);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_BroadcastSessionModificationRequest);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_MODIFICATION_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionModification);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_BroadcastSessionModificationResponse);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_MODIFICATION_FAILURE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionModification);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_unsuccessfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_UnsuccessfulOutcome__value_PR_BroadcastSessionModificationFailure);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_RELEASE_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionRelease);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_BroadcastSessionReleaseRequest);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_RELEASE_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionRelease);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_BroadcastSessionReleaseResponse);
+    } break;
+    case NgapMessageType::BROADCAST_SESSION_RELEASE_REQUIRED: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_BroadcastSessionReleaseRequired);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_BroadcastSessionReleaseRequired);
+    } break;
+    case NgapMessageType::DISTRIBUTION_SETUP_REQUEST: {
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_DistributionSetupRequest);
+    } break;
+    case NgapMessageType::DISTRIBUTION_SETUP_RESPONSE: {
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_DistributionSetupResponse);
+    } break;
+    case NgapMessageType::DISTRIBUTION_SETUP_FAILURE: {
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionSetup);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_unsuccessfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_UnsuccessfulOutcome__value_PR_DistributionSetupFailure);
+    } break;
+    case NgapMessageType::DISTRIBUTION_RELEASE_REQUEST: {
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionRelease);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_DistributionReleaseRequest);
+    } break;
+    case NgapMessageType::DISTRIBUTION_RELEASE_RESPONSE: {
+      messageTypeIE.setProcedureCode(Ngap_ProcedureCode_id_DistributionRelease);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_DistributionReleaseResponse);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_ACTIVATION_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionActivation);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_MulticastSessionActivationRequest);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_ACTIVATION_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionActivation);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_MulticastSessionActivationResponse);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_ACTIVATION_FAILURE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionActivation);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_unsuccessfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_UnsuccessfulOutcome__value_PR_MulticastSessionActivationFailure);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_DEACTIVATION_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionDeactivation);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_MulticastSessionDeactivationRequest);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_DEACTIVATION_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionDeactivation);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_MulticastSessionDeactivationResponse);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_UPDATE_REQUEST: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionUpdate);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_MulticastSessionUpdateRequest);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_UPDATE_RESPONSE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionUpdate);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_successfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_SuccessfulOutcome__value_PR_MulticastSessionUpdateResponse);
+    } break;
+    case NgapMessageType::MULTICAST_SESSION_UPDATE_FAILURE: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastSessionUpdate);
+      messageTypeIE.setCriticality(Ngap_Criticality_reject);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_unsuccessfulOutcome);
+      messageTypeIE.setValuePresent(
+          Ngap_UnsuccessfulOutcome__value_PR_MulticastSessionUpdateFailure);
+    } break;
+    case NgapMessageType::MULTICAST_GROUP_PAGING: {
+      messageTypeIE.setProcedureCode(
+          Ngap_ProcedureCode_id_MulticastGroupPaging);
+      messageTypeIE.setCriticality(Ngap_Criticality_ignore);
+      messageTypeIE.setTypeOfMessage(Ngap_NGAP_PDU_PR_initiatingMessage);
+      messageTypeIE.setValuePresent(
+          Ngap_InitiatingMessage__value_PR_MulticastGroupPaging);
     } break;
     default: {
     } break;

@@ -31,7 +31,7 @@ class NsagInformation : public Type6NasIe {
   const std::vector<uint8_t>& GetValue() const;
 
  private:
-  std::vector<uint8_t> value_;  // raw content bytes (opaque container)
+  std::vector<uint8_t> value_;  // raw content bytes
 };
 
 }  // namespace oai::nas

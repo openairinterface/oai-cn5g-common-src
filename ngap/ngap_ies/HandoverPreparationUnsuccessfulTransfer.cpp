@@ -24,7 +24,10 @@ HandoverPreparationUnsuccessfulTransfer::
 //------------------------------------------------------------------------------
 void HandoverPreparationUnsuccessfulTransfer::setCause(const Cause& cause) {
   m_Cause = cause;
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode CauseRadioNetwork IE error");
@@ -38,7 +41,10 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseRadioNetwork(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
 
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode CauseRadioNetwork IE error");
@@ -52,7 +58,10 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseTransport(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
 
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseTransport IE error");
     return;
@@ -65,7 +74,10 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseNas(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
 
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseNas IE error");
     return;
@@ -78,7 +90,10 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseProtocol(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
 
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseProtocol IE error");
     return;
@@ -91,7 +106,10 @@ void HandoverPreparationUnsuccessfulTransfer::setCauseMisc(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
 
-  int ret = m_Cause.encode(m_HandoverPreparationUnsuccessfulTransferIe->cause);
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause)
+    m_HandoverPreparationUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  int ret = m_Cause.encode(*m_HandoverPreparationUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseMisc IE error");
     return;
@@ -134,7 +152,8 @@ bool HandoverPreparationUnsuccessfulTransfer::decode(
   // &asn_DEF_Ngap_HandoverPreparationUnsuccessfulTransfer,
   // m_HandoverPreparationUnsuccessfulTransferIe);
 
-  if (!m_Cause.decode(m_HandoverPreparationUnsuccessfulTransferIe->cause)) {
+  if (!m_HandoverPreparationUnsuccessfulTransferIe->cause) return false;
+  if (!m_Cause.decode(*m_HandoverPreparationUnsuccessfulTransferIe->cause)) {
     oai::logger::logger_common::ngap().error("Decode Cause IE error");
     return false;
   }

@@ -23,6 +23,7 @@ extern "C" {
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f SEQUENCE_OF_compare;
+#define SEQUENCE_OF_copy SET_OF_copy
 
 #define SEQUENCE_OF_constraint SET_OF_constraint
 
@@ -32,11 +33,12 @@ der_type_encoder_f SEQUENCE_OF_encode_der;
 #endif /* !defined(ASN_DISABLE_BER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_XER_SUPPORT)
-#define SEQUENCE_OF_decode_xer SET_OF_decode_xer
+xer_type_decoder_f SEQUENCE_OF_decode_xer;
 xer_type_encoder_f SEQUENCE_OF_encode_xer;
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+#define SEQUENCE_OF_decode_jer SET_OF_decode_jer
 jer_type_encoder_f SEQUENCE_OF_encode_jer;
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -44,6 +46,10 @@ jer_type_encoder_f SEQUENCE_OF_encode_jer;
 #define SEQUENCE_OF_decode_oer SET_OF_decode_oer
 #define SEQUENCE_OF_encode_oer SET_OF_encode_oer
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+cbor_type_decoder_f SEQUENCE_OF_decode_cbor;
+cbor_type_encoder_f SEQUENCE_OF_encode_cbor;
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
 #define SEQUENCE_OF_decode_uper SET_OF_decode_uper
@@ -59,6 +65,13 @@ per_type_encoder_f SEQUENCE_OF_encode_aper;
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
 
 extern asn_TYPE_operation_t asn_OP_SEQUENCE_OF;
+
+/*
+ * Generic descriptor for anonymous SEQUENCE OF (placeholder only).
+ * Not a concrete "OF T" for runtime encoding/decoding. Concrete OF types
+ * generated for specific elements still have their own descriptors.
+ */
+extern asn_TYPE_descriptor_t asn_DEF_SEQUENCE_OF;
 
 #ifdef __cplusplus
 }

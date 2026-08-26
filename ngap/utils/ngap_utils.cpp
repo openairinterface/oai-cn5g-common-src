@@ -13,8 +13,12 @@ namespace oai::ngap {
 //------------------------------------------------------------------------------
 void ngap_utils::print_asn_msg(
     const asn_TYPE_descriptor_t* td, const void* struct_ptr) {
-  if (oai::logger::logger_registry::should_log(spdlog::level::debug))
-    asn_fprint(stdout, td, struct_ptr);
+  if (!oai::logger::logger_registry::should_log(spdlog::level::debug)) return;
+
+  // asn_fprint() is not safe for all generated APER open-type choices and can
+  // crash while printing otherwise valid NGAP messages.
+  oai::logger::logger_common::ngap().debug(
+      "Decoded ASN.1 message %s", td && td->name ? td->name : "<unknown>");
 }
 
 //------------------------------------------------------------------------------

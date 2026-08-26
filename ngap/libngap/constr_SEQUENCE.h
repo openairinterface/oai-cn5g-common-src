@@ -50,6 +50,7 @@ asn_struct_print_f SEQUENCE_print;
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f SEQUENCE_compare;
+asn_struct_copy_f SEQUENCE_copy;
 
 asn_constr_check_f SEQUENCE_constraint;
 
@@ -64,6 +65,7 @@ xer_type_encoder_f SEQUENCE_encode_xer;
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f SEQUENCE_decode_jer;
 jer_type_encoder_f SEQUENCE_encode_jer;
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -71,6 +73,10 @@ jer_type_encoder_f SEQUENCE_encode_jer;
 oer_type_decoder_f SEQUENCE_decode_oer;
 oer_type_encoder_f SEQUENCE_encode_oer;
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+cbor_type_decoder_f SEQUENCE_decode_cbor;
+cbor_type_encoder_f SEQUENCE_encode_cbor;
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
 per_type_decoder_f SEQUENCE_decode_uper;

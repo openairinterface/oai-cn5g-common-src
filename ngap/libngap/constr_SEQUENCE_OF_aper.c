@@ -17,6 +17,10 @@ asn_enc_rval_t SEQUENCE_OF_encode_aper(
   int seq;
 
   if (!sptr) ASN__ENCODE_FAILED;
+
+  /* Check recursion depth to prevent stack overflow */
+  APER_ENCODER_RECURSION_DEPTH_INC();
+
   list = _A_CSEQUENCE_FROM_VOID(sptr);
 
   er.encoded = 0;
@@ -42,10 +46,15 @@ asn_enc_rval_t SEQUENCE_OF_encode_aper(
         ct->flags & APC_EXTENSIBLE ? "ext" : "fix");
     if (ct->flags & APC_EXTENSIBLE) {
       /* Declare whether size is in extension root */
-      if (per_put_few_bits(po, not_in_root, 1)) ASN__ENCODE_FAILED;
+      if (per_put_few_bits(po, not_in_root, 1)) {
+        APER_ENCODER_RECURSION_DEPTH_DEC();
+        ASN__ENCODE_FAILED;
+      }
       if (not_in_root) ct = 0;
-    } else if (not_in_root && ct->effective_bits >= 0)
+    } else if (not_in_root && ct->effective_bits >= 0) {
+      APER_ENCODER_RECURSION_DEPTH_DEC();
       ASN__ENCODE_FAILED;
+    }
   }
 
   if (ct && ct->effective_bits >= 0) {
@@ -60,8 +69,10 @@ asn_enc_rval_t SEQUENCE_OF_encode_aper(
     } else if (
         aper_put_length(
             po, ct->lower_bound, ct->upper_bound, list->count - ct->lower_bound,
-            0) < 0)
+            0) < 0) {
+      APER_ENCODER_RECURSION_DEPTH_DEC();
       ASN__ENCODE_FAILED;
+    }
   }
 
   for (seq = -1; seq < list->count;) {
@@ -72,20 +83,32 @@ asn_enc_rval_t SEQUENCE_OF_encode_aper(
       mayEncode = list->count;
     } else {
       mayEncode = aper_put_length(po, -1, -1, list->count - seq, &need_eom);
-      if (mayEncode < 0) ASN__ENCODE_FAILED;
+      if (mayEncode < 0) {
+        APER_ENCODER_RECURSION_DEPTH_DEC();
+        ASN__ENCODE_FAILED;
+      }
     }
 
     while (mayEncode--) {
       void* memb_ptr = list->array[seq++];
-      if (!memb_ptr) ASN__ENCODE_FAILED;
+      if (!memb_ptr) {
+        APER_ENCODER_RECURSION_DEPTH_DEC();
+        ASN__ENCODE_FAILED;
+      }
       er = elm->type->op->aper_encoder(
           elm->type, elm->encoding_constraints.per_constraints, memb_ptr, po);
-      if (er.encoded == -1) ASN__ENCODE_FAILED;
+      if (er.encoded == -1) {
+        APER_ENCODER_RECURSION_DEPTH_DEC();
+        ASN__ENCODE_FAILED;
+      }
     }
 
-    if (need_eom && (aper_put_length(po, -1, -1, 0, NULL) < 0))
+    if (need_eom && (aper_put_length(po, -1, -1, 0, NULL) < 0)) {
+      APER_ENCODER_RECURSION_DEPTH_DEC();
       ASN__ENCODE_FAILED; /* End of Message length */
+    }
   }
 
+  APER_ENCODER_RECURSION_DEPTH_DEC();
   ASN__ENCODED_OK(er);
 }

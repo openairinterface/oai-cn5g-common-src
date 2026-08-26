@@ -5,17 +5,22 @@
 #include "InitialUeMessage.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
 InitialUeMessageMsg::InitialUeMessageMsg() : NgapMessage() {
-  m_InitialUEMessageIes = nullptr;
-  m_UeContextRequest    = std::nullopt;
-  m_FiveGSTmsi          = std::nullopt;
-  m_AmfSetId            = std::nullopt;
-  m_AllowedNssai        = std::nullopt;
+  m_InitialUEMessageIes  = nullptr;
+  m_UeContextRequest     = std::nullopt;
+  m_FiveGSTmsi           = std::nullopt;
+  m_AmfSetId             = std::nullopt;
+  m_AllowedNssai         = std::nullopt;
+  m_RedCapIndication     = std::nullopt;
+  m_NpnAccessInformation = std::nullopt;
 
   NgapMessage::setMessageType(NgapMessageType::INITIAL_UE_MESSAGE);
   initialize();
@@ -28,6 +33,11 @@ InitialUeMessageMsg::~InitialUeMessageMsg() {}
 void InitialUeMessageMsg::initialize() {
   m_InitialUEMessageIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.InitialUEMessage);
+  if (!m_InitialUEMessageIes->protocolIEs) {
+    m_InitialUEMessageIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -47,7 +57,7 @@ void InitialUeMessageMsg::setRanUeNgapId(const uint32_t& value) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -69,7 +79,7 @@ void InitialUeMessageMsg::setNasPdu(const bstring& pdu) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NAS PDU IE error");
 }
@@ -93,8 +103,12 @@ void InitialUeMessageMsg::setUserLocationInfoNr(
   ie->value.present =
       Ngap_InitialUEMessage_IEs__value_PR_UserLocationInformation;
 
+  if (!ie->value.choice.UserLocationInformation)
+    ie->value.choice.UserLocationInformation =
+        (Ngap_UserLocationInformation_t*) calloc(
+            1, sizeof(Ngap_UserLocationInformation_t));
   int ret = m_UserLocationInformation.encode(
-      ie->value.choice.UserLocationInformation);
+      *ie->value.choice.UserLocationInformation);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode UserLocationInformation IE error");
@@ -102,7 +116,7 @@ void InitialUeMessageMsg::setUserLocationInfoNr(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UserLocationInformation IE error");
@@ -128,7 +142,7 @@ void InitialUeMessageMsg::setRrcEstablishmentCause(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode RRCEstablishmentCause IE error");
@@ -154,7 +168,7 @@ void InitialUeMessageMsg::setUeContextRequest(
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_InitialUEMessageIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UEContextRequest IE error");
@@ -205,16 +219,16 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     oai::logger::logger_common::ngap().error("Check MessageType error");
     return false;
   }
-  for (int i = 0; i < m_InitialUEMessageIes->protocolIEs.list.count; i++) {
-    switch (m_InitialUEMessageIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_InitialUEMessageIes->protocolIEs->list.count; i++) {
+    Ngap_InitialUEMessage_IEs_t* ngap_ie =
+        (Ngap_InitialUEMessage_IEs_t*)
+            m_InitialUEMessageIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!m_RanUeNgapId.decode(
-                  m_InitialUEMessageIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+          if (!m_RanUeNgapId.decode(ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -229,12 +243,10 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_NAS_PDU: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_NAS_PDU) {
-          if (!m_NasPdu.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
-                                   ->value.choice.NAS_PDU)) {
+          if (!m_NasPdu.decode(ngap_ie->value.choice.NAS_PDU)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP NAS_PDU IE error");
             return false;
@@ -247,13 +259,12 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
       case Ngap_ProtocolIE_ID_id_UserLocationInformation: {
         // TODO: to be verified
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_UserLocationInformation) {
+          if (!ngap_ie->value.choice.UserLocationInformation) return false;
           if (!m_UserLocationInformation.decode(
-                  m_InitialUEMessageIes->protocolIEs.list.array[i]
-                      ->value.choice.UserLocationInformation)) {
+                  *ngap_ie->value.choice.UserLocationInformation)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UserLocationInformation IE error");
             return false;
@@ -265,13 +276,11 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RRCEstablishmentCause: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_RRCEstablishmentCause) {
           if (!m_RrcEstablishmentCause.decode(
-                  m_InitialUEMessageIes->protocolIEs.list.array[i]
-                      ->value.choice.RRCEstablishmentCause)) {
+                  ngap_ie->value.choice.RRCEstablishmentCause)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RRCEstablishmentCause IE error");
             return false;
@@ -283,13 +292,11 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_UEContextRequest: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_UEContextRequest) {
           UeContextRequest tmp = {};
-          if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
-                              ->value.choice.UEContextRequest)) {
+          if (!tmp.decode(ngap_ie->value.choice.UEContextRequest)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UEContextRequest IE error");
             return false;
@@ -304,13 +311,11 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_FiveG_S_TMSI: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_FiveG_S_TMSI) {
           FiveGSTmsi tmp = {};
-          if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
-                              ->value.choice.FiveG_S_TMSI)) {
+          if (!tmp.decode(ngap_ie->value.choice.FiveG_S_TMSI)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP FiveG_S_TMSI IE error");
             return false;
@@ -319,13 +324,11 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_AMFSetID: {
-        if (m_InitialUEMessageIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_InitialUEMessage_IEs__value_PR_AMFSetID) {
           AmfSetId tmp = {};
-          if (!tmp.decode(m_InitialUEMessageIes->protocolIEs.list.array[i]
-                              ->value.choice.AMFSetID)) {
+          if (!tmp.decode(ngap_ie->value.choice.AMFSetID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF Set ID IE error");
             return false;
@@ -334,15 +337,54 @@ bool InitialUeMessageMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
 
       } break;
+      case Ngap_ProtocolIE_ID_id_RedCapIndication: {
+        if (ngap_ie->value.present ==
+            Ngap_InitialUEMessage_IEs__value_PR_RedCapIndication) {
+          RedCapIndication tmp{};
+          if (!tmp.decode(ngap_ie->value.choice.RedCapIndication)) {
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP RedCapIndication IE error");
+            return false;
+          }
+          m_RedCapIndication = std::make_optional<RedCapIndication>(tmp);
+        }
+      } break;
+      case Ngap_ProtocolIE_ID_id_NPN_AccessInformation: {
+        if (ngap_ie->value.present ==
+            Ngap_InitialUEMessage_IEs__value_PR_NPN_AccessInformation) {
+          NpnAccessInformation tmp{};
+          if (!tmp.decode(ngap_ie->value.choice.NPN_AccessInformation)) {
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP NPN_AccessInformation IE error");
+            return false;
+          }
+          m_NpnAccessInformation =
+              std::make_optional<NpnAccessInformation>(tmp);
+        }
+      } break;
       default: {
         oai::logger::logger_common::ngap().warn(
-            "Not decoded IE %d",
-            m_InitialUEMessageIes->protocolIEs.list.array[i]->id);
-        return true;
+            "Not decoded IE %d", ngap_ie->id);
+        break;
       }
     }
   }
 
+  return true;
+}
+
+//------------------------------------------------------------------------------
+bool InitialUeMessageMsg::getRedCapIndication(RedCapIndication& value) const {
+  if (!m_RedCapIndication.has_value()) return false;
+  value = m_RedCapIndication.value();
+  return true;
+}
+
+//------------------------------------------------------------------------------
+bool InitialUeMessageMsg::getNpnAccessInformation(
+    NpnAccessInformation& value) const {
+  if (!m_NpnAccessInformation.has_value()) return false;
+  value = m_NpnAccessInformation.value();
   return true;
 }
 

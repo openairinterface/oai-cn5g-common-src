@@ -5,6 +5,9 @@
 #include "HandoverCommandMsg.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "ngap_utils.hpp"
 #include "utils.hpp"
 
@@ -35,6 +38,11 @@ HandoverCommandMsg::~HandoverCommandMsg() {
 void HandoverCommandMsg::initialize() {
   m_HandoverCommandIes =
       &ngapPdu->choice.successfulOutcome->value.choice.HandoverCommand;
+  if (!m_HandoverCommandIes->protocolIEs) {
+    m_HandoverCommandIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -55,7 +63,7 @@ void HandoverCommandMsg::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error");
 }
@@ -78,7 +86,7 @@ void HandoverCommandMsg::setRanUeNgapId(const uint32_t& ranUeNgapId) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error");
 }
@@ -92,7 +100,7 @@ void HandoverCommandMsg::setHandoverType(const long& type) {
   ie->criticality   = Ngap_Criticality_reject;
   ie->value.present = Ngap_HandoverCommandIEs__value_PR_HandoverType;
   ie->value.choice.HandoverType = type;
-  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
 
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode HandoverType IE error");
@@ -119,7 +127,7 @@ void HandoverCommandMsg::setNasSecurityParametersFromNgRan(
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NASSecurityParametersFromNGRAN IE error");
@@ -155,7 +163,7 @@ void HandoverCommandMsg::setPduSessionResourceHandoverList(
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionResourceHandoverList IE error");
@@ -193,7 +201,7 @@ void HandoverCommandMsg::setPduSessionResourceToReleaseListHOCmd(
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionResourceToReleaseListHOCmd IE error");
@@ -222,7 +230,7 @@ void HandoverCommandMsg::setTargetToSourceTransparentContainer(
   ngap_utils::octet_string_copy(
       ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
 
-  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode HandoverType IE error");
 }
@@ -257,16 +265,17 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         "Handover Command MessageType error");
     return false;
   }
-  for (int i = 0; i < m_HandoverCommandIes->protocolIEs.list.count; i++) {
-    switch (m_HandoverCommandIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_HandoverCommandIes->protocolIEs->list.count; i++) {
+    Ngap_HandoverCommandIEs_t* ngap_ie =
+        (Ngap_HandoverCommandIEs_t*)
+            m_HandoverCommandIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_AMF_UE_NGAP_ID) {
           if (!NgapUeMessage::m_AmfUeNgapId.decode(
-                  m_HandoverCommandIes->protocolIEs.list.array[i]
-                      ->value.choice.AMF_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -278,13 +287,11 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
-                  m_HandoverCommandIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+                  ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -296,12 +303,10 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_HandoverType: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_HandoverType) {
-          m_HandoverType = m_HandoverCommandIes->protocolIEs.list.array[i]
-                               ->value.choice.HandoverType;
+          m_HandoverType = ngap_ie->value.choice.HandoverType;
         } else {
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP Handover Type IE error");
@@ -309,13 +314,12 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceHandoverList: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_PDUSessionResourceHandoverList) {
           PduSessionResourceHandoverList tmp = {};
-          if (tmp.decode(m_HandoverCommandIes->protocolIEs.list.array[i]
-                             ->value.choice.PDUSessionResourceHandoverList)) {
+          if (tmp.decode(
+                  ngap_ie->value.choice.PDUSessionResourceHandoverList)) {
             m_PduSessionResourceHandoverList =
                 std::optional<PduSessionResourceHandoverList>(tmp);
           } else {
@@ -330,14 +334,12 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_PDUSessionResourceToReleaseListHOCmd: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_PDUSessionResourceToReleaseListHOCmd) {
           PduSessionResourceToReleaseListHandoverCmd tmp = {};
           if (tmp.decode(
-                  m_HandoverCommandIes->protocolIEs.list.array[i]
-                      ->value.choice.PDUSessionResourceToReleaseListHOCmd)) {
+                  ngap_ie->value.choice.PDUSessionResourceToReleaseListHOCmd)) {
             m_PduSessionResourceToReleaseListHOCmd =
                 std::optional<PduSessionResourceToReleaseListHandoverCmd>(tmp);
           } else {
@@ -354,9 +356,8 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_TargetToSource_TransparentContainer: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_TargetToSource_TransparentContainer) {
         } else {
           oai::logger::logger_common::ngap().error(
@@ -365,9 +366,8 @@ bool HandoverCommandMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_CriticalityDiagnostics: {
-        if (m_HandoverCommandIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_HandoverCommandIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_HandoverCommandIEs__value_PR_CriticalityDiagnostics) {
         } else {
           oai::logger::logger_common::ngap().error(

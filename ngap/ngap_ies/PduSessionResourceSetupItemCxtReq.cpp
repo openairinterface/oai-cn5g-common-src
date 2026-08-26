@@ -57,7 +57,11 @@ bool PduSessionResourceSetupItemCxtReq::encode(
     pduSessionResourceSetupItemCxtReq.nAS_PDU = naspdu;
   }
 
-  if (!m_SNssai.encode(pduSessionResourceSetupItemCxtReq.s_NSSAI)) return false;
+  if (!pduSessionResourceSetupItemCxtReq.s_NSSAI)
+    pduSessionResourceSetupItemCxtReq.s_NSSAI =
+        (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+  if (!m_SNssai.encode(*pduSessionResourceSetupItemCxtReq.s_NSSAI))
+    return false;
   pduSessionResourceSetupItemCxtReq.pDUSessionResourceSetupRequestTransfer =
       m_PduSessionResourceSetupRequestTransfer;
 
@@ -70,7 +74,9 @@ bool PduSessionResourceSetupItemCxtReq::decode(
         pduSessionResourceSetupItemCxtReq) {
   if (!m_PduSessionId.decode(pduSessionResourceSetupItemCxtReq.pDUSessionID))
     return false;
-  if (!m_SNssai.decode(pduSessionResourceSetupItemCxtReq.s_NSSAI)) return false;
+  if (!pduSessionResourceSetupItemCxtReq.s_NSSAI) return false;
+  if (!m_SNssai.decode(*pduSessionResourceSetupItemCxtReq.s_NSSAI))
+    return false;
 
   if (pduSessionResourceSetupItemCxtReq.nAS_PDU) {
     NasPdu tmp = {};

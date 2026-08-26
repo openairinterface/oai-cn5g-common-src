@@ -5,6 +5,9 @@
 #include "NgSetupFailure.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -25,6 +28,11 @@ NgSetupFailureMsg::~NgSetupFailureMsg() {}
 void NgSetupFailureMsg::initialize() {
   m_NgSetupFailureIes =
       &(ngapPdu->choice.unsuccessfulOutcome->value.choice.NGSetupFailure);
+  if (!m_NgSetupFailureIes->protocolIEs) {
+    m_NgSetupFailureIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -41,7 +49,7 @@ void NgSetupFailureMsg::addCauseIe() {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NGAP Cause IE error");
 }
@@ -62,7 +70,7 @@ void NgSetupFailureMsg::addTimeToWaitIE() {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_NgSetupFailureIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NGAP TimeToWait IE error");
 }
@@ -185,15 +193,15 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     oai::logger::logger_common::ngap().error("MessageType error!");
     return false;
   }
-  for (int i = 0; i < m_NgSetupFailureIes->protocolIEs.list.count; i++) {
-    switch (m_NgSetupFailureIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_NgSetupFailureIes->protocolIEs->list.count; i++) {
+    Ngap_NGSetupFailureIEs_t* ngap_ie =
+        (Ngap_NGSetupFailureIEs_t*)
+            m_NgSetupFailureIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_Cause: {
-        if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
-                Ngap_NGSetupFailureIEs__value_PR_Cause) {
-          if (!m_Cause.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
-                                  ->value.choice.Cause)) {
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present == Ngap_NGSetupFailureIEs__value_PR_Cause) {
+          if (!m_Cause.decode(ngap_ie->value.choice.Cause)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP Cause IE error");
             return false;
@@ -205,13 +213,11 @@ bool NgSetupFailureMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_TimeToWait: {
-        if (m_NgSetupFailureIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_NgSetupFailureIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_NGSetupFailureIEs__value_PR_TimeToWait) {
           TimeToWait tmp = {};
-          if (!tmp.decode(m_NgSetupFailureIes->protocolIEs.list.array[i]
-                              ->value.choice.TimeToWait)) {
+          if (!tmp.decode(ngap_ie->value.choice.TimeToWait)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP TimeToWait IE error");
             return false;

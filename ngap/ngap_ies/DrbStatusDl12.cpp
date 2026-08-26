@@ -25,7 +25,10 @@ void DrbStatusDl12::set(const CountValueForPdcpSn12& value) {
 
 //------------------------------------------------------------------------------
 bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t& dl12) const {
-  if (!m_DlCountValue.encode(dl12.dL_COUNTValue)) {
+  dl12.dL_COUNTValue = (Ngap_COUNTValueForPDCP_SN12_t*) calloc(
+      1, sizeof(Ngap_COUNTValueForPDCP_SN12_t));
+  if (!dl12.dL_COUNTValue) return false;
+  if (!m_DlCountValue.encode(*dl12.dL_COUNTValue)) {
     oai::logger::logger_common::ngap().error("Encode DrbStatusDl12 IE error");
     return false;
   }
@@ -34,7 +37,8 @@ bool DrbStatusDl12::encode(Ngap_DRBStatusDL12_t& dl12) const {
 
 //------------------------------------------------------------------------------
 bool DrbStatusDl12::decode(const Ngap_DRBStatusDL12_t& dl12) {
-  if (!m_DlCountValue.decode(dl12.dL_COUNTValue)) {
+  if (!dl12.dL_COUNTValue) return false;
+  if (!m_DlCountValue.decode(*dl12.dL_COUNTValue)) {
     oai::logger::logger_common::ngap().error("Decode DrbStatusDl12 IE error");
     return false;
   }

@@ -59,15 +59,20 @@ asn_dec_rval_t INTEGER_decode_uper(
         uintmax_t uvalue = 0;
         if (uper_get_constrained_whole_number(pd, &uvalue, ct->range_bits))
           ASN__DECODE_STARVED;
-        ASN_DEBUG("Got value %lu + low %ld", uvalue, ct->lower_bound);
+        ASN_DEBUG(
+            "Got value %" ASN_PRIuMAX " + low %" ASN_PRIdMAX "", uvalue,
+            ct->lower_bound);
         uvalue += ct->lower_bound;
+        if (uvalue > (uintmax_t) ct->upper_bound) ASN__DECODE_FAILED;
         if (asn_umax2INTEGER(st, uvalue)) ASN__DECODE_FAILED;
       } else {
         uintmax_t uvalue = 0;
         intmax_t svalue;
         if (uper_get_constrained_whole_number(pd, &uvalue, ct->range_bits))
           ASN__DECODE_STARVED;
-        ASN_DEBUG("Got value %lu + low %ld", uvalue, ct->lower_bound);
+        ASN_DEBUG(
+            "Got value %" ASN_PRIuMAX " + low %" ASN_PRIdMAX "", uvalue,
+            ct->lower_bound);
         if (per_imax_range_unrebase(
                 uvalue, ct->lower_bound, ct->upper_bound, &svalue) ||
             asn_imax2INTEGER(st, svalue)) {
@@ -81,6 +86,7 @@ asn_dec_rval_t INTEGER_decode_uper(
   }
 
   /* X.691, #12.2.3, #12.2.4 */
+  size_t bytes_received = 0; /* Actual content bytes decoded from stream */
   do {
     ssize_t len = 0;
     void* p     = NULL;
@@ -97,8 +103,45 @@ asn_dec_rval_t INTEGER_decode_uper(
     ret = per_get_many_bits(pd, &st->buf[st->size], 0, 8 * len);
     if (ret < 0) ASN__DECODE_STARVED;
     st->size += len;
+    bytes_received += (size_t) len;
   } while (repeat);
   st->buf[st->size] = 0; /* JIC */
+
+  /* INTEGER must have at least one content octet (X.691 §12.2.3) */
+  if (bytes_received == 0) {
+    ASN__DECODE_FAILED;
+  }
+
+  /*
+   * Canonical UPER validation: X.691 11.3.6 - minimum octet encoding check.
+   * For unconstrained integers, verify that the encoding uses the minimum
+   * number of octets (leading 8 bits shall not all be zero unless the field
+   * is precisely 8 bits long).
+   */
+  if (opt_codec_ctx && opt_codec_ctx->uper_canonical && !ct && st->size > 1) {
+    /* Check for non-minimal encoding */
+    if (st->buf[0] == 0x00 && (st->buf[1] & 0x80) == 0) {
+      /* Leading zeros in positive number - not minimal */
+      if (opt_codec_ctx->uper_canonical_lenient) {
+        ASN_DEBUG(
+            "Non-canonical UPER: leading zeros in positive integer (lenient "
+            "mode - continuing)");
+      } else {
+        ASN_DEBUG("Non-canonical UPER: leading zeros in positive integer");
+        ASN__DECODE_FAILED;
+      }
+    } else if (st->buf[0] == 0xFF && (st->buf[1] & 0x80) != 0) {
+      /* Leading ones in negative number - not minimal */
+      if (opt_codec_ctx->uper_canonical_lenient) {
+        ASN_DEBUG(
+            "Non-canonical UPER: leading ones in negative integer (lenient "
+            "mode - continuing)");
+      } else {
+        ASN_DEBUG("Non-canonical UPER: leading ones in negative integer");
+        ASN__DECODE_FAILED;
+      }
+    }
+  }
 
   /* #12.2.3 */
   if (ct && ct->lower_bound) {
@@ -148,9 +191,10 @@ asn_enc_rval_t INTEGER_encode_uper(
           inext = 1;
       }
       ASN_DEBUG(
-          "Value %lu (%02x/%" ASN_PRI_SIZE ") lb %lu ub %lu %s", value.u,
-          st->buf[0], st->size, ct->lower_bound, ct->upper_bound,
-          inext ? "ext" : "fix");
+          "Value %" ASN_PRIuMAX " (%02x/%" ASN_PRI_SIZE ") lb %" ASN_PRIuMAX
+          " ub %" ASN_PRIuMAX " %s",
+          value.u, st->buf[0], st->size, (uintmax_t) ct->lower_bound,
+          (uintmax_t) ct->upper_bound, inext ? "ext" : "fix");
     } else {
       if (asn_INTEGER2imax(st, &value.s)) ASN__ENCODE_FAILED;
       /* Check proper range */
@@ -160,8 +204,9 @@ asn_enc_rval_t INTEGER_encode_uper(
         if (value.s < ct->lower_bound || value.s > ct->upper_bound) inext = 1;
       }
       ASN_DEBUG(
-          "Value %ld (%02x/%" ASN_PRI_SIZE ") lb %ld ub %ld %s", value.s,
-          st->buf[0], st->size, ct->lower_bound, ct->upper_bound,
+          "Value %" ASN_PRIdMAX " (%02x/%" ASN_PRI_SIZE ") lb %" ASN_PRIdMAX
+          " ub %" ASN_PRIdMAX " %s",
+          value.s, st->buf[0], st->size, ct->lower_bound, ct->upper_bound,
           inext ? "ext" : "fix");
     }
     if (ct->flags & APC_EXTENSIBLE) {
@@ -181,8 +226,10 @@ asn_enc_rval_t INTEGER_encode_uper(
            (value.u < (uintmax_t) ct->lower_bound)) ||
           (value.u > (uintmax_t) ct->upper_bound)) {
         ASN_DEBUG(
-            "Value %lu to-be-encoded is outside the bounds [%lu, %lu]!",
-            value.u, ct->lower_bound, ct->upper_bound);
+            "Value %" ASN_PRIuMAX
+            " to-be-encoded is outside the bounds [%" ASN_PRIuMAX
+            ", %" ASN_PRIuMAX "]!",
+            value.u, (uintmax_t) ct->lower_bound, (uintmax_t) ct->upper_bound);
         ASN__ENCODE_FAILED;
       }
       v = value.u - (uintmax_t) ct->lower_bound;
@@ -192,16 +239,67 @@ asn_enc_rval_t INTEGER_encode_uper(
         ASN__ENCODE_FAILED;
       }
     }
-    ASN_DEBUG("Encoding integer %lu with range %d bits", v, ct->range_bits);
+    ASN_DEBUG(
+        "Encoding integer %" ASN_PRIuMAX " with range %d bits", v,
+        ct->range_bits);
     if (uper_put_constrained_whole_number_u(po, v, ct->range_bits))
       ASN__ENCODE_FAILED;
     ASN__ENCODED_OK(er);
   }
 
   if (ct && ct->lower_bound) {
-    ASN_DEBUG("Adjust lower bound to %ld", ct->lower_bound);
-    /* TODO: adjust lower bound */
-    ASN__ENCODE_FAILED;
+    ASN_DEBUG("Adjust lower bound to %" ASN_PRIdMAX "", ct->lower_bound);
+    /*
+     * Encode semi-constrained integer by subtracting lower bound.
+     * Per X.691, the value is encoded as (value - lower_bound),
+     * which is always non-negative.
+     */
+    INTEGER_t adjusted_int;
+    memset(&adjusted_int, 0, sizeof(adjusted_int));
+
+    if (specs && specs->field_unsigned) {
+      if (value.u < (uintmax_t) ct->lower_bound) {
+        ASN__ENCODE_FAILED;
+      }
+      value.u -= (uintmax_t) ct->lower_bound;
+      if (asn_umax2INTEGER(&adjusted_int, value.u)) {
+        ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+        ASN__ENCODE_FAILED;
+      }
+    } else {
+      if (value.s < ct->lower_bound) {
+        ASN__ENCODE_FAILED;
+      }
+      value.s -= ct->lower_bound;
+      if (asn_imax2INTEGER(&adjusted_int, value.s)) {
+        ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+        ASN__ENCODE_FAILED;
+      }
+    }
+
+    /* Encode the adjusted value using unconstrained encoding */
+    buf = adjusted_int.buf;
+    end = adjusted_int.buf + adjusted_int.size;
+    while (buf < end) {
+      int need_eom      = 0;
+      ssize_t mayEncode = uper_put_length(po, end - buf, &need_eom);
+      if (mayEncode < 0) {
+        ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+        ASN__ENCODE_FAILED;
+      }
+      if (per_put_many_bits(po, buf, 8 * mayEncode)) {
+        ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+        ASN__ENCODE_FAILED;
+      }
+      buf += mayEncode;
+      if (need_eom && uper_put_length(po, 0, 0)) {
+        ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+        ASN__ENCODE_FAILED;
+      }
+    }
+
+    ASN_STRUCT_RESET(asn_DEF_INTEGER, &adjusted_int);
+    ASN__ENCODED_OK(er);
   }
 
   for (buf = st->buf, end = st->buf + st->size; buf < end;) {

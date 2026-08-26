@@ -58,7 +58,10 @@ bool QosFlowWithCauseItem::encode(
     Ngap_QosFlowWithCauseItem_t& QosFlowWithCauseItem) const {
   if (!m_QosFlowIdentifier.encode(QosFlowWithCauseItem.qosFlowIdentifier))
     return false;
-  if (!m_Cause.encode(QosFlowWithCauseItem.cause)) return false;
+  if (!QosFlowWithCauseItem.cause)
+    QosFlowWithCauseItem.cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
+  if (!m_Cause.encode(*QosFlowWithCauseItem.cause)) return false;
 
   return true;
 }
@@ -68,7 +71,8 @@ bool QosFlowWithCauseItem::decode(
     const Ngap_QosFlowWithCauseItem_t& QosFlowWithCauseItem) {
   if (!m_QosFlowIdentifier.decode(QosFlowWithCauseItem.qosFlowIdentifier))
     return false;
-  if (!m_Cause.decode(QosFlowWithCauseItem.cause)) return false;
+  if (!QosFlowWithCauseItem.cause) return false;
+  if (!m_Cause.decode(*QosFlowWithCauseItem.cause)) return false;
 
   return true;
 }

@@ -7,6 +7,9 @@
 #include <vector>
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -29,6 +32,10 @@ NgResetAckMsg::~NgResetAckMsg() {
 void NgResetAckMsg::initialize() {
   m_NgResetAckIes =
       &(ngapPdu->choice.successfulOutcome->value.choice.NGResetAcknowledge);
+  if (!m_NgResetAckIes->protocolIEs) {
+    m_NgResetAckIes->protocolIEs = (struct Ngap_ProtocolIE_Container*) calloc(
+        1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -67,7 +74,7 @@ void NgResetAckMsg::addUeAssociatedLogicalNgConnectionList() {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_NgResetAckIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_NgResetAckIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UE_associatedLogicalNG_connectionList IE error");
@@ -87,16 +94,17 @@ bool NgResetAckMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
             Ngap_SuccessfulOutcome__value_PR_NGResetAcknowledge) {
       m_NgResetAckIes =
           &ngapPdu->choice.successfulOutcome->value.choice.NGResetAcknowledge;
-      for (int i = 0; i < m_NgResetAckIes->protocolIEs.list.count; i++) {
-        switch (m_NgResetAckIes->protocolIEs.list.array[i]->id) {
+      for (int i = 0; i < m_NgResetAckIes->protocolIEs->list.count; i++) {
+        Ngap_NGResetAcknowledgeIEs_t* ngap_ie =
+            (Ngap_NGResetAcknowledgeIEs_t*)
+                m_NgResetAckIes->protocolIEs->list.array[i];
+        switch (ngap_ie->id) {
           case Ngap_ProtocolIE_ID_id_UE_associatedLogicalNG_connectionList: {
-            if (m_NgResetAckIes->protocolIEs.list.array[i]->criticality ==
-                    Ngap_Criticality_ignore &&
-                m_NgResetAckIes->protocolIEs.list.array[i]->value.present ==
+            if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+                ngap_ie->value.present ==
                     Ngap_NGResetAcknowledgeIEs__value_PR_UE_associatedLogicalNG_connectionList) {
               UeAssociatedLogicalNgConnectionList tmp = {};
-              if (!tmp.decode(m_NgResetAckIes->protocolIEs.list.array[i]
-                                  ->value.choice
+              if (!tmp.decode(ngap_ie->value.choice
                                   .UE_associatedLogicalNG_connectionList)) {
                 oai::logger::logger_common::ngap().error(
                     "Decoded NGAP UE_associatedLogicalNG_connectionList IE "

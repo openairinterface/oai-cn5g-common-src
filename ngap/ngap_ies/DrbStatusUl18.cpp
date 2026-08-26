@@ -24,7 +24,10 @@ void DrbStatusUl18::set(const CountValueForPdcpSn18& countValue) {
 
 //------------------------------------------------------------------------------
 bool DrbStatusUl18::encode(Ngap_DRBStatusUL18_t& ul18) const {
-  if (!m_PdcpValue.encode(ul18.uL_COUNTValue)) {
+  ul18.uL_COUNTValue = (Ngap_COUNTValueForPDCP_SN18_t*) calloc(
+      1, sizeof(Ngap_COUNTValueForPDCP_SN18_t));
+  if (!ul18.uL_COUNTValue) return false;
+  if (!m_PdcpValue.encode(*ul18.uL_COUNTValue)) {
     return false;
   }
   return true;
@@ -32,7 +35,8 @@ bool DrbStatusUl18::encode(Ngap_DRBStatusUL18_t& ul18) const {
 
 //------------------------------------------------------------------------------
 bool DrbStatusUl18::decode(const Ngap_DRBStatusUL18_t& ul18) {
-  if (!m_PdcpValue.decode(ul18.uL_COUNTValue)) {
+  if (!ul18.uL_COUNTValue) return false;
+  if (!m_PdcpValue.decode(*ul18.uL_COUNTValue)) {
     return false;
   }
   return true;

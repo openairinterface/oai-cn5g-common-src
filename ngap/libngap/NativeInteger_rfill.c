@@ -14,7 +14,7 @@ asn_random_fill_result_t NativeInteger_random_fill(
   asn_random_fill_result_t result_ok      = {ARFILL_OK, 1};
   asn_random_fill_result_t result_failed  = {ARFILL_FAILED, 0};
   asn_random_fill_result_t result_skipped = {ARFILL_SKIPPED, 0};
-  long* st                                = *sptr;
+  void* st                                = *sptr;
   const asn_INTEGER_enum_map_t* emap;
   size_t emap_len;
   intmax_t value;
@@ -23,7 +23,7 @@ asn_random_fill_result_t NativeInteger_random_fill(
   if (max_length == 0) return result_skipped;
 
   if (st == NULL) {
-    st = (long*) CALLOC(1, sizeof(*st));
+    st = CALLOC(1, NativeInteger_field_width(specs));
     if (st == NULL) {
       return result_failed;
     }
@@ -62,8 +62,10 @@ asn_random_fill_result_t NativeInteger_random_fill(
           0, sizeof(variants) / sizeof(variants[0]) - 1)];
     }
 
-    if (!constraints) constraints = &td->encoding_constraints;
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
+    if (!constraints || !constraints->per_constraints)
+      constraints = &td->encoding_constraints;
+
     const asn_per_constraints_t* ct;
 
     ct = constraints ? constraints->per_constraints : 0;
@@ -73,11 +75,13 @@ asn_random_fill_result_t NativeInteger_random_fill(
             asn_random_between(ct->value.lower_bound, ct->value.upper_bound);
       }
     }
+#else
+    if (!constraints) constraints = &td->encoding_constraints;
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
   }
 
   *sptr = st;
-  *st   = value;
+  NativeInteger_store(st, specs, (uintmax_t) value);
   return result_ok;
 }

@@ -27,8 +27,11 @@ void PduSessionResourceSetupUnsuccessfulTransfer::setCauseRadioNetwork(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_Cause.set(causeValue);
 
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceSetupUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_Cause.encode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
+      m_Cause.encode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode CauseRadioNetwork IE error");
@@ -42,8 +45,11 @@ void PduSessionResourceSetupUnsuccessfulTransfer::setCauseTransport(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_Cause.set(causeValue);
 
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceSetupUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_Cause.encode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
+      m_Cause.encode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseTransport IE error");
     return;
@@ -56,8 +62,11 @@ void PduSessionResourceSetupUnsuccessfulTransfer::setCauseNas(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_Cause.set(causeValue);
 
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceSetupUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_Cause.encode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
+      m_Cause.encode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseNas IE error");
     return;
@@ -70,8 +79,11 @@ void PduSessionResourceSetupUnsuccessfulTransfer::setCauseProtocol(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_Cause.set(causeValue);
 
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceSetupUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_Cause.encode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
+      m_Cause.encode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseProtocol IE error");
     return;
@@ -84,8 +96,11 @@ void PduSessionResourceSetupUnsuccessfulTransfer::setCauseMisc(
   m_Cause.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_Cause.set(causeValue);
 
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)
+    m_PduSessionResourceSetupUnsuccessfulTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_Cause.encode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
+      m_Cause.encode(*m_PduSessionResourceSetupUnsuccessfulTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseMisc IE error");
     return;
@@ -130,7 +145,9 @@ bool PduSessionResourceSetupUnsuccessfulTransfer::decode(
   // &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
   // m_PduSessionResourceSetupUnsuccessfulTransferIe);
 
-  if (!m_Cause.decode(m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)) {
+  if (!m_PduSessionResourceSetupUnsuccessfulTransferIe->cause) return false;
+  if (!m_Cause.decode(
+          *m_PduSessionResourceSetupUnsuccessfulTransferIe->cause)) {
     oai::logger::logger_common::ngap().error("Decode Cause IE error");
     return false;
   }

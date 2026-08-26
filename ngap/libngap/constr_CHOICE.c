@@ -5,54 +5,72 @@
 #include <asn_internal.h>
 #include <constr_CHOICE.h>
 
-asn_TYPE_operation_t asn_OP_CHOICE = {CHOICE_free,
+asn_TYPE_operation_t asn_OP_CHOICE = {
+    .kind = ASN_KIND_CHOICE,
+    CHOICE_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
-                                      CHOICE_print,
+    CHOICE_print,
 #else
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
-                                      CHOICE_compare,
+    CHOICE_compare,
+    CHOICE_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
-                                      CHOICE_decode_ber,  CHOICE_encode_der,
+    CHOICE_decode_ber,
+    CHOICE_encode_der,
 #else
     0,
     0,
 #endif /* !defined(ASN_DISABLE_BER_SUPPORT) */
 #if !defined(ASN_DISABLE_XER_SUPPORT)
-                                      CHOICE_decode_xer,  CHOICE_encode_xer,
+    CHOICE_decode_xer,
+    CHOICE_encode_xer,
 #else
     0,
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
-                                      CHOICE_encode_jer,
+    CHOICE_decode_jer,
+    CHOICE_encode_jer,
 #else
+    0,
     0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
-                                      CHOICE_decode_oer,  CHOICE_encode_oer,
+    CHOICE_decode_oer,
+    CHOICE_encode_oer,
 #else
     0,
     0,
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
-                                      CHOICE_decode_uper, CHOICE_encode_uper,
+    CHOICE_decode_uper,
+    CHOICE_encode_uper,
 #else
     0,
     0,
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) */
 #if !defined(ASN_DISABLE_APER_SUPPORT)
-                                      CHOICE_decode_aper, CHOICE_encode_aper,
+    CHOICE_decode_aper,
+    CHOICE_encode_aper,
 #else
     0,
     0,
 #endif /* !defined(ASN_DISABLE_APER_SUPPORT) */
 #if !defined(ASN_DISABLE_RFILL_SUPPORT)
-                                      CHOICE_random_fill,
+    CHOICE_random_fill,
 #else
     0,
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
-                                      CHOICE_outmost_tag};
+    CHOICE_outmost_tag,
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    CHOICE_decode_cbor,
+    CHOICE_encode_cbor,
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
+};
 
 ber_tlv_tag_t CHOICE_outmost_tag(
     const asn_TYPE_descriptor_t* td, const void* ptr, int tag_mode,
@@ -147,11 +165,12 @@ int CHOICE_constraint(
 void CHOICE_free(
     const asn_TYPE_descriptor_t* td, void* ptr,
     enum asn_struct_free_method method) {
-  const asn_CHOICE_specifics_t* specs =
-      (const asn_CHOICE_specifics_t*) td->specifics;
+  const asn_CHOICE_specifics_t* specs;
   unsigned present;
 
   if (!td || !ptr) return;
+
+  specs = (const asn_CHOICE_specifics_t*) td->specifics;
 
   ASN_DEBUG("Freeing %s as CHOICE", td->name);
 
@@ -308,6 +327,56 @@ int CHOICE_compare(
   } else {
     return 1;
   }
+}
+
+int CHOICE_copy(
+    const asn_TYPE_descriptor_t* td, void** aptr, const void* bptr) {
+  if (!td) return -1;
+
+  void* st = *aptr;
+  const asn_CHOICE_specifics_t* specs =
+      (const asn_CHOICE_specifics_t*) td->specifics;
+  const asn_TYPE_member_t* elm; /* CHOICE's element */
+  int present;
+  int ret;
+  void* amemb;
+  void** amembp;
+  const void* bmemb;
+
+  if (!bptr) {
+    if (st) {
+      ASN_STRUCT_FREE(*td, st);
+      *aptr = NULL;
+    }
+    return 0;
+  }
+
+  if (!st) {
+    st = *aptr = CALLOC(1, specs->struct_size);
+    if (!st) return -1;
+  }
+
+  present = _fetch_present_idx(bptr, specs->pres_offset, specs->pres_size);
+
+  if (present <= 0 && (unsigned) present > td->elements_count) return -1;
+  --present;
+
+  elm = &td->elements[present];
+  if (elm->flags & ATF_POINTER) {
+    /* Member is a pointer to another structure */
+    amembp = (void**) ((char*) st + elm->memb_offset);
+    bmemb  = *(const void* const*) ((const char*) bptr + elm->memb_offset);
+  } else {
+    amemb  = (char*) st + elm->memb_offset;
+    amembp = &amemb;
+    bmemb  = (const void*) ((const char*) bptr + elm->memb_offset);
+  }
+  ret = elm->type->op->copy_struct(elm->type, amembp, bmemb);
+  if (ret != 0) return ret;
+
+  _set_present_idx(st, specs->pres_offset, specs->pres_size, present + 1);
+
+  return 0;
 }
 
 /*

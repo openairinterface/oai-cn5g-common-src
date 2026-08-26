@@ -64,7 +64,7 @@ asn_dec_rval_t NativeEnumerated_decode_aper(
      */
 
     /* XXX handle indefinite index length > 64k */
-    value = aper_get_nsnnwn(pd, 65537);
+    value = aper_get_nsnnwn(pd);
     if (value < 0) ASN__DECODE_STARVED;
     value += specs->extension - 1;
     // if(value >= specs->map_count)
@@ -110,7 +110,6 @@ asn_enc_rval_t NativeEnumerated_encode_aper(
   er.encoded = 0;
 
   native = *(const long*) sptr;
-  if (native < 0) ASN__ENCODE_FAILED;
 
   key.nat_value = native;
   kf            = bsearch(
@@ -146,9 +145,7 @@ asn_enc_rval_t NativeEnumerated_encode_aper(
   ASN_DEBUG(
       "value = %ld, ext = %d, inext = %d, res = %ld", value, specs->extension,
       inext, value - (inext ? (specs->extension - 1) : 0));
-  if (aper_put_nsnnwn(
-          po, ct->upper_bound - ct->lower_bound + 1,
-          value - (inext ? (specs->extension - 1) : 0)))
+  if (aper_put_nsnnwn(po, value - (inext ? (specs->extension - 1) : 0)))
     ASN__ENCODE_FAILED;
 
   ASN__ENCODED_OK(er);

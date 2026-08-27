@@ -6914,14 +6914,14 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
   //--------
   void load_from(std::istream& is) {
     // tlv.load_from(is);
-    if (tlv.get_length() != 1) {
+    if (tlv.get_length() < 2) {
       throw pfcp_tlv_bad_length_exception(
           tlv.type, tlv.get_length(), __FILE__, __LINE__);
     }
     is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
     switch (u1.bf.rule_id_type) {
       case pfcp::FAILED_RULE_ID_TYPE_BAR: {
-        if (tlv.get_length() != 1) {
+        if (tlv.get_length() != 2) {
           throw pfcp_tlv_bad_length_exception(
               tlv.type, tlv.get_length(), __FILE__, __LINE__);
         }
@@ -6930,7 +6930,7 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
         rule_id_value = b;
       } break;
       case pfcp::FAILED_RULE_ID_TYPE_PDR: {
-        if (tlv.get_length() != 2) {
+        if (tlv.get_length() != 3) {
           throw pfcp_tlv_bad_length_exception(
               tlv.type, tlv.get_length(), __FILE__, __LINE__);
         }
@@ -6941,7 +6941,7 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
       case pfcp::FAILED_RULE_ID_TYPE_URR:
       case pfcp::FAILED_RULE_ID_TYPE_FAR:
       case pfcp::FAILED_RULE_ID_TYPE_QER: {
-        if (tlv.get_length() != 4) {
+        if (tlv.get_length() != 5) {
           throw pfcp_tlv_bad_length_exception(
               tlv.type, tlv.get_length(), __FILE__, __LINE__);
         }

@@ -52,8 +52,7 @@ class PduSessionResourceModifyRequestTransfer {
       std::optional<QosFlowAddOrModifyRequestList>& list) const;
 
   void setQosFlowToReleaseList(const QosFlowListWithCause& list);
-  void getQosFlowToReleaseList(
-      std::optional<QosFlowListWithCause>& list) const;
+  void getQosFlowToReleaseList(std::optional<QosFlowListWithCause>& list) const;
 
   int encode(uint8_t* buf, int bufSize);
   bool decode(uint8_t* buf, int bufSize);

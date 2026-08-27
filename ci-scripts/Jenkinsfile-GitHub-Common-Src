@@ -294,7 +294,7 @@ pipeline {
           }
           githubPRComment comment: githubPRMessage(message)
         }
-        notifyGitHub('SUCCESS', 'Build success', 'Jenkins OAI CI')
+        notifyGitHub('SUCCESS', 'Build success', env.JOB_BASE_NAME)
         echo "Pipeline is SUCCESSFUL"
       }
     }
@@ -315,7 +315,7 @@ pipeline {
           }
           githubPRComment comment: githubPRMessage(message)
         }
-        notifyGitHub('FAILURE', 'Build failed', 'Jenkins OAI CI')
+        notifyGitHub('FAILURE', 'Build failed', env.JOB_BASE_NAME)
         echo "Pipeline FAILED"
       }
     }
@@ -360,7 +360,7 @@ def checkoutSource() {
   }
 }
 
-// Record a failed stage for the PR comment. 'Jenkins OAI CI' (posted from the
+// Record a failed stage for the PR comment. env.JOB_BASE_NAME (posted from the
 // pipeline post blocks) is the only GitHub commit status this job publishes.
 def recordFailure(String reportLink = null) {
   failingStages += reportLink ? "\n * [${env.STAGE_NAME}](${reportLink})" : "\n * ${env.STAGE_NAME}"

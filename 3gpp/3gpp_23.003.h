@@ -82,11 +82,6 @@ typedef struct plmn_s {
   std::string mnc;
 } plmn_t;
 
-typedef struct plmn_nid_s {
-  plmn_t plmnId;
-  std::string m_Nid;
-} plmn_nid_t;
-
 #define INVALID_TAC_0000 (uint16_t) 0x0000
 #define INVALID_TAC_FFFE (uint16_t) 0xFFFE
 #define INVALID_TAC (uint32_t) 0x00000000

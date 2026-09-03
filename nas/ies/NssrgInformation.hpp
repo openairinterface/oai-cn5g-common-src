@@ -9,7 +9,6 @@
 
 #include "Type6NasIe.hpp"
 
-// TS 24.501 clause 9.11.3.82 – NSSRG information
 constexpr uint8_t kNssrgInformationMinimumContentLength  = 7;
 constexpr uint16_t kNssrgInformationMaximumContentLength = 4099;
 constexpr auto kNssrgInformationIeName                   = "NSSRG Information";

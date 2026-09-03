@@ -106,6 +106,9 @@ asn_enc_rval_t CHOICE_encode_uper(
 
   if (!sptr) ASN__ENCODE_FAILED;
 
+  /* Check recursion depth to prevent stack overflow */
+  UPER_ENCODER_RECURSION_DEPTH_INC();
+
   ASN_DEBUG("Encoding %s as CHOICE", td->name);
 
   if (constraints)
@@ -121,10 +124,12 @@ asn_enc_rval_t CHOICE_encode_uper(
    * If the structure was not initialized properly, it cannot be encoded:
    * can't deduce what to encode in the choice type.
    */
-  if (present == 0 || present > td->elements_count)
+  if (present == 0 || present > td->elements_count) {
+    UPER_ENCODER_RECURSION_DEPTH_DEC();
     ASN__ENCODE_FAILED;
-  else
+  } else {
     present--;
+  }
 
   ASN_DEBUG("Encoding %s CHOICE element %d", td->name, present);
 
@@ -138,10 +143,15 @@ asn_enc_rval_t CHOICE_encode_uper(
     if (present_enc < ct->lower_bound || present_enc > ct->upper_bound) {
       if (ct->flags & APC_EXTENSIBLE) {
         ASN_DEBUG(
-            "CHOICE member %d (enc %d) is an extension (%ld..%ld)", present,
-            present_enc, ct->lower_bound, ct->upper_bound);
-        if (per_put_few_bits(po, 1, 1)) ASN__ENCODE_FAILED;
+            "CHOICE member %d (enc %d) is an extension (%" ASN_PRIdMAX
+            "..%" ASN_PRIdMAX ")",
+            present, present_enc, ct->lower_bound, ct->upper_bound);
+        if (per_put_few_bits(po, 1, 1)) {
+          UPER_ENCODER_RECURSION_DEPTH_DEC();
+          ASN__ENCODE_FAILED;
+        }
       } else {
+        UPER_ENCODER_RECURSION_DEPTH_DEC();
         ASN__ENCODE_FAILED;
       }
       ct = 0;
@@ -149,9 +159,13 @@ asn_enc_rval_t CHOICE_encode_uper(
   }
   if (ct && ct->flags & APC_EXTENSIBLE) {
     ASN_DEBUG(
-        "CHOICE member %d (enc %d) is not an extension (%ld..%ld)", present,
-        present_enc, ct->lower_bound, ct->upper_bound);
-    if (per_put_few_bits(po, 0, 1)) ASN__ENCODE_FAILED;
+        "CHOICE member %d (enc %d) is not an extension (%" ASN_PRIdMAX
+        "..%" ASN_PRIdMAX ")",
+        present, present_enc, ct->lower_bound, ct->upper_bound);
+    if (per_put_few_bits(po, 0, 1)) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
+      ASN__ENCODE_FAILED;
+    }
   }
 
   elm = &td->elements[present];
@@ -159,24 +173,43 @@ asn_enc_rval_t CHOICE_encode_uper(
   if (elm->flags & ATF_POINTER) {
     /* Member is a pointer to another structure */
     memb_ptr = *(const void* const*) ((const char*) sptr + elm->memb_offset);
-    if (!memb_ptr) ASN__ENCODE_FAILED;
+    if (!memb_ptr) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
+      ASN__ENCODE_FAILED;
+    }
   } else {
     memb_ptr = (const char*) sptr + elm->memb_offset;
   }
 
   if (ct && ct->range_bits >= 0) {
-    if (per_put_few_bits(po, present_enc, ct->range_bits)) ASN__ENCODE_FAILED;
+    if (per_put_few_bits(po, present_enc, ct->range_bits)) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
+      ASN__ENCODE_FAILED;
+    }
 
-    return elm->type->op->uper_encoder(
+    asn_enc_rval_t rval;
+    rval = elm->type->op->uper_encoder(
         elm->type, elm->encoding_constraints.per_constraints, memb_ptr, po);
+    UPER_ENCODER_RECURSION_DEPTH_DEC();
+    return rval;
   } else {
     asn_enc_rval_t rval = {0, 0, 0};
-    if (specs->ext_start == -1) ASN__ENCODE_FAILED;
-    if (uper_put_nsnnwn(po, present_enc - specs->ext_start)) ASN__ENCODE_FAILED;
-    if (uper_open_type_put(
-            elm->type, elm->encoding_constraints.per_constraints, memb_ptr, po))
+    if (specs->ext_start == -1) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
       ASN__ENCODE_FAILED;
+    }
+    if (uper_put_nsnnwn(po, present_enc - specs->ext_start)) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
+      ASN__ENCODE_FAILED;
+    }
+    if (uper_open_type_put(
+            elm->type, elm->encoding_constraints.per_constraints, memb_ptr,
+            po)) {
+      UPER_ENCODER_RECURSION_DEPTH_DEC();
+      ASN__ENCODE_FAILED;
+    }
     rval.encoded = 0;
+    UPER_ENCODER_RECURSION_DEPTH_DEC();
     ASN__ENCODED_OK(rval);
   }
 }

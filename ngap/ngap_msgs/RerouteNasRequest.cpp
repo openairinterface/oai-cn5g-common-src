@@ -7,6 +7,9 @@
 #include "3gpp_23.003.h"
 #include "common_defs.hpp"
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+}
 #include "utils.hpp"
 
 namespace oai::ngap {
@@ -28,6 +31,11 @@ RerouteNasRequest::~RerouteNasRequest() {}
 void RerouteNasRequest::initialize() {
   m_RerouteNASRequestIes =
       &(ngapPdu->choice.initiatingMessage->value.choice.RerouteNASRequest);
+  if (!m_RerouteNASRequestIes->protocolIEs) {
+    m_RerouteNASRequestIes->protocolIEs =
+        (struct Ngap_ProtocolIE_Container*) calloc(
+            1, sizeof(struct Ngap_ProtocolIE_Container));
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -49,7 +57,7 @@ void RerouteNasRequest::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
 }
@@ -78,7 +86,7 @@ void RerouteNasRequest::setRanUeNgapId(const uint32_t& ranUeNgapId) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
 }
@@ -120,7 +128,7 @@ void RerouteNasRequest::setAllowedNssai(const std::vector<S_Nssai>& list) {
     return;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error!");
 }
@@ -150,7 +158,7 @@ void RerouteNasRequest::setNgapMessage(const OCTET_STRING_t& message) {
   ie->value.present = Ngap_RerouteNASRequest_IEs__value_PR_OCTET_STRING;
   ie->value.choice.OCTET_STRING = message;
 
-  int ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NGAP Message IE error!");
 }
@@ -178,7 +186,7 @@ bool RerouteNasRequest::setAmfSetId(const uint16_t& amfSetId) {
     return false;
   }
 
-  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs.list, ie);
+  ret = ASN_SEQUENCE_ADD(&m_RerouteNASRequestIes->protocolIEs->list, ie);
   if (ret != 0) {
     oai::logger::logger_common::ngap().error("Encode AMFSetID IE error!");
     return false;
@@ -214,16 +222,17 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
     oai::logger::logger_common::ngap().error("MessageType error!");
     return false;
   }
-  for (int i = 0; i < m_RerouteNASRequestIes->protocolIEs.list.count; i++) {
-    switch (m_RerouteNASRequestIes->protocolIEs.list.array[i]->id) {
+  for (int i = 0; i < m_RerouteNASRequestIes->protocolIEs->list.count; i++) {
+    Ngap_RerouteNASRequest_IEs_t* ngap_ie =
+        (Ngap_RerouteNASRequest_IEs_t*)
+            m_RerouteNASRequestIes->protocolIEs->list.array[i];
+    switch (ngap_ie->id) {
       case Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID: {
-        if (m_RerouteNASRequestIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_RerouteNASRequestIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AMF_UE_NGAP_ID) {
           AmfUeNgapId tmp = {};
-          if (!tmp.decode(m_RerouteNASRequestIes->protocolIEs.list.array[i]
-                              ->value.choice.AMF_UE_NGAP_ID)) {
+          if (!tmp.decode(ngap_ie->value.choice.AMF_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMF_UE_NGAP_ID IE error");
             return false;
@@ -236,13 +245,10 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (m_RerouteNASRequestIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_RerouteNASRequestIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_RAN_UE_NGAP_ID) {
-          if (!m_RanUeNgapId.decode(
-                  m_RerouteNASRequestIes->protocolIEs.list.array[i]
-                      ->value.choice.RAN_UE_NGAP_ID)) {
+          if (!m_RanUeNgapId.decode(ngap_ie->value.choice.RAN_UE_NGAP_ID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP RAN_UE_NGAP_ID IE error");
             return false;
@@ -255,25 +261,20 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_NGAP_Message: {
-        if (m_RerouteNASRequestIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_RerouteNASRequestIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_OCTET_STRING) {
-          m_NgapMessage = m_RerouteNASRequestIes->protocolIEs.list.array[i]
-                              ->value.choice.OCTET_STRING;
+          m_NgapMessage = ngap_ie->value.choice.OCTET_STRING;
           oai::logger::logger_common::ngap().error(
               "Decoded NGAP Message IE error");
         }
       } break;
 
       case Ngap_ProtocolIE_ID_id_AMFSetID: {
-        if (m_RerouteNASRequestIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_RerouteNASRequestIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AMFSetID) {
-          if (!m_AmfSetId.decode(
-                  m_RerouteNASRequestIes->protocolIEs.list.array[i]
-                      ->value.choice.AMFSetID)) {
+          if (!m_AmfSetId.decode(ngap_ie->value.choice.AMFSetID)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AMFSetID error");
             return false;
@@ -286,14 +287,11 @@ bool RerouteNasRequest::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_AllowedNSSAI: {
-        if (m_RerouteNASRequestIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_RerouteNASRequestIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_RerouteNASRequest_IEs__value_PR_AllowedNSSAI) {
           AllowedNSSAI tmp = {};
-          if (!m_AllowedNssai->decode(
-                  m_RerouteNASRequestIes->protocolIEs.list.array[i]
-                      ->value.choice.AllowedNSSAI)) {
+          if (!m_AllowedNssai->decode(ngap_ie->value.choice.AllowedNSSAI)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP AllowedNSSAI IE error");
             return false;

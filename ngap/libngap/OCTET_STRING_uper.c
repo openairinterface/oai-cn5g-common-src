@@ -87,7 +87,7 @@ asn_dec_rval_t OCTET_STRING_decode_uper(
   }
 
   ASN_DEBUG(
-      "PER Decoding %s size %ld .. %ld bits %d",
+      "PER Decoding %s size %" ASN_PRIdMAX " .. %" ASN_PRIdMAX " bits %d",
       csiz->flags & APC_EXTENSIBLE ? "extensible" : "non-extensible",
       csiz->lower_bound, csiz->upper_bound, csiz->effective_bits);
 
@@ -120,13 +120,14 @@ asn_dec_rval_t OCTET_STRING_decode_uper(
   if (csiz->effective_bits == 0) {
     int ret;
     if (bpc) {
-      ASN_DEBUG("Encoding OCTET STRING size %ld", csiz->upper_bound);
+      ASN_DEBUG(
+          "Encoding OCTET STRING size %" ASN_PRIdMAX "", csiz->upper_bound);
       ret = OCTET_STRING_per_get_characters(
           pd, st->buf, csiz->upper_bound, bpc, unit_bits, cval->lower_bound,
           cval->upper_bound, pc);
       if (ret > 0) RETURN(RC_FAIL);
     } else {
-      ASN_DEBUG("Encoding BIT STRING size %ld", csiz->upper_bound);
+      ASN_DEBUG("Encoding BIT STRING size %" ASN_PRIdMAX "", csiz->upper_bound);
       ret = per_get_many_bits(pd, st->buf, 0, unit_bits * csiz->upper_bound);
     }
     if (ret < 0) RETURN(RC_WMORE);
@@ -195,6 +196,21 @@ asn_enc_rval_t OCTET_STRING_encode_uper(
 
   if (!st || (!st->buf && st->size)) ASN__ENCODE_FAILED;
 
+  /*
+   * Sanity check for st->size: if it appears to contain a pointer value
+   * rather than a reasonable size, this indicates a struct layout mismatch
+   * or memory corruption. This can happen when the type descriptor specifics
+   * don't match the actual structure being passed.
+   */
+  if (st->size > 0x7FFFFFFFUL) { /* More than ~2GB is suspicious */
+    ASN_DEBUG(
+        "OCTET_STRING size %zu (0x%zx) is suspiciously large, "
+        "possible pointer value or memory corruption. Check type descriptor "
+        "specifics.",
+        st->size, st->size);
+    ASN__ENCODE_FAILED;
+  }
+
   if (pc) {
     cval = &pc->value;
     csiz = &pc->size;
@@ -240,7 +256,7 @@ asn_enc_rval_t OCTET_STRING_encode_uper(
   ASN_DEBUG(
       "Encoding %s into %" ASN_PRI_SIZE
       " units of %d bits"
-      " (%ld..%ld, effective %d)%s",
+      " (%" ASN_PRIdMAX "..%" ASN_PRIdMAX ", effective %d)%s",
       td->name, size_in_units, unit_bits, csiz->lower_bound, csiz->upper_bound,
       csiz->effective_bits, ct_extensible ? " EXT" : "");
 
@@ -268,8 +284,9 @@ asn_enc_rval_t OCTET_STRING_encode_uper(
 
   if (csiz->effective_bits >= 0 && !inext) {
     ASN_DEBUG(
-        "Encoding %" ASN_PRI_SIZE " bytes (%ld), length in %d bits", st->size,
-        size_in_units - csiz->lower_bound, csiz->effective_bits);
+        "Encoding %" ASN_PRI_SIZE " bytes (%" ASN_PRIdMAX
+        "), length in %d bits",
+        st->size, size_in_units - csiz->lower_bound, csiz->effective_bits);
     ret = per_put_few_bits(
         po, size_in_units - csiz->lower_bound, csiz->effective_bits);
     if (ret) ASN__ENCODE_FAILED;

@@ -54,7 +54,10 @@ void PlmnSupportItem::getSliceSupportList(
 //------------------------------------------------------------------------------
 bool PlmnSupportItem::encode(Ngap_PLMNSupportItem_t& plmnSupportItem) const {
   if (!m_PlmnId.encode(plmnSupportItem.pLMNIdentity)) return false;
-  if (!m_SliceSupportList.encode(plmnSupportItem.sliceSupportList))
+  if (!plmnSupportItem.sliceSupportList)
+    plmnSupportItem.sliceSupportList =
+        (Ngap_SliceSupportList_t*) calloc(1, sizeof(Ngap_SliceSupportList_t));
+  if (!m_SliceSupportList.encode(*plmnSupportItem.sliceSupportList))
     return false;
   return true;
 }
@@ -62,7 +65,8 @@ bool PlmnSupportItem::encode(Ngap_PLMNSupportItem_t& plmnSupportItem) const {
 //------------------------------------------------------------------------------
 bool PlmnSupportItem::decode(const Ngap_PLMNSupportItem_t& plmnSupportItem) {
   if (!m_PlmnId.decode(plmnSupportItem.pLMNIdentity)) return false;
-  if (!m_SliceSupportList.decode(plmnSupportItem.sliceSupportList))
+  if (!plmnSupportItem.sliceSupportList) return false;
+  if (!m_SliceSupportList.decode(*plmnSupportItem.sliceSupportList))
     return false;
   return true;
 }

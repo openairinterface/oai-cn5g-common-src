@@ -6,6 +6,8 @@
 
 extern "C" {
 #include "Ngap_TAIListForInactiveItem.h"
+#include "Ngap_TAIListForInactive.h"
+#include "asn_SEQUENCE_OF.h"
 }
 
 namespace oai::ngap {
@@ -51,8 +53,12 @@ void CoreNetworkAssistanceInformationForInactive::get(
 bool CoreNetworkAssistanceInformationForInactive::encode(
     Ngap_CoreNetworkAssistanceInformationForInactive_t&
         coreNetworkAssistanceInformation) const {
+  coreNetworkAssistanceInformation.uEIdentityIndexValue =
+      (Ngap_UEIdentityIndexValue_t*) calloc(
+          1, sizeof(Ngap_UEIdentityIndexValue_t));
+  if (!coreNetworkAssistanceInformation.uEIdentityIndexValue) return false;
   if (!m_UeIdentityIndexValue.encode(
-          coreNetworkAssistanceInformation.uEIdentityIndexValue))
+          *coreNetworkAssistanceInformation.uEIdentityIndexValue))
     return false;
 
   if (!m_PeriodicRegUpdateTimer.encode(
@@ -65,9 +71,17 @@ bool CoreNetworkAssistanceInformationForInactive::encode(
         (Ngap_TAIListForInactiveItem_t*) calloc(
             1, sizeof(Ngap_TAIListForInactiveItem_t));
     if (!taiListForInactiveItem) return false;
-    if (!it->encode(taiListForInactiveItem->tAI)) return false;
+    taiListForInactiveItem->tAI = (Ngap_TAI_t*) calloc(1, sizeof(Ngap_TAI_t));
+    if (!taiListForInactiveItem->tAI) return false;
+    if (!it->encode(*taiListForInactiveItem->tAI)) return false;
+    if (!coreNetworkAssistanceInformation.tAIListForInactive) {
+      coreNetworkAssistanceInformation.tAIListForInactive =
+          (Ngap_TAIListForInactive_t*) calloc(
+              1, sizeof(Ngap_TAIListForInactive_t));
+      if (!coreNetworkAssistanceInformation.tAIListForInactive) return false;
+    }
     if (ASN_SEQUENCE_ADD(
-            &coreNetworkAssistanceInformation.tAIListForInactive.list,
+            &coreNetworkAssistanceInformation.tAIListForInactive->list,
             taiListForInactiveItem) != 0)
       return false;
   }
@@ -96,21 +110,26 @@ bool CoreNetworkAssistanceInformationForInactive::encode(
 bool CoreNetworkAssistanceInformationForInactive::decode(
     const Ngap_CoreNetworkAssistanceInformationForInactive_t&
         coreNetworkAssistanceInformation) {
+  if (!coreNetworkAssistanceInformation.uEIdentityIndexValue) return false;
   if (!m_UeIdentityIndexValue.decode(
-          coreNetworkAssistanceInformation.uEIdentityIndexValue))
+          *coreNetworkAssistanceInformation.uEIdentityIndexValue))
     return false;
 
   if (!m_PeriodicRegUpdateTimer.decode(
           coreNetworkAssistanceInformation.periodicRegistrationUpdateTimer))
     return false;
 
+  if (!coreNetworkAssistanceInformation.tAIListForInactive) return false;
   for (int i = 0;
-       i < coreNetworkAssistanceInformation.tAIListForInactive.list.count;
+       i < coreNetworkAssistanceInformation.tAIListForInactive->list.count;
        i++) {
     Tai tai_item = {};
+    if (!coreNetworkAssistanceInformation.tAIListForInactive->list.array[i]
+             ->tAI)
+      return false;
     if (!tai_item.decode(
-            coreNetworkAssistanceInformation.tAIListForInactive.list.array[i]
-                ->tAI))
+            *coreNetworkAssistanceInformation.tAIListForInactive->list.array[i]
+                 ->tAI))
       return false;
     m_TaiList.push_back(tai_item);
   }

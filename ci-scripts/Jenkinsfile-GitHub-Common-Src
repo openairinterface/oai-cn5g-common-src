@@ -131,6 +131,8 @@ pipeline {
         failure {
           script {
             preBuildFailureMessage = 'Git operation failure or internal CI error'
+            if (isPullRequest)
+               preBuildFailureMessage += ", likely conflicts with ${targetBranch}; please resolve it."
             echo preBuildFailureMessage
             recordFailure()
           }
@@ -167,15 +169,21 @@ pipeline {
             ]) {
               sh "git -c credential.helper='!f() { echo \"username=\$GITHUB_USERNAME\"; echo \"password=\$GITHUB_TOKEN\"; }; f' fetch --no-tags ${env.GIT_URL} +refs/heads/${targetBranch}:refs/remotes/origin/${targetBranch}"
             }
+            // The list is kept on claHost: read it over SSH for the
+            // check instead of storing a copy on the build node. Retry
+            // to handle transient network failures.
+            retry(3) {
+              sh "ssh -o BatchMode=yes ${claHost} 'cat ${claFile}' > cla.csv"
+            }
+            // An empty list is a misconfiguration, not a reason to fail the CLA Check
+            sh "test -s cla.csv"
 
             def mrValidationLog = "signedCommit_${env.BUILD_NUMBER}.log"
             def mrValidationExitCode = sh(
-              script: "bash ./ci-scripts/pre-ci-check.sh -s ${env.GITHUB_PR_HEAD_SHA} -t origin/${targetBranch} > ${mrValidationLog} 2>&1",
+              script: "bash ./ci-scripts/pre-ci-check.sh -s ${env.GITHUB_PR_HEAD_SHA} -t origin/${targetBranch} -r ${params.gitAccount}/${params.gitRepo} -p ${env.GITHUB_PR_NUMBER} -c cla.csv > ${mrValidationLog} 2>&1",
               returnStatus: true
             )
             def mrValidationMessage = readFile(mrValidationLog).trim()
-            sh "rm -f ${mrValidationLog}"
-
             if (mrValidationExitCode >= 1) {
               mrValidationWarning = mrValidationMessage
             }
@@ -266,6 +274,10 @@ pipeline {
             sh 'docker image prune --force'
             // HTML build report (PR only).
             if (isPullRequest) {
+              if (!fileExists('ci-scripts/generateHTMLReport.py')) {
+                echo 'Skipping HTML report -- workspace was never checked out'
+                return
+              }
               withEnv(["PR_TITLE=${env.GITHUB_PR_TITLE}"]) {
                 sh "python3 ./ci-scripts/generateHTMLReport.py --archives archives --all-nfs ${ALL_NFS.join(',')} --job-name ${JOB_NAME} --build-id ${BUILD_ID} --build-url ${env.BUILD_URL} --git-url ${env.GIT_URL} --git-src-branch ${common_src_branch} --git-src-commit ${env.GITHUB_PR_HEAD_SHA} --git-dst-branch ${targetBranch} --git-dst-commit ${env.GIT_COMMIT} --build-time \"${env.JOB_TIMESTAMP}\" --pr-url ${env.GITHUB_PR_URL} --pr-title \"\$PR_TITLE\""
               }
@@ -294,7 +306,7 @@ pipeline {
           }
           githubPRComment comment: githubPRMessage(message)
         }
-        notifyGitHub('SUCCESS', 'Build success', 'Jenkins OAI CI')
+        notifyGitHub('SUCCESS', 'Build success', env.JOB_BASE_NAME)
         echo "Pipeline is SUCCESSFUL"
       }
     }
@@ -315,7 +327,7 @@ pipeline {
           }
           githubPRComment comment: githubPRMessage(message)
         }
-        notifyGitHub('FAILURE', 'Build failed', 'Jenkins OAI CI')
+        notifyGitHub('FAILURE', 'Build failed', env.JOB_BASE_NAME)
         echo "Pipeline FAILED"
       }
     }
@@ -360,7 +372,7 @@ def checkoutSource() {
   }
 }
 
-// Record a failed stage for the PR comment. 'Jenkins OAI CI' (posted from the
+// Record a failed stage for the PR comment. env.JOB_BASE_NAME (posted from the
 // pipeline post blocks) is the only GitHub commit status this job publishes.
 def recordFailure(String reportLink = null) {
   failingStages += reportLink ? "\n * [${env.STAGE_NAME}](${reportLink})" : "\n * ${env.STAGE_NAME}"

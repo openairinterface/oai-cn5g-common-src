@@ -1578,12 +1578,12 @@ class pfcp_volume_threshold_ie : public pfcp_ie {
     }
     if (u1.bf.ulvol) {
       is.read(reinterpret_cast<char*>(&uplink_volume), sizeof(uplink_volume));
-      total_volume = be64toh(uplink_volume);
+      uplink_volume = be64toh(uplink_volume);
     }
     if (u1.bf.dlvol) {
       is.read(
           reinterpret_cast<char*>(&downlink_volume), sizeof(downlink_volume));
-      total_volume = be64toh(downlink_volume);
+      downlink_volume = be64toh(downlink_volume);
     }
   }
   //--------
@@ -1804,18 +1804,19 @@ class pfcp_subsequent_volume_threshold_ie : public pfcp_ie {
       throw pfcp_tlv_bad_length_exception(
           tlv.type, tlv.get_length(), __FILE__, __LINE__);
     }
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1));
     if (u1.bf.tovol) {
       is.read(reinterpret_cast<char*>(&total_volume), sizeof(total_volume));
       total_volume = be64toh(total_volume);
     }
     if (u1.bf.ulvol) {
       is.read(reinterpret_cast<char*>(&uplink_volume), sizeof(uplink_volume));
-      total_volume = be64toh(uplink_volume);
+      uplink_volume = be64toh(uplink_volume);
     }
     if (u1.bf.dlvol) {
       is.read(
           reinterpret_cast<char*>(&downlink_volume), sizeof(downlink_volume));
-      total_volume = be64toh(downlink_volume);
+      downlink_volume = be64toh(downlink_volume);
     }
   }
   //--------
@@ -4556,18 +4557,19 @@ class pfcp_volume_quota_ie : public pfcp_ie {
       throw pfcp_tlv_bad_length_exception(
           tlv.type, tlv.get_length(), __FILE__, __LINE__);
     }
+    is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1));
     if (u1.bf.tovol) {
       is.read(reinterpret_cast<char*>(&total_volume), sizeof(total_volume));
       total_volume = be64toh(total_volume);
     }
     if (u1.bf.ulvol) {
       is.read(reinterpret_cast<char*>(&uplink_volume), sizeof(uplink_volume));
-      total_volume = be64toh(uplink_volume);
+      uplink_volume = be64toh(uplink_volume);
     }
     if (u1.bf.dlvol) {
       is.read(
           reinterpret_cast<char*>(&downlink_volume), sizeof(downlink_volume));
-      total_volume = be64toh(downlink_volume);
+      downlink_volume = be64toh(downlink_volume);
     }
   }
   //--------

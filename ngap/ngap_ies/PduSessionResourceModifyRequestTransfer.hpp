@@ -13,6 +13,7 @@
 #include "UlNgUUpTnlModifyList.hpp"
 #include "QosFlowAddOrModifyRequestItem.hpp"
 #include "QosFlowAddOrModifyRequestList.hpp"
+#include "QosFlowListWithCause.hpp"
 
 extern "C" {
 #include "Ngap_PDUSessionResourceModifyRequestTransfer.h"
@@ -50,6 +51,9 @@ class PduSessionResourceModifyRequestTransfer {
   void getQosFlowAddOrModifyRequestList(
       std::optional<QosFlowAddOrModifyRequestList>& list) const;
 
+  void setQosFlowToReleaseList(const QosFlowListWithCause& list);
+  void getQosFlowToReleaseList(std::optional<QosFlowListWithCause>& list) const;
+
   int encode(uint8_t* buf, int bufSize);
   bool decode(uint8_t* buf, int bufSize);
 
@@ -65,7 +69,8 @@ class PduSessionResourceModifyRequestTransfer {
   std::optional<NetworkInstance> m_NetworkInstance;
   // QoS Flow Add or Modify Request List (Optional 0..)
   std::optional<QosFlowAddOrModifyRequestList> m_QosFlowAddOrModifyRequestList;
-  // TODO: QoS Flow to Release List (Optional)
+  // QoS Flow to Release List (Optional 0..) [TS 38.413 9.3.4.3 / 9.3.1.13]
+  std::optional<QosFlowListWithCause> m_QosFlowToReleaseList;
   // TODO: Additional UL NG-U UP TNL Information (Optional)
   // TODO: Common Network Instance (Optional)
   // TODO: Additional Redundant UL NG-U UP TNL Information (Optional)
@@ -75,6 +80,7 @@ class PduSessionResourceModifyRequestTransfer {
 
   void addPduSessionAggregateMaximumBitRate();
   void addQosFlowAddOrModifyRequestList();
+  void addQosFlowToReleaseList();
 };
 
 }  // namespace oai::ngap

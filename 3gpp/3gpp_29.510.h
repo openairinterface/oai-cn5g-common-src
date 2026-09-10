@@ -379,7 +379,7 @@ typedef struct subscription_condition_s {
     // TODO:
   }
 
-  virtual ~subscription_condition_s(){};
+  virtual ~subscription_condition_s() {};
 
   std::string to_string() const {
     std::string s = {};

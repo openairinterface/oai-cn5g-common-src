@@ -20,7 +20,7 @@ namespace oai::ngap {
 class UeAssociatedLogicalNgConnectionItem {
  public:
   UeAssociatedLogicalNgConnectionItem();
-  virtual ~UeAssociatedLogicalNgConnectionItem(){};
+  virtual ~UeAssociatedLogicalNgConnectionItem() {};
 
   bool setAmfUeNgapId(const uint64_t& id);
   bool getAmfUeNgapId(uint64_t& id) const;

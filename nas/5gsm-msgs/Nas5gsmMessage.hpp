@@ -12,8 +12,8 @@ namespace oai::nas {
 
 class Nas5gsmMessage : public NasMessage {
  public:
-  Nas5gsmMessage(){};
-  virtual ~Nas5gsmMessage(){};
+  Nas5gsmMessage() {};
+  virtual ~Nas5gsmMessage() {};
 
   Nas5gsmMessage(
       uint8_t epd, uint8_t pdu_session_id, uint16_t procedure_transaction_id,

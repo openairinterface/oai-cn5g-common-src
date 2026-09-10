@@ -19,7 +19,7 @@ Non3gppNwProvidedPolicies::Non3gppNwProvidedPolicies()
     : Type1NasIeFormatTv(kIeiNon3gppNwProvidedPolicies) {}
 
 //------------------------------------------------------------------------------
-Non3gppNwProvidedPolicies::~Non3gppNwProvidedPolicies(){};
+Non3gppNwProvidedPolicies::~Non3gppNwProvidedPolicies() {};
 
 //------------------------------------------------------------------------------
 void Non3gppNwProvidedPolicies::SetValue(uint8_t value) {

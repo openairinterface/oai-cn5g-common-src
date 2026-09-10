@@ -26,7 +26,7 @@ class uint_range_generator {
   };
 
   uint_range_generator(uint_range_generator const&) = delete;
-  void operator=(uint_range_generator const&) = delete;
+  void operator=(uint_range_generator const&)       = delete;
 
   UINT get_uid() {
     std::unique_lock<std::mutex> lr(m_uid_generator);
@@ -118,7 +118,7 @@ class uint_uid_generator {
   }
 
   uint_uid_generator(uint_uid_generator const&) = delete;
-  void operator=(uint_uid_generator const&) = delete;
+  void operator=(uint_uid_generator const&)     = delete;
 
   UINT get_uid() {
     std::unique_lock<std::mutex> lr(m_uid_generator);

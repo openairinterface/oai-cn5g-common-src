@@ -885,7 +885,8 @@ select_UnsuccessfulOutcome_Ngap_criticality_type(
   size_t for_column                 = 4; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UnsuccessfulOutcome, procedureCode));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UnsuccessfulOutcome, procedureCode));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -934,7 +935,8 @@ static asn_type_selector_result_t select_UnsuccessfulOutcome_Ngap_value_type(
   size_t for_column                 = 2; /* &UnsuccessfulOutcome */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UnsuccessfulOutcome, procedureCode));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UnsuccessfulOutcome, procedureCode));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =

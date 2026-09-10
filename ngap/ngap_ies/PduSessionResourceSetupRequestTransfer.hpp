@@ -26,7 +26,7 @@ namespace oai::ngap {
 class PduSessionResourceSetupRequestTransfer {
  public:
   PduSessionResourceSetupRequestTransfer();
-  virtual ~PduSessionResourceSetupRequestTransfer(){};
+  virtual ~PduSessionResourceSetupRequestTransfer() {};
 
   // PDU Session Aggregate Maximum Bit Rate (optional)
   bool setPduSessionAggregateMaximumBitRate(

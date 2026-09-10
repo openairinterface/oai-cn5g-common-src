@@ -117,7 +117,7 @@ typedef unsigned int uint32_t;
 #endif /* Thread safety */
 
 #ifndef offsetof /* If not defined by <stddef.h> */
-#define offsetof(s, m) ((ptrdiff_t) & (((s*) 0)->m) - (ptrdiff_t) ((s*) 0))
+#define offsetof(s, m) ((ptrdiff_t) &(((s*) 0)->m) - (ptrdiff_t) ((s*) 0))
 #endif /* offsetof */
 
 #ifndef MIN /* Suitable for comparing primitive types (integers) */

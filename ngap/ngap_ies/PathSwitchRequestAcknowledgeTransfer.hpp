@@ -22,7 +22,7 @@ namespace oai::ngap {
 class PathSwitchRequestAcknowledgeTransfer {
  public:
   PathSwitchRequestAcknowledgeTransfer();
-  virtual ~PathSwitchRequestAcknowledgeTransfer(){};
+  virtual ~PathSwitchRequestAcknowledgeTransfer() {};
 
   void setUlNgUUpTnlInformation(
       const UpTransportLayerInformation& ulNgUUpTnlInformation);

@@ -31,7 +31,7 @@ NasKeySetIdentifier::NasKeySetIdentifier(bool tsc, uint8_t key_id)
 }
 
 //------------------------------------------------------------------------------
-NasKeySetIdentifier::~NasKeySetIdentifier(){};
+NasKeySetIdentifier::~NasKeySetIdentifier() {};
 
 //------------------------------------------------------------------------------
 void NasKeySetIdentifier::Set(bool high_pos) {

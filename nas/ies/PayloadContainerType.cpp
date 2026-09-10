@@ -26,4 +26,4 @@ PayloadContainerType::PayloadContainerType(uint8_t iei, uint8_t value)
 }
 
 //------------------------------------------------------------------------------
-PayloadContainerType::~PayloadContainerType(){};
+PayloadContainerType::~PayloadContainerType() {};

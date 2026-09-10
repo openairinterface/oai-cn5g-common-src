@@ -10,7 +10,7 @@ namespace oai::nas {
 
 class NasMessage {
  public:
-  NasMessage(){};
+  NasMessage() {};
   virtual ~NasMessage() = default;
 
   // May not be the actual length of the message (by rounding 1/2 octet to 1

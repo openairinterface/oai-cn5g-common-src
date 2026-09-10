@@ -202,7 +202,7 @@ ssize_t pxml_parse(
         }
         break;
     } /* switch(*ptr) */
-  }   /* for() */
+  } /* for() */
 
   /*
    * Flush the partially processed chunk, state permitting.

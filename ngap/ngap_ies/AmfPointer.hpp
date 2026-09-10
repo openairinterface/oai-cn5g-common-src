@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <string>
+#include <cstdint>
 
 constexpr uint8_t kAmfPointerMaxValue = 63;  // 6 bits
 

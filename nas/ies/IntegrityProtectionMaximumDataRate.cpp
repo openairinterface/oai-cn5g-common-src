@@ -33,7 +33,7 @@ IntegrityProtectionMaximumDataRate::IntegrityProtectionMaximumDataRate(
 }
 
 //------------------------------------------------------------------------------
-IntegrityProtectionMaximumDataRate::~IntegrityProtectionMaximumDataRate(){};
+IntegrityProtectionMaximumDataRate::~IntegrityProtectionMaximumDataRate() {};
 
 //------------------------------------------------------------------------------
 uint32_t IntegrityProtectionMaximumDataRate::GetIeLength() const {

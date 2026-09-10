@@ -25,7 +25,7 @@ MicoIndication::MicoIndication() : Type1NasIeFormatTv(kIeiMicoIndication) {
 }
 
 //------------------------------------------------------------------------------
-MicoIndication::~MicoIndication(){};
+MicoIndication::~MicoIndication() {};
 
 //------------------------------------------------------------------------------
 void MicoIndication::SetValue() {

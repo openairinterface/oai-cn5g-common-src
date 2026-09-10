@@ -15,7 +15,7 @@ namespace oai::nas {
 
 class ExtendedProtocolDiscriminator : public NasIe {
  public:
-  ExtendedProtocolDiscriminator(){};  // TODO: = delete;
+  ExtendedProtocolDiscriminator() {};  // TODO: = delete;
   ExtendedProtocolDiscriminator(uint8_t epd);
   virtual ~ExtendedProtocolDiscriminator() = default;
 

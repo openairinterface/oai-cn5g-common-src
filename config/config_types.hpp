@@ -32,7 +32,7 @@ class config_type {
    * Validates the configuration
    * @throws std::runtime_error if validation is not successful
    */
-  virtual void validate(){};
+  virtual void validate() {};
 
   /**
    * Overwrites the values from a YAML node

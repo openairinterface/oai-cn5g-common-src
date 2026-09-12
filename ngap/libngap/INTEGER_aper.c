@@ -85,25 +85,31 @@ asn_dec_rval_t INTEGER_decode_aper(
          * by the minimum number of octets needed for the offset.
          */
         size_t max_range_bytes = ((size_t) ct->range_bits + 7) >> 3;
-        size_t remaining_bits  = pd->nbits - pd->nboff;
+        size_t length_bits     = 0;
         ssize_t len;
+        int len_value;
         uintmax_t offset = 0;
         intmax_t value;
 
-        if (remaining_bits > 0 && remaining_bits <= ct->range_bits &&
-            (remaining_bits & 0x07) == 0) {
-          len = (ssize_t) (remaining_bits >> 3);
-        } else {
-          len = aper_get_length(pd, -1, -1, -1, &repeat);
-          if (len < 0) ASN__DECODE_STARVED;
-          if (repeat || len <= 0 || (size_t) len > max_range_bytes ||
-              (size_t) len > sizeof(offset))
-            ASN__DECODE_FAILED;
-          ASN_DEBUG(
-              "Constrained INTEGER>16 decode: range_bits=%d "
-              "max_bytes=%" ASN_PRI_SIZE " len=%" ASN_PRI_SSIZE,
-              ct->range_bits, max_range_bytes, len);
-        }
+        if (max_range_bytes > sizeof(offset)) ASN__DECODE_FAILED;
+
+        /*
+         * The number of value octets is itself a constrained whole number
+         * in the range 1..max_range_bytes, carried in the minimum number of
+         * bits, and is followed by octet alignment (mirrors the encoder).
+         */
+        while (((size_t) 1 << length_bits) < max_range_bytes) length_bits++;
+        len_value = per_get_few_bits(pd, (int) length_bits);
+        if (len_value < 0) ASN__DECODE_STARVED;
+        len = (ssize_t) len_value + 1;
+        if ((size_t) len > max_range_bytes) ASN__DECODE_FAILED;
+        if (aper_get_align(pd) < 0) ASN__DECODE_FAILED;
+
+        ASN_DEBUG(
+            "Constrained INTEGER>16 decode: range_bits=%d "
+            "max_bytes=%" ASN_PRI_SIZE " len_bits=%" ASN_PRI_SIZE
+            " len=%" ASN_PRI_SSIZE,
+            ct->range_bits, max_range_bytes, length_bits, len);
 
         while (len > 0) {
           int buf = per_get_few_bits(pd, 8);

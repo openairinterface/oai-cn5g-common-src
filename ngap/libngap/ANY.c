@@ -8,6 +8,7 @@
 asn_OCTET_STRING_specifics_t asn_SPC_ANY_specs = {
     sizeof(ANY_t), offsetof(ANY_t, _asn_ctx), ASN_OSUBV_ANY};
 asn_TYPE_operation_t asn_OP_ANY = {
+    .kind = ASN_KIND_PRIMITIVE,
     OCTET_STRING_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
     OCTET_STRING_print,
@@ -15,6 +16,7 @@ asn_TYPE_operation_t asn_OP_ANY = {
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     OCTET_STRING_compare,
+    OCTET_STRING_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     OCTET_STRING_decode_ber,
     OCTET_STRING_encode_der,
@@ -30,13 +32,15 @@ asn_TYPE_operation_t asn_OP_ANY = {
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    OCTET_STRING_decode_jer_hex,
     ANY_encode_jer,
 #else
     0,
+    0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
-    0,
-    0,
+    OCTET_STRING_decode_oer,
+    OCTET_STRING_encode_oer,
 #else
     0,
     0,
@@ -56,7 +60,14 @@ asn_TYPE_operation_t asn_OP_ANY = {
     0,
 #endif /* !defined(ASN_DISABLE_APER_SUPPORT) */
     0, /* Random fill is not defined for ANY type */
-    0  /* Use generic outmost tag fetcher */
+    0, /* Use generic outmost tag fetcher */
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    OCTET_STRING_decode_cbor, /* Reuse OCTET STRING decoder (raw DER bytes) */
+    OCTET_STRING_encode_cbor, /* Reuse OCTET STRING encoder (raw DER bytes) */
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 };
 asn_TYPE_descriptor_t asn_DEF_ANY = {
     "ANY",
@@ -72,8 +83,11 @@ asn_TYPE_descriptor_t asn_DEF_ANY = {
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT) || !defined(ASN_DISABLE_APER_SUPPORT)
         0,
-#endif                              /* !defined(ASN_DISABLE_UPER_SUPPORT) ||   \
-                                       !defined(ASN_DISABLE_APER_SUPPORT) */
+#endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
+          !defined(ASN_DISABLE_APER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+        0,
+#endif                              /* !defined(ASN_DISABLE_JER_SUPPORT) */
         asn_generic_no_constraint}, /* No constraints */
     0,
     0, /* No members */

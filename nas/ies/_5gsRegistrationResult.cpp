@@ -110,6 +110,7 @@ int _5gsRegistrationResult::Decode(
 
   const int min_len = is_iei ? k5gsRegistrationResultLength :
                                (k5gsRegistrationResultLength - 1);
+
   if (len < min_len) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the minimum length of this IE (%d "

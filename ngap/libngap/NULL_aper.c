@@ -26,8 +26,10 @@ asn_dec_rval_t NULL_decode_aper(
   }
 
   /*
-   * NULL type does not have content octets.
+   * NULL type does not have content octets but has to align
    */
+
+  if (aper_get_align(pd) < 0) ASN__DECODE_FAILED;
 
   rv.code     = RC_OK;
   rv.consumed = 0;
@@ -43,6 +45,8 @@ asn_enc_rval_t NULL_encode_aper(
   (void) constraints;
   (void) sptr;
   (void) po;
+
+  if (aper_put_align(po) < 0) ASN__ENCODE_FAILED;
 
   er.encoded = 0;
   ASN__ENCODED_OK(er);

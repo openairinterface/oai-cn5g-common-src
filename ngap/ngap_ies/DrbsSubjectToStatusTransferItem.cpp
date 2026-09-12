@@ -37,10 +37,12 @@ bool DrbSubjectToStatusTransferItem::decode(
   if (drbItem.dRB_ID) {
     m_DrbId = drbItem.dRB_ID;
   }
-  if (!m_DrbUl.decode(drbItem.dRBStatusUL)) {
+  if (!drbItem.dRBStatusUL) return false;
+  if (!m_DrbUl.decode(*drbItem.dRBStatusUL)) {
     return false;
   }
-  if (!m_DrbDl.decode(drbItem.dRBStatusDL)) {
+  if (!drbItem.dRBStatusDL) return false;
+  if (!m_DrbDl.decode(*drbItem.dRBStatusDL)) {
     return false;
   }
   return true;
@@ -51,11 +53,17 @@ bool DrbSubjectToStatusTransferItem::encode(
     Ngap_DRBsSubjectToStatusTransferItem_t& drbItem) const {
   drbItem.dRB_ID = m_DrbId;
 
-  if (!m_DrbUl.encode(drbItem.dRBStatusUL)) {
+  if (!drbItem.dRBStatusUL)
+    drbItem.dRBStatusUL =
+        (Ngap_DRBStatusUL_t*) calloc(1, sizeof(Ngap_DRBStatusUL_t));
+  if (!m_DrbUl.encode(*drbItem.dRBStatusUL)) {
     return false;
   }
 
-  if (!m_DrbDl.encode(drbItem.dRBStatusDL)) {
+  if (!drbItem.dRBStatusDL)
+    drbItem.dRBStatusDL =
+        (Ngap_DRBStatusDL_t*) calloc(1, sizeof(Ngap_DRBStatusDL_t));
+  if (!m_DrbDl.encode(*drbItem.dRBStatusDL)) {
     return false;
   }
 

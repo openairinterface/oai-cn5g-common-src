@@ -9,7 +9,7 @@
 /*
  * Version of the ASN.1 infrastructure shipped with compiler.
  */
-int get_asn1c_environment_version() {
+int get_asn1c_environment_version(void) {
   return ASN1C_ENVIRONMENT_VERSION;
 }
 
@@ -50,6 +50,25 @@ int asn_fprint(
   }
 
   return fflush(stream);
+}
+
+/*
+ * Copy a structuture.
+ */
+int asn_copy(
+    const asn_TYPE_descriptor_t* td, void** struct_dst,
+    const void* struct_src) {
+  if (!td || !struct_dst || !struct_src) {
+    errno = EINVAL;
+    return -1;
+  }
+
+  if (!td->op) {
+    errno = ENOSYS;
+    return -1;
+  }
+
+  return td->op->copy_struct(td, struct_dst, struct_src);
 }
 
 /* Dump the data into the specified stdio stream */

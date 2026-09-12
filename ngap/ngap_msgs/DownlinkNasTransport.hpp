@@ -14,6 +14,7 @@
 #include "NasPdu.hpp"
 #include "NgapUeMessage.hpp"
 #include "RanPagingPriority.hpp"
+#include "TargetNssaiInformation.hpp"
 #include "UeAggregateMaxBitRate.hpp"
 
 namespace oai::ngap {
@@ -50,6 +51,8 @@ class DownLinkNasTransportMsg : public NgapUeMessage {
   void setAllowedNssai(const AllowedNSSAI& allowedNssai);
   bool getAllowedNssai(AllowedNSSAI& allowedNssai) const;
 
+  void setTargetNssaiInformation(const TargetNssaiInformation& value);
+
  private:
   Ngap_DownlinkNASTransport_t* m_DownLinkNasTransportIes;
 
@@ -62,6 +65,7 @@ class DownLinkNasTransportMsg : public NgapUeMessage {
   std::optional<IndexToRfsp> m_IndexToRfsp;                          // Optional
   std::optional<UeAggregateMaxBitRate> m_UeAggregateMaxBitRate;      // Optional
   std::optional<AllowedNSSAI> m_AllowedNssai;                        // Optional
+  std::optional<TargetNssaiInformation> m_TargetNssaiInformation;    // Rel-17
   // TODO: SRVCC Operation Possible (Optional, Rel 16.14.0)
   // TODO: Enhanced Coverage Restriction (Optional, Rel 16.14.0)
   // TODO: Extended Connected Time (Optional, Rel 16.14.0)

@@ -18,7 +18,9 @@ bool SliceSupportList::encode(Ngap_SliceSupportList_t& SliceSupportList) const {
        it < m_SliceSupportItems.end(); ++it) {
     Ngap_SliceSupportItem_t* ta =
         (Ngap_SliceSupportItem_t*) calloc(1, sizeof(Ngap_SliceSupportItem_t));
-    if (!it->encode(ta->s_NSSAI)) return false;
+    if (!ta->s_NSSAI)
+      ta->s_NSSAI = (Ngap_S_NSSAI_t*) calloc(1, sizeof(Ngap_S_NSSAI_t));
+    if (!it->encode(*ta->s_NSSAI)) return false;
     if (ASN_SEQUENCE_ADD(&SliceSupportList.list, ta) != 0) return false;
   }
   return true;
@@ -28,7 +30,8 @@ bool SliceSupportList::encode(Ngap_SliceSupportList_t& SliceSupportList) const {
 bool SliceSupportList::decode(const Ngap_SliceSupportList_t& SliceSupportList) {
   for (int i = 0; i < SliceSupportList.list.count; i++) {
     SNssai item = {};
-    if (!item.decode(SliceSupportList.list.array[i]->s_NSSAI)) return false;
+    if (!SliceSupportList.list.array[i]->s_NSSAI) return false;
+    if (!item.decode(*SliceSupportList.list.array[i]->s_NSSAI)) return false;
     m_SliceSupportItems.push_back(item);
   }
 

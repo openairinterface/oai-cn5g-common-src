@@ -68,7 +68,10 @@ bool Dynamic5qiDescriptor::encode(
     return false;
   if (!m_PacketDelayBudget.encode(dynamic5QIDescriptor.packetDelayBudget))
     return false;
-  if (!m_PacketErrorRate.encode(dynamic5QIDescriptor.packetErrorRate))
+  if (!dynamic5QIDescriptor.packetErrorRate)
+    dynamic5QIDescriptor.packetErrorRate =
+        (Ngap_PacketErrorRate_t*) calloc(1, sizeof(Ngap_PacketErrorRate_t));
+  if (!m_PacketErrorRate.encode(*dynamic5QIDescriptor.packetErrorRate))
     return false;
 
   if (m_FiveQI.has_value()) {
@@ -110,7 +113,8 @@ bool Dynamic5qiDescriptor::decode(
     return false;
   if (!m_PacketDelayBudget.decode(dynamic5QIDescriptor.packetDelayBudget))
     return false;
-  if (!m_PacketErrorRate.decode(dynamic5QIDescriptor.packetErrorRate))
+  if (!dynamic5QIDescriptor.packetErrorRate) return false;
+  if (!m_PacketErrorRate.decode(*dynamic5QIDescriptor.packetErrorRate))
     return false;
 
   if (dynamic5QIDescriptor.fiveQI) {

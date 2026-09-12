@@ -5,6 +5,10 @@
 #include <asn_internal.h>
 #include <asn_application.h>
 #include <errno.h>
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+#include <cbor_encoder.h>
+#include <cbor_decoder.h>
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 
 static asn_enc_rval_t asn_encode_internal(
     const asn_codec_ctx_t* opt_codec_ctx, enum asn_transfer_syntax syntax,
@@ -223,6 +227,9 @@ static asn_enc_rval_t asn_encode_internal(
 #if !defined(ASN_DISABLE_XER_SUPPORT)
   enum xer_encoder_flags_e xer_flags = XER_F_CANONICAL;
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+  enum jer_encoder_flags_e jer_flags = JER_F;
+#endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
   (void) opt_codec_ctx; /* Parameters are not checked on encode yet. */
 
@@ -425,9 +432,15 @@ static asn_enc_rval_t asn_encode_internal(
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    case ATS_JER_MINIFIED:
+      /* Currently JER_F and JER_F_MINIFIED have opposite purposes
+       *  so we just flip the flag. */
+      jer_flags &= ~JER_F;
+      jer_flags |= JER_F_MINIFIED;
+      /* Fall through. */
     case ATS_JER:
       if (td->op->jer_encoder) {
-        er = jer_encode(td, sptr, callback, callback_key);
+        er = jer_encode(td, sptr, jer_flags, callback, callback_key);
         if (er.encoded == -1) {
           if (er.failed_type && er.failed_type->op->jer_encoder) {
             errno = EBADF; /* Structure has incorrect form. */
@@ -441,6 +454,29 @@ static asn_enc_rval_t asn_encode_internal(
       }
       break;
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
+
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    case ATS_CBOR:
+      if (td->op->cbor_encoder) {
+        er = cbor_encode(td, sptr, callback, callback_key);
+        if (er.encoded == -1) {
+          if (er.failed_type && er.failed_type->op->cbor_encoder) {
+            errno = EBADF; /* Structure has incorrect form. */
+          } else {
+            errno = ENOENT; /* CBOR is not defined for this type. */
+          }
+        }
+      } else {
+        errno = ENOENT; /* Transfer syntax is not defined for this type. */
+        ASN__ENCODE_FAILED;
+      }
+      break;
+#else
+    case ATS_CBOR:
+      errno = ENOENT; /* CBOR is not defined. */
+      ASN__ENCODE_FAILED;
+      break;
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
     default:
       errno = ENOENT;
       ASN__ENCODE_FAILED;
@@ -526,5 +562,22 @@ asn_dec_rval_t asn_decode(
       errno = ENOENT;
       ASN__DECODE_FAILED;
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
+
+    case ATS_JER:
+    case ATS_JER_MINIFIED:
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+      return jer_decode(opt_codec_ctx, td, sptr, buffer, size);
+#else
+      errno = ENOENT;
+      ASN__DECODE_FAILED;
+#endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
+
+    case ATS_CBOR:
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+      return cbor_decode(opt_codec_ctx, td, sptr, buffer, size);
+#else
+      errno = ENOENT;
+      ASN__DECODE_FAILED;
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
   }
 }

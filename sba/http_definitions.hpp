@@ -5,9 +5,9 @@
 #pragma once
 #define FMT_HEADER_ONLY
 
-#include <cpr/cpr.h>
-#include <curl/curl.h>
 #include <fmt/format.h>
+
+#include <map>
 
 #include <nlohmann/json.hpp>
 
@@ -15,12 +15,12 @@
 
 #include "3gpp_29.500.h"
 
-namespace oai::http {
+namespace oai::sba {
 
 struct response {
   int status_code;
   std::string body;
-  cpr::Header headers;
+  std::map<std::string, std::string> headers;
   nlohmann::json get_json() const {
     nlohmann::json json_data = {};
     try {
@@ -34,7 +34,7 @@ struct response {
 struct request {
   std::string uri;
   std::string body;
-  cpr::Header headers;
+  std::map<std::string, std::string> headers;
 
   std::string to_string() const {
     return fmt::format("HTTP Request to URI: {}", uri);
@@ -47,4 +47,4 @@ constexpr auto kSbiResponseJsonData         = "jsonData";
 constexpr auto kSbiResponseHttpResponseCode = "httpResponseCode";
 constexpr auto kSbiResponseHeaderLocation   = "httpResponseLocation";
 
-}  // namespace oai::http
+}  // namespace oai::sba

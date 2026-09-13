@@ -15,10 +15,10 @@
 
 namespace oai::config {
 
-const int COLUMN_WIDTH           = 45;
-const int INDENT_WIDTH           = 2;
-const std::string BASE_FORMATTER = "{} {:.<{}}: {}\n";
-const std::string LOGGER_NAME    = "config ";
+const int COLUMN_WIDTH               = 45;
+const int INDENT_WIDTH               = 2;
+inline constexpr auto BASE_FORMATTER = "{} {:.<{}}: {}\n";
+const std::string LOGGER_NAME        = "config ";
 
 // common validator REGEX
 

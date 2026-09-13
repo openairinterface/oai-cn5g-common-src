@@ -110,3 +110,29 @@ void sbi_helper::parse_query(
       });
   return;
 }
+
+//---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_udsf_record_uri(
+    const nf_addr_t& udsf_addr, const std::string& realm,
+    const std::string& storage_id, const std::string& record_id) {
+  return udsf_addr.uri_root + "/nudsf-dr/" + udsf_addr.api_version + "/" +
+         realm + "/" + storage_id + "/records/" + record_id;
+}
+
+//---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_udsf_records_uri(
+    const nf_addr_t& udsf_addr, const std::string& realm,
+    const std::string& storage_id) {
+  return udsf_addr.uri_root + "/nudsf-dr/" + udsf_addr.api_version + "/" +
+         realm + "/" + storage_id + "/records";
+}
+
+//---------------------------------------------------------------------------------------------
+std::string sbi_helper::get_udsf_block_uri(
+    const nf_addr_t& udsf_addr, const std::string& realm,
+    const std::string& storage_id, const std::string& record_id,
+    const std::string& block_id) {
+  return sbi_helper::get_udsf_record_uri(
+             udsf_addr, realm, storage_id, record_id) +
+         "/blocks/" + block_id;
+}

@@ -11,6 +11,7 @@ SET(SBA_SRC_FILES
         ${SBA_DIR}/nf_event.cpp
         ${SBA_DIR}/task_manager.cpp
         ${SBA_DIR}/http_client.cpp
+        ${SBA_DIR}/nf_service.cpp
 )
 
 # The HTTP/2 server (http2_server.cpp) pulls in libevent on top of nghttp2, so

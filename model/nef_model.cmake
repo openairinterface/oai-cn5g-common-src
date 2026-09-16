@@ -272,6 +272,9 @@ set(NEF_MODEL_SRC_FILES
     ${NEF_MODEL_DIR}/NwdafInfo.cpp
     ${NEF_MODEL_DIR}/PartitioningCriteria.cpp
     ${NEF_MODEL_DIR}/PartitioningCriteria_anyOf.cpp
+    ${NEF_MODEL_DIR}/PatchItem.cpp
+    ${NEF_MODEL_DIR}/PatchOperation.cpp
+    ${NEF_MODEL_DIR}/PatchOperation_anyOf.cpp
     ${NEF_MODEL_DIR}/PcfInfo.cpp
     ${NEF_MODEL_DIR}/PcscfInfo.cpp
     ${NEF_MODEL_DIR}/PduSessionType.cpp

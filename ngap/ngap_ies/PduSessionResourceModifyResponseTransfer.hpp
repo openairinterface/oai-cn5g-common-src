@@ -23,7 +23,7 @@ namespace oai::ngap {
 class PduSessionResourceModifyResponseTransfer {
  public:
   PduSessionResourceModifyResponseTransfer();
-  virtual ~PduSessionResourceModifyResponseTransfer(){};
+  virtual ~PduSessionResourceModifyResponseTransfer() {};
 
   void setDlNgUUpTnlInformation(
       const UpTransportLayerInformation& dlNgUUpTnlInformation);

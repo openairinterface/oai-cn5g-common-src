@@ -1474,7 +1474,7 @@ class pfcp_ies_container {
         0, PFCP_IE_3GPP_INTERFACE_TYPE, __FILE__, __LINE__);
   }
 
-  virtual ~pfcp_ies_container(){};
+  virtual ~pfcp_ies_container() {};
 };
 }  // namespace pfcp
 

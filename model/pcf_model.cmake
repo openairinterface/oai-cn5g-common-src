@@ -5,6 +5,7 @@ SET(PCF_MODEL_DIR ${SRC_TOP_DIR}/${MOUNTED_COMMON}/model)
 include_directories(${PCF_MODEL_DIR})
 
 file(GLOB PCF_MODEL_SRC_FILES
+    ${PCF_MODEL_DIR}/AddrFqdn.cpp
     ${PCF_MODEL_DIR}/AccNetChId.cpp
     ${PCF_MODEL_DIR}/AccNetChargingAddress.cpp
     ${PCF_MODEL_DIR}/AcceptableServiceInfo.cpp
@@ -29,6 +30,7 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/AfSigProtocol.cpp
     ${PCF_MODEL_DIR}/AfSigProtocol_anyOf.cpp
     ${PCF_MODEL_DIR}/AlternativeServiceRequirementsData.cpp
+    ${PCF_MODEL_DIR}/ApplicationVolume.cpp
     ${PCF_MODEL_DIR}/AmRequestedValueRep.cpp
     ${PCF_MODEL_DIR}/Ambr.cpp
     ${PCF_MODEL_DIR}/AnGwAddress.cpp
@@ -97,27 +99,41 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/BdtReqData.cpp
     ${PCF_MODEL_DIR}/BdtReqDataPatch.cpp
     ${PCF_MODEL_DIR}/BridgeManagementContainer.cpp
+    ${PCF_MODEL_DIR}/CacheStatus_anyOf.cpp
+    ${PCF_MODEL_DIR}/CacheStatus.cpp
     ${PCF_MODEL_DIR}/CandidateForReplacement.cpp
     ${PCF_MODEL_DIR}/CellGlobalId.cpp
+    ${PCF_MODEL_DIR}/CivicAddress.cpp
     ${PCF_MODEL_DIR}/ChargingData.cpp
     ${PCF_MODEL_DIR}/ChargingInformation.cpp
+    ${PCF_MODEL_DIR}/CommunicationCollection.cpp
     ${PCF_MODEL_DIR}/CollectiveBehaviourInfo.cpp
     ${PCF_MODEL_DIR}/ConditionData.cpp
     ${PCF_MODEL_DIR}/CreditManagementStatus.cpp
     ${PCF_MODEL_DIR}/CreditManagementStatus_anyOf.cpp
     ${PCF_MODEL_DIR}/DddTrafficDescriptor.cpp
+    ${PCF_MODEL_DIR}/DispersionClass_oneOf.cpp
+    ${PCF_MODEL_DIR}/DispersionClass.cpp
     ${PCF_MODEL_DIR}/DispersionCollection.cpp
     ${PCF_MODEL_DIR}/DlDataDeliveryStatus.cpp
     ${PCF_MODEL_DIR}/DlDataDeliveryStatus_anyOf.cpp
     ${PCF_MODEL_DIR}/DnaiChangeType.cpp
     ${PCF_MODEL_DIR}/DnaiChangeType_anyOf.cpp
+    ${PCF_MODEL_DIR}/DynamicPolicy.cpp
     ${PCF_MODEL_DIR}/DnnSelectionMode.cpp
     ${PCF_MODEL_DIR}/DnnSelectionMode_anyOf.cpp
     ${PCF_MODEL_DIR}/DownlinkDataNotificationControl.cpp
     ${PCF_MODEL_DIR}/DownlinkDataNotificationControlRm.cpp
+    ${PCF_MODEL_DIR}/EndpointAddress.cpp
     ${PCF_MODEL_DIR}/EasIpReplacementInfo.cpp
     ${PCF_MODEL_DIR}/EasServerAddress.cpp
+    ${PCF_MODEL_DIR}/EllipsoidArc.cpp
     ${PCF_MODEL_DIR}/Ecgi.cpp
+    ${PCF_MODEL_DIR}/Exception.cpp
+    ${PCF_MODEL_DIR}/ExceptionId_anyOf.cpp
+    ${PCF_MODEL_DIR}/ExceptionId.cpp
+    ${PCF_MODEL_DIR}/ExceptionTrend_anyOf.cpp
+    ${PCF_MODEL_DIR}/ExceptionTrend.cpp
     ${PCF_MODEL_DIR}/ErrorReport.cpp
     ${PCF_MODEL_DIR}/EthFlowDescription.cpp
     ${PCF_MODEL_DIR}/EthernetFlowInfo.cpp
@@ -136,6 +152,7 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/Failure_oneOf.cpp
     ${PCF_MODEL_DIR}/FinalUnitAction.cpp
     ${PCF_MODEL_DIR}/FinalUnitAction_anyOf.cpp
+    ${PCF_MODEL_DIR}/FlowInfo.cpp
     ${PCF_MODEL_DIR}/FlowDirection.cpp
     ${PCF_MODEL_DIR}/FlowDirectionRm.cpp
     ${PCF_MODEL_DIR}/FlowDirection_anyOf.cpp
@@ -145,6 +162,9 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/FlowUsage.cpp
     ${PCF_MODEL_DIR}/FlowUsage_anyOf.cpp
     ${PCF_MODEL_DIR}/Flows.cpp
+    ${PCF_MODEL_DIR}/GADShape.cpp
+    ${PCF_MODEL_DIR}/GeographicalCoordinates.cpp
+    ${PCF_MODEL_DIR}/GeographicArea.cpp
     ${PCF_MODEL_DIR}/GNbId.cpp
     ${PCF_MODEL_DIR}/GeraLocation.cpp
     ${PCF_MODEL_DIR}/GlobalRanNodeId.cpp
@@ -152,6 +172,7 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/HfcNodeId.cpp
     ${PCF_MODEL_DIR}/InvalidParam.cpp
     ${PCF_MODEL_DIR}/IpAddr.cpp
+    ${PCF_MODEL_DIR}/IpPacketFilterSet.cpp
     ${PCF_MODEL_DIR}/IpEndPoint.cpp
     ${PCF_MODEL_DIR}/IpFlowInfo.cpp
     ${PCF_MODEL_DIR}/IpIndex.cpp
@@ -160,8 +181,14 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/Ipv6Prefix.cpp
     ${PCF_MODEL_DIR}/LineType.cpp
     ${PCF_MODEL_DIR}/LineType_anyOf.cpp
+    ${PCF_MODEL_DIR}/LocationArea5G.cpp
     ${PCF_MODEL_DIR}/LocationAreaId.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord.cpp
     ${PCF_MODEL_DIR}/MSAccessActivityCollection.cpp
+    ${PCF_MODEL_DIR}/M5QoSSpecification.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_connectionMetrics.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_requestMessage.cpp
+    ${PCF_MODEL_DIR}/MediaStreamingAccessRecord_allOf_responseMessage.cpp
     ${PCF_MODEL_DIR}/MaPduIndication.cpp
     ${PCF_MODEL_DIR}/MaPduIndication_anyOf.cpp
     ${PCF_MODEL_DIR}/MappingOfSnssai.cpp
@@ -189,6 +216,7 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/Ncgi.cpp
     ${PCF_MODEL_DIR}/NetLocAccessSupport.cpp
     ${PCF_MODEL_DIR}/NetLocAccessSupport_anyOf.cpp
+    ${PCF_MODEL_DIR}/NetworkAssistanceSession.cpp
     ${PCF_MODEL_DIR}/NetworkAreaInfo.cpp
     ${PCF_MODEL_DIR}/NgApCause.cpp
     ${PCF_MODEL_DIR}/Notification.cpp
@@ -207,6 +235,9 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/PartialSuccessReport.cpp
     ${PCF_MODEL_DIR}/PartitioningCriteria.cpp
     ${PCF_MODEL_DIR}/PartitioningCriteria_anyOf.cpp
+    ${PCF_MODEL_DIR}/PatchItem.cpp
+    ${PCF_MODEL_DIR}/PatchOperation.cpp
+    ${PCF_MODEL_DIR}/PatchOperation_anyOf.cpp
     ${PCF_MODEL_DIR}/PatchBdtPolicy.cpp
     ${PCF_MODEL_DIR}/PcEvent.cpp
     ${PCF_MODEL_DIR}/PcEventExposureNotif.cpp
@@ -227,7 +258,15 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/PduSessionTsnBridge.cpp
     ${PCF_MODEL_DIR}/PduSessionType.cpp
     ${PCF_MODEL_DIR}/PduSessionType_anyOf.cpp
+    ${PCF_MODEL_DIR}/PerformanceData.cpp
+    ${PCF_MODEL_DIR}/PerUeAttribute.cpp
     ${PCF_MODEL_DIR}/PerformanceDataCollection.cpp
+    ${PCF_MODEL_DIR}/Point.cpp
+    ${PCF_MODEL_DIR}/PointAltitude.cpp
+    ${PCF_MODEL_DIR}/PointAltitudeUncertainty.cpp
+    ${PCF_MODEL_DIR}/PointUncertaintyCircle.cpp
+    ${PCF_MODEL_DIR}/PointUncertaintyEllipse.cpp
+    ${PCF_MODEL_DIR}/Polygon.cpp
     ${PCF_MODEL_DIR}/PlmnId.cpp
     ${PCF_MODEL_DIR}/PlmnIdNid.cpp
     ${PCF_MODEL_DIR}/PolicyAssociation.cpp
@@ -311,9 +350,11 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/ServAuthInfo.cpp
     ${PCF_MODEL_DIR}/ServAuthInfo_anyOf.cpp
     ${PCF_MODEL_DIR}/ServerAddressingInfo.cpp
+    ${PCF_MODEL_DIR}/ServiceDataFlowDescription.cpp
     ${PCF_MODEL_DIR}/ServiceAreaCoverageInfo.cpp
     ${PCF_MODEL_DIR}/ServiceAreaId.cpp
     ${PCF_MODEL_DIR}/ServiceAreaRestriction.cpp
+    ${PCF_MODEL_DIR}/ServiceExperienceInfoPerFlow.cpp
     ${PCF_MODEL_DIR}/ServiceExperienceInfoPerApp.cpp
     ${PCF_MODEL_DIR}/ServiceIdentification.cpp
     ${PCF_MODEL_DIR}/ServiceInfoStatus.cpp
@@ -325,6 +366,9 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/SessionRuleFailureCode.cpp
     ${PCF_MODEL_DIR}/SessionRuleFailureCode_anyOf.cpp
     ${PCF_MODEL_DIR}/SessionRuleReport.cpp
+    ${PCF_MODEL_DIR}/SvcExperience.cpp
+    ${PCF_MODEL_DIR}/SupportedGADShapes_anyOf.cpp
+    ${PCF_MODEL_DIR}/SupportedGADShapes.cpp
     ${PCF_MODEL_DIR}/SgsnAddress.cpp
     ${PCF_MODEL_DIR}/SipForkingIndication.cpp
     ${PCF_MODEL_DIR}/SipForkingIndication_anyOf.cpp
@@ -374,8 +418,12 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/TsnQosContainer.cpp
     ${PCF_MODEL_DIR}/TsnQosContainerRm.cpp
     ${PCF_MODEL_DIR}/TwapId.cpp
+    ${PCF_MODEL_DIR}/UeTrajectoryCollection.cpp
+    ${PCF_MODEL_DIR}/UeContextInfoClass_anyOf.cpp
+    ${PCF_MODEL_DIR}/UeContextInfoClass.cpp
     ${PCF_MODEL_DIR}/UeCampingRep.cpp
     ${PCF_MODEL_DIR}/UeCommunicationCollection.cpp
+    ${PCF_MODEL_DIR}/UncertaintyEllipse.cpp
     ${PCF_MODEL_DIR}/UeIdentityInfo.cpp
     ${PCF_MODEL_DIR}/UeInitiatedResourceRequest.cpp
     ${PCF_MODEL_DIR}/UeMobilityCollection.cpp

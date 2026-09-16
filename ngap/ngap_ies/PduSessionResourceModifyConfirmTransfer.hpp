@@ -23,7 +23,7 @@ namespace oai::ngap {
 class PduSessionResourceModifyConfirmTransfer {
  public:
   PduSessionResourceModifyConfirmTransfer();
-  virtual ~PduSessionResourceModifyConfirmTransfer(){};
+  virtual ~PduSessionResourceModifyConfirmTransfer() {};
 
   void setQosFlowModifyConfirmList(
       const std::vector<QosFlowModifyConfirmItem> list);

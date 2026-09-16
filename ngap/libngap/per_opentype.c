@@ -18,8 +18,7 @@ asn_dec_rval_t uper_sot_suck(
   (void) constraints;
   (void) sptr;
 
-  while (per_get_few_bits(pd, 1) >= 0)
-    ;
+  while (per_get_few_bits(pd, 1) >= 0);
 
   rv.code     = RC_OK;
   rv.consumed = pd->moved;

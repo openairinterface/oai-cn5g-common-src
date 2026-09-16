@@ -17,7 +17,7 @@ namespace oai::nas {
 
 class Nas5gsmHeader {
  public:
-  Nas5gsmHeader(){};
+  Nas5gsmHeader() {};
   virtual ~Nas5gsmHeader() = default;
 
   Nas5gsmHeader(

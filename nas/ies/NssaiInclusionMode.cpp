@@ -19,7 +19,7 @@ NssaiInclusionMode::NssaiInclusionMode(uint8_t value)
 }
 
 //------------------------------------------------------------------------------
-NssaiInclusionMode::~NssaiInclusionMode(){};
+NssaiInclusionMode::~NssaiInclusionMode() {};
 
 //------------------------------------------------------------------------------
 void NssaiInclusionMode::SetValue(uint8_t value) {

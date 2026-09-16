@@ -14,7 +14,7 @@ namespace oai::ngap {
 class ConfidentialityProtectionResult {
  public:
   ConfidentialityProtectionResult();
-  virtual ~ConfidentialityProtectionResult(){};
+  virtual ~ConfidentialityProtectionResult() {};
 
   void set(const e_Ngap_ConfidentialityProtectionResult& value);
   bool get(long& value) const;

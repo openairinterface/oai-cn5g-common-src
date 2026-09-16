@@ -23,7 +23,7 @@ namespace oai::ngap {
 class PduSessionResourceNotifyTransfer {
  public:
   PduSessionResourceNotifyTransfer();
-  virtual ~PduSessionResourceNotifyTransfer(){};
+  virtual ~PduSessionResourceNotifyTransfer() {};
 
   void setQosFlowNotifyList(const std::vector<QosFlowNotifyItem> list);
   void setQosFlowNotifyList(const QosFlowNotifyList& list);

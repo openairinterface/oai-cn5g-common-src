@@ -2150,8 +2150,7 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
 
   /* First check if the current buffer holds the terminator */
   b[l] = terminator; /* Set sentinel */
-  for (i = 0; b[i] != terminator; i++)
-    ;
+  for (i = 0; b[i] != terminator; i++);
   if (i < l) {
     x.slen        = i + 1;
     ret           = bconcat(r, &x);
@@ -2180,8 +2179,7 @@ int bsreadlna(bstring r, struct bStream* s, char terminator) {
       return BSTR_ERR & -(r->slen == rlo);
     }
     b[l] = terminator; /* Set sentinel */
-    for (i = 0; b[i] != terminator; i++)
-      ;
+    for (i = 0; b[i] != terminator; i++);
     if (i < l) break;
     r->slen += l;
   }
@@ -2224,8 +2222,7 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
 
   /* First check if the current buffer holds the terminator */
   b[l] = term->data[0]; /* Set sentinel */
-  for (i = 0; !testInCharField(&cf, b[i]); i++)
-    ;
+  for (i = 0; !testInCharField(&cf, b[i]); i++);
   if (i < l) {
     x.slen        = i + 1;
     ret           = bconcat(r, &x);
@@ -2255,8 +2252,7 @@ int bsreadlnsa(bstring r, struct bStream* s, const_bstring term) {
     }
 
     b[l] = term->data[0]; /* Set sentinel */
-    for (i = 0; !testInCharField(&cf, b[i]); i++)
-      ;
+    for (i = 0; !testInCharField(&cf, b[i]); i++);
     if (i < l) break;
     r->slen += l;
   }
@@ -2520,8 +2516,7 @@ int bssplitscb(
   if (NULL == (buff = bfromcstr(""))) return BSTR_ERR;
 
   if (splitStr->slen == 0) {
-    while (bsreada(buff, s, BSSSC_BUFF_LEN) >= 0)
-      ;
+    while (bsreada(buff, s, BSSSC_BUFF_LEN) >= 0);
     if ((ret = cb(parm, 0, buff)) > 0) ret = 0;
   } else {
     buildCharField(&chrs, splitStr);
@@ -2962,7 +2957,9 @@ struct bstrList* bsplits(const_bstring str, const_bstring splitStr) {
 /* Give WATCOM C/C++, MSVC some latitude for their non-support of vsnprintf */
 #if defined(__WATCOMC__) || defined(_MSC_VER)
 #define exvsnprintf(r, b, n, f, a)                                             \
-  { r = _vsnprintf(b, n, f, a); }
+  {                                                                            \
+    r = _vsnprintf(b, n, f, a);                                                \
+  }
 #else
 #ifdef BSTRLIB_NOVSNP
 /* This is just a hack.  If you are using a system without a vsnprintf, it is
@@ -2982,7 +2979,9 @@ extern int vsnprintf(char* buf, size_t count, const char* format, va_list arg);
 #endif
 
 #define exvsnprintf(r, b, n, f, a)                                             \
-  { r = vsnprintf(b, n, f, a); }
+  {                                                                            \
+    r = vsnprintf(b, n, f, a);                                                 \
+  }
 #endif
 #endif
 

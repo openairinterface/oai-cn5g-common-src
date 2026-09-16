@@ -24,7 +24,7 @@ namespace oai::ngap {
 class PduSessionResourceModifyRequestTransfer {
  public:
   PduSessionResourceModifyRequestTransfer();
-  virtual ~PduSessionResourceModifyRequestTransfer(){};
+  virtual ~PduSessionResourceModifyRequestTransfer() {};
 
   void setPduSessionAggregateMaximumBitRate(
       const long& bitRateDl, const long& bitRateUl);

@@ -38,7 +38,7 @@ typedef struct asn_ioc_cell_s {
     size_t types_count;
     struct {
       unsigned choice_position;
-    } * types;
+    }* types;
   } open_type;
 } asn_ioc_cell_t;
 

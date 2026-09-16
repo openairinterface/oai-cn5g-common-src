@@ -109,8 +109,8 @@ asn_dec_rval_t oer_decode_primitive(
   (void) constraints;
 
   if (!st) {
-    st =
-        (ASN__PRIMITIVE_TYPE_t*) (*sptr = CALLOC(1, sizeof(ASN__PRIMITIVE_TYPE_t)));
+    st = (ASN__PRIMITIVE_TYPE_t*) (*sptr = CALLOC(
+                                       1, sizeof(ASN__PRIMITIVE_TYPE_t)));
     if (!st) ASN__DECODE_FAILED;
   }
 

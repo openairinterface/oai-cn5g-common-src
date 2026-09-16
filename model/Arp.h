@@ -26,6 +26,7 @@
 namespace odb {
 class access;
 }
+
 namespace oai::_3gpp::model {
 
 /// <summary>
@@ -91,6 +92,9 @@ class Arp {
   oai::_3gpp::model::PreemptionCapability m_PreemptCap;
 
   oai::_3gpp::model::PreemptionVulnerability m_PreemptVuln;
+
+ private:
+  friend class odb::access;
 };
 
 }  // namespace oai::_3gpp::model

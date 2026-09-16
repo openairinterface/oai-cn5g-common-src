@@ -17,7 +17,7 @@ HandoverNotifyMsg::HandoverNotifyMsg() : NgapUeMessage() {
 }
 
 //------------------------------------------------------------------------------
-HandoverNotifyMsg::~HandoverNotifyMsg(){};
+HandoverNotifyMsg::~HandoverNotifyMsg() {};
 
 //------------------------------------------------------------------------------
 void HandoverNotifyMsg::initialize() {

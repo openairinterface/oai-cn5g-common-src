@@ -85,7 +85,7 @@ class pfcp_ie : public stream_serializable {
   explicit pfcp_ie(const pfcp_tlv& t) : tlv(t) {}
   explicit pfcp_ie(const uint16_t tlv_type) : tlv() { tlv.type = tlv_type; }
 
-  virtual ~pfcp_ie(){};
+  virtual ~pfcp_ie() {};
 
   virtual void to_core_type(pfcp_ies_container& s) {
     throw pfcp_msg_illegal_ie_exception(s.msg_id, tlv.type, __FILE__, __LINE__);
@@ -617,7 +617,7 @@ class pfcp_enterprise_specific_ie : public pfcp_ie {
   }
   //  --------
   explicit pfcp_enterprise_specific_ie(const pfcp_tlv& t)
-      : pfcp_ie(t), enterprise_id(0), proprietary_data(){};
+      : pfcp_ie(t), enterprise_id(0), proprietary_data() {};
 
   //--------
   void to_core_type(pfcp::enterprise_specific_t& b) {
@@ -875,7 +875,7 @@ class pfcp_network_instance_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_network_instance_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_network_instance_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::network_instance_t& b) {
     b.network_instance = network_instance;
@@ -979,7 +979,7 @@ class pfcp_sdf_filter_ie : public pfcp_ie {
     tlv.set_length(2);
   }
   //--------
-  explicit pfcp_sdf_filter_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_sdf_filter_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::sdf_filter_t& b) {
     b     = {};
@@ -1093,7 +1093,7 @@ class pfcp_application_id_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_application_id_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_application_id_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::application_id_t& b) {
     b.application_id = application_id;
@@ -1145,7 +1145,7 @@ class pfcp_gate_status_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_gate_status_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_gate_status_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::gate_status_t& b) {
     b.ul_gate = u1.bf.ul_gate;
@@ -1428,7 +1428,7 @@ class pfcp_transport_level_marking_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_transport_level_marking_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_transport_level_marking_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::transport_level_marking_t& b) {
     b.transport_level_marking = transport_level_marking;
@@ -1513,7 +1513,7 @@ class pfcp_volume_threshold_ie : public pfcp_ie {
     downlink_volume = 0;
   }
   //--------
-  explicit pfcp_volume_threshold_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_volume_threshold_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::volume_threshold_t& b) {
     b       = {};
@@ -1612,7 +1612,7 @@ class pfcp_time_threshold_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_time_threshold_ie(const pfcp_tlv& t)
-      : pfcp_ie(t), time_threshold(0){};
+      : pfcp_ie(t), time_threshold(0) {};
   //--------
   void to_core_type(pfcp::time_threshold_t& b) {
     b.time_threshold = time_threshold;
@@ -1661,7 +1661,7 @@ class pfcp_monitoring_time_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_monitoring_time_ie(const pfcp_tlv& t)
-      : pfcp_ie(t), monitoring_time(0){};
+      : pfcp_ie(t), monitoring_time(0) {};
   //--------
   void to_core_type(pfcp::monitoring_time_t& b) {
     b.monitoring_time = monitoring_time;
@@ -1746,7 +1746,7 @@ class pfcp_subsequent_volume_threshold_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_subsequent_volume_threshold_ie(const pfcp_tlv& t)
-      : pfcp_ie(t){};
+      : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::subsequent_volume_threshold_t& b) {
     b       = {};
@@ -1847,7 +1847,7 @@ class pfcp_subsequent_time_threshold_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_subsequent_time_threshold_ie(const pfcp_tlv& t)
-      : pfcp_ie(t), subsequent_time_threshold(0){};
+      : pfcp_ie(t), subsequent_time_threshold(0) {};
   //--------
   void to_core_type(pfcp::subsequent_time_threshold_t& b) {
     b.subsequent_time_threshold = subsequent_time_threshold;
@@ -1900,7 +1900,7 @@ class pfcp_inactivity_detection_time_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_inactivity_detection_time_ie(const pfcp_tlv& t)
-      : pfcp_ie(t), inactivity_detection_time(0){};
+      : pfcp_ie(t), inactivity_detection_time(0) {};
   //--------
   void to_core_type(pfcp::inactivity_detection_time_t& b) {
     b.inactivity_detection_time = inactivity_detection_time;
@@ -1990,7 +1990,7 @@ class pfcp_reporting_triggers_ie : public pfcp_ie {
     tlv.set_length(2);
   }
   //--------
-  explicit pfcp_reporting_triggers_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_reporting_triggers_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::reporting_triggers_t& b) {
     b.liusa = u1.bf.liusa;
@@ -2251,7 +2251,7 @@ class pfcp_forwarding_policy_ie : public pfcp_ie {
   explicit pfcp_forwarding_policy_ie(const pfcp_tlv& t)
       : pfcp_ie(t),
         forwarding_policy_identifier_length(0),
-        forwarding_policy_identifier(){};
+        forwarding_policy_identifier() {};
   //--------
   void to_core_type(pfcp::forwarding_policy_t& b) {
     b.forwarding_policy_identifier_length = forwarding_policy_identifier_length;
@@ -3275,7 +3275,7 @@ class pfcp_pdr_id_ie : public pfcp_ie {
     tlv.set_length(sizeof(rule_id));
   }
   //--------
-  explicit pfcp_pdr_id_ie(const pfcp_tlv& t) : pfcp_ie(t), rule_id(0){};
+  explicit pfcp_pdr_id_ie(const pfcp_tlv& t) : pfcp_ie(t), rule_id(0) {};
   //--------
   void to_core_type(pfcp::pdr_id_t& b) { b.rule_id = rule_id; }
   //--------
@@ -3344,7 +3344,7 @@ class pfcp_f_seid_ie : public pfcp_ie {
     tlv.set_length(9);
   }
   //--------
-  explicit pfcp_f_seid_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_f_seid_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::fseid_t& b) {
     b      = {};
@@ -3544,7 +3544,7 @@ class pfcp_node_id_ie : public pfcp_ie {
     fqdn                = {};
   }
   //--------
-  explicit pfcp_node_id_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_node_id_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::node_id_t& b) {
     b.node_id_type = u1.bf.node_id_type;
@@ -3798,7 +3798,7 @@ class pfcp_usage_report_trigger_ie : public pfcp_ie {
     tlv.set_length(3);
   }
   //--------
-  explicit pfcp_usage_report_trigger_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_usage_report_trigger_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::usage_report_trigger_t& b) {
     b.immer = u1.bf.immer;
@@ -4499,7 +4499,7 @@ class pfcp_volume_quota_ie : public pfcp_ie {
     downlink_volume = 0;
   }
   //--------
-  explicit pfcp_volume_quota_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_volume_quota_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::volume_quota_t& b) {
     b       = {};
@@ -4597,7 +4597,7 @@ class pfcp_time_quota_ie : public pfcp_ie {
     tlv.set_length(sizeof(time_quota));
   }
   //--------
-  explicit pfcp_time_quota_ie(const pfcp_tlv& t) : pfcp_ie(t), time_quota(0){};
+  explicit pfcp_time_quota_ie(const pfcp_tlv& t) : pfcp_ie(t), time_quota(0) {};
   //--------
   void to_core_type(pfcp::time_quota_t& b) { b.time_quota = time_quota; }
   //--------
@@ -4958,7 +4958,7 @@ class pfcp_downlink_data_report_ie : public pfcp_grouped_ie {
       : pfcp_grouped_ie(PFCP_IE_DOWNLINK_DATA_REPORT) {}
   //--------
   explicit pfcp_downlink_data_report_ie(const pfcp_tlv& t)
-      : pfcp_grouped_ie(t){};
+      : pfcp_grouped_ie(t) {};
   //--------
   void to_core_type(pfcp::downlink_data_report& c) {
     for (auto sie : ies) {
@@ -5513,7 +5513,7 @@ class pfcp_ue_ip_address_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_ue_ip_address_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_ue_ip_address_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::ue_ip_address_t& b) {
     b.sd = u1.bf.sd;
@@ -5876,7 +5876,7 @@ class pfcp_dl_flow_level_marking_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_dl_flow_level_marking_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_dl_flow_level_marking_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::dl_flow_level_marking_t& b) {
     b     = {};
@@ -6374,7 +6374,7 @@ class pfcp_usage_report_within_session_report_request_ie
       : pfcp_grouped_ie(PFCP_IE_USAGE_REPORT_WITHIN_SESSION_REPORT_REQUEST) {}
   //--------
   explicit pfcp_usage_report_within_session_report_request_ie(const pfcp_tlv& t)
-      : pfcp_grouped_ie(t){};
+      : pfcp_grouped_ie(t) {};
   //--------
   void to_core_type(pfcp::usage_report_within_pfcp_session_report_request& c) {
     for (auto sie : ies) {
@@ -6477,7 +6477,7 @@ class pfcp_activate_predefined_rules_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_activate_predefined_rules_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_activate_predefined_rules_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::activate_predefined_rules_t& b) {
     b.predefined_rules_name = predefined_rules_name;
@@ -6527,7 +6527,7 @@ class pfcp_deactivate_predefined_rules_ie : public pfcp_ie {
   }
   //--------
   explicit pfcp_deactivate_predefined_rules_ie(const pfcp_tlv& t)
-      : pfcp_ie(t){};
+      : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::deactivate_predefined_rules_t& b) {
     b.predefined_rules_name = predefined_rules_name;
@@ -7481,7 +7481,7 @@ class pfcp_rqi_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_rqi_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_rqi_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::rqi_t& b) { b.rqi = u1.bf.rqi; }
   //--------
@@ -7530,7 +7530,7 @@ class pfcp_qfi_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_qfi_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_qfi_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::qfi_t& b) { b.qfi = u1.bf.qfi; }
   //--------
@@ -7957,7 +7957,7 @@ class pfcp_mac_address_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_mac_address_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_mac_address_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::mac_address_t& b) {
     b      = {};
@@ -8310,7 +8310,8 @@ class pfcp_ethernet_filter_properties_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_ethernet_filter_properties_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_ethernet_filter_properties_ie(const pfcp_tlv& t)
+      : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::ethernet_filter_properties_t& b) {
     b.bide = u1.bf.bide;
@@ -8521,7 +8522,7 @@ class pfcp_user_id_ie : public pfcp_ie {
     tlv.set_length(1);
   }
   //--------
-  explicit pfcp_user_id_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_user_id_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::user_id_t& b) {
     b.naif    = u1.bf.naif;
@@ -9177,7 +9178,7 @@ class pfcp_framed_route_ie : public pfcp_ie {
   //--------
   pfcp_framed_route_ie() : pfcp_ie(PFCP_IE_FRAMED_ROUTE) { tlv.set_length(0); }
   //--------
-  pfcp_framed_route_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  pfcp_framed_route_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::framed_route_t& b) { b.framed_route = framed_route; }
   //--------
@@ -9311,7 +9312,7 @@ class pfcp_apn_dnn_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_apn_dnn_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_apn_dnn_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::apn_dnn_t& b) { b.apn_dnn = apn_dnn; }
   //--------
@@ -9349,7 +9350,7 @@ class pfcp_nssai_ie : public pfcp_ie {
     tlv.set_length(0);
   }
   //--------
-  explicit pfcp_nssai_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  explicit pfcp_nssai_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::nssai_t& b) { b = nssai; }
   //--------
@@ -9399,7 +9400,7 @@ class pfcp_3gpp_interface_type_ie : public pfcp_ie {
   //--------
   pfcp_3gpp_interface_type_ie() : pfcp_ie(PFCP_IE_3GPP_INTERFACE_TYPE) {}
   //--------
-  pfcp_3gpp_interface_type_ie(const pfcp_tlv& t) : pfcp_ie(t){};
+  pfcp_3gpp_interface_type_ie(const pfcp_tlv& t) : pfcp_ie(t) {};
   //--------
   void to_core_type(pfcp::_3gpp_interface_type_t& b) {
     b.interface_type_value = u1.bf._3gpp_interface_type;
@@ -11511,7 +11512,7 @@ class pfcp_usage_report_within_session_deletion_response_ie
   //--------
   explicit pfcp_usage_report_within_session_deletion_response_ie(
       const pfcp_tlv& t)
-      : pfcp_grouped_ie(t){};
+      : pfcp_grouped_ie(t) {};
   //--------
   void to_core_type(
       pfcp::usage_report_within_pfcp_session_deletion_response& c) {

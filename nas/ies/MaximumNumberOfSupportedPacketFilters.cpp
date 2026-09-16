@@ -31,7 +31,7 @@ MaximumNumberOfSupportedPacketFilters::MaximumNumberOfSupportedPacketFilters(
 
 //------------------------------------------------------------------------------
 MaximumNumberOfSupportedPacketFilters::
-    ~MaximumNumberOfSupportedPacketFilters(){};
+    ~MaximumNumberOfSupportedPacketFilters() {};
 
 //------------------------------------------------------------------------------
 uint32_t MaximumNumberOfSupportedPacketFilters::GetIeLength() const {

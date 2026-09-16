@@ -3,16 +3,15 @@
 # */
 #---------------------------------------------------------------------
 #
-# Dockerfile for the Open-Air-Interface AMF service
-#   Valid for Ubuntu-20.04 (focal),
-#             Ubuntu-22.04 (jammy)
+# Dockerfile for the Open-Air-Interface CN5G common-src unit tests
+#   Valid for Ubuntu-24.04 (noble)
 #
 #---------------------------------------------------------------------
 
 #---------------------------------------------------------------------
 # BASE IMAGE
 #---------------------------------------------------------------------
-ARG BASE_IMAGE=ubuntu:jammy
+ARG BASE_IMAGE=ubuntu:noble
 FROM $BASE_IMAGE as common-src-unit-tests
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -27,8 +26,7 @@ RUN apt-get update && \
         make \
         libasio-dev \
         libboost-all-dev \
-        libasan6 \
-        googletest-tools \
+        libasan8 \
         libgoogle-glog-dev \
         libgtest-dev \
         libtool \

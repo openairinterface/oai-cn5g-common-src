@@ -19,8 +19,8 @@ typedef bs2::signal_type<
 class task_manager;
 class nf_event {
  public:
-  nf_event(){};
-  nf_event(nf_event const&) = delete;
+  nf_event() {};
+  nf_event(nf_event const&)       = delete;
   void operator=(nf_event const&) = delete;
 
   static nf_event& get_instance() {

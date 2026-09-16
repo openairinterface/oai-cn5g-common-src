@@ -2159,61 +2159,61 @@ static const long asn_VAL_194_Ngap_reject                                 = 0;
 static const long asn_VAL_194_Ngap_mandatory                              = 2;
 static const asn_ioc_cell_t asn_IOS_Ngap_HandoverRequiredIEs_1_rows[]     = {
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_187_Ngap_id_AMF_UE_NGAP_ID},
+         &asn_VAL_187_Ngap_id_AMF_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_187_Ngap_reject},
+         &asn_VAL_187_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_AMF_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_187_Ngap_mandatory},
+         &asn_VAL_187_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_188_Ngap_id_RAN_UE_NGAP_ID},
+         &asn_VAL_188_Ngap_id_RAN_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_188_Ngap_reject},
+         &asn_VAL_188_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_RAN_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_188_Ngap_mandatory},
+         &asn_VAL_188_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_189_Ngap_id_HandoverType},
+         &asn_VAL_189_Ngap_id_HandoverType},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_189_Ngap_reject},
+         &asn_VAL_189_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_HandoverType},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_189_Ngap_mandatory},
+         &asn_VAL_189_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_190_Ngap_id_Cause},
+         &asn_VAL_190_Ngap_id_Cause},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_190_Ngap_ignore},
+         &asn_VAL_190_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_Cause},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_190_Ngap_mandatory},
+         &asn_VAL_190_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_191_Ngap_id_TargetID},
+         &asn_VAL_191_Ngap_id_TargetID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_191_Ngap_reject},
+         &asn_VAL_191_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_TargetID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_191_Ngap_mandatory},
+         &asn_VAL_191_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_192_Ngap_id_DirectForwardingPathAvailability},
+         &asn_VAL_192_Ngap_id_DirectForwardingPathAvailability},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_192_Ngap_ignore},
+         &asn_VAL_192_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_DirectForwardingPathAvailability},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_192_Ngap_optional},
+         &asn_VAL_192_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_193_Ngap_id_PDUSessionResourceListHORqd},
+         &asn_VAL_193_Ngap_id_PDUSessionResourceListHORqd},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_193_Ngap_reject},
+         &asn_VAL_193_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_PDUSessionResourceListHORqd},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_193_Ngap_mandatory},
+         &asn_VAL_193_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_194_Ngap_id_SourceToTarget_TransparentContainer},
+         &asn_VAL_194_Ngap_id_SourceToTarget_TransparentContainer},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_194_Ngap_reject},
+         &asn_VAL_194_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_SourceToTarget_TransparentContainer},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_194_Ngap_mandatory}};
+         &asn_VAL_194_Ngap_mandatory}};
 static const asn_ioc_set_t asn_IOS_Ngap_HandoverRequiredIEs_1[] = {
     {8, 4, asn_IOS_Ngap_HandoverRequiredIEs_1_rows}};
 static const long asn_VAL_195_Ngap_id_AMF_UE_NGAP_ID                       = 10;
@@ -2242,61 +2242,61 @@ static const long asn_VAL_202_Ngap_ignore                                 = 1;
 static const long asn_VAL_202_Ngap_optional                               = 0;
 static const asn_ioc_cell_t asn_IOS_Ngap_HandoverCommandIEs_1_rows[]      = {
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_195_Ngap_id_AMF_UE_NGAP_ID},
+          &asn_VAL_195_Ngap_id_AMF_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_195_Ngap_reject},
+          &asn_VAL_195_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_AMF_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_195_Ngap_mandatory},
+          &asn_VAL_195_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_196_Ngap_id_RAN_UE_NGAP_ID},
+          &asn_VAL_196_Ngap_id_RAN_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_196_Ngap_reject},
+          &asn_VAL_196_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_RAN_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_196_Ngap_mandatory},
+          &asn_VAL_196_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_197_Ngap_id_HandoverType},
+          &asn_VAL_197_Ngap_id_HandoverType},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_197_Ngap_reject},
+          &asn_VAL_197_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_HandoverType},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_197_Ngap_mandatory},
+          &asn_VAL_197_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_198_Ngap_id_NASSecurityParametersFromNGRAN},
+          &asn_VAL_198_Ngap_id_NASSecurityParametersFromNGRAN},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_198_Ngap_reject},
+          &asn_VAL_198_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_NASSecurityParametersFromNGRAN},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_198_Ngap_conditional},
+          &asn_VAL_198_Ngap_conditional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_199_Ngap_id_PDUSessionResourceHandoverList},
+          &asn_VAL_199_Ngap_id_PDUSessionResourceHandoverList},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_199_Ngap_ignore},
+          &asn_VAL_199_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PDUSessionResourceHandoverList},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_199_Ngap_optional},
+          &asn_VAL_199_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_200_Ngap_id_PDUSessionResourceToReleaseListHOCmd},
+          &asn_VAL_200_Ngap_id_PDUSessionResourceToReleaseListHOCmd},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_200_Ngap_ignore},
+          &asn_VAL_200_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PDUSessionResourceToReleaseListHOCmd},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_200_Ngap_optional},
+          &asn_VAL_200_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_201_Ngap_id_TargetToSource_TransparentContainer},
+          &asn_VAL_201_Ngap_id_TargetToSource_TransparentContainer},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_201_Ngap_reject},
+          &asn_VAL_201_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_TargetToSource_TransparentContainer},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_201_Ngap_mandatory},
+          &asn_VAL_201_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_202_Ngap_id_CriticalityDiagnostics},
+          &asn_VAL_202_Ngap_id_CriticalityDiagnostics},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_202_Ngap_ignore},
+          &asn_VAL_202_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_CriticalityDiagnostics},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_202_Ngap_optional}};
+          &asn_VAL_202_Ngap_optional}};
 static const asn_ioc_set_t asn_IOS_Ngap_HandoverCommandIEs_1[] = {
     {8, 4, asn_IOS_Ngap_HandoverCommandIEs_1_rows}};
 static const long asn_VAL_203_Ngap_id_AMF_UE_NGAP_ID         = 10;
@@ -3527,96 +3527,96 @@ static const long asn_VAL_326_Ngap_ignore                          = 1;
 static const long asn_VAL_326_Ngap_optional                        = 0;
 static const asn_ioc_cell_t asn_IOS_Ngap_PagingIEs_1_rows[]        = {
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_314_Ngap_id_UEPagingIdentity},
+            &asn_VAL_314_Ngap_id_UEPagingIdentity},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_314_Ngap_ignore},
+            &asn_VAL_314_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_UEPagingIdentity},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_314_Ngap_mandatory},
+            &asn_VAL_314_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_315_Ngap_id_PagingDRX},
+            &asn_VAL_315_Ngap_id_PagingDRX},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_315_Ngap_ignore},
+            &asn_VAL_315_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PagingDRX},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_315_Ngap_optional},
+            &asn_VAL_315_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_316_Ngap_id_TAIListForPaging},
+            &asn_VAL_316_Ngap_id_TAIListForPaging},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_316_Ngap_ignore},
+            &asn_VAL_316_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_TAIListForPaging},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_316_Ngap_mandatory},
+            &asn_VAL_316_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_317_Ngap_id_PagingPriority},
+            &asn_VAL_317_Ngap_id_PagingPriority},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_317_Ngap_ignore},
+            &asn_VAL_317_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PagingPriority},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_317_Ngap_optional},
+            &asn_VAL_317_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_318_Ngap_id_UERadioCapabilityForPaging},
+            &asn_VAL_318_Ngap_id_UERadioCapabilityForPaging},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_318_Ngap_ignore},
+            &asn_VAL_318_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_UERadioCapabilityForPaging},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_318_Ngap_optional},
+            &asn_VAL_318_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_319_Ngap_id_PagingOrigin},
+            &asn_VAL_319_Ngap_id_PagingOrigin},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_319_Ngap_ignore},
+            &asn_VAL_319_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PagingOrigin},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_319_Ngap_optional},
+            &asn_VAL_319_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_320_Ngap_id_AssistanceDataForPaging},
+            &asn_VAL_320_Ngap_id_AssistanceDataForPaging},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_320_Ngap_ignore},
+            &asn_VAL_320_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_AssistanceDataForPaging},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_320_Ngap_optional},
+            &asn_VAL_320_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_321_Ngap_id_NB_IoT_Paging_eDRXInfo},
+            &asn_VAL_321_Ngap_id_NB_IoT_Paging_eDRXInfo},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_321_Ngap_ignore},
+            &asn_VAL_321_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_NB_IoT_Paging_eDRXInfo},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_321_Ngap_optional},
+            &asn_VAL_321_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_322_Ngap_id_NB_IoT_PagingDRX},
+            &asn_VAL_322_Ngap_id_NB_IoT_PagingDRX},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_322_Ngap_ignore},
+            &asn_VAL_322_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_NB_IoT_PagingDRX},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_322_Ngap_optional},
+            &asn_VAL_322_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_323_Ngap_id_Enhanced_CoverageRestriction},
+            &asn_VAL_323_Ngap_id_Enhanced_CoverageRestriction},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_323_Ngap_ignore},
+            &asn_VAL_323_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_Enhanced_CoverageRestriction},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_323_Ngap_optional},
+            &asn_VAL_323_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_324_Ngap_id_WUS_Assistance_Information},
+            &asn_VAL_324_Ngap_id_WUS_Assistance_Information},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_324_Ngap_ignore},
+            &asn_VAL_324_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_WUS_Assistance_Information},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_324_Ngap_optional},
+            &asn_VAL_324_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_325_Ngap_id_PagingeDRXInformation},
+            &asn_VAL_325_Ngap_id_PagingeDRXInformation},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_325_Ngap_ignore},
+            &asn_VAL_325_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_PagingeDRXInformation},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_325_Ngap_optional},
+            &asn_VAL_325_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_326_Ngap_id_CEmodeBrestricted},
+            &asn_VAL_326_Ngap_id_CEmodeBrestricted},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_326_Ngap_ignore},
+            &asn_VAL_326_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_CEmodeBrestricted},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_326_Ngap_optional}};
+            &asn_VAL_326_Ngap_optional}};
 static const asn_ioc_set_t asn_IOS_Ngap_PagingIEs_1[] = {
     {13, 4, asn_IOS_Ngap_PagingIEs_1_rows}};
 static const long asn_VAL_327_Ngap_id_RAN_UE_NGAP_ID          = 85;
@@ -4743,26 +4743,26 @@ static const long asn_VAL_434_Ngap_ignore                               = 1;
 static const long asn_VAL_434_Ngap_optional                             = 0;
 static const asn_ioc_cell_t asn_IOS_Ngap_OverloadStartIEs_1_rows[]      = {
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_432_Ngap_id_AMFOverloadResponse},
+          &asn_VAL_432_Ngap_id_AMFOverloadResponse},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_432_Ngap_reject},
+          &asn_VAL_432_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_OverloadResponse},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_432_Ngap_optional},
+          &asn_VAL_432_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_433_Ngap_id_AMFTrafficLoadReductionIndication},
+          &asn_VAL_433_Ngap_id_AMFTrafficLoadReductionIndication},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_433_Ngap_ignore},
+          &asn_VAL_433_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_TrafficLoadReductionIndication},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_433_Ngap_optional},
+          &asn_VAL_433_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_434_Ngap_id_OverloadStartNSSAIList},
+          &asn_VAL_434_Ngap_id_OverloadStartNSSAIList},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_434_Ngap_ignore},
+          &asn_VAL_434_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_OverloadStartNSSAIList},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_434_Ngap_optional}};
+          &asn_VAL_434_Ngap_optional}};
 static const asn_ioc_set_t asn_IOS_Ngap_OverloadStartIEs_1[] = {
     {3, 4, asn_IOS_Ngap_OverloadStartIEs_1_rows}};
 static const long asn_VAL_435_Ngap_id_SONConfigurationTransferUL      = 99;
@@ -5555,40 +5555,40 @@ static const long asn_VAL_509_Ngap_ignore                            = 1;
 static const long asn_VAL_509_Ngap_mandatory                         = 2;
 static const asn_ioc_cell_t asn_IOS_Ngap_LocationReportIEs_1_rows[]  = {
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_505_Ngap_id_AMF_UE_NGAP_ID},
+      &asn_VAL_505_Ngap_id_AMF_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_505_Ngap_reject},
+      &asn_VAL_505_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_AMF_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_505_Ngap_mandatory},
+      &asn_VAL_505_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_506_Ngap_id_RAN_UE_NGAP_ID},
+      &asn_VAL_506_Ngap_id_RAN_UE_NGAP_ID},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_506_Ngap_reject},
+      &asn_VAL_506_Ngap_reject},
     {"&Value", aioc__type, &asn_DEF_Ngap_RAN_UE_NGAP_ID},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_506_Ngap_mandatory},
+      &asn_VAL_506_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_507_Ngap_id_UserLocationInformation},
+      &asn_VAL_507_Ngap_id_UserLocationInformation},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_507_Ngap_ignore},
+      &asn_VAL_507_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_UserLocationInformation},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_507_Ngap_mandatory},
+      &asn_VAL_507_Ngap_mandatory},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_508_Ngap_id_UEPresenceInAreaOfInterestList},
+      &asn_VAL_508_Ngap_id_UEPresenceInAreaOfInterestList},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_508_Ngap_ignore},
+      &asn_VAL_508_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_UEPresenceInAreaOfInterestList},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_508_Ngap_optional},
+      &asn_VAL_508_Ngap_optional},
     {"&id", aioc__value, &asn_DEF_Ngap_ProtocolIE_ID,
-     &asn_VAL_509_Ngap_id_LocationReportingRequestType},
+      &asn_VAL_509_Ngap_id_LocationReportingRequestType},
     {"&criticality", aioc__value, &asn_DEF_Ngap_Criticality,
-     &asn_VAL_509_Ngap_ignore},
+      &asn_VAL_509_Ngap_ignore},
     {"&Value", aioc__type, &asn_DEF_Ngap_LocationReportingRequestType},
     {"&presence", aioc__value, &asn_DEF_Ngap_Presence,
-     &asn_VAL_509_Ngap_mandatory}};
+      &asn_VAL_509_Ngap_mandatory}};
 static const asn_ioc_set_t asn_IOS_Ngap_LocationReportIEs_1[] = {
     {5, 4, asn_IOS_Ngap_LocationReportIEs_1_rows}};
 static const long asn_VAL_510_Ngap_id_AMF_UE_NGAP_ID = 10;
@@ -6855,7 +6855,9 @@ select_CPTransportLayerInformation_ExtIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_CPTransportLayerInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_CPTransportLayerInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -6906,7 +6908,9 @@ select_CPTransportLayerInformation_ExtIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_CPTransportLayerInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_CPTransportLayerInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -7347,7 +7351,8 @@ select_GlobalRANNodeID_ExtIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_GlobalRANNodeID_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_GlobalRANNodeID_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -7396,7 +7401,8 @@ static asn_type_selector_result_t select_GlobalRANNodeID_ExtIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_GlobalRANNodeID_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_GlobalRANNodeID_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -8752,7 +8758,8 @@ select_SONInformation_ExtIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_SONInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_SONInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -8801,7 +8808,8 @@ static asn_type_selector_result_t select_SONInformation_ExtIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_SONInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_SONInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -8997,7 +9005,8 @@ static asn_type_selector_result_t select_TargetID_ExtIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TargetID_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TargetID_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9046,7 +9055,8 @@ static asn_type_selector_result_t select_TargetID_ExtIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TargetID_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TargetID_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9609,7 +9619,8 @@ select_UserLocationInformation_ExtIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UserLocationInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UserLocationInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9659,7 +9670,8 @@ select_UserLocationInformation_ExtIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UserLocationInformation_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UserLocationInformation_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9735,7 +9747,9 @@ select_UserLocationInformationW_AGF_ExtIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UserLocationInformationW_AGF_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UserLocationInformationW_AGF_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9786,7 +9800,9 @@ select_UserLocationInformationW_AGF_ExtIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UserLocationInformationW_AGF_ExtIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UserLocationInformationW_AGF_ExtIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -9984,7 +10000,9 @@ select_PDUSessionResourceSetupRequestIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10035,7 +10053,9 @@ select_PDUSessionResourceSetupRequestIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10111,7 +10131,9 @@ select_PDUSessionResourceSetupResponseIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10162,7 +10184,9 @@ select_PDUSessionResourceSetupResponseIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10238,7 +10262,9 @@ select_PDUSessionResourceReleaseCommandIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceReleaseCommandIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceReleaseCommandIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10289,7 +10315,9 @@ select_PDUSessionResourceReleaseCommandIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceReleaseCommandIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceReleaseCommandIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10365,7 +10393,9 @@ select_PDUSessionResourceReleaseResponseIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceReleaseResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceReleaseResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10416,7 +10446,9 @@ select_PDUSessionResourceReleaseResponseIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceReleaseResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceReleaseResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10492,7 +10524,9 @@ select_PDUSessionResourceModifyRequestIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10543,7 +10577,9 @@ select_PDUSessionResourceModifyRequestIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10619,7 +10655,9 @@ select_PDUSessionResourceModifyResponseIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10670,7 +10708,9 @@ select_PDUSessionResourceModifyResponseIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10745,7 +10785,8 @@ select_PDUSessionResourceNotifyIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceNotifyIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PDUSessionResourceNotifyIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10795,7 +10836,8 @@ select_PDUSessionResourceNotifyIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceNotifyIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PDUSessionResourceNotifyIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10871,7 +10913,10 @@ select_PDUSessionResourceModifyIndicationIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyIndicationIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10922,7 +10967,10 @@ select_PDUSessionResourceModifyIndicationIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyIndicationIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -10998,7 +11046,9 @@ select_PDUSessionResourceModifyConfirmIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyConfirmIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyConfirmIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11049,7 +11099,9 @@ select_PDUSessionResourceModifyConfirmIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyConfirmIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyConfirmIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11124,7 +11176,8 @@ select_InitialContextSetupRequestIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11174,7 +11227,8 @@ select_InitialContextSetupRequestIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11249,7 +11303,8 @@ select_InitialContextSetupResponseIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11299,7 +11354,8 @@ select_InitialContextSetupResponseIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11374,7 +11430,8 @@ select_InitialContextSetupFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11424,7 +11481,8 @@ select_InitialContextSetupFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialContextSetupFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialContextSetupFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11499,7 +11557,8 @@ select_UEContextReleaseRequest_IEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseRequest_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseRequest_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11549,7 +11608,8 @@ select_UEContextReleaseRequest_IEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseRequest_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseRequest_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11624,7 +11684,8 @@ select_UEContextReleaseCommand_IEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseCommand_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseCommand_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11674,7 +11735,8 @@ select_UEContextReleaseCommand_IEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseCommand_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseCommand_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11749,7 +11811,8 @@ select_UEContextReleaseComplete_IEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseComplete_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseComplete_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11799,7 +11862,8 @@ select_UEContextReleaseComplete_IEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextReleaseComplete_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextReleaseComplete_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11874,7 +11938,8 @@ select_UEContextResumeRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11924,7 +11989,8 @@ select_UEContextResumeRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -11999,7 +12065,8 @@ select_UEContextResumeResponseIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12049,7 +12116,8 @@ select_UEContextResumeResponseIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12124,7 +12192,8 @@ select_UEContextResumeFailureIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12174,7 +12243,8 @@ select_UEContextResumeFailureIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextResumeFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextResumeFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12249,7 +12319,8 @@ select_UEContextSuspendRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12299,7 +12370,8 @@ select_UEContextSuspendRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12374,7 +12446,8 @@ select_UEContextSuspendResponseIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12424,7 +12497,8 @@ select_UEContextSuspendResponseIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12499,7 +12573,8 @@ select_UEContextSuspendFailureIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12549,7 +12624,8 @@ select_UEContextSuspendFailureIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextSuspendFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextSuspendFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12624,7 +12700,8 @@ select_UEContextModificationRequestIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextModificationRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12674,7 +12751,8 @@ select_UEContextModificationRequestIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextModificationRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12749,7 +12827,9 @@ select_UEContextModificationResponseIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UEContextModificationResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12799,7 +12879,9 @@ select_UEContextModificationResponseIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UEContextModificationResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12874,7 +12956,8 @@ select_UEContextModificationFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextModificationFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12924,7 +13007,8 @@ select_UEContextModificationFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEContextModificationFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEContextModificationFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -12999,7 +13083,8 @@ select_RRCInactiveTransitionReportIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RRCInactiveTransitionReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RRCInactiveTransitionReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13049,7 +13134,8 @@ select_RRCInactiveTransitionReportIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RRCInactiveTransitionReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RRCInactiveTransitionReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13124,7 +13210,8 @@ select_RetrieveUEInformationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RetrieveUEInformationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RetrieveUEInformationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13174,7 +13261,8 @@ select_RetrieveUEInformationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RetrieveUEInformationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RetrieveUEInformationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13249,7 +13337,8 @@ select_UEInformationTransferIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13299,7 +13388,8 @@ select_UEInformationTransferIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UEInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UEInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13374,7 +13464,8 @@ select_RANCPRelocationIndicationIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANCPRelocationIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RANCPRelocationIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13424,7 +13515,8 @@ select_RANCPRelocationIndicationIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANCPRelocationIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RANCPRelocationIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13499,7 +13591,8 @@ select_HandoverRequiredIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequiredIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequiredIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13548,7 +13641,8 @@ static asn_type_selector_result_t select_HandoverRequiredIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequiredIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequiredIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13623,7 +13717,8 @@ select_HandoverCommandIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCommandIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCommandIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13672,7 +13767,8 @@ static asn_type_selector_result_t select_HandoverCommandIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCommandIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCommandIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13747,7 +13843,8 @@ select_HandoverPreparationFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverPreparationFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverPreparationFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13797,7 +13894,8 @@ select_HandoverPreparationFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverPreparationFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverPreparationFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13872,7 +13970,8 @@ select_HandoverRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13921,7 +14020,8 @@ static asn_type_selector_result_t select_HandoverRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -13996,7 +14096,8 @@ select_HandoverRequestAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequestAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequestAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14046,7 +14147,8 @@ select_HandoverRequestAcknowledgeIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverRequestAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverRequestAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14121,7 +14223,8 @@ select_HandoverFailureIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14170,7 +14273,8 @@ static asn_type_selector_result_t select_HandoverFailureIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14245,7 +14349,8 @@ select_HandoverNotifyIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverNotifyIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverNotifyIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14294,7 +14399,8 @@ static asn_type_selector_result_t select_HandoverNotifyIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverNotifyIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverNotifyIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14369,7 +14475,8 @@ select_PathSwitchRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14418,7 +14525,8 @@ static asn_type_selector_result_t select_PathSwitchRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14493,7 +14601,8 @@ select_PathSwitchRequestAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14543,7 +14652,8 @@ select_PathSwitchRequestAcknowledgeIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14618,7 +14728,8 @@ select_PathSwitchRequestFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14668,7 +14779,8 @@ select_PathSwitchRequestFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PathSwitchRequestFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PathSwitchRequestFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14743,7 +14855,8 @@ select_HandoverCancelIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCancelIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCancelIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14792,7 +14905,8 @@ static asn_type_selector_result_t select_HandoverCancelIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCancelIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCancelIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14867,7 +14981,8 @@ select_HandoverCancelAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCancelAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCancelAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14917,7 +15032,8 @@ select_HandoverCancelAcknowledgeIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverCancelAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverCancelAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -14992,7 +15108,8 @@ select_HandoverSuccessIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverSuccessIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverSuccessIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15041,7 +15158,8 @@ static asn_type_selector_result_t select_HandoverSuccessIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_HandoverSuccessIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_HandoverSuccessIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15116,7 +15234,8 @@ select_UplinkRANEarlyStatusTransferIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANEarlyStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRANEarlyStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15166,7 +15285,8 @@ select_UplinkRANEarlyStatusTransferIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANEarlyStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRANEarlyStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15242,7 +15362,9 @@ select_DownlinkRANEarlyStatusTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANEarlyStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRANEarlyStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15293,7 +15415,9 @@ select_DownlinkRANEarlyStatusTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANEarlyStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRANEarlyStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15368,7 +15492,8 @@ select_UplinkRANStatusTransferIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRANStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15418,7 +15543,8 @@ select_UplinkRANStatusTransferIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRANStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15493,7 +15619,8 @@ select_DownlinkRANStatusTransferIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DownlinkRANStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15543,7 +15670,8 @@ select_DownlinkRANStatusTransferIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANStatusTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DownlinkRANStatusTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15617,7 +15745,8 @@ static asn_type_selector_result_t select_PagingIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PagingIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PagingIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15666,7 +15795,8 @@ static asn_type_selector_result_t select_PagingIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PagingIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PagingIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15741,7 +15871,8 @@ select_InitialUEMessage_IEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialUEMessage_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialUEMessage_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15790,7 +15921,8 @@ static asn_type_selector_result_t select_InitialUEMessage_IEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_InitialUEMessage_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_InitialUEMessage_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15865,7 +15997,8 @@ select_DownlinkNASTransport_IEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkNASTransport_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DownlinkNASTransport_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15915,7 +16048,8 @@ select_DownlinkNASTransport_IEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkNASTransport_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DownlinkNASTransport_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -15990,7 +16124,8 @@ select_UplinkNASTransport_IEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkNASTransport_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkNASTransport_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16039,7 +16174,8 @@ static asn_type_selector_result_t select_UplinkNASTransport_IEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkNASTransport_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkNASTransport_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16114,7 +16250,8 @@ select_NASNonDeliveryIndication_IEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NASNonDeliveryIndication_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NASNonDeliveryIndication_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16164,7 +16301,8 @@ select_NASNonDeliveryIndication_IEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NASNonDeliveryIndication_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NASNonDeliveryIndication_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16239,7 +16377,8 @@ select_RerouteNASRequest_IEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RerouteNASRequest_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RerouteNASRequest_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16288,7 +16427,8 @@ static asn_type_selector_result_t select_RerouteNASRequest_IEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RerouteNASRequest_IEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RerouteNASRequest_IEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16363,7 +16503,8 @@ select_NGSetupRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16412,7 +16553,8 @@ static asn_type_selector_result_t select_NGSetupRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16487,7 +16629,8 @@ select_NGSetupResponseIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16536,7 +16679,8 @@ static asn_type_selector_result_t select_NGSetupResponseIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16611,7 +16755,8 @@ select_NGSetupFailureIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16660,7 +16805,8 @@ static asn_type_selector_result_t select_NGSetupFailureIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGSetupFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGSetupFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16735,7 +16881,8 @@ select_RANConfigurationUpdateIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RANConfigurationUpdateIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16785,7 +16932,8 @@ select_RANConfigurationUpdateIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_RANConfigurationUpdateIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16861,7 +17009,9 @@ select_RANConfigurationUpdateAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_RANConfigurationUpdateAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16912,7 +17062,9 @@ select_RANConfigurationUpdateAcknowledgeIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_RANConfigurationUpdateAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -16987,7 +17139,9 @@ select_RANConfigurationUpdateFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_RANConfigurationUpdateFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17037,7 +17191,9 @@ select_RANConfigurationUpdateFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_RANConfigurationUpdateFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_RANConfigurationUpdateFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17112,7 +17268,8 @@ select_AMFConfigurationUpdateIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFConfigurationUpdateIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17162,7 +17319,8 @@ select_AMFConfigurationUpdateIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFConfigurationUpdateIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17238,7 +17396,9 @@ select_AMFConfigurationUpdateAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_AMFConfigurationUpdateAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17289,7 +17449,9 @@ select_AMFConfigurationUpdateAcknowledgeIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_AMFConfigurationUpdateAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17364,7 +17526,9 @@ select_AMFConfigurationUpdateFailureIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_AMFConfigurationUpdateFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17414,7 +17578,9 @@ select_AMFConfigurationUpdateFailureIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFConfigurationUpdateFailureIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_AMFConfigurationUpdateFailureIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17489,7 +17655,8 @@ select_AMFStatusIndicationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFStatusIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFStatusIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17538,7 +17705,8 @@ static asn_type_selector_result_t select_AMFStatusIndicationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFStatusIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFStatusIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17612,7 +17780,8 @@ static asn_type_selector_result_t select_NGResetIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGResetIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGResetIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17661,7 +17830,8 @@ static asn_type_selector_result_t select_NGResetIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGResetIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGResetIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17736,7 +17906,8 @@ select_NGResetAcknowledgeIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGResetAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGResetAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17785,7 +17956,8 @@ static asn_type_selector_result_t select_NGResetAcknowledgeIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_NGResetAcknowledgeIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_NGResetAcknowledgeIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17860,7 +18032,8 @@ select_ErrorIndicationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_ErrorIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_ErrorIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17909,7 +18082,8 @@ static asn_type_selector_result_t select_ErrorIndicationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_ErrorIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_ErrorIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -17983,7 +18157,8 @@ static asn_type_selector_result_t select_OverloadStartIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_OverloadStartIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_OverloadStartIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18032,7 +18207,8 @@ static asn_type_selector_result_t select_OverloadStartIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_OverloadStartIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_OverloadStartIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18169,7 +18345,9 @@ select_UplinkRANConfigurationTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANConfigurationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkRANConfigurationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18220,7 +18398,9 @@ select_UplinkRANConfigurationTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRANConfigurationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkRANConfigurationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18296,7 +18476,9 @@ select_DownlinkRANConfigurationTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANConfigurationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRANConfigurationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18347,7 +18529,9 @@ select_DownlinkRANConfigurationTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRANConfigurationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRANConfigurationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18422,7 +18606,8 @@ select_WriteReplaceWarningRequestIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_WriteReplaceWarningRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_WriteReplaceWarningRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18472,7 +18657,8 @@ select_WriteReplaceWarningRequestIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_WriteReplaceWarningRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_WriteReplaceWarningRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18547,7 +18733,8 @@ select_WriteReplaceWarningResponseIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_WriteReplaceWarningResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_WriteReplaceWarningResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18597,7 +18784,8 @@ select_WriteReplaceWarningResponseIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_WriteReplaceWarningResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_WriteReplaceWarningResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18672,7 +18860,8 @@ select_PWSCancelRequestIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSCancelRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSCancelRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18721,7 +18910,8 @@ static asn_type_selector_result_t select_PWSCancelRequestIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSCancelRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSCancelRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18796,7 +18986,8 @@ select_PWSCancelResponseIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSCancelResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSCancelResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18845,7 +19036,8 @@ static asn_type_selector_result_t select_PWSCancelResponseIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSCancelResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSCancelResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18920,7 +19112,8 @@ select_PWSRestartIndicationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSRestartIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSRestartIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -18970,7 +19163,8 @@ select_PWSRestartIndicationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSRestartIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSRestartIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19045,7 +19239,8 @@ select_PWSFailureIndicationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSFailureIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19095,7 +19290,8 @@ select_PWSFailureIndicationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PWSFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_PWSFailureIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19171,7 +19367,10 @@ select_DownlinkUEAssociatedNRPPaTransportIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19222,7 +19421,10 @@ select_DownlinkUEAssociatedNRPPaTransportIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19298,7 +19500,9 @@ select_UplinkUEAssociatedNRPPaTransportIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkUEAssociatedNRPPaTransportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19349,7 +19553,9 @@ select_UplinkUEAssociatedNRPPaTransportIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkUEAssociatedNRPPaTransportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19425,7 +19631,10 @@ select_DownlinkNonUEAssociatedNRPPaTransportIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkNonUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkNonUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19476,7 +19685,10 @@ select_DownlinkNonUEAssociatedNRPPaTransportIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkNonUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkNonUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19552,7 +19764,10 @@ select_UplinkNonUEAssociatedNRPPaTransportIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkNonUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkNonUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19603,7 +19818,10 @@ select_UplinkNonUEAssociatedNRPPaTransportIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkNonUEAssociatedNRPPaTransportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UplinkNonUEAssociatedNRPPaTransportIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19677,7 +19895,8 @@ static asn_type_selector_result_t select_TraceStartIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TraceStartIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TraceStartIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19726,7 +19945,8 @@ static asn_type_selector_result_t select_TraceStartIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TraceStartIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TraceStartIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19801,7 +20021,8 @@ select_TraceFailureIndicationIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TraceFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TraceFailureIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19851,7 +20072,8 @@ select_TraceFailureIndicationIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_TraceFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_TraceFailureIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19926,7 +20148,8 @@ select_DeactivateTraceIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DeactivateTraceIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DeactivateTraceIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -19975,7 +20198,8 @@ static asn_type_selector_result_t select_DeactivateTraceIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DeactivateTraceIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_DeactivateTraceIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20050,7 +20274,8 @@ select_CellTrafficTraceIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_CellTrafficTraceIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_CellTrafficTraceIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20099,7 +20324,8 @@ static asn_type_selector_result_t select_CellTrafficTraceIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_CellTrafficTraceIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_CellTrafficTraceIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20174,7 +20400,8 @@ select_LocationReportingControlIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportingControlIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_LocationReportingControlIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20224,7 +20451,8 @@ select_LocationReportingControlIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportingControlIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_LocationReportingControlIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20300,7 +20528,10 @@ select_LocationReportingFailureIndicationIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportingFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_LocationReportingFailureIndicationIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20351,7 +20582,10 @@ select_LocationReportingFailureIndicationIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportingFailureIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_LocationReportingFailureIndicationIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20426,7 +20660,8 @@ select_LocationReportIEs_Ngap_criticality_type(
   size_t for_column                 = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_LocationReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20475,7 +20710,8 @@ static asn_type_selector_result_t select_LocationReportIEs_Ngap_value_type(
   size_t for_column                 = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_LocationReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_LocationReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20550,7 +20786,8 @@ select_UETNLABindingReleaseRequestIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UETNLABindingReleaseRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UETNLABindingReleaseRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20600,7 +20837,8 @@ select_UETNLABindingReleaseRequestIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UETNLABindingReleaseRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UETNLABindingReleaseRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20676,7 +20914,9 @@ select_UERadioCapabilityInfoIndicationIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityInfoIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityInfoIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20727,7 +20967,9 @@ select_UERadioCapabilityInfoIndicationIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityInfoIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityInfoIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20802,7 +21044,9 @@ select_UERadioCapabilityCheckRequestIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityCheckRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityCheckRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20852,7 +21096,9 @@ select_UERadioCapabilityCheckRequestIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityCheckRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityCheckRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20928,7 +21174,9 @@ select_UERadioCapabilityCheckResponseIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityCheckResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityCheckResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -20979,7 +21227,9 @@ select_UERadioCapabilityCheckResponseIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityCheckResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityCheckResponseIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21054,7 +21304,8 @@ select_SecondaryRATDataUsageReportIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_SecondaryRATDataUsageReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_SecondaryRATDataUsageReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21104,7 +21355,8 @@ select_SecondaryRATDataUsageReportIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_SecondaryRATDataUsageReportIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_SecondaryRATDataUsageReportIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21179,7 +21431,8 @@ select_UplinkRIMInformationTransferIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRIMInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRIMInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21229,7 +21482,8 @@ select_UplinkRIMInformationTransferIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UplinkRIMInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_UplinkRIMInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21305,7 +21559,9 @@ select_DownlinkRIMInformationTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRIMInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRIMInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21356,7 +21612,9 @@ select_DownlinkRIMInformationTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_DownlinkRIMInformationTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_DownlinkRIMInformationTransferIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21432,7 +21690,9 @@ select_ConnectionEstablishmentIndicationIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_ConnectionEstablishmentIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_ConnectionEstablishmentIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21483,7 +21743,9 @@ select_ConnectionEstablishmentIndicationIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_ConnectionEstablishmentIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_ConnectionEstablishmentIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21559,7 +21821,9 @@ select_UERadioCapabilityIDMappingRequestIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityIDMappingRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityIDMappingRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21610,7 +21874,9 @@ select_UERadioCapabilityIDMappingRequestIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityIDMappingRequestIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityIDMappingRequestIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21686,7 +21952,10 @@ select_UERadioCapabilityIDMappingResponseIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityIDMappingResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityIDMappingResponseIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21737,7 +22006,10 @@ select_UERadioCapabilityIDMappingResponseIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_UERadioCapabilityIDMappingResponseIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_UERadioCapabilityIDMappingResponseIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21812,7 +22084,8 @@ select_AMFCPRelocationIndicationIEs_Ngap_criticality_type(
   size_t for_column           = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFCPRelocationIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFCPRelocationIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21862,7 +22135,8 @@ select_AMFCPRelocationIndicationIEs_Ngap_value_type(
   size_t for_column           = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_AMFCPRelocationIndicationIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(struct Ngap_AMFCPRelocationIndicationIEs, id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21938,7 +22212,10 @@ select_PDUSessionResourceModifyRequestTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyRequestTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyRequestTransferIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -21989,7 +22266,10 @@ select_PDUSessionResourceModifyRequestTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceModifyRequestTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceModifyRequestTransferIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -22065,7 +22345,10 @@ select_PDUSessionResourceSetupRequestTransferIEs_Ngap_criticality_type(
   size_t for_column          = 1; /* &criticality */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupRequestTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupRequestTransferIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -22116,7 +22399,10 @@ select_PDUSessionResourceSetupRequestTransferIEs_Ngap_value_type(
   size_t for_column          = 2; /* &Value */
   size_t row, presence_index = 0;
   const long* constraining_value =
-      (const long*) ((const char*) parent_sptr + offsetof(struct Ngap_PDUSessionResourceSetupRequestTransferIEs, id));
+      (const long*) ((const char*) parent_sptr +
+                     offsetof(
+                         struct Ngap_PDUSessionResourceSetupRequestTransferIEs,
+                         id));
 
   for (row = 0; row < itable->rows_count; row++) {
     const asn_ioc_cell_t* constraining_cell =
@@ -37420,9 +37706,9 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_236[] = {
      "CriticalityDiagnostics"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_236[]        = {0, 1, 2,
-                                                               3, 5, 4};
+                                                                      3, 5, 4};
 static const unsigned asn_MAP_Ngap_value_from_canonical_236[]      = {0, 1, 2,
-                                                                 3, 5, 4};
+                                                                      3, 5, 4};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_236[] = {
     {(ASN_TAG_CLASS_UNIVERSAL | (2 << 2)), 0, 0, 1},  /* AMF-UE-NGAP-ID */
     {(ASN_TAG_CLASS_UNIVERSAL | (2 << 2)), 1, -1, 0}, /* RAN-UE-NGAP-ID */
@@ -40391,7 +40677,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_272[] = {
      "PagingAssisDataforCEcapabUE"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_272[]   = {0, 1, 3, 4,
-                                                               5, 6, 2};
+                                                                 5, 6, 2};
 static const unsigned asn_MAP_Ngap_value_from_canonical_272[] = {0, 1, 6, 2,
                                                                  3, 4, 5};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_272[] = {
@@ -40718,7 +41004,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_276[] = {
      "PagingAssisDataforCEcapabUE"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_276[]   = {0, 1, 2, 5,
-                                                               3, 4, 6, 7};
+                                                                 3, 4, 6, 7};
 static const unsigned asn_MAP_Ngap_value_from_canonical_276[] = {0, 1, 2, 4,
                                                                  5, 3, 6, 7};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_276[] = {
@@ -41040,7 +41326,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_280[] = {
      "CriticalityDiagnostics"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_280[]   = {0, 1, 6, 5,
-                                                               2, 3, 4, 7};
+                                                                 2, 3, 4, 7};
 static const unsigned asn_MAP_Ngap_value_from_canonical_280[] = {0, 1, 4, 5,
                                                                  6, 3, 2, 7};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_280[] = {
@@ -43809,7 +44095,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_320[] = {
      "MaskedIMEISV"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_320[]   = {1, 6, 2, 0,
-                                                               3, 4, 5};
+                                                                 3, 4, 5};
 static const unsigned asn_MAP_Ngap_value_from_canonical_320[] = {3, 0, 2, 4,
                                                                  5, 6, 1};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_320[] = {
@@ -44365,7 +44651,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_328[] = {
      "SourceToTarget-TransparentContainer"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_328[]   = {0, 1, 7, 2,
-                                                               5, 6, 3, 4};
+                                                                 5, 6, 3, 4};
 static const unsigned asn_MAP_Ngap_value_from_canonical_328[] = {0, 1, 3, 6,
                                                                  7, 4, 5, 2};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_328[] = {
@@ -44687,7 +44973,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_332[] = {
      "CriticalityDiagnostics"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_332[]   = {0, 1, 3, 6,
-                                                               2, 4, 5, 7};
+                                                                 2, 4, 5, 7};
 static const unsigned asn_MAP_Ngap_value_from_canonical_332[] = {0, 1, 4, 2,
                                                                  5, 6, 3, 7};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_332[] = {
@@ -46128,7 +46414,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_344[] = {
      "NPN-AccessInformation"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_344[]   = {0, 1, 4, 2,
-                                                               3, 5, 6};
+                                                                 3, 5, 6};
 static const unsigned asn_MAP_Ngap_value_from_canonical_344[] = {0, 1, 3, 4,
                                                                  2, 5, 6};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_344[] = {
@@ -46889,7 +47175,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_356[] = {
      "RRCEstablishmentCause"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_356[]   = {0, 1, 6, 3,
-                                                               4, 5, 2};
+                                                                 4, 5, 2};
 static const unsigned asn_MAP_Ngap_value_from_canonical_356[] = {0, 1, 6, 3,
                                                                  4, 5, 2};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_356[] = {
@@ -51022,7 +51308,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_408[] = {
      "OCTET STRING"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_408[]   = {0, 1, 2, 4,
-                                                               5, 6, 3};
+                                                                 5, 6, 3};
 static const unsigned asn_MAP_Ngap_value_from_canonical_408[] = {0, 1, 2, 6,
                                                                  3, 4, 5};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_408[] = {
@@ -51523,9 +51809,9 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_416[] = {
      "SourceToTarget-AMFInformationReroute"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_416[]        = {0, 1, 3,
-                                                               2, 4, 5};
+                                                                      2, 4, 5};
 static const unsigned asn_MAP_Ngap_value_from_canonical_416[]      = {0, 1, 3,
-                                                                 2, 4, 5};
+                                                                      2, 4, 5};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_416[] = {
     {(ASN_TAG_CLASS_UNIVERSAL | (2 << 2)), 0, 0, 1},  /* RAN-UE-NGAP-ID */
     {(ASN_TAG_CLASS_UNIVERSAL | (2 << 2)), 1, -1, 0}, /* AMF-UE-NGAP-ID */
@@ -51809,7 +52095,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_420[] = {
      "Extended-RANNodeName"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_420[]   = {3, 4, 5, 2,
-                                                               6, 1, 0};
+                                                                 6, 1, 0};
 static const unsigned asn_MAP_Ngap_value_from_canonical_420[] = {6, 5, 3, 0,
                                                                  1, 2, 4};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_420[] = {
@@ -52120,7 +52406,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_424[] = {
      "Extended-AMFName"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_424[]   = {2, 5, 6, 1,
-                                                               3, 4, 7, 0};
+                                                                 3, 4, 7, 0};
 static const unsigned asn_MAP_Ngap_value_from_canonical_424[] = {7, 3, 0, 4,
                                                                  5, 1, 2, 6};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_424[] = {
@@ -52622,7 +52908,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_432[] = {
      "Extended-RANNodeName"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_432[]   = {2, 5, 1, 4,
-                                                               6, 0, 3};
+                                                                 6, 0, 3};
 static const unsigned asn_MAP_Ngap_value_from_canonical_432[] = {5, 2, 0, 6,
                                                                  3, 1, 4};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_432[] = {
@@ -53327,7 +53613,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_444[] = {
      "Extended-AMFName"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_444[]   = {2, 1, 3, 4,
-                                                               5, 6, 7, 0};
+                                                                 5, 6, 7, 0};
 static const unsigned asn_MAP_Ngap_value_from_canonical_444[] = {7, 1, 0, 2,
                                                                  3, 4, 5, 6};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_444[] = {
@@ -58600,7 +58886,7 @@ static asn_TYPE_member_t asn_MBR_Ngap_value_540[] = {
      "URI-address"},
 };
 static const unsigned asn_MAP_Ngap_value_to_canonical_540[]   = {0, 1, 4, 2,
-                                                               5, 6, 3};
+                                                                 5, 6, 3};
 static const unsigned asn_MAP_Ngap_value_from_canonical_540[] = {0, 1, 3, 6,
                                                                  2, 4, 5};
 static const asn_TYPE_tag2member_t asn_MAP_Ngap_value_tag2el_540[] = {

@@ -23,7 +23,7 @@ namespace oai::ngap {
 class PathSwitchRequestTransfer {
  public:
   PathSwitchRequestTransfer();
-  virtual ~PathSwitchRequestTransfer(){};
+  virtual ~PathSwitchRequestTransfer() {};
 
   void setDlNgUUpTnlInformation(
       const UpTransportLayerInformation& dlNgUUpTnlInformation);

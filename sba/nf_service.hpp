@@ -236,6 +236,15 @@ class nf_service {
   void discovery_cache_clear();
 
   /*
+   * Interval between two registration attempts once one has failed. An NF
+   * that wants to come back faster (or slower) than
+   * kNrfRegistrationRetryTimerSeconds overrides this.
+   */
+  virtual uint64_t nrf_registration_retry_seconds() const {
+    return kNrfRegistrationRetryTimerSeconds;
+  }
+
+  /*
    * Lifetime of a cache entry. An NF whose peers move more (or less) often
    * than every kDiscoveryCacheTtlSeconds overrides this.
    */

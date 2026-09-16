@@ -213,7 +213,7 @@ void nf_service::start_nrf_registration_retry() {
                       std::chrono::system_clock::now().time_since_epoch())
                       .count();
     const uint64_t interval =
-        kNrfRegistrationRetryTimerSeconds * 1000;  // convert sec to msec
+        nrf_registration_retry_seconds() * 1000;  // convert sec to msec
 
     oai::logger::logger_common::common().debug(
         "Start NRF registration retry task");

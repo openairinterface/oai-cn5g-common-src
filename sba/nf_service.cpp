@@ -4,6 +4,7 @@
 
 #include "nf_service.hpp"
 
+#include <boost/bind/bind.hpp>
 #include <boost/uuid/random_generator.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <nlohmann/json.hpp>
@@ -13,14 +14,14 @@
 #include "http_client.hpp"
 
 using namespace oai::sba;
+using namespace boost::placeholders;
 
 //------------------------------------------------------------------------------
 nf_service::nf_service(
     const std::shared_ptr<nf_event>& ev,
     const std::shared_ptr<oai::sba::http_client>& client_inst)
     : event_sub_(ev), http_client_inst_(client_inst) {
-  // generate UUID
-  nf_instance_id = to_string(boost::uuids::random_generator()());
+  generate_uuid();
 }
 
 //------------------------------------------------------------------------------
@@ -29,107 +30,140 @@ nf_service::~nf_service() {
   if (retry_nrf_registration_task_connection.connected())
     retry_nrf_registration_task_connection.disconnect();
 }
+
+//---------------------------------------------------------------------------------------------
+void nf_service::generate_uuid() {
+  nf_instance_id = to_string(boost::uuids::random_generator()());
+}
+
 //---------------------------------------------------------------------------------------------
 void nf_service::generate_nf_profile() {
   // TODO:
 }
+
 //---------------------------------------------------------------------------------------------
-void nf_service::register_to_nrf(
+bool nf_service::register_to_nrf(
     const oai::common::sbi::nf_addr_t& nrf_addr,
     const nlohmann::json& nf_profile) {
-  nlohmann::json response_data = {};
-  std::string nrf_uri          = {};
+  nrf_addr_   = std::make_optional<oai::common::sbi::nf_addr_t>(nrf_addr);
+  nf_profile_ = std::make_optional<nlohmann::json>(nf_profile);
+  return send_nf_registration();
+}
 
+//---------------------------------------------------------------------------------------------
+bool nf_service::send_nf_registration() {
+  if (!nrf_registration_enabled()) return true;
+  if (!nrf_addr_.has_value()) return false;
+  if (!nf_profile_.has_value()) return false;
+
+  std::string nrf_uri = {};
   oai::common::sbi::sbi_helper::get_nrf_nf_instance_uri(
-      nrf_addr, nf_instance_id, nrf_uri);
+      nrf_addr_.value(), nf_instance_id, nrf_uri);
   oai::logger::logger_common::common().info(
       "Sending NF registration request to NRF, NRF's URI: %s", nrf_uri);
 
-  bool registration_success = false;
+  oai::sba::request http_request = http_client_inst_->prepare_json_request(
+      nrf_uri, nf_profile_.value().dump());
+  auto http_response = send_with_policy(
+      nrf_call_kind::registration, oai::common::sbi::method_e::PUT,
+      http_request);
 
-  oai::sba::request http_request =
-      http_client_inst_->prepare_json_request(nrf_uri, nf_profile.dump());
-  auto http_response = http_client_inst_->send_http_request(
-      oai::common::sbi::method_e::PUT, http_request);
+  const bool registration_success = registration_succeeded(http_response);
+  on_registration_outcome(registration_success, http_response);
+  return registration_success;
+}
 
-  if ((http_response.status_code == oai::common::sbi::http_status_code::OK) or
-      (http_response.status_code ==
-       oai::common::sbi::http_status_code::CREATED)) {
-    try {
-      response_data = nlohmann::json::parse(http_response.body);
-      // TODO: use Heart-beart timer interval returned from NRF
-      if (response_data.find("nfStatus") != response_data.end()) {
-        std::string status = response_data["nfStatus"].get<std::string>();
-        if (status.compare("REGISTERED") == 0) {
-          registration_success = true;
-          start_event_nf_heartbeat(nrf_uri);
-          stop_nrf_registration_retry();
-        }
-      }
-    } catch (nlohmann::json::exception& e) {
-      oai::logger::logger_common::common().warn(
-          "NF Registration procedure failed, try again ...");
-    }
-  } else {
+//---------------------------------------------------------------------------------------------
+bool nf_service::registration_succeeded(const oai::sba::response& resp) const {
+  if ((resp.status_code != oai::common::sbi::http_status_code::OK) and
+      (resp.status_code != oai::common::sbi::http_status_code::CREATED)) {
     oai::logger::logger_common::common().warn(
         "Could not get response from NRF, try again ...");
+    return false;
   }
+  try {
+    // TODO: use Heart-beat timer interval returned from NRF
+    nlohmann::json response_data = nlohmann::json::parse(resp.body);
+    auto it                      = response_data.find("nfStatus");
+    if (it != response_data.end() &&
+        it->get<std::string>().compare("REGISTERED") == 0) {
+      return true;
+    }
+  } catch (nlohmann::json::exception& e) {
+  }
+  oai::logger::logger_common::common().warn(
+      "NF Registration procedure failed, try again ...");
+  return false;
+}
 
-  if (!registration_success) {
+//---------------------------------------------------------------------------------------------
+void nf_service::on_registration_outcome(
+    bool success, const oai::sba::response& resp) {
+  (void) resp;
+  if (success) {
+    start_event_nf_heartbeat();
+    stop_nrf_registration_retry();
+  } else {
     start_nrf_registration_retry();
   }
 }
 
 //---------------------------------------------------------------------------------------------
-void nf_service::deregister_to_nrf(
-    const oai::common::sbi::nf_addr_t& nrf_addr) {
-  nlohmann::json response_data = {};
-  std::string nrf_uri          = {};
+oai::sba::response nf_service::send_with_policy(
+    nrf_call_kind kind, const oai::common::sbi::method_e& method,
+    const oai::sba::request& req) {
+  (void) kind;
+  return http_client_inst_->send_http_request(method, req);
+}
 
+//---------------------------------------------------------------------------------------------
+bool nf_service::deregister_to_nrf() {
+  if (!nrf_registration_enabled()) return true;
+  if (!nrf_addr_.has_value()) return false;
+
+  std::string nrf_uri = {};
   oai::common::sbi::sbi_helper::get_nrf_nf_instance_uri(
-      nrf_addr, nf_instance_id, nrf_uri);
+      nrf_addr_.value(), nf_instance_id, nrf_uri);
   oai::logger::logger_common::common().info(
       "Sending NF Deregistration request");
 
   oai::sba::request http_request =
       http_client_inst_->prepare_json_request(nrf_uri);
-  auto http_response = http_client_inst_->send_http_request(
-      oai::common::sbi::method_e::DELETE, http_request);
+  auto http_response = send_with_policy(
+      nrf_call_kind::deregistration, oai::common::sbi::method_e::DELETE,
+      http_request);
 
   if (http_response.status_code ==
       oai::common::sbi::http_status_code::NO_CONTENT) {
     oai::logger::logger_common::common().info(
         "NF Deregistration procedure successful");
-    // TODO:
-  } else {
-    oai::logger::logger_common::common().info(
-        "NF Deregistration procedure failed");
-    // TODO:
+    return true;
   }
+  oai::logger::logger_common::common().info(
+      "NF Deregistration procedure failed");
+  return false;
 }
 
 //---------------------------------------------------------------------------------------------
-void nf_service::start_event_nf_heartbeat(std::string& nrf_uri) {
+void nf_service::start_event_nf_heartbeat(uint64_t heartbeat_seconds) {
   // get current time
   uint64_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(
                     std::chrono::system_clock::now().time_since_epoch())
                     .count();
-  struct itimerspec its;
-  its.it_value.tv_sec  = 10;  // seconds
-  its.it_value.tv_nsec = 0;   // 100 * 1000 * 1000; //100ms
-  const uint64_t interval =
-      its.it_value.tv_sec * 1000 +
-      its.it_value.tv_nsec / 1000000;  // convert sec, nsec to msec
+  const uint64_t interval = heartbeat_seconds * 1000;  // convert sec to msec
 
+  // The task tick carries only a timestamp, so the NRF address is bound by
+  // value from the address retained at registration time.
   task_connection = event_sub_->subscribe_task_nf_heartbeat(
-      boost::bind(&nf_service::trigger_nf_heartbeat_procedure, this, _1, _2),
+      boost::bind(&nf_service::trigger_nf_heartbeat_procedure, this, _1),
       interval, ms + interval);
 }
 
 //---------------------------------------------------------------------------------------------
-void nf_service::trigger_nf_heartbeat_procedure(
-    uint64_t ms, const nf_addr_t& nrf_addr) {
-  _unused(ms);
+void nf_service::trigger_nf_heartbeat_procedure(uint64_t ms) {
+  (void) ms;
+  if (!nrf_addr_.has_value()) return;
+
   oai::_3gpp::model::PatchItem patch_item = {};
   std::vector<oai::_3gpp::model::PatchItem> patch_items;
   //{"op":"replace","path":"/nfStatus", "value": "REGISTERED"}
@@ -150,12 +184,14 @@ void nf_service::trigger_nf_heartbeat_procedure(
   }
 
   std::string nrf_uri = {};
-  sbi_helper::get_nrf_nf_instance_uri(nrf_addr, nf_instance_id, nrf_uri);
+  oai::common::sbi::sbi_helper::get_nrf_nf_instance_uri(
+      nrf_addr_.value(), nf_instance_id, nrf_uri);
 
   oai::sba::request http_request =
       http_client_inst_->prepare_json_request(nrf_uri, json_data.dump());
-  auto http_response = http_client_inst_->send_http_request(
-      oai::common::sbi::method_e::PATCH, http_request);
+  auto http_response = send_with_policy(
+      nrf_call_kind::heartbeat, oai::common::sbi::method_e::PATCH,
+      http_request);
 
   if ((http_response.status_code == oai::common::sbi::http_status_code::OK) or
       (http_response.status_code ==
@@ -165,7 +201,7 @@ void nf_service::trigger_nf_heartbeat_procedure(
     oai::logger::logger_common::common().info(
         "NF Heartbeat procedure failed, try to register again");
     if (task_connection.connected()) task_connection.disconnect();
-    register_to_nrf();
+    send_nf_registration();
   }
 }
 
@@ -177,7 +213,7 @@ void nf_service::start_nrf_registration_retry() {
                       std::chrono::system_clock::now().time_since_epoch())
                       .count();
     const uint64_t interval =
-        NRF_REGISTRATION_RETRY_TIMER * 1000;  // convert sec to msec
+        kNrfRegistrationRetryTimerSeconds * 1000;  // convert sec to msec
 
     oai::logger::logger_common::common().debug(
         "Start NRF registration retry task");
@@ -192,16 +228,12 @@ void nf_service::start_nrf_registration_retry() {
 
 //---------------------------------------------------------------------------------------------
 void nf_service::trigger_nrf_registration_retry_procedure(uint64_t ms) {
-  _unused(ms);
-  register_to_nrf();
+  (void) ms;
+  send_nf_registration();
 }
 
 //---------------------------------------------------------------------------------------------
 void nf_service::stop_nrf_registration_retry() {
-  // get current time
-  uint64_t ms = std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::system_clock::now().time_since_epoch())
-                    .count();
   if (retry_nrf_registration_task_connection.connected()) {
     oai::logger::logger_common::common().info(
         "Stop NRF registration retry task");
@@ -210,40 +242,58 @@ void nf_service::stop_nrf_registration_retry() {
 }
 
 //------------------------------------------------------------------------------
-bool nf_service::discover_nf(
-    const std::string& source_nf_type const std::string& target_nf_type,
-    const std::string& service_name, std::string& endpoint) {
+bool nf_service::discovery_cache_lookup(
+    const std::string& target_nf_type, const std::string& service_name,
+    std::string& endpoint) {
   const std::string cache_key = target_nf_type + ":" + service_name;
-  {
-    std::unique_lock<std::mutex> lock(m_discovery_mutex);
-    auto it = m_discovery_cache.find(cache_key);
-    if (it != m_discovery_cache.end()) {
-      endpoint = it->second;
-      return true;
-    }
-  }
+  const auto now              = std::chrono::steady_clock::now();
+  std::shared_lock<std::shared_mutex> lock(m_discovery_mutex);
+  auto it = m_discovery_cache.find(cache_key);
+  if (it == m_discovery_cache.end()) return false;
+  // An expired entry is a miss: leave it in place, the next store overwrites
+  // it anyway.
+  if (now >= it->second.expires_at) return false;
+  endpoint = it->second.endpoint;
+  oai::logger::logger_common::common().debug(
+      "NF discovery cache hit: %s -> %s", cache_key.c_str(), endpoint.c_str());
+  return true;
+}
 
-  // Build the NRF SearchNFInstances URI and add discovery query parameters.
-  std::string uri = {};
-  oai::common::sbi::sbi_helper::get_nrf_disc_search_nf_instances_uri(
-      nrf_addr, uri);
-  uri += "?target-nf-type=" + target_nf_type +
-         "&requester-nf-type=" + source_nf_type;
+//------------------------------------------------------------------------------
+void nf_service::discovery_cache_store(
+    const std::string& target_nf_type, const std::string& service_name,
+    std::string endpoint, int ttl_seconds) {
+  const std::string cache_key = target_nf_type + ":" + service_name;
+  const auto expires_at =
+      std::chrono::steady_clock::now() + std::chrono::seconds(ttl_seconds);
+  std::unique_lock<std::shared_mutex> lock(m_discovery_mutex);
+  m_discovery_cache[cache_key] = {std::move(endpoint), expires_at};
+}
 
-  oai::sba::request req = http_client_inst_->prepare_json_request(uri);
-  oai::sba::response resp =
-      http_client_inst__->send_http_request(method_e::GET, req);
-  if (resp.status_code != oai::common::sbi::http_status_code::OK) {
-    oai::logger::logger_common::common().warn(
-        "NRF discovery for %s failed (HTTP %d)", target_nf_type.c_str(),
-        resp.status_code);
-    return false;
-  }
+//------------------------------------------------------------------------------
+void nf_service::discovery_cache_invalidate(
+    const std::string& target_nf_type, const std::string& service_name) {
+  const std::string cache_key = target_nf_type + ":" + service_name;
+  std::unique_lock<std::shared_mutex> lock(m_discovery_mutex);
+  m_discovery_cache.erase(cache_key);
+}
 
-  nlohmann::json search_result = resp.get_json();
+//------------------------------------------------------------------------------
+void nf_service::discovery_cache_clear() {
+  std::unique_lock<std::shared_mutex> lock(m_discovery_mutex);
+  m_discovery_cache.clear();
+}
+
+//------------------------------------------------------------------------------
+bool nf_service::handle_discovery_response(
+    const oai::sba::response& search_result_resp,
+    const std::string& target_nf_type, const std::string& service_name,
+    std::string& endpoint) {
+  nlohmann::json search_result = search_result_resp.get_json();
   if (!search_result.contains("nfInstances") ||
       !search_result["nfInstances"].is_array()) {
-    Logger::udm_nrf().warn("NRF discovery: no nfInstances in SearchResult");
+    oai::logger::logger_common::common().warn(
+        "NRF discovery: no nfInstances in SearchResult");
     return false;
   }
 
@@ -253,17 +303,19 @@ bool nf_service::discover_nf(
     if (nf_instance.contains("nfServices") &&
         nf_instance["nfServices"].is_array()) {
       for (const auto& svc : nf_instance["nfServices"]) {
-        if (svc.value("serviceName", std::string{}) != service_name) continue;
+        // An empty service_name means "any service": take the first one.
+        if (!service_name.empty() &&
+            svc.value("serviceName", std::string{}) != service_name)
+          continue;
         std::string svc_scheme = svc.value("scheme", std::string{"http"});
         if (svc.contains("ipEndPoints") && svc["ipEndPoints"].is_array() &&
             !svc["ipEndPoints"].empty()) {
           const auto& ep = svc["ipEndPoints"][0];
           std::string ip = ep.value("ipv4Address", std::string{});
-          int port       = ep.value("port", 80);
+          int port = ep.value("port", static_cast<int>(default_sbi_port()));
           if (!ip.empty()) {
             endpoint = svc_scheme + "://" + ip + ":" + std::to_string(port);
-            std::unique_lock<std::mutex> lock(m_discovery_mutex);
-            m_discovery_cache[cache_key] = endpoint;
+            discovery_cache_store(target_nf_type, service_name, endpoint);
             return true;
           }
         }
@@ -275,13 +327,16 @@ bool nf_service::discover_nf(
         !nf_instance["ipv4Addresses"].empty()) {
       std::string ip = nf_instance["ipv4Addresses"][0].get<std::string>();
       if (!ip.empty()) {
-        endpoint = "http://" + ip;
-        Logger::udm_nrf().warn(
+        // The bare address carries no port, so the NF's default SBI port is
+        // appended: an endpoint without one is only usable when that port
+        // happens to be 80.
+        endpoint = "http://" + ip + ":" +
+                   std::to_string(static_cast<int>(default_sbi_port()));
+        oai::logger::logger_common::common().warn(
             "NRF discovery: service %s not found for %s, using instance "
             "address %s",
             service_name.c_str(), target_nf_type.c_str(), endpoint.c_str());
-        std::unique_lock<std::mutex> lock(m_discovery_mutex);
-        m_discovery_cache[cache_key] = endpoint;
+        discovery_cache_store(target_nf_type, service_name, endpoint);
         return true;
       }
     }
@@ -291,4 +346,45 @@ bool nf_service::discover_nf(
       "NRF discovery: no usable endpoint for %s/%s", target_nf_type.c_str(),
       service_name.c_str());
   return false;
+}
+
+//------------------------------------------------------------------------------
+bool nf_service::discover_nf(
+    const oai::common::sbi::nf_addr_t& nrf_addr,
+    const std::string& requester_nf_type, const std::string& target_nf_type,
+    const std::string& service_name, std::string& endpoint) {
+  // Local configuration first: a deployment that pins its peers statically
+  // must not be made to depend on the NRF being up.
+  if (resolve_endpoint_from_config(target_nf_type, service_name, endpoint))
+    return true;
+
+  if (!nrf_discovery_enabled()) {
+    oai::logger::logger_common::common().warn(
+        "NRF discovery is disabled and no static configuration for %s",
+        target_nf_type.c_str());
+    return false;
+  }
+
+  if (discovery_cache_lookup(target_nf_type, service_name, endpoint))
+    return true;
+
+  // Build the NRF SearchNFInstances URI and add discovery query parameters.
+  std::string uri = {};
+  oai::common::sbi::sbi_helper::get_nrf_disc_search_nf_instances_uri(
+      nrf_addr, uri);
+  uri += "?target-nf-type=" + target_nf_type +
+         "&requester-nf-type=" + requester_nf_type;
+
+  oai::sba::request req   = http_client_inst_->prepare_json_request(uri);
+  oai::sba::response resp = send_with_policy(
+      nrf_call_kind::discovery, oai::common::sbi::method_e::GET, req);
+  if (resp.status_code != oai::common::sbi::http_status_code::OK) {
+    oai::logger::logger_common::common().warn(
+        "NRF discovery for %s failed (HTTP %d)", target_nf_type.c_str(),
+        resp.status_code);
+    return false;
+  }
+
+  return handle_discovery_response(
+      resp, target_nf_type, service_name, endpoint);
 }

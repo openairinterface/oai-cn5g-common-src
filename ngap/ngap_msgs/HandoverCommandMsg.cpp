@@ -218,8 +218,12 @@ bool HandoverCommandMsg::getPduSessionResourceToReleaseListHOCmd(
 //------------------------------------------------------------------------------
 void HandoverCommandMsg::setTargetToSourceTransparentContainer(
     const OCTET_STRING_t& targetTosource) {
-  ngap_utils::octet_string_copy(
-      m_TargetToSourceTransparentContainer, targetTosource);
+  if (!ngap_utils::octet_string_copy(
+          m_TargetToSourceTransparentContainer, targetTosource)) {
+    oai::logger::logger_common::ngap().error(
+        "Empty TargetToSourceTransparentContainer");
+    return;
+  }
 
   Ngap_HandoverCommandIEs_t* ie =
       (Ngap_HandoverCommandIEs_t*) calloc(1, sizeof(Ngap_HandoverCommandIEs_t));
@@ -227,12 +231,17 @@ void HandoverCommandMsg::setTargetToSourceTransparentContainer(
   ie->criticality = Ngap_Criticality_reject;
   ie->value.present =
       Ngap_HandoverCommandIEs__value_PR_TargetToSource_TransparentContainer;
-  ngap_utils::octet_string_copy(
-      ie->value.choice.TargetToSource_TransparentContainer, targetTosource);
+  if (!ngap_utils::octet_string_copy(
+          ie->value.choice.TargetToSource_TransparentContainer,
+          targetTosource)) {
+    oai::utils::utils::free_wrapper((void**) &ie);
+    return;
+  }
 
   int ret = ASN_SEQUENCE_ADD(&m_HandoverCommandIes->protocolIEs->list, ie);
   if (ret != 0)
-    oai::logger::logger_common::ngap().error("Encode HandoverType IE error");
+    oai::logger::logger_common::ngap().error(
+        "Encode TargetToSource_TransparentContainer IE error");
 }
 
 //------------------------------------------------------------------------------

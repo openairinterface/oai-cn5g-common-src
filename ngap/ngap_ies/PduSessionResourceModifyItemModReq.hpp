@@ -37,10 +37,10 @@ class PduSessionResourceModifyItemModReq {
                   pduSessionResourceModifyItemModReq);
 
  private:
-  PduSessionId m_PduSessionId;                               // Mandatory
-  std::optional<NasPdu> m_NasPdu;                            // Optional
-  OCTET_STRING_t m_PduSessionResourceModifyRequestTransfer;  // Mandatory
-  std::optional<SNssai> m_SNssai;                            // Optional
+  PduSessionId m_PduSessionId;                                    // Mandatory
+  std::optional<NasPdu> m_NasPdu;                                 // Optional
+  OCTET_STRING_t m_PduSessionResourceModifyRequestTransfer = {};  // Mandatory
+  std::optional<SNssai> m_SNssai;                                 // Optional
 };
 
 }  // namespace oai::ngap

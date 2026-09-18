@@ -24,7 +24,7 @@ class UeIdentityIndexValue {
 
  private:
   uint16_t m_Index;
-  Ngap_UEIdentityIndexValue_PR m_Present;
+  Ngap_UEIdentityIndexValue_PR m_Present = {};
 };
 
 }  // namespace oai::ngap

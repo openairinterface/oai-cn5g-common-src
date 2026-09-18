@@ -41,16 +41,16 @@ class MessageType {
   // TODO: void decode(const Ngap_NGAP_PDU_t&);
 
  private:
-  Ngap_ProcedureCode_t m_ProcedureCode;  // Ngap_ProcedureCode.h
-  Ngap_NGAP_PDU_PR m_TypeOfMessage;      // Ngap_NGAP-PDU.h
-  Ngap_Criticality m_Criticality;        // Ngap_Criticality.h
+  Ngap_ProcedureCode_t m_ProcedureCode = {};  // Ngap_ProcedureCode.h
+  Ngap_NGAP_PDU_PR m_TypeOfMessage     = {};  // Ngap_NGAP-PDU.h
+  Ngap_Criticality m_Criticality       = {};  // Ngap_Criticality.h
 
-  Ngap_InitiatingMessage__value_PR
-      m_InitiatingMsgValuePresent;  // Ngap_InitiatingMessage.h
-  Ngap_SuccessfulOutcome__value_PR
-      m_SuccessfulOutcomeValuePresent;  // Ngap_SuccessfulOutcome.h
-  Ngap_UnsuccessfulOutcome__value_PR
-      m_UnsuccessfulOutcomeValuePresent;  // Ngap_UnsuccessfulOutcome.h
+  Ngap_InitiatingMessage__value_PR m_InitiatingMsgValuePresent =
+      {};  // Ngap_InitiatingMessage.h
+  Ngap_SuccessfulOutcome__value_PR m_SuccessfulOutcomeValuePresent =
+      {};  // Ngap_SuccessfulOutcome.h
+  Ngap_UnsuccessfulOutcome__value_PR m_UnsuccessfulOutcomeValuePresent =
+      {};  // Ngap_UnsuccessfulOutcome.h
 };
 }  // namespace oai::ngap
 

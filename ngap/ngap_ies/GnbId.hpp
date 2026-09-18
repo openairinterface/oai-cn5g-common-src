@@ -35,7 +35,7 @@ class GnbId {
 
  private:
   std::optional<gNBId_t> m_GnbId;  // 22bits to 32bits
-  Ngap_GNB_ID_PR m_Present;
+  Ngap_GNB_ID_PR m_Present = {};
 };
 
 }  // namespace oai::ngap

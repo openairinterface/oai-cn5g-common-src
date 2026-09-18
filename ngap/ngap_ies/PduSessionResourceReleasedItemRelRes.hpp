@@ -33,7 +33,7 @@ class PduSessionResourceReleasedItemRelRes {
 
  private:
   PduSessionId m_PduSessionId;
-  OCTET_STRING_t m_PduSessionResourceReleaseResponseTransfer;
+  OCTET_STRING_t m_PduSessionResourceReleaseResponseTransfer = {};
 };
 
 }  // namespace oai::ngap

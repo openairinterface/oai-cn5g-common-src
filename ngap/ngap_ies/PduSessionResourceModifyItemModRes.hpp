@@ -31,8 +31,8 @@ class PduSessionResourceModifyItemModRes {
       const Ngap_PDUSessionResourceModifyItemModRes_t& pduSessionResourceItem);
 
  private:
-  PduSessionId m_PduSessionId;                                // Mandatory
-  OCTET_STRING_t m_PduSessionResourceModifyResponseTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                                     // Mandatory
+  OCTET_STRING_t m_PduSessionResourceModifyResponseTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

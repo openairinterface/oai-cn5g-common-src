@@ -34,8 +34,8 @@ class PduSessionResourceReleaseItemCmd {
                   pduSessionResourceReleaseItem);
 
  private:
-  PduSessionId m_PduSessionId;                                // Mandatory
-  OCTET_STRING_t m_PduSessionResourceReleaseCommandTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                                     // Mandatory
+  OCTET_STRING_t m_PduSessionResourceReleaseCommandTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

@@ -23,7 +23,7 @@ class RoutingId {
   void decode(const Ngap_RoutingID_t&);
 
  private:
-  OCTET_STRING_t m_RoutingId;  // Mandatory
+  OCTET_STRING_t m_RoutingId = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

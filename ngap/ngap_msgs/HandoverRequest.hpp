@@ -100,20 +100,20 @@ class HandoverRequest : public NgapMessage {
   Ngap_HandoverRequest_t* m_HandoverRequestIes;
 
   AmfUeNgapId m_AmfUeNgapId;                          // Mandatory
-  Ngap_HandoverType_t m_HandoverType;                 // Mandatory
+  Ngap_HandoverType_t m_HandoverType = {};            // Mandatory
   Cause m_Cause;                                      // Mandatory
   UeAggregateMaxBitRate m_UeAggregateMaximumBitRate;  // Mandatory
   // TODO: Core Network Assistance Information for RRC INACTIVE (Optional)
   UeSecurityCapabilities m_UeSecurityCapabilities;  // Mandatory
-  Ngap_SecurityContext_t m_SecurityContext;         // Mandatory
+  Ngap_SecurityContext_t m_SecurityContext = {};    // Mandatory
   // TODO: New Security Context Indicator (Optional)
   // TODO: NASC - NAS-PDU (Optional)
   PduSessionResourceSetupListHoReq m_PduSessionResourceSetupList;  // Mandatory
-  Ngap_AllowedNSSAI_t m_AllowedNssai;                              // Mandatory
+  Ngap_AllowedNSSAI_t m_AllowedNssai = {};                         // Mandatory
   // TODO: Trace Activation (Optional)
   // TODO: Masked IMEISV  (Optional)
   Ngap_SourceToTarget_TransparentContainer_t
-      m_SourceToTargetTransparentContainer;  // Mandatory
+      m_SourceToTargetTransparentContainer = {};  // Mandatory
   std::optional<MobilityRestrictionList> m_MobilityRestrictionList;
   // TODO: Location Reporting Request Type (Optional)
   // TODO: RRC Inactive Transition Report Request (Optional)

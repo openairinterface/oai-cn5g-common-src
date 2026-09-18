@@ -5,9 +5,7 @@
 #include "Paging.hpp"
 
 #include "logger_base.hpp"
-extern "C" {
-#include "Ngap_ProtocolIE_Container_compat.h"
-}
+#include "ngap_utils.hpp"
 #include "utils.hpp"
 
 extern "C" {
@@ -132,6 +130,40 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
 
+      case Ngap_ProtocolIE_ID_id_PagingOrigin: {
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present == Ngap_PagingIEs__value_PR_PagingOrigin) {
+          m_pagingOrigin = static_cast<e_Ngap_PagingOrigin>(
+              ngap_ie->value.choice.PagingOrigin);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP PagingOrigin IE error");
+          return false;
+        }
+      } break;
+
+      case Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging: {
+        if (m_PagingIes->protocolIEs.list.array[i]->criticality ==
+                Ngap_Criticality_ignore &&
+            m_PagingIes->protocolIEs.list.array[i]->value.present ==
+                Ngap_PagingIEs__value_PR_UERadioCapabilityForPaging) {
+          UeRadioCapabilityForPaging capability = {};
+          if (!capability.decode(
+                  m_PagingIes->protocolIEs.list.array[i]
+                      ->value.choice.UERadioCapabilityForPaging)) {
+            oai::logger::logger_common::ngap().error(
+                "Decoded NGAP UERadioCapabilityForPaging IE error");
+            return false;
+          }
+          m_ueRadioCapabilityForPaging =
+              std::make_optional<UeRadioCapabilityForPaging>(capability);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP UERadioCapabilityForPaging IE error");
+          return false;
+        }
+      } break;
+
       default: {
         oai::logger::logger_common::ngap().warn(
             "Not decoded IE %d", ngap_ie->id);
@@ -150,6 +182,11 @@ void PagingMsg::setUePagingIdentity(
 
   Ngap_PagingIEs_t* ie =
       (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error(
+        "calloc failed for UE Paging Identity IE");
+    return;
+  }
   ie->id            = Ngap_ProtocolIE_ID_id_UEPagingIdentity;
   ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_PagingIEs__value_PR_UEPagingIdentity;
@@ -158,6 +195,7 @@ void PagingMsg::setUePagingIdentity(
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEPagingIdentity IE error");
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
     return;
   }
 
@@ -165,6 +203,8 @@ void PagingMsg::setUePagingIdentity(
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEPagingIdentity IE error");
+  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+}
 }
 
 //------------------------------------------------------------------------------
@@ -200,6 +240,11 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
 
   Ngap_PagingIEs_t* ie =
       (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error(
+        "calloc failed for TAI List For Paging IE");
+    return;
+  }
   ie->id            = Ngap_ProtocolIE_ID_id_TAIListForPaging;
   ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_PagingIEs__value_PR_TAIListForPaging;
@@ -208,6 +253,7 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP TAIListForPaging IE error");
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
     return;
   }
 
@@ -215,6 +261,8 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP TAIListForPaging IE error");
+  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+}
 }
 
 //------------------------------------------------------------------------------
@@ -248,13 +296,15 @@ void PagingMsg::setPagingDrx(e_Ngap_PagingDRX drx) {
 
   if (!paging_drx.encode(ie->value.choice.PagingDRX)) {
     oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
-    free(ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
     return;
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
+  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+}
 }
 
 //------------------------------------------------------------------------------
@@ -278,7 +328,7 @@ void PagingMsg::setPagingPriority(uint8_t ppi) {
   if (!paging_priority.encode(ie->value.choice.PagingPriority)) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PagingPriority IE error");
-    free(ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
     return;
   }
 
@@ -286,6 +336,8 @@ void PagingMsg::setPagingPriority(uint8_t ppi) {
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PagingPriority IE error");
+  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+}
 }
 
 //------------------------------------------------------------------------------
@@ -310,8 +362,8 @@ void PagingMsg::setNrPagingEDrxInformation(
     free(ie);
     return;
   }
-  int ret2 = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
-  if (ret2 != 0)
+  int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
+  if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NrPagingEDrxInformation IE error");
 }
@@ -367,4 +419,76 @@ void PagingMsg::setPeipsAssistanceInformation(
         "Encode PeipsAssistanceInformation IE error");
 }
 
+//------------------------------------------------------------------------------
+void PagingMsg::setPagingOrigin(e_Ngap_PagingOrigin origin) {
+  m_pagingOrigin = std::make_optional(origin);
+
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error(
+        "calloc failed for Paging Origin IE");
+    return;
+  }
+  ie->id                        = Ngap_ProtocolIE_ID_id_PagingOrigin;
+  ie->criticality               = Ngap_Criticality_ignore;
+  ie->value.present             = Ngap_PagingIEs__value_PR_PagingOrigin;
+  ie->value.choice.PagingOrigin = static_cast<Ngap_PagingOrigin_t>(origin);
+
+  int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
+  if (ret != 0) {
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP PagingOrigin IE error");
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
+}
+
+//------------------------------------------------------------------------------
+void PagingMsg::setUeRadioCapabilityForPaging(
+    const OCTET_STRING_t& ue_radio_capability_for_paging_of_nr,
+    const OCTET_STRING_t& ue_radio_capability_for_paging_of_eutra) {
+  if (!ngap_utils::check_octet_string(ue_radio_capability_for_paging_of_nr) &&
+      !ngap_utils::check_octet_string(
+          ue_radio_capability_for_paging_of_eutra)) {
+    return;
+  }
+
+  UeRadioCapabilityForPaging capability = {};
+  if (ngap_utils::check_octet_string(ue_radio_capability_for_paging_of_nr)) {
+    capability.setUeRadioCapabilityForPagingOfNr(
+        ue_radio_capability_for_paging_of_nr);
+  }
+  if (ngap_utils::check_octet_string(ue_radio_capability_for_paging_of_eutra)) {
+    capability.setUeRadioCapabilityForPagingOfEutra(
+        ue_radio_capability_for_paging_of_eutra);
+  }
+  m_ueRadioCapabilityForPaging =
+      std::make_optional<UeRadioCapabilityForPaging>(capability);
+
+  Ngap_PagingIEs_t* ie =
+      (Ngap_PagingIEs_t*) calloc(1, sizeof(Ngap_PagingIEs_t));
+  if (!ie) {
+    oai::logger::logger_common::ngap().error(
+        "calloc failed for UE Radio Capability For Paging IE");
+    return;
+  }
+  ie->id            = Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging;
+  ie->criticality   = Ngap_Criticality_ignore;
+  ie->value.present = Ngap_PagingIEs__value_PR_UERadioCapabilityForPaging;
+
+  if (!m_ueRadioCapabilityForPaging.value().encode(
+          ie->value.choice.UERadioCapabilityForPaging)) {
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapabilityForPaging IE error");
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+    return;
+  }
+
+  int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
+  if (ret != 0) {
+    oai::logger::logger_common::ngap().error(
+        "Encode NGAP UERadioCapabilityForPaging IE error");
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
+}
 }  // namespace oai::ngap

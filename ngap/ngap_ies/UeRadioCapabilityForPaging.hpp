@@ -37,6 +37,7 @@ class UeRadioCapabilityForPaging {
       m_UeRadioCapabilityForPagingOfNr;  // Optional
   std::optional<UeRadioCapabilityForPagingOfEutra>
       m_UeRadioCapabilityForPagingOfEutra;  // Optional
+  // TODO: UE Radio Capability for Paging of NB-IoT (Optional)
 };
 
 }  // namespace oai::ngap

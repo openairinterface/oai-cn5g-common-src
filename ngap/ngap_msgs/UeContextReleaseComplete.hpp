@@ -28,7 +28,7 @@ class UEContextReleaseCompleteMsg : public NgapUeMessage {
   bool decode(Ngap_NGAP_PDU_t* ngapMsgPdu) override;
 
   void setUserLocationInfoNr(const NrCgi_t& cig, const Tai_t& tai);
-  void getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const;
+  bool getUserLocationInfoNr(NrCgi_t& cig, Tai_t& tai) const;
 
   void setPduSessionResourceCxtRelCplList(
       const std::vector<PDUSessionResourceCxtRelCplItem_t>& list);

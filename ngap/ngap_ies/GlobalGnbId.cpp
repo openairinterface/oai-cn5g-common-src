@@ -30,7 +30,9 @@ void GlobalGnbId::get(PlmnId& plmn, GnbId& gnbId) const {
 //------------------------------------------------------------------------------
 bool GlobalGnbId::encode(Ngap_GlobalGNB_ID_t& globalGnbId) const {
   if (!m_PlmnId.encode(globalGnbId.pLMNIdentity)) return false;
-  if (!m_GnbId.encode(globalGnbId.gNB_ID)) return false;
+  if (!globalGnbId.gNB_ID)
+    globalGnbId.gNB_ID = (Ngap_GNB_ID_t*) calloc(1, sizeof(Ngap_GNB_ID_t));
+  if (!m_GnbId.encode(*globalGnbId.gNB_ID)) return false;
 
   return true;
 }
@@ -38,7 +40,8 @@ bool GlobalGnbId::encode(Ngap_GlobalGNB_ID_t& globalGnbId) const {
 //------------------------------------------------------------------------------
 bool GlobalGnbId::decode(const Ngap_GlobalGNB_ID_t& globalGnbId) {
   if (!m_PlmnId.decode(globalGnbId.pLMNIdentity)) return false;
-  if (!m_GnbId.decode(globalGnbId.gNB_ID)) return false;
+  if (!globalGnbId.gNB_ID) return false;
+  if (!m_GnbId.decode(*globalGnbId.gNB_ID)) return false;
 
   return true;
 }

@@ -36,10 +36,10 @@ class PduSessionResourceSetupItemCxtReq {
       const Ngap_PDUSessionResourceSetupItemCxtReq_t& pduSessionResourceItem);
 
  private:
-  PduSessionId m_PduSessionId;                              // Mandatory
-  std::optional<NasPdu> m_NasPdu;                           // Optional
-  SNssai m_SNssai;                                          // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupRequestTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                                   // Mandatory
+  std::optional<NasPdu> m_NasPdu;                                // Optional
+  SNssai m_SNssai;                                               // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupRequestTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

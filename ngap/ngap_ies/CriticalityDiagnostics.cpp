@@ -5,6 +5,10 @@
 #include "CriticalityDiagnostics.hpp"
 
 #include "logger_base.hpp"
+extern "C" {
+#include "Ngap_ProtocolIE_Container_compat.h"
+#include "asn_SEQUENCE_OF.h"
+}
 
 namespace oai::ngap {
 
@@ -55,52 +59,53 @@ void CriticalityDiagnostics::setIesCriticalityDiagnosticsList(
 //------------------------------------------------------------------------------
 int CriticalityDiagnostics::encode(
     Ngap_NGSetupFailure_t& ngSetupFailure) const {
+  if (!m_ProcedureCodeIsSet && !m_TriggeringMessageIsSet &&
+      !m_ProcedureCriticalityIsSet && !m_NumberOfIEsCriticalityDiagnostics) {
+    return 1;
+  }
   Ngap_NGSetupFailureIEs_t* ie =
       (Ngap_NGSetupFailureIEs_t*) calloc(1, sizeof(Ngap_NGSetupFailureIEs_t));
   ie->id            = Ngap_ProtocolIE_ID_id_CriticalityDiagnostics;
   ie->criticality   = Ngap_Criticality_ignore;
   ie->value.present = Ngap_NGSetupFailureIEs__value_PR_CriticalityDiagnostics;
+  // CriticalityDiagnostics is a VALUE type in the choice union (not a pointer)
+  Ngap_CriticalityDiagnostics_t& cd = ie->value.choice.CriticalityDiagnostics;
 
   if (m_ProcedureCodeIsSet) {
     Ngap_ProcedureCode_t* procedureCodeIE =
         (Ngap_ProcedureCode_t*) calloc(1, sizeof(Ngap_ProcedureCode_t));
-    *procedureCodeIE                                      = m_ProcedureCode;
-    ie->value.choice.CriticalityDiagnostics.procedureCode = procedureCodeIE;
+    *procedureCodeIE = m_ProcedureCode;
+    cd.procedureCode = procedureCodeIE;
   }
   if (m_TriggeringMessageIsSet) {
     Ngap_TriggeringMessage_t* triggeringMessageIE =
         (Ngap_TriggeringMessage_t*) calloc(1, sizeof(Ngap_TriggeringMessage_t));
     *triggeringMessageIE = m_TriggeringMessage;
-    ie->value.choice.CriticalityDiagnostics.triggeringMessage =
-        triggeringMessageIE;
+    cd.triggeringMessage = triggeringMessageIE;
   }
   if (m_ProcedureCriticalityIsSet) {
     Ngap_Criticality_t* procedureCriticalityIE =
         (Ngap_Criticality_t*) calloc(1, sizeof(Ngap_Criticality_t));
     *procedureCriticalityIE = m_ProcedureCriticality;
-    ie->value.choice.CriticalityDiagnostics.procedureCriticality =
-        procedureCriticalityIE;
+    cd.procedureCriticality = procedureCriticalityIE;
   }
 
   if (m_IEsCriticalityDiagnostics.size() > 0) {
     Ngap_CriticalityDiagnostics_IE_List_t* ieList =
         (Ngap_CriticalityDiagnostics_IE_List_t*) calloc(
             1, sizeof(Ngap_CriticalityDiagnostics_IE_List_t));
-    for (int i = 0; i < m_IEsCriticalityDiagnostics.size(); i++) {
+    for (int i = 0; i < (int) m_IEsCriticalityDiagnostics.size(); i++) {
       Ngap_CriticalityDiagnostics_IE_Item_t* ieItem =
           (Ngap_CriticalityDiagnostics_IE_Item_t*) calloc(
               1, sizeof(Ngap_CriticalityDiagnostics_IE_Item_t));
       m_IEsCriticalityDiagnostics[i].encode(*ieItem);
       ASN_SEQUENCE_ADD(&ieList->list, ieItem);
     }
-    ie->value.choice.CriticalityDiagnostics.iEsCriticalityDiagnostics = ieList;
+    cd.iEsCriticalityDiagnostics = ieList;
   }
-  if (!m_ProcedureCodeIsSet && !m_TriggeringMessageIsSet &&
-      !m_ProcedureCriticalityIsSet && !m_NumberOfIEsCriticalityDiagnostics) {
-    free(ie);
-    return 1;
-  }
-  int ret = ASN_SEQUENCE_ADD(&ngSetupFailure.protocolIEs.list, ie);
+  // protocolIEs is managed by the ASN.1 runtime; pass it directly to
+  // SEQUENCE_ADD
+  int ret = ASN_SEQUENCE_ADD(ngSetupFailure.protocolIEs, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode CriticalityDiagnostics IE error");

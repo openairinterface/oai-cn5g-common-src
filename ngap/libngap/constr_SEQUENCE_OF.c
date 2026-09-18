@@ -7,7 +7,27 @@
 #include <constr_SEQUENCE_OF.h>
 #include <asn_SEQUENCE_OF.h>
 
+/*
+ * Generic placeholder descriptor for anonymous SEQUENCE OF.
+ * NOTE: not a concrete "OF T" — used only to satisfy references from
+ * some codegen paths. Concrete OF types still have their own descriptors.
+ */
+asn_TYPE_descriptor_t asn_DEF_SEQUENCE_OF = {
+    "SEQUENCE OF",
+    "SEQUENCE OF",
+    &asn_OP_SEQUENCE_OF,
+    0,
+    0,
+    0,
+    0,
+    {0}, /* No constraints */
+    0,
+    0, /* No members */
+    0  /* No specifics */
+};
+
 asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
+    .kind = ASN_KIND_SEQUENCE_OF,
     SEQUENCE_OF_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
     SEQUENCE_OF_print,
@@ -15,6 +35,7 @@ asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     SEQUENCE_OF_compare,
+    SEQUENCE_OF_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     SEQUENCE_OF_decode_ber,
     SEQUENCE_OF_encode_der,
@@ -30,8 +51,10 @@ asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    SEQUENCE_OF_decode_jer,
     SEQUENCE_OF_encode_jer,
 #else
+    0,
     0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -60,7 +83,14 @@ asn_TYPE_operation_t asn_OP_SEQUENCE_OF = {
 #else
     0,
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
-    0  /* Use generic outmost tag fetcher */
+    0 /* Use generic outmost tag fetcher */,
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    SEQUENCE_OF_decode_cbor,
+    SEQUENCE_OF_encode_cbor,
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 };
 
 int SEQUENCE_OF_compare(

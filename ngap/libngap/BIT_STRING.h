@@ -31,6 +31,7 @@ asn_struct_print_f BIT_STRING_print; /* Human-readable output */
 #endif                               /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
 
 asn_struct_compare_f BIT_STRING_compare;
+asn_struct_copy_f BIT_STRING_copy;
 
 asn_constr_check_f BIT_STRING_constraint;
 
@@ -40,11 +41,12 @@ asn_constr_check_f BIT_STRING_constraint;
 #endif /* !defined(ASN_DISABLE_BER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_XER_SUPPORT)
-#define BIT_STRING_decode_xer OCTET_STRING_decode_xer_binary
+#define BIT_STRING_decode_xer BIT_STRING_decode_xer_binary_or_hex
 xer_type_encoder_f BIT_STRING_encode_xer;
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+jer_type_decoder_f BIT_STRING_decode_jer;
 jer_type_encoder_f BIT_STRING_encode_jer;
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 
@@ -52,6 +54,10 @@ jer_type_encoder_f BIT_STRING_encode_jer;
 oer_type_decoder_f BIT_STRING_decode_oer;
 oer_type_encoder_f BIT_STRING_encode_oer;
 #endif /* !defined(ASN_DISABLE_OER_SUPPORT) */
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+cbor_type_decoder_f BIT_STRING_decode_cbor;
+cbor_type_encoder_f BIT_STRING_encode_cbor;
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
 per_type_decoder_f BIT_STRING_decode_uper;

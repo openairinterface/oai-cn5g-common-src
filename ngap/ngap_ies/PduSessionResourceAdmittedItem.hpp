@@ -30,8 +30,8 @@ class PduSessionResourceAdmittedItem {
   bool decode(const Ngap_PDUSessionResourceAdmittedItem_t& pduItem);
 
  private:
-  PduSessionId m_PduSessionId;                  // Mandatory
-  OCTET_STRING_t m_HandoverRequestAckTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                       // Mandatory
+  OCTET_STRING_t m_HandoverRequestAckTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

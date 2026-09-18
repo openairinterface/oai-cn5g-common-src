@@ -37,7 +37,7 @@ class GlobalRanNodeId {
   std::optional<GlobalGnbId> m_GlobalGnbId;
   std::optional<GlobalNgEnbId> m_GlobalNgEnbId;
   // TODO: Global N3IWF ID
-  Ngap_GlobalRANNodeID_PR m_IdPresent;
+  Ngap_GlobalRANNodeID_PR m_IdPresent = {};
 };
 
 }  // namespace oai::ngap

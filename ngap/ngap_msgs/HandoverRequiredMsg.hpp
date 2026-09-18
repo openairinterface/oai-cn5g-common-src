@@ -54,14 +54,14 @@ class HandoverRequiredMsg : public NgapUeMessage {
   Ngap_HandoverRequired_t* m_HandoverRequiredIes;
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
-  Ngap_HandoverType_t m_HandoverType;  // Mandatory
-  Cause m_Cause;                       // Mandatory
-  Ngap_TargetID_t m_TargetId;          // Mandatory
+  Ngap_HandoverType_t m_HandoverType = {};  // Mandatory
+  Cause m_Cause;                            // Mandatory
+  Ngap_TargetID_t m_TargetId = {};          // Mandatory
   std::optional<Ngap_DirectForwardingPathAvailability_t>
       m_DirectForwardingPathAvailability;                      // Optional
   PduSessionResourceListHandoverRqd m_PduSessionResourceList;  // Mandatory
   Ngap_SourceToTarget_TransparentContainer_t
-      m_SourceToTargetTransparentContainer;  // Mandatory
+      m_SourceToTargetTransparentContainer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

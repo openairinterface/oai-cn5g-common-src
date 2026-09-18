@@ -38,8 +38,8 @@ class UplinkUeAssociatedNrppaTransportMsg : public NgapUeMessage {
 
   // AMF_UE_NGAP_ID  //Mandatory
   // RAN_UE_NGAP_ID //Mandatory
-  OCTET_STRING_t m_RoutingId;  // Mandatory
-  OCTET_STRING_t m_NrppaPdu;   // Mandatory
+  OCTET_STRING_t m_RoutingId = {};  // Mandatory
+  OCTET_STRING_t m_NrppaPdu  = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

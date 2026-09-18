@@ -93,7 +93,8 @@ bool PduSessionResourceModifyIndicationTransfer::decode(
   oai::logger::logger_common::ngap().debug(
       "rc.consumed to decode: %d", rc.consumed);
 
-  if (!m_DlQosFlowPerTnlInformation.decode(m_Ie->dLQosFlowPerTNLInformation)) {
+  if (!m_Ie->dLQosFlowPerTNLInformation) return false;
+  if (!m_DlQosFlowPerTnlInformation.decode(*m_Ie->dLQosFlowPerTNLInformation)) {
     oai::logger::logger_common::ngap().error(
         "Decode DL QoS Flow per TNL Information IE error");
     return false;

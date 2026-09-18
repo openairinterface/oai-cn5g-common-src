@@ -30,8 +30,9 @@ class PduSessionResourceFailedToSetupItemCxtRes {
       const Ngap_PDUSessionResourceFailedToSetupItemCxtRes_t& pduSessionCxt);
 
  private:
-  PduSessionId m_PduSessionId;                                   // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;  // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer =
+      {};  // Mandatory
 };
 
 }  // namespace oai::ngap

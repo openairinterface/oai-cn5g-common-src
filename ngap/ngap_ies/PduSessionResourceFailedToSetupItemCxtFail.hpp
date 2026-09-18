@@ -28,8 +28,9 @@ class PduSessionResourceFailedToSetupItemCxtFail {
   bool decode(const Ngap_PDUSessionResourceFailedToSetupItemCxtFail_t& pduCxt);
 
  private:
-  PduSessionId m_PduSessionId;                                   // Mandatory
-  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;  // Mandatory
+  OCTET_STRING_t m_PduSessionResourceSetupUnsuccessfulTransfer =
+      {};  // Mandatory
 };
 
 }  // namespace oai::ngap

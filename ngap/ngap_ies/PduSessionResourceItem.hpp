@@ -122,7 +122,7 @@ class PduSessionResourceItem {
 
  private:
   PduSessionId m_PduSessionId;  // Mandatory
-  OCTET_STRING_t m_Resource;
+  OCTET_STRING_t m_Resource = {};
 };
 
 }  // namespace oai::ngap

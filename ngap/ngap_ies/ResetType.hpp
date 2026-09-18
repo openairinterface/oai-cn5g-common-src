@@ -41,7 +41,7 @@ class ResetType {
   bool decode(const Ngap_ResetType_t& type);
 
  private:
-  Ngap_ResetType_PR m_Present;
+  Ngap_ResetType_PR m_Present = {};
   std::optional<long> m_NgInterface;
   std::optional<UeAssociatedLogicalNgConnectionList> m_PartOfNgInterface;
   //	struct Ngap_ProtocolIE_SingleContainer	*choice_Extensions;

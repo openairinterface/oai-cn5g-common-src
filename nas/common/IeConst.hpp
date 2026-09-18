@@ -68,6 +68,8 @@ constexpr uint8_t kIeiShortNameForNetwork          = 0x45;
 // OK
 constexpr uint8_t kIeiPayloadContainerType =
     0x08;  // TS 24.501 Table 8.2.6.1.1: IEI nibble 8H (Type 1 half-octet TV);
+           // content values (0x01–0x0F) are in Table 9.11.3.40, defined
+           // separately in 3gpp_24.501.hpp
 constexpr uint8_t kIeiRequestType              = 0x08;  // 8-(4 higher bits)
 constexpr uint8_t kIeiNetworkSlicingIndication = 0x09;  // 9-(4 higher bits)
 

@@ -29,7 +29,7 @@ class Cause {
 
  private:
   long m_CauseValue;
-  Ngap_Cause_PR m_CausePresent;
+  Ngap_Cause_PR m_CausePresent = {};
 };
 }  // namespace oai::ngap
 

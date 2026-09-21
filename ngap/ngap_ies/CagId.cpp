@@ -26,12 +26,12 @@ bool CagId::encode(Ngap_CAG_ID_t& cagId) const {
   cagId.size        = 6;
   cagId.buf         = (uint8_t*) calloc(1, sizeof(uint32_t) + sizeof(uint8_t));
   if (!cagId.buf) return false;
-  cagId.buf[5] = cagId & 0x00000000ff;
-  cagId.buf[4] = (cagId & 0x000000ff00) >> 8;
-  cagId.buf[3] = (cagId & 0x0000ff0000) >> 16;
-  cagId.buf[2] = (cagId & 0x00ff000000) >> 24;
-  cagId.buf[1] = (cagId & 0xff00000000) >> 32;
-  cagId.buf[0] = (cagId & 0xff00000000) >> 40;
+  cagId.buf[5] = m_CagId & 0x00000000ff;
+  cagId.buf[4] = (m_CagId & 0x000000ff00) >> 8;
+  cagId.buf[3] = (m_CagId & 0x0000ff0000) >> 16;
+  cagId.buf[2] = (m_CagId & 0x00ff000000) >> 24;
+  cagId.buf[1] = (m_CagId & 0xff00000000) >> 32;
+  cagId.buf[0] = (m_CagId & 0xff00000000) >> 40;
   return true;
 }
 

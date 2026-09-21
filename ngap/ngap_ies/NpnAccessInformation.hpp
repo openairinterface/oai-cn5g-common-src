@@ -5,6 +5,8 @@
 #ifndef _NPN_ACCESS_INFORMATION_H_
 #define _NPN_ACCESS_INFORMATION_H_
 
+#include "CellCagList.hpp"
+
 extern "C" {
 #include "Ngap_NPN-AccessInformation.h"
 }
@@ -23,10 +25,10 @@ class NpnAccessInformation {
   bool encode(Ngap_NPN_AccessInformation_t& value) const;
   bool decode(const Ngap_NPN_AccessInformation_t& value);
 
-  const Ngap_NPN_AccessInformation_t& get() const { return m_Value; }
+  const CellCagList& getCellCagList();
 
  private:
-  Ngap_NPN_AccessInformation_t m_Value{};
+  CellCagList m_CagIdList{};
 };
 
 }  // namespace oai::ngap

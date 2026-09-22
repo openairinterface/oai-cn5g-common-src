@@ -221,7 +221,7 @@ void PduSessionResourceModifyRequestTransfer::setQosFlowToReleaseList(
     const QosFlowListWithCause& list) {
   m_QosFlowToReleaseList = std::make_optional<QosFlowListWithCause>(list);
 
-  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs.list
+  // Add to the PduSessionResourceModifyRequestTransfer->protocolIEs->list
   addQosFlowToReleaseList();
 }
 
@@ -251,7 +251,7 @@ void PduSessionResourceModifyRequestTransfer::addQosFlowToReleaseList() {
     return;
   }
 
-  int ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs.list, ie);
+  int ret = ASN_SEQUENCE_ADD(&m_Ie->protocolIEs->list, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode QosFlowToReleaseList IE error");
@@ -376,14 +376,12 @@ bool PduSessionResourceModifyRequestTransfer::decode(
         }
       } break;
       case Ngap_ProtocolIE_ID_id_QosFlowToReleaseList: {
-        if (m_Ie->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_reject &&
-            m_Ie->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+            ngap_ie->value.present ==
                 Ngap_PDUSessionResourceModifyRequestTransferIEs__value_PR_QosFlowListWithCause) {
           QosFlowListWithCause qosFlowToReleaseList = {};
           if (!qosFlowToReleaseList.decode(
-                  m_Ie->protocolIEs.list.array[i]
-                      ->value.choice.QosFlowListWithCause)) {
+                  ngap_ie->value.choice.QosFlowListWithCause)) {
             oai::logger::logger_common::ngap().error(
                 "Decode NGAP QosFlowToReleaseList IE error");
             return false;

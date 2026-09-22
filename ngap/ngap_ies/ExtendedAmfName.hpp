@@ -5,14 +5,17 @@
 #ifndef _EXTENDED_AMF_NAME_H_
 #define _EXTENDED_AMF_NAME_H_
 
+#include <cstdint>
 #include <string>
-#include <cstring>
 
 extern "C" {
 #include "Ngap_Extended-AMFName.h"
 }
 
 namespace oai::ngap {
+
+// AMFNameVisibleString ::= VisibleString (SIZE(1..150,...))
+constexpr uint8_t EXTENDED_AMF_NAME_SIZE_MAX = 150;
 
 /**
  * Wrapper for id-ExtendedAMFName (9.3.3.51, Rel-17).
@@ -27,20 +30,14 @@ class ExtendedAmfName {
   bool encode(Ngap_Extended_AMFName_t& value) const;
   bool decode(const Ngap_Extended_AMFName_t& value);
 
-  const Ngap_Extended_AMFName_t& get() const { return m_Value; }
-  void set(const Ngap_Extended_AMFName_t& v) { m_Value = v; }
-
   /**
-   * Set from a plain string using the VisibleString alternative (§9.3.3.51).
-   * Stores pointers into members; the caller must ensure the ExtendedAmfName
-   * lifetime exceeds the encode call.
+   * Set/get the VisibleString alternative (9.3.3.51).
    */
   bool set(const std::string& name);
+  void get(std::string& name) const;
 
  private:
-  Ngap_Extended_AMFName_t m_Value{};
-  Ngap_AMFNameVisibleString_t m_VisibleString{};
-  std::string m_VisibleStringBuf;  // backing store for set(const std::string&)
+  std::string m_VisibleString;  // AMFNameVisibleString
 };
 
 }  // namespace oai::ngap

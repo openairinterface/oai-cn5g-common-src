@@ -28,9 +28,9 @@ class DrbSubjectToStatusTransferItem {
   bool decode(const Ngap_DRBsSubjectToStatusTransferItem_t& drbItem);
 
  private:
-  Ngap_DRB_ID_t m_DrbId;  // Mandatory
-  DrbStatusUl m_DrbUl;    // Mandatory
-  DrbStatusDl m_DrbDl;    // Mandatory
+  Ngap_DRB_ID_t m_DrbId = {};  // Mandatory
+  DrbStatusUl m_DrbUl;         // Mandatory
+  DrbStatusDl m_DrbDl;         // Mandatory
   // TODO: Old Associated QoS Flow List - UL End Marker Expected
 };
 }  // namespace oai::ngap

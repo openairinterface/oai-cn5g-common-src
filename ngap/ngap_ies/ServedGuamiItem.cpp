@@ -32,7 +32,9 @@ bool ServedGuamiItem::getBackupAmfName(AmfName& amfName) const {
 }
 //------------------------------------------------------------------------------
 bool ServedGuamiItem::encode(Ngap_ServedGUAMIItem& servedGUAMIItem) const {
-  if (!m_GuamiGroup.encode(servedGUAMIItem.gUAMI)) return false;
+  if (!servedGUAMIItem.gUAMI)
+    servedGUAMIItem.gUAMI = (Ngap_GUAMI_t*) calloc(1, sizeof(Ngap_GUAMI_t));
+  if (!m_GuamiGroup.encode(*servedGUAMIItem.gUAMI)) return false;
   if (m_BackupAmfName.has_value()) {
     servedGUAMIItem.backupAMFName =
         (Ngap_AMFName_t*) calloc(1, sizeof(Ngap_AMFName_t));
@@ -45,7 +47,8 @@ bool ServedGuamiItem::encode(Ngap_ServedGUAMIItem& servedGUAMIItem) const {
 
 //------------------------------------------------------------------------------
 bool ServedGuamiItem::decode(const Ngap_ServedGUAMIItem& pdu) {
-  if (!m_GuamiGroup.decode(pdu.gUAMI)) return false;
+  if (!pdu.gUAMI) return false;
+  if (!m_GuamiGroup.decode(*pdu.gUAMI)) return false;
   if (pdu.backupAMFName) {
     AmfName amfName = {};
     if (!amfName.decode(*pdu.backupAMFName)) return false;

@@ -43,9 +43,9 @@ class CriticalityDiagnostics {
   bool decode(const Ngap_CriticalityDiagnostics_t&);
 
  private:
-  Ngap_ProcedureCode_t m_ProcedureCode;          // TODO: Optional
-  Ngap_TriggeringMessage_t m_TriggeringMessage;  // TODO: Optional
-  Ngap_Criticality_t m_ProcedureCriticality;     // TODO: Optional
+  Ngap_ProcedureCode_t m_ProcedureCode         = {};  // TODO: Optional
+  Ngap_TriggeringMessage_t m_TriggeringMessage = {};  // TODO: Optional
+  Ngap_Criticality_t m_ProcedureCriticality    = {};  // TODO: Optional
   // Ngap_CriticalityDiagnostics_IE_List_t iEsCriticalityDiagnostics;	/*
   // TODO: Optional
   std::vector<IesCriticalityDiagnostics> m_IEsCriticalityDiagnostics;

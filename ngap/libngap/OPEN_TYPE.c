@@ -7,6 +7,7 @@
 #include <constr_CHOICE.h>
 
 asn_TYPE_operation_t asn_OP_OPEN_TYPE = {
+    .kind = ASN_KIND_PRIMITIVE,
     OPEN_TYPE_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
     OPEN_TYPE_print,
@@ -14,6 +15,7 @@ asn_TYPE_operation_t asn_OP_OPEN_TYPE = {
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     OPEN_TYPE_compare,
+    OPEN_TYPE_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     OPEN_TYPE_decode_ber,
     OPEN_TYPE_encode_der,
@@ -29,8 +31,10 @@ asn_TYPE_operation_t asn_OP_OPEN_TYPE = {
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    OPEN_TYPE_decode_jer,
     OPEN_TYPE_encode_jer,
 #else
+    0,
     0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -59,5 +63,12 @@ asn_TYPE_operation_t asn_OP_OPEN_TYPE = {
 #else
     0,
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
-    0  /* Use generic outmost tag fetcher */
+    0, /* Use generic outmost tag fetcher */
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    OPEN_TYPE_decode_cbor,
+    OPEN_TYPE_encode_cbor,
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 };

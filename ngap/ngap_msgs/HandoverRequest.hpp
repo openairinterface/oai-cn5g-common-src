@@ -7,14 +7,21 @@
 
 #include "AmfUeNgapId.hpp"
 #include "Cause.hpp"
+#include "FiveGProSeAuthorized.hpp"
+#include "FiveGProSePC5QoSParameters.hpp"
+#include "FiveGProSeUePC5AggregateMaximumBitRate.hpp"
 #include "Guami.hpp"
+#include "IabAuthorized.hpp"
+#include "ManagementBasedMdtPlmnList.hpp"
 #include "MobilityRestrictionList.hpp"
 #include "NgapMessage.hpp"
 #include "PduSessionResourceSetupListHoReq.hpp"
 #include "SNssai.hpp"
 #include "SecurityKey.hpp"
+#include "TimeSynchronisationAssistanceInfo.hpp"
 #include "UeAggregateMaxBitRate.hpp"
 #include "UeSecurityCapabilities.hpp"
+#include "UeSliceMaximumBitRateList.hpp"
 
 extern "C" {
 #include "Ngap_AllowedNSSAI-Item.h"
@@ -79,24 +86,34 @@ class HandoverRequest : public NgapMessage {
   void setMobilityRestrictionList(const PlmnId& m_plmnId);
   // TODO: getMobilityRestrictionList
 
+  void setManagementBasedMdtPlmnList(const ManagementBasedMdtPlmnList& value);
+  void setTimeSynchronisationAssistanceInfo(
+      const TimeSynchronisationAssistanceInfo& value);
+  void setUeSliceMaximumBitRateList(const UeSliceMaximumBitRateList& value);
+  void setFiveGProSeAuthorized(const FiveGProSeAuthorized& value);
+  void setFiveGProSeUePC5AggregateMaximumBitRate(
+      const FiveGProSeUePC5AggregateMaximumBitRate& value);
+  void setFiveGProSePC5QoSParameters(const FiveGProSePC5QoSParameters& value);
+  void setIabAuthorized(const IabAuthorized& value);
+
  private:
   Ngap_HandoverRequest_t* m_HandoverRequestIes;
 
   AmfUeNgapId m_AmfUeNgapId;                          // Mandatory
-  Ngap_HandoverType_t m_HandoverType;                 // Mandatory
+  Ngap_HandoverType_t m_HandoverType = {};            // Mandatory
   Cause m_Cause;                                      // Mandatory
   UeAggregateMaxBitRate m_UeAggregateMaximumBitRate;  // Mandatory
   // TODO: Core Network Assistance Information for RRC INACTIVE (Optional)
   UeSecurityCapabilities m_UeSecurityCapabilities;  // Mandatory
-  Ngap_SecurityContext_t m_SecurityContext;         // Mandatory
+  Ngap_SecurityContext_t m_SecurityContext = {};    // Mandatory
   // TODO: New Security Context Indicator (Optional)
   // TODO: NASC - NAS-PDU (Optional)
   PduSessionResourceSetupListHoReq m_PduSessionResourceSetupList;  // Mandatory
-  Ngap_AllowedNSSAI_t m_AllowedNssai;                              // Mandatory
+  Ngap_AllowedNSSAI_t m_AllowedNssai = {};                         // Mandatory
   // TODO: Trace Activation (Optional)
   // TODO: Masked IMEISV  (Optional)
   Ngap_SourceToTarget_TransparentContainer_t
-      m_SourceToTargetTransparentContainer;  // Mandatory
+      m_SourceToTargetTransparentContainer = {};  // Mandatory
   std::optional<MobilityRestrictionList> m_MobilityRestrictionList;
   // TODO: Location Reporting Request Type (Optional)
   // TODO: RRC Inactive Transition Report Request (Optional)
@@ -114,7 +131,15 @@ class HandoverRequest : public NgapMessage {
   // TODO: PC5 QoS Parameters (Optional, Rel 16.14.0)
   // TODO: CE-mode-B Restricted (Optional, Rel 16.14.0)
   // TODO: UE User Plane CIoT Support Indicator (Optional, Rel 16.14.0)
-  // TODO: Management Based MDT PLMN List (Optional, Rel 16.14.0)
+  std::optional<ManagementBasedMdtPlmnList> m_ManagementBasedMdtPlmnList;
+  std::optional<TimeSynchronisationAssistanceInfo>
+      m_TimeSynchronisationAssistanceInfo;
+  std::optional<UeSliceMaximumBitRateList> m_UeSliceMaximumBitRateList;
+  std::optional<FiveGProSeAuthorized> m_FiveGProSeAuthorized;
+  std::optional<FiveGProSeUePC5AggregateMaximumBitRate>
+      m_FiveGProSeUePC5AggregateMaximumBitRate;
+  std::optional<FiveGProSePC5QoSParameters> m_FiveGProSePC5QoSParameters;
+  std::optional<IabAuthorized> m_IabAuthorized;
   // TODO: UE Radio Capability ID (Optional, Rel 16.14.0)
 };
 

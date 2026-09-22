@@ -26,8 +26,8 @@ class PduSessionResourceHandoverItem {
   bool decode(const Ngap_PDUSessionResourceHandoverItem_t& item);
 
  private:
-  PduSessionId m_PduSessionId;               // Mandatory
-  OCTET_STRING_t m_HandoverCommandTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                    // Mandatory
+  OCTET_STRING_t m_HandoverCommandTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

@@ -31,7 +31,7 @@ class NgEnbId {
     uint32_t short_macro_ngENB_id;
     uint32_t long_macro_ngENB_id;
   } m_Id;  // Mandatory
-  Ngap_NgENB_ID_PR m_Present;
+  Ngap_NgENB_ID_PR m_Present = {};
 };
 
 }  // namespace oai::ngap

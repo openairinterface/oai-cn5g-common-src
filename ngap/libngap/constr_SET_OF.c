@@ -6,7 +6,18 @@
 #include <asn_internal.h>
 #include <constr_SET_OF.h>
 
+/*
+ * Generic placeholder descriptor for anonymous SET OF.
+ * NOTE: not a concrete "OF T" — used only to satisfy references.
+ */
+asn_TYPE_descriptor_t asn_DEF_SET_OF = {
+    "SET OF", "SET OF", &asn_OP_SET_OF, 0, 0, 0, 0, {0}, /* No constraints */
+    0,        0,                                         /* No members */
+    0                                                    /* No specifics */
+};
+
 asn_TYPE_operation_t asn_OP_SET_OF = {
+    .kind = ASN_KIND_SET_OF,
     SET_OF_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
     SET_OF_print,
@@ -14,6 +25,7 @@ asn_TYPE_operation_t asn_OP_SET_OF = {
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     SET_OF_compare,
+    SET_OF_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     SET_OF_decode_ber,
     SET_OF_encode_der,
@@ -29,8 +41,10 @@ asn_TYPE_operation_t asn_OP_SET_OF = {
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    SET_OF_decode_jer,
     SET_OF_encode_jer,
 #else
+    0,
     0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -59,7 +73,14 @@ asn_TYPE_operation_t asn_OP_SET_OF = {
 #else
     0,
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
-    0  /* Use generic outmost tag fetcher */
+    0 /* Use generic outmost tag fetcher */,
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    SET_OF_decode_cbor,
+    SET_OF_encode_cbor,
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 };
 
 /* Append bytes to the above structure */
@@ -155,6 +176,7 @@ struct _el_buffer* SET_OF__encode_sorted(
     asn_enc_rval_t erval           = {0, 0, 0};
 
     if (!memb_ptr) break;
+    encoding_el->memb_ptr = memb_ptr;
 
     /*
      * Encode the member into the prepared space.
@@ -163,7 +185,8 @@ struct _el_buffer* SET_OF__encode_sorted(
 #if !defined(ASN_DISABLE_BER_SUPPORT)
       case SOES_DER:
         erval = elm->type->op->der_encoder(
-            elm->type, memb_ptr, 0, elm->tag, _el_addbytes, encoding_el);
+            elm->type, memb_ptr, elm->tag_mode, elm->tag, _el_addbytes,
+            encoding_el);
         break;
 #endif /* !defined(ASN_DISABLE_BER_SUPPORT) */
 #if !defined(ASN_DISABLE_UPER_SUPPORT)
@@ -360,6 +383,59 @@ int SET_OF_compare(
     return -1;
   } else if (!b) {
     return 1;
+  }
+
+  return 0;
+}
+
+int SET_OF_copy(
+    const asn_TYPE_descriptor_t* td, void** aptr, const void* bptr) {
+  if (!td) return -1;
+
+  const asn_SET_OF_specifics_t* specs =
+      (const asn_SET_OF_specifics_t*) td->specifics;
+  void* st = *aptr;
+
+  if (!bptr) {
+    if (*aptr) {
+      asn_set_empty(_A_SET_FROM_VOID(*aptr));
+      *aptr = 0;
+    }
+    return 0;
+  }
+
+  if (st == 0) {
+    st = *aptr = CALLOC(1, specs->struct_size);
+    if (st == 0) return -1;
+  }
+
+  asn_anonymous_set_* a       = _A_SET_FROM_VOID(*aptr);
+  const asn_anonymous_set_* b = _A_CSET_FROM_VOID(bptr);
+
+  if (b->size) {
+    void* _new_arr;
+    _new_arr = REALLOC(a->array, b->size * sizeof(b->array[0]));
+    if (_new_arr) {
+      a->array = (void**) _new_arr;
+      a->size  = b->size;
+    } else {
+      return -1;
+    }
+    a->count = b->count;
+
+    for (int i = 0; i < b->count; i++) {
+      void* bmemb = b->array[i];
+      if (bmemb) {
+        void* amemb = 0;
+        int ret;
+        ret = td->elements->type->op->copy_struct(
+            td->elements->type, &amemb, bmemb);
+        if (ret != 0) return ret;
+        a->array[i] = amemb;
+      } else {
+        a->array[i] = 0;
+      }
+    }
   }
 
   return 0;

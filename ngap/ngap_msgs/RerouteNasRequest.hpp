@@ -43,7 +43,7 @@ class RerouteNasRequest : public NgapMessage {
 
   RanUeNgapId m_RanUeNgapId;                   // Mandatory
   std::optional<AmfUeNgapId> m_AmfUeNgapId;    // Optional
-  OCTET_STRING_t m_NgapMessage;                // Mandatory
+  OCTET_STRING_t m_NgapMessage = {};           // Mandatory
   AmfSetId m_AmfSetId;                         // Mandatory
   std::optional<AllowedNSSAI> m_AllowedNssai;  // Optional
   // SourceToTarget-AMFInformationReroute //Optional

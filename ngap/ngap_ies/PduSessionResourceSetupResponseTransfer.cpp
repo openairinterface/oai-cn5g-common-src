@@ -27,8 +27,12 @@ void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
     const QosFlowPerTnlInformation& qosFlowPerTnlInformation) {
   m_DlQosFlowPerTnlInformation = qosFlowPerTnlInformation;
 
+  if (!m_Ie->dLQosFlowPerTNLInformation)
+    m_Ie->dLQosFlowPerTNLInformation =
+        (Ngap_QosFlowPerTNLInformation_t*) calloc(
+            1, sizeof(Ngap_QosFlowPerTNLInformation_t));
   int ret =
-      m_DlQosFlowPerTnlInformation.encode(m_Ie->dLQosFlowPerTNLInformation);
+      m_DlQosFlowPerTnlInformation.encode(*m_Ie->dLQosFlowPerTNLInformation);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode DLQoSFlowPerTNLInformation IE error");
@@ -67,8 +71,12 @@ void PduSessionResourceSetupResponseTransfer::setDlQosFlowPerTnlInformation(
   m_DlQosFlowPerTnlInformation.set(
       upTransportLayerInformation, associatedQosFlowList);
 
+  if (!m_Ie->dLQosFlowPerTNLInformation)
+    m_Ie->dLQosFlowPerTNLInformation =
+        (Ngap_QosFlowPerTNLInformation_t*) calloc(
+            1, sizeof(Ngap_QosFlowPerTNLInformation_t));
   int ret =
-      m_DlQosFlowPerTnlInformation.encode(m_Ie->dLQosFlowPerTNLInformation);
+      m_DlQosFlowPerTnlInformation.encode(*m_Ie->dLQosFlowPerTNLInformation);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode DLQoSFlowPerTNLInformation IE error");
@@ -253,7 +261,8 @@ bool PduSessionResourceSetupResponseTransfer::decode(
   // asn_fprint(stderr, &asn_DEF_Ngap_PDUSessionResourceSetupResponseTransfer,
   // m_Ie);
 
-  if (!m_DlQosFlowPerTnlInformation.decode(m_Ie->dLQosFlowPerTNLInformation)) {
+  if (!m_Ie->dLQosFlowPerTNLInformation) return false;
+  if (!m_DlQosFlowPerTnlInformation.decode(*m_Ie->dLQosFlowPerTNLInformation)) {
     oai::logger::logger_common::ngap().error(
         "Decode NGAP DLQoSFlowPerTNLInformation IE error");
     return false;

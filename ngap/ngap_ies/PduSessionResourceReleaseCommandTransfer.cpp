@@ -29,8 +29,11 @@ PduSessionResourceReleaseCommandTransfer::
 //------------------------------------------------------------------------------
 void PduSessionResourceReleaseCommandTransfer::setCause(const Cause& cause) {
   m_CauseValue = cause;
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode Cause IE error");
     return;
@@ -43,8 +46,11 @@ void PduSessionResourceReleaseCommandTransfer::setCauseRadioNetwork(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_radioNetwork);
   m_CauseValue.set(causeValue);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error(
         "Encode CauseRadioNetwork IE error");
@@ -58,8 +64,11 @@ void PduSessionResourceReleaseCommandTransfer::setCauseTransport(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_transport);
   m_CauseValue.set(causeValue);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseTransport IE error");
     return;
@@ -72,8 +81,11 @@ void PduSessionResourceReleaseCommandTransfer::setCauseNas(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_nas);
   m_CauseValue.set(causeValue);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseNas IE error");
     return;
@@ -86,8 +98,11 @@ void PduSessionResourceReleaseCommandTransfer::setCauseProtocol(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_protocol);
   m_CauseValue.set(causeValue);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseProtocol IE error");
     return;
@@ -100,8 +115,11 @@ void PduSessionResourceReleaseCommandTransfer::setCauseMisc(
   m_CauseValue.setChoiceOfCause(Ngap_Cause_PR_misc);
   m_CauseValue.set(causeValue);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause)
+    m_PduSessionResourceReleaseCommandTransferIe->cause =
+        (Ngap_Cause_t*) calloc(1, sizeof(Ngap_Cause_t));
   int ret =
-      m_CauseValue.encode(m_PduSessionResourceReleaseCommandTransferIe->cause);
+      m_CauseValue.encode(*m_PduSessionResourceReleaseCommandTransferIe->cause);
   if (!ret) {
     oai::logger::logger_common::ngap().error("Encode CauseMisc IE error");
     return;
@@ -159,8 +177,9 @@ bool PduSessionResourceReleaseCommandTransfer::decode(
   // &asn_DEF_Ngap_PDUSessionResourceSetupUnsuccessfulTransfer,
   // pduSessionResourceSetupUnsuccessfulTransferIEs);
 
+  if (!m_PduSessionResourceReleaseCommandTransferIe->cause) return false;
   if (!m_CauseValue.decode(
-          m_PduSessionResourceReleaseCommandTransferIe->cause)) {
+          *m_PduSessionResourceReleaseCommandTransferIe->cause)) {
     oai::logger::logger_common::ngap().error("Decode Cause IE error");
     return false;
   }

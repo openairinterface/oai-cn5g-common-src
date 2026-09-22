@@ -29,9 +29,9 @@ class IesCriticalityDiagnostics {
   void decode(const Ngap_CriticalityDiagnostics_IE_Item_t&);
 
  private:
-  Ngap_Criticality_t m_Criticality;     // Mandatory
-  Ngap_ProtocolIE_ID_t m_ProtocolIeId;  // Mandatory
-  Ngap_TypeOfError_t m_TypeOfError;     // Mandatory
+  Ngap_Criticality_t m_Criticality    = {};  // Mandatory
+  Ngap_ProtocolIE_ID_t m_ProtocolIeId = {};  // Mandatory
+  Ngap_TypeOfError_t m_TypeOfError    = {};  // Mandatory
 };
 }  // namespace oai::ngap
 

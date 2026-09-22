@@ -11,6 +11,7 @@
 static const ber_tlv_tag_t asn_DEF_NULL_tags[] = {
     (ASN_TAG_CLASS_UNIVERSAL | (5 << 2))};
 asn_TYPE_operation_t asn_OP_NULL = {
+    .kind = ASN_KIND_PRIMITIVE,
     NULL_free,
 #if !defined(ASN_DISABLE_PRINT_SUPPORT)
     NULL_print,
@@ -18,6 +19,7 @@ asn_TYPE_operation_t asn_OP_NULL = {
     0,
 #endif /* !defined(ASN_DISABLE_PRINT_SUPPORT) */
     NULL_compare,
+    NULL_copy,
 #if !defined(ASN_DISABLE_BER_SUPPORT)
     NULL_decode_ber,
     NULL_encode_der, /* Special handling of DER encoding */
@@ -33,8 +35,10 @@ asn_TYPE_operation_t asn_OP_NULL = {
     0,
 #endif /* !defined(ASN_DISABLE_XER_SUPPORT) */
 #if !defined(ASN_DISABLE_JER_SUPPORT)
+    NULL_decode_jer,
     NULL_encode_jer,
 #else
+    0,
     0,
 #endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
 #if !defined(ASN_DISABLE_OER_SUPPORT)
@@ -63,7 +67,14 @@ asn_TYPE_operation_t asn_OP_NULL = {
 #else
     0,
 #endif /* !defined(ASN_DISABLE_RFILL_SUPPORT) */
-    0  /* Use generic outmost tag fetcher */
+    0 /* Use generic outmost tag fetcher */,
+#if !defined(ASN_DISABLE_CBOR_SUPPORT)
+    NULL_decode_cbor,
+    NULL_encode_cbor,
+#else
+    0,
+    0,
+#endif /* !defined(ASN_DISABLE_CBOR_SUPPORT) */
 };
 asn_TYPE_descriptor_t asn_DEF_NULL = {
     "NULL",
@@ -81,6 +92,9 @@ asn_TYPE_descriptor_t asn_DEF_NULL = {
         0,
 #endif /* !defined(ASN_DISABLE_UPER_SUPPORT) ||                                \
           !defined(ASN_DISABLE_APER_SUPPORT) */
+#if !defined(ASN_DISABLE_JER_SUPPORT)
+        0,
+#endif /* !defined(ASN_DISABLE_JER_SUPPORT) */
         asn_generic_no_constraint},
     0,
     0, /* No members */
@@ -109,5 +123,16 @@ int NULL_compare(
   (void) td;
   (void) a;
   (void) b;
+  return 0;
+}
+
+int NULL_copy(const asn_TYPE_descriptor_t* td, void** a, const void* b) {
+  (void) td;
+
+  if (b && !*a) {
+    *a = CALLOC(1, sizeof(NULL_t));
+    if (!*a) return -1;
+  }
+
   return 0;
 }

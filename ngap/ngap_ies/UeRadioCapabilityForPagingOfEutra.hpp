@@ -30,7 +30,7 @@ class UeRadioCapabilityForPagingOfEutra {
                   ueRadioCapabilityForPagingOfEutra);
 
  private:
-  OCTET_STRING_t m_UeRadioCapability;
+  OCTET_STRING_t m_UeRadioCapability = {};
 };
 
 }  // namespace oai::ngap

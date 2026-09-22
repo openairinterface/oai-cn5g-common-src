@@ -30,8 +30,8 @@ class PduSessionResourceItemHoRqd {
       const Ngap_PDUSessionResourceItemHORqd_t& pduSessionResourceItemHORqd);
 
  private:
-  PduSessionId m_PduSessionId;                // Mandatory
-  OCTET_STRING_t m_HandoverRequiredTransfer;  // Mandatory
+  PduSessionId m_PduSessionId;                     // Mandatory
+  OCTET_STRING_t m_HandoverRequiredTransfer = {};  // Mandatory
 };
 
 }  // namespace oai::ngap

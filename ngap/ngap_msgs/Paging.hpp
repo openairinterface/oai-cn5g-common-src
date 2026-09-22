@@ -9,9 +9,12 @@
 #include <vector>
 #include <cstdint>
 
-#include "PagingDrx.hpp"
 #include "NgapMessage.hpp"
+#include "NrPagingEDrxInformation.hpp"
+#include "PagingCause.hpp"
+#include "PagingDrx.hpp"
 #include "PagingPriority.hpp"
+#include "PeipsAssistanceInformation.hpp"
 #include "TaiListforPaging.hpp"
 #include "UePagingIdentity.hpp"
 
@@ -49,6 +52,10 @@ class PagingMsg : public NgapMessage {
   // Paging Priority (Optional) — mapped from Paging Policy Indicator
   void setPagingPriority(uint8_t ppi);
 
+  void setNrPagingEDrxInformation(const NrPagingEDrxInformation& value);
+  void setPagingCause(const PagingCause& value);
+  void setPeipsAssistanceInformation(const PeipsAssistanceInformation& value);
+
   // Paging Origin — not set for 3GPP paging (current scope)
   // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
 
@@ -59,6 +66,10 @@ class PagingMsg : public NgapMessage {
   std::optional<PagingDrx> m_pagingDRX;            // Optional
   TaiListForPaging m_TaiListForPaging;             // Mandatory
   std::optional<PagingPriority> m_pagingPriority;  // Optional
+  std::optional<NrPagingEDrxInformation> m_NrPagingEDrxInformation;  // Rel-17
+  std::optional<PagingCause> m_PagingCause;                          // Rel-17
+  std::optional<PeipsAssistanceInformation>
+      m_PeipsAssistanceInformation;  // Rel-17
   // TODO: UE Radio Capability for Paging (Optional)
   // TODO: PagingOrigin not set (3GPP-only paging, current scope)
   // TODO: Assistance Data for Paging (Optional)

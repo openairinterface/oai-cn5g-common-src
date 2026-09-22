@@ -55,12 +55,20 @@ void UlNgUUpTnlModifyItem::getDlNgUUpTnlInformation(
 //------------------------------------------------------------------------------
 bool UlNgUUpTnlModifyItem::encode(
     Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem) const {
+  if (!ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation)
+    ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation =
+        (Ngap_UPTransportLayerInformation_t*) calloc(
+            1, sizeof(Ngap_UPTransportLayerInformation_t));
   if (!m_UlNgUUpTnlInformation.encode(
-          ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation)) {
+          *ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation)) {
     return false;
   }
+  if (!ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation)
+    ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation =
+        (Ngap_UPTransportLayerInformation_t*) calloc(
+            1, sizeof(Ngap_UPTransportLayerInformation_t));
   if (!m_DlNgUUpTnlInformation.encode(
-          ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation)) {
+          *ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation)) {
     return false;
   }
   return true;
@@ -69,11 +77,13 @@ bool UlNgUUpTnlModifyItem::encode(
 //------------------------------------------------------------------------------
 bool UlNgUUpTnlModifyItem::decode(
     const Ngap_UL_NGU_UP_TNLModifyItem_t& ulNgUUpTnlModifyItem) {
+  if (!ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation) return false;
   if (!m_UlNgUUpTnlInformation.decode(
-          ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation))
+          *ulNgUUpTnlModifyItem.uL_NGU_UP_TNLInformation))
     false;
+  if (!ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation) return false;
   if (!m_DlNgUUpTnlInformation.decode(
-          ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation))
+          *ulNgUUpTnlModifyItem.dL_NGU_UP_TNLInformation))
     return false;
 
   return true;

@@ -56,7 +56,7 @@ class HandoverCommandMsg : public NgapUeMessage {
 
   // AMF_UE_NGAP_ID (Mandatory)
   // RAN_UE_NGAP_ID (Mandatory)
-  Ngap_HandoverType_t m_HandoverType;  // Mandatory
+  Ngap_HandoverType_t m_HandoverType = {};  // Mandatory
   std::optional<Ngap_NASSecurityParametersFromNGRAN_t>
       m_NasSecurityParametersFromNgRan;  // TODO: Conditional
   std::optional<PduSessionResourceHandoverList>
@@ -64,7 +64,7 @@ class HandoverCommandMsg : public NgapUeMessage {
   std::optional<PduSessionResourceToReleaseListHandoverCmd>
       m_PduSessionResourceToReleaseListHOCmd;
   Ngap_TargetToSource_TransparentContainer_t
-      m_TargetToSourceTransparentContainer;                 // TODO: Mandatory
+      m_TargetToSourceTransparentContainer = {};            // TODO: Mandatory
   Ngap_CriticalityDiagnostics_t* m_CriticalityDiagnostics;  // TODO: Optional
 };
 

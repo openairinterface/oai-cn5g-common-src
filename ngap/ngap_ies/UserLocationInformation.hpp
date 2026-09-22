@@ -36,7 +36,7 @@ class UserLocationInformation {
   bool decode(const Ngap_UserLocationInformation_t& userLocationInformation);
 
  private:
-  Ngap_UserLocationInformation_PR m_Present;
+  Ngap_UserLocationInformation_PR m_Present = {};
   std::optional<UserLocationInformationEutra> m_UserLocationInformationEutra;
   std::optional<UserLocationInformationNr> m_UserLocationInformationNr;
   // TODO: UserLocationInformationN3IWF *userLocationInformationN3IWF;

@@ -19,6 +19,8 @@ PduSessionResourceModifyRequestTransfer::
     PduSessionResourceModifyRequestTransfer() {
   m_Ie = (Ngap_PDUSessionResourceModifyRequestTransfer_t*) calloc(
       1, sizeof(Ngap_PDUSessionResourceModifyRequestTransfer_t));
+  m_Ie->protocolIEs = (struct Ngap_ProtocolIE_Container*) calloc(
+      1, sizeof(struct Ngap_ProtocolIE_Container));
   m_PduSessionAggregateMaximumBitRateIe = std::nullopt;
   m_NetworkInstance                     = std::nullopt;
 }

@@ -4,6 +4,9 @@
 
 #include "InitialContextSetupRequest.hpp"
 
+#include <iterator>
+#include <optional>
+
 #include "logger_base.hpp"
 extern "C" {
 #include "Ngap_InitialContextSetupRequest.h"
@@ -15,6 +18,103 @@ extern "C" {
 #include "utils.hpp"
 
 namespace oai::ngap {
+
+namespace {
+// IE order of InitialContextSetupRequestIEs object set (TS 38.413 9.4.4).
+// IEs shall be ordered as in the object set (TS 38.413 9.4.1), otherwise the
+// gNB may reject the message with "abstract-syntax-error-falsely-constructed".
+constexpr long kIeOrder[] = {
+    Ngap_ProtocolIE_ID_id_AMF_UE_NGAP_ID,
+    Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID,
+    Ngap_ProtocolIE_ID_id_OldAMF,
+    Ngap_ProtocolIE_ID_id_UEAggregateMaximumBitRate,
+    Ngap_ProtocolIE_ID_id_CoreNetworkAssistanceInformationForInactive,
+    Ngap_ProtocolIE_ID_id_GUAMI,
+    Ngap_ProtocolIE_ID_id_PDUSessionResourceSetupListCxtReq,
+    Ngap_ProtocolIE_ID_id_AllowedNSSAI,
+    Ngap_ProtocolIE_ID_id_UESecurityCapabilities,
+    Ngap_ProtocolIE_ID_id_SecurityKey,
+    Ngap_ProtocolIE_ID_id_TraceActivation,
+    Ngap_ProtocolIE_ID_id_MobilityRestrictionList,
+    Ngap_ProtocolIE_ID_id_UERadioCapability,
+    Ngap_ProtocolIE_ID_id_IndexToRFSP,
+    Ngap_ProtocolIE_ID_id_MaskedIMEISV,
+    Ngap_ProtocolIE_ID_id_NAS_PDU,
+    Ngap_ProtocolIE_ID_id_EmergencyFallbackIndicator,
+    Ngap_ProtocolIE_ID_id_RRCInactiveTransitionReportRequest,
+    Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging,
+    Ngap_ProtocolIE_ID_id_RedirectionVoiceFallback,
+    Ngap_ProtocolIE_ID_id_LocationReportingRequestType,
+    Ngap_ProtocolIE_ID_id_CNAssistedRANTuning,
+    Ngap_ProtocolIE_ID_id_SRVCCOperationPossible,
+    Ngap_ProtocolIE_ID_id_IAB_Authorized,
+    Ngap_ProtocolIE_ID_id_Enhanced_CoverageRestriction,
+    Ngap_ProtocolIE_ID_id_Extended_ConnectedTime,
+    Ngap_ProtocolIE_ID_id_UE_DifferentiationInfo,
+    Ngap_ProtocolIE_ID_id_NRV2XServicesAuthorized,
+    Ngap_ProtocolIE_ID_id_LTEV2XServicesAuthorized,
+    Ngap_ProtocolIE_ID_id_NRUESidelinkAggregateMaximumBitrate,
+    Ngap_ProtocolIE_ID_id_LTEUESidelinkAggregateMaximumBitrate,
+    Ngap_ProtocolIE_ID_id_PC5QoSParameters,
+    Ngap_ProtocolIE_ID_id_CEmodeBrestricted,
+    Ngap_ProtocolIE_ID_id_UE_UP_CIoT_Support,
+    Ngap_ProtocolIE_ID_id_RGLevelWirelineAccessCharacteristics,
+    Ngap_ProtocolIE_ID_id_ManagementBasedMDTPLMNList,
+    Ngap_ProtocolIE_ID_id_UERadioCapabilityID,
+    Ngap_ProtocolIE_ID_id_TimeSyncAssistanceInfo,
+    Ngap_ProtocolIE_ID_id_QMCConfigInfo,
+    Ngap_ProtocolIE_ID_id_TargetNSSAIInformation,
+    Ngap_ProtocolIE_ID_id_UESliceMaximumBitRateList,
+    Ngap_ProtocolIE_ID_id_FiveG_ProSeAuthorized,
+    Ngap_ProtocolIE_ID_id_FiveG_ProSeUEPC5AggregateMaximumBitRate,
+    Ngap_ProtocolIE_ID_id_FiveG_ProSePC5QoSParameters};
+
+std::optional<size_t> ieRank(long id) {
+  for (size_t i = 0; i < std::size(kIeOrder); i++)
+    if (kIeOrder[i] == id) return i;
+  return std::nullopt;
+}
+
+// Insert the IE at its position in the object set, whatever the setter order.
+// Do not append an IE that is not represented in kIeOrder: doing so would
+// recreate the malformed-message failure this ordering is intended to avoid.
+// New ASN.1 IEs therefore require an explicit order-table update alongside
+// their setter.
+int addIeInOrder(
+    Ngap_InitialContextSetupRequest_t* msg,
+    Ngap_InitialContextSetupRequestIEs_t* ie) {
+  auto& list         = msg->protocolIEs->list;
+  const auto ie_rank = ieRank(ie->id);
+  if (!ie_rank.has_value()) {
+    oai::logger::logger_common::ngap().error(
+        "InitialContextSetupRequest IE %ld has no object-set order", ie->id);
+    return -1;
+  }
+
+  // A pre-existing unknown IE cannot be positioned safely either. Refuse the
+  // update rather than emitting an IE container with a spec-violating order.
+  for (int i = 0; i < list.count; i++) {
+    const auto* existing =
+        (const Ngap_InitialContextSetupRequestIEs_t*) list.array[i];
+    if (!ieRank(existing->id).has_value()) {
+      oai::logger::logger_common::ngap().error(
+          "InitialContextSetupRequest contains IE %ld with no object-set order",
+          existing->id);
+      return -1;
+    }
+  }
+
+  int ret = ASN_SEQUENCE_ADD(&list, ie);
+  if (ret != 0) return ret;
+  for (int i = list.count - 1; i > 0; i--) {
+    auto* prev = (Ngap_InitialContextSetupRequestIEs_t*) list.array[i - 1];
+    if (ieRank(prev->id).value() <= ie_rank.value()) break;
+    list.array[i]     = prev;
+    list.array[i - 1] = ie;
+  }
+  return 0;
+}
+}  // namespace
 
 //------------------------------------------------------------------------------
 InitialContextSetupRequestMsg::InitialContextSetupRequestMsg()
@@ -76,8 +176,7 @@ void InitialContextSetupRequestMsg::setAmfUeNgapId(const uint64_t& id) {
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AMF_UE_NGAP_ID IE error!");
 }
@@ -103,8 +202,7 @@ void InitialContextSetupRequestMsg::setRanUeNgapId(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode RAN_UE_NGAP_ID IE error!");
 }
@@ -129,8 +227,7 @@ void InitialContextSetupRequestMsg::setOldAmf(const std::string& name) {
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode oldAmfName IE error!");
 }
@@ -166,8 +263,7 @@ void InitialContextSetupRequestMsg::setUeAggregateMaxBitRate(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UeAggregateMaxBitRate IE error!");
@@ -203,8 +299,7 @@ void InitialContextSetupRequestMsg::setUeAggregateMaxBitRate(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEAggregateMaximumBitRate IE error");
@@ -272,8 +367,7 @@ void InitialContextSetupRequestMsg::setCoreNetworkAssistanceInfo(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode CoreNetworkAssistanceInformation IE error!");
@@ -331,8 +425,7 @@ void InitialContextSetupRequestMsg::setGuami(const guami_full_format_t& value) {
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode GUAMI IE error!");
 }
@@ -396,8 +489,7 @@ void InitialContextSetupRequestMsg::setPduSessionResourceSetupRequestList(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode PDUSessionResourceSetupListCxtReq IE error!");
@@ -467,8 +559,7 @@ void InitialContextSetupRequestMsg::setAllowedNssai(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode AllowedNSSAI IE error!");
 }
@@ -514,8 +605,7 @@ void InitialContextSetupRequestMsg::setUeSecurityCapability(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UESecurityCapabilities IE error!");
@@ -554,8 +644,7 @@ void InitialContextSetupRequestMsg::setSecurityKey(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode SecurityKey IE error!");
 }
@@ -596,8 +685,7 @@ void InitialContextSetupRequestMsg::setMobilityRestrictionList(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode MobilityRestrictionList IE error!");
@@ -623,8 +711,7 @@ void InitialContextSetupRequestMsg::setNasPdu(const bstring& pdu) {
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode NAS PDU error!");
 }
@@ -659,8 +746,7 @@ void InitialContextSetupRequestMsg::setUeRadioCapability(
     return;
   }
 
-  ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UERadioCapability IE error!");
@@ -689,8 +775,7 @@ void InitialContextSetupRequestMsg::setMaskedImeisv(const std::string& imeisv) {
     return;
   }
 
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode MaskedIMEISV IE error!");
 }
@@ -944,8 +1029,7 @@ void InitialContextSetupRequestMsg::setManagementBasedMdtPlmnList(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode ManagementBasedMdtPlmnList IE error");
@@ -970,8 +1054,7 @@ void InitialContextSetupRequestMsg::setTimeSynchronisationAssistanceInfo(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode TimeSynchronisationAssistanceInfo IE error");
@@ -993,8 +1076,7 @@ void InitialContextSetupRequestMsg::setQmcConfigInfo(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode QmcConfigInfo IE error");
 }
@@ -1017,8 +1099,7 @@ void InitialContextSetupRequestMsg::setTargetNssaiInformation(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode TargetNssaiInformation IE error");
@@ -1043,8 +1124,7 @@ void InitialContextSetupRequestMsg::setUeSliceMaximumBitRateList(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UeSliceMaximumBitRateList IE error");
@@ -1068,8 +1148,7 @@ void InitialContextSetupRequestMsg::setFiveGProSeAuthorized(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSeAuthorized IE error");
@@ -1094,8 +1173,7 @@ void InitialContextSetupRequestMsg::setFiveGProSeUePC5AggregateMaximumBitRate(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSeUePC5AggregateMaximumBitRate IE error");
@@ -1120,8 +1198,7 @@ void InitialContextSetupRequestMsg::setFiveGProSePC5QoSParameters(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode FiveGProSePC5QoSParameters IE error");
@@ -1143,8 +1220,7 @@ void InitialContextSetupRequestMsg::setIabAuthorized(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error("Encode IabAuthorized IE error");
 }
@@ -1167,8 +1243,7 @@ void InitialContextSetupRequestMsg::setUeRadioCapabilityId(
     free(ie);
     return;
   }
-  int ret =
-      ASN_SEQUENCE_ADD(&m_InitialContextSetupRequestIes->protocolIEs->list, ie);
+  int ret = addIeInOrder(m_InitialContextSetupRequestIes, ie);
   if (ret != 0)
     oai::logger::logger_common::ngap().error(
         "Encode UeRadioCapabilityId IE error");

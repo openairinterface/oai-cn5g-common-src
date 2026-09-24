@@ -1,0 +1,6 @@
+[submodule "ci-scripts/common-ci"]
+	path = ci-scripts/common
+	url = https://github.com/openairinterface/oai-cn5g-common-ci.git
+[submodule "ci-scripts/common"]
+	path = ci-scripts/common
+	url = https://github.com/openairinterface/oai-cn5g-common-ci.git

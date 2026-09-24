@@ -243,6 +243,19 @@ typedef struct pcf_info_s {
   // ToDo: rxDiamHost, rxDiamRealm, v2xSupportInd.
 } pcf_info_t;
 
+typedef struct snpn_id_s {
+  plmn_t plmn_id;
+  std::string nid;
+} snpn_id_t;
+
+typedef struct sepp_info_s {
+  std::string sepp_prefix;
+  std::map<std::string, int32_t> sepp_ports;
+  std::vector<plmn_t> remote_plmn_list;     // remotePlmnList
+  std::vector<snpn_id_t> remote_snpn_list;  // remoteSnpnList
+  std::vector<std::string> n32_purposes;    // n32Purposes
+} sepp_info_t;
+
 typedef struct udsf_info_s {
   std::string group_id;
   std::vector<supi_range_t> supi_ranges;

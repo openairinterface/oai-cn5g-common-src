@@ -100,7 +100,7 @@ struct http2_stream {
   }
 
   // Non-copyable (owns body_ptr)
-  http2_stream(const http2_stream&) = delete;
+  http2_stream(const http2_stream&)            = delete;
   http2_stream& operator=(const http2_stream&) = delete;
 };
 
@@ -148,9 +148,7 @@ struct http2_connection {
 
   ~http2_connection() {
     // Destroy streams first (frees response_body allocations via http2_stream
-    // destructors) BEFORE calling nghttp2_session_del(), so that any
-    // on_stream_close_callback invocations triggered by session deletion
-    // find an empty map and are safe no-ops.
+    // destructors) BEFORE calling nghttp2_session_del().
     streams.clear();
     if (session) {
       nghttp2_session_del(session);
@@ -163,7 +161,7 @@ struct http2_connection {
   }
 
   // Non-copyable
-  http2_connection(const http2_connection&) = delete;
+  http2_connection(const http2_connection&)            = delete;
   http2_connection& operator=(const http2_connection&) = delete;
 
   http2_stream* create_stream(int32_t id) {
@@ -299,8 +297,10 @@ static int on_header_callback(
 // on_data_chunk_recv_callback
 // Called for each chunk of received DATA payload.
 // Accumulates body data.  Enforces max_request_body_size.
-// CRITICAL: nghttp2_session_consume() MUST be called to replenish the
-//           flow-control window; without it the connection stalls.
+// Flow control is nghttp2's job here: we never set no_auto_window_update, so it
+// sends WINDOW_UPDATE on its own. Don't add nghttp2_session_consume() — in this
+// mode it just returns NGHTTP2_ERR_INVALID_STATE. If auto updates are ever
+// turned off, this is where the consume call belongs (and check its return).
 
 static int on_data_chunk_recv_callback(
     nghttp2_session* session, uint8_t /*flags*/, int32_t stream_id,
@@ -320,9 +320,6 @@ static int on_data_chunk_recv_callback(
   }
 
   stream->request.body.append(reinterpret_cast<const char*>(data), len);
-
-  // Replenish the connection- and stream-level flow-control windows.
-  nghttp2_session_consume(session, stream_id, len);
 
   return 0;
 }
@@ -1043,15 +1040,28 @@ void http2_server::start() {
     drain_timer_ = nullptr;
   }
   close_all_connections();
+  // event_base_free() below drops pending events without running them, so mop
+  // up any deferred-destruction contexts whose timer never got to fire. Safe
+  // here because the loop has stopped.
+  reclaim_deferred_ctxs();
   pool_.reset();  // join worker threads
   event_base_free(base_);
   base_ = nullptr;
   running_.store(false);
-  srv_log().info("HTTP2 server fully stopped");
+  srv_log().info("HTTP2 server: event loop stopped and resources released");
 }
 
 void http2_server::stop() {
   if (!running_.load()) return;
+
+  // Only the first caller runs the shutdown sequence. A second signal would
+  // otherwise re-run it end to end and overwrite drain_timer_, leaking the
+  // first timer.
+  bool expected = false;
+  if (!stop_requested_.compare_exchange_strong(expected, true)) {
+    srv_log().info("HTTP2 server stop: already in progress, ignoring");
+    return;
+  }
 
   // Schedule the GOAWAY + drain sequence on the event loop thread.
   // event_base_once() is documented thread-safe in libevent.
@@ -1292,10 +1302,27 @@ void http2_server::goaway_and_drain_cb(
   // Step 4: Start the drain timer.  In-flight streams may complete before it
   // fires; remaining connections are force-closed in drain_timer_cb.
   struct timeval tv;
-  tv.tv_sec            = server->config_.shutdown_drain_timeout_sec;
-  tv.tv_usec           = 0;
+  tv.tv_sec  = server->config_.shutdown_drain_timeout_sec;
+  tv.tv_usec = 0;
+  // Belt and braces: the stop() guard should keep us from getting here twice,
+  // but never overwrite a live timer without freeing it.
+  if (server->drain_timer_) {
+    event_free(server->drain_timer_);
+    server->drain_timer_ = nullptr;
+  }
   server->drain_timer_ = evtimer_new(server->base_, drain_timer_cb, server);
   evtimer_add(server->drain_timer_, &tv);
+
+  // Nothing to drain? Stop now rather than waiting out the timeout, which stays
+  // armed as the upper bound. Note this relies on main() joining the task
+  // manager before it frees anything: the long wait used to hide that race.
+  {
+    std::lock_guard<std::mutex> lock(server->connections_mutex_);
+    if (server->connections_.empty()) {
+      srv_log().info("HTTP2 server: no connections to drain, stopping now");
+      event_base_loopbreak(server->base_);
+    }
+  }
 }
 
 // drain_timer_cb
@@ -1338,6 +1365,7 @@ void http2_server::deferred_destruction_timeout_cb(
   auto* ctx    = static_cast<deferred_destruction_ctx*>(arg);
   uint64_t id  = ctx->conn_id;
   auto* server = ctx->server;
+  server->untrack_deferred_ctx(ctx);
   delete ctx;  // always freed regardless of lookup outcome
 
   http2_connection* conn = server->find_connection(id);
@@ -1388,6 +1416,7 @@ void http2_connection::start_deferred_destruction(const char* reason) {
       static_cast<unsigned long long>(conn_id), reason);
 
   auto* ctx = new deferred_destruction_ctx{conn_id, server};
+  server->track_deferred_ctx(ctx);
   struct timeval tv;
   tv.tv_sec  = DEFERRED_DESTRUCTION_TIMEOUT_SEC;
   tv.tv_usec = 0;
@@ -1398,6 +1427,7 @@ void http2_connection::start_deferred_destruction(const char* reason) {
         "HTTP2 conn %llu: event_base_once failed for deferred destruction "
         "timeout — connection may leak",
         static_cast<unsigned long long>(conn_id));
+    server->untrack_deferred_ctx(ctx);
     delete ctx;
   }
 }
@@ -1424,6 +1454,35 @@ void http2_server::close_all_connections() {
     delete conn;
   }
   connections_.clear();
+}
+
+// ---------------------------------------------------------------------------
+void http2_server::track_deferred_ctx(void* ctx) {
+  std::lock_guard<std::mutex> lock(deferred_ctx_mutex_);
+  deferred_ctxs_.insert(ctx);
+}
+
+// ---------------------------------------------------------------------------
+void http2_server::untrack_deferred_ctx(void* ctx) {
+  std::lock_guard<std::mutex> lock(deferred_ctx_mutex_);
+  deferred_ctxs_.erase(ctx);
+}
+
+// ---------------------------------------------------------------------------
+// Call only after the event loop has stopped — a pending timer would still hold
+// a pointer to one of these.
+void http2_server::reclaim_deferred_ctxs() {
+  std::lock_guard<std::mutex> lock(deferred_ctx_mutex_);
+  if (!deferred_ctxs_.empty()) {
+    srv_log().info(
+        "HTTP2 server: reclaiming %zu deferred-destruction context(s) whose "
+        "timer never fired",
+        deferred_ctxs_.size());
+  }
+  for (void* ctx : deferred_ctxs_) {
+    delete static_cast<deferred_destruction_ctx*>(ctx);
+  }
+  deferred_ctxs_.clear();
 }
 
 // ---------------------------------------------------------------------------

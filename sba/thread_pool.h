@@ -8,6 +8,7 @@
 #include <atomic>
 #include <condition_variable>
 #include <cstddef>
+#include <exception>
 #include <functional>
 #include <mutex>
 #include <queue>
@@ -39,10 +40,10 @@ class thread_pool {
   ~thread_pool() { shutdown(); }
 
   // Non-copyable, non-movable
-  thread_pool(const thread_pool&) = delete;
+  thread_pool(const thread_pool&)            = delete;
   thread_pool& operator=(const thread_pool&) = delete;
   thread_pool(thread_pool&&)                 = delete;
-  thread_pool& operator=(thread_pool&&) = delete;
+  thread_pool& operator=(thread_pool&&)      = delete;
 
   // Enqueue a task for execution on a worker thread.
   // Returns false if the pool is shut down or the queue is full.
@@ -76,6 +77,12 @@ class thread_pool {
   // Lock-free read — use as a hint; enqueue() is authoritative under mutex.
   bool is_shutdown() const { return shutdown_; }
 
+  // How many tasks threw and were contained. Anything but zero means work was
+  // lost, so it is worth surfacing rather than failing quietly.
+  std::size_t exceptions_caught() const {
+    return exceptions_caught_.load(std::memory_order_relaxed);
+  }
+
  private:
   void worker_loop() {
     while (true) {
@@ -87,12 +94,26 @@ class thread_pool {
         task = std::move(tasks_.front());
         tasks_.pop();
       }
-      task();
+      // Don't let a throwing task call std::terminate and take the process with
+      // it. Swallowing is safe because destroying `task` below releases any
+      // response handle it holds, and that destructor sends a 500 if nothing
+      // was — so the client gets an error rather than hanging.
+      // Only a counter: no logger in this header, and a shared error string
+      // would race between workers. Read it via exceptions_caught().
+      try {
+        task();
+      } catch (...) {
+        exceptions_caught_.fetch_add(1, std::memory_order_relaxed);
+      }
+      // Drop the task here so its captures die on this worker, at a predictable
+      // point, rather than whenever the next iteration happens to reassign it.
+      task = nullptr;
     }
   }
 
   std::vector<std::thread> workers_;
   std::queue<std::function<void()>> tasks_;
+  std::atomic<std::size_t> exceptions_caught_{0};
   std::mutex mutex_;
   std::condition_variable cv_;
   std::atomic<bool> shutdown_;

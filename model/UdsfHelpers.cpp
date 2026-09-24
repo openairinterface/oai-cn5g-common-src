@@ -39,12 +39,4 @@ bool fromStringValue(
   return true;
 }
 
-void fromPistacheToStdStringOptional(
-    const Pistache::Optional<Pistache::Http::Header::Raw>& inOpt,
-    std::optional<std::string>& outOpt) {
-  if (!inOpt.isEmpty()) {
-    outOpt = std::optional<std::string>(inOpt.get().value());
-  }
-}
-
 }  // namespace oai::_3gpp::model::helpers

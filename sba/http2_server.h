@@ -13,6 +13,7 @@
 #include <mutex>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <nghttp2/nghttp2.h>
@@ -138,8 +139,8 @@ class http2_response {
 // arrives is handled safely there.
 class http2_deferred_response {
  public:
-  http2_deferred_response()                               = default;
-  http2_deferred_response(const http2_deferred_response&) = delete;
+  http2_deferred_response()                                          = default;
+  http2_deferred_response(const http2_deferred_response&)            = delete;
   http2_deferred_response& operator=(const http2_deferred_response&) = delete;
   http2_deferred_response(http2_deferred_response&&) noexcept;
   http2_deferred_response& operator=(http2_deferred_response&&) noexcept;
@@ -207,7 +208,7 @@ class http2_server {
   ~http2_server();
 
   // Non-copyable, non-movable
-  http2_server(const http2_server&) = delete;
+  http2_server(const http2_server&)            = delete;
   http2_server& operator=(const http2_server&) = delete;
 
   // Register a route handler matched by longest-prefix.
@@ -232,13 +233,15 @@ class http2_server {
   // conn->server->find_handler() without friendship.
   http2_handler* find_handler(const std::string& path);
 
+  // Deferred-destruction context bookkeeping (see deferred_ctxs_).
+  void track_deferred_ctx(void* ctx);
+  void untrack_deferred_ctx(void* ctx);
+
   // Thread pool accessors (called from event-loop callbacks).
   bool has_thread_pool() const { return pool_ != nullptr; }
   thread_pool* get_thread_pool() { return pool_.get(); }
   bool is_shutting_down() const { return shutting_down_; }
-  struct event_base* base() const {
-    return base_;
-  }
+  struct event_base* base() const { return base_; }
 
   // Static callback registered via event_base_once() by worker threads.
   // Must be public so lambdas in file-scope nghttp2 callbacks can reference it.
@@ -261,6 +264,16 @@ class http2_server {
   uint32_t port_;
   http2_server_config config_;
   std::atomic<bool> running_{false};
+  // Set by the first stop(); keeps a second shutdown signal (SIGINT then
+  // SIGTERM, say) from running the whole teardown again.
+  std::atomic<bool> stop_requested_{false};
+
+  // Live deferred_destruction_ctx allocations, each owned by a pending timer.
+  // void* because the type is private to the .cpp. start() frees whatever is
+  // left once the loop exits, since event_base_free() drops those timers
+  // without running them.
+  std::mutex deferred_ctx_mutex_;
+  std::unordered_set<void*> deferred_ctxs_;
 
   // routing table (sorted longest-prefix-first after start())
   struct Route {
@@ -289,6 +302,10 @@ class http2_server {
   void remove_connection(http2_connection* conn);
   void close_all_connections();
   http2_connection* find_connection(uint64_t conn_id);
+
+  // Frees contexts whose timer never fired. Only safe once the loop has
+  // stopped, and only start() needs it.
+  void reclaim_deferred_ctxs();
 
   // Thread pool state (only valid when pool_ != nullptr)
   std::unique_ptr<thread_pool> pool_;

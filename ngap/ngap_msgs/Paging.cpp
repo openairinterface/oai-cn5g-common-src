@@ -11,6 +11,7 @@
 extern "C" {
 #include "Ngap_ProtocolIE-Field.h"
 #include "Ngap_ProtocolIE-ID.h"
+#include "Ngap_ProtocolIE_Container_compat.h"
 }
 
 namespace oai::ngap {

@@ -28,6 +28,7 @@
 #include "assertions.h"
 
 #ifndef FILE_CONVERSIONS_SEEN
+
 #define FILE_CONVERSIONS_SEEN
 
 /* Endianness conversions for 16 and 32 bits integers from host to network order

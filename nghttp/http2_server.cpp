@@ -25,7 +25,7 @@
 // Diagnostics logger
 // ---------------------------------------------------------------------------
 
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 namespace {
 // Category the server logs under. Set once at startup by the NF, then only
@@ -44,12 +44,12 @@ const oai::logger::printf_logger& http2_server_logger() {
   return oai::logger::logger_registry::get_logger(http2_server_logger_name());
 }
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2
 
 // Short alias for the log call sites below.
 namespace {
 inline const oai::logger::printf_logger& srv_log() {
-  return oai::sba::http2_server_logger();
+  return oai::nghttp2::http2_server_logger();
 }
 }  // namespace
 

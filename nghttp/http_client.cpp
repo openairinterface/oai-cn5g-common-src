@@ -30,13 +30,13 @@
 #include <pthread.h>
 
 namespace json = nlohmann;
-using namespace oai::sba;
+using namespace oai::nghttp2;
 
 // ============================================================================
 // Internal helpers (file-scope only)
 // ============================================================================
 
-namespace oai::sba::internal {
+namespace oai::nghttp2::internal {
 
 // ---------------------------------------------------------------------------
 // method_to_string
@@ -1064,12 +1064,12 @@ void nghttp2_connection_pool::shutdown_all() {
   m_pool.clear();
 }
 
-}  // namespace oai::sba::internal
+}  // namespace oai::nghttp2::internal
 
 // ============================================================================
 // http_client_impl (PIMPL body — visible only to this translation unit)
 // ============================================================================
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 class http_client_impl {
  public:
@@ -1257,12 +1257,12 @@ request http_client_impl::build_multipart_request(
   return req;
 }
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2
 
 // ============================================================================
 // http_client — thin wrapper delegating to http_client_impl
 // ============================================================================
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 http_client::http_client(
     oai::logger::printf_logger logger, int timeout_ms,
@@ -1314,4 +1314,4 @@ request http_client::prepare_multipart_request(
   return http_client_impl::build_multipart_request(uri, body);
 }
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2

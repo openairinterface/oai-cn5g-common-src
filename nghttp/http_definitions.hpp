@@ -15,7 +15,7 @@
 
 #include "3gpp_29.500.h"
 
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 struct response {
   int status_code;
@@ -47,4 +47,4 @@ constexpr auto kSbiResponseJsonData         = "jsonData";
 constexpr auto kSbiResponseHttpResponseCode = "httpResponseCode";
 constexpr auto kSbiResponseHeaderLocation   = "httpResponseLocation";
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2

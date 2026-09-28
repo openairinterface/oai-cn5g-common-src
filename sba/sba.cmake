@@ -9,11 +9,10 @@ include_directories(${SBA_DIR})
 
 SET(SBA_SRC_FILES
         ${SBA_DIR}/nf_event.cpp
-        ${SBA_DIR}/task_manager.cpp
-        ${SBA_DIR}/nf_service.cpp
         ${SBA_DIR}/nf_profile.cpp
+        ${SBA_DIR}/nf_service.cpp
+        ${SBA_DIR}/task_manager.cpp
 )
-
 
 ## SBA used in NF_TARGET (main)
 if (TARGET ${NF_TARGET})

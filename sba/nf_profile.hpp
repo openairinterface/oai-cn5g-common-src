@@ -16,7 +16,6 @@
 
 #include "3gpp_29.510.h"
 #include "logger.hpp"
-#include "nf_event.hpp"
 
 namespace oai::sba {
 
@@ -26,14 +25,14 @@ const oai::logger::printf_logger& sba_logger();
 }  // namespace oai::sba
 
 namespace oai {
-namespace sba
+namespace sba {
 
-    using namespace oai::common::sbi;
+using namespace oai::common::sbi;
 
 class nf_profile : public std::enable_shared_from_this<nf_profile> {
  public:
   nf_profile()
-      : nf_type(NF_TYPE_UNKNOWN),
+      : nf_type(),
         heartBeat_timer(0),
         snssais(),
         fqdn(),
@@ -43,32 +42,11 @@ class nf_profile : public std::enable_shared_from_this<nf_profile> {
         priority(0),
         capacity(0),
         nf_services(),
-        hb_mutex(),
         nf_profile_mutex() {
     nf_instance_name = "";
     nf_status        = "";
     json_data        = {};
     custom_info      = {};
-    first_update     = true;
-    is_updated       = false;
-  }
-  nf_profile(const nf_type_t type)
-      : nf_type(type),
-        heartBeat_timer(0),
-        snssais(),
-        fqdn(),
-        plmn_list(),
-        ipv4_addresses(),
-        ipv6_addresses(),
-        priority(0),
-        capacity(0),
-        nf_services(),
-        hb_mutex(),
-        nf_profile_mutex() {
-    nf_instance_name = "";
-    nf_status        = "";
-    json_data        = {};
-    first_update     = true;
     is_updated       = false;
   }
 
@@ -83,13 +61,12 @@ class nf_profile : public std::enable_shared_from_this<nf_profile> {
         priority(0),
         capacity(0),
         nf_services(),
-        nf_type(NF_TYPE_UNKNOWN),
-        hb_mutex(),
+        nf_type(),
         nf_profile_mutex() {
     nf_instance_name = "";
     nf_status        = "";
     json_data        = {};
-    first_update     = true;
+    custom_info      = {};
     is_updated       = false;
   }
 
@@ -170,14 +147,14 @@ class nf_profile : public std::enable_shared_from_this<nf_profile> {
    * @param
    * @return [std::string] nf type
    */
-  nf_type_t get_nf_type() const;
+  std::string get_nf_type() const;
 
   /*
    * Set NF type
-   * @param [const nf_type_t &] type: nf type
+   * @param [const std::string &] type: nf type
    * @return void
    */
-  void set_nf_type(const nf_type_t& type);
+  void set_nf_type(const std::string& type);
 
   /*
    * Set NF instance heartBeat_timer
@@ -452,11 +429,12 @@ class nf_profile : public std::enable_shared_from_this<nf_profile> {
 
  protected:
   mutable std::shared_mutex nf_profile_mutex;
+  bool is_updated;
 
   // From NFProfile (Section 6.1.6.2.2@3GPP TS 29.510 V16.0.0 (2019-06))
   std::string nf_instance_id;  // required
   std::string nf_instance_name;
-  nf_type_t nf_type;      // required
+  std::string nf_type;    // required
   std::string nf_status;  // required
   int32_t heartBeat_timer;
   std::vector<plmn_t> plmn_list;
@@ -540,10 +518,13 @@ class nf_profile : public std::enable_shared_from_this<nf_profile> {
 
 class amf_profile : public nf_profile {
  public:
-  amf_profile() : nf_profile(ev, NF_TYPE_AMF) { amf_info = {}; }
+  amf_profile() : nf_profile() {
+    nf_type  = "AMF";
+    amf_info = {};
+  }
 
-  amf_profile(const std::string& id) : nf_profile(ev, id) {
-    nf_type  = NF_TYPE_AMF;
+  amf_profile(const std::string& id) : nf_profile(id) {
+    nf_type  = "AMF";
     amf_info = {};
   }
 
@@ -609,10 +590,13 @@ class amf_profile : public nf_profile {
 
 class smf_profile : public nf_profile {
  public:
-  smf_profile() : nf_profile(NF_TYPE_SMF) { smf_info = {}; }
+  smf_profile() : nf_profile() {
+    nf_type  = "SMF";
+    smf_info = {};
+  }
 
   smf_profile(const std::string& id) : nf_profile(id) {
-    nf_type  = NF_TYPE_SMF;
+    nf_type  = "SMF";
     smf_info = {};
   }
 
@@ -676,10 +660,13 @@ class smf_profile : public nf_profile {
 
 class upf_profile : public nf_profile {
  public:
-  upf_profile() : nf_profile(NF_TYPE_UPF) { upf_info = {}; }
+  upf_profile() : nf_profile() {
+    nf_type  = "UPF";
+    upf_info = {};
+  }
 
   upf_profile(const std::string& id) : nf_profile(id) {
-    nf_type  = NF_TYPE_UPF;
+    nf_type  = "UPF";
     upf_info = {};
   }
 
@@ -743,10 +730,13 @@ class upf_profile : public nf_profile {
 
 class ausf_profile : public nf_profile {
  public:
-  ausf_profile() : nf_profile(NF_TYPE_AUSF) { ausf_info = {}; }
+  ausf_profile() : nf_profile() {
+    nf_type   = "AUSF";
+    ausf_info = {};
+  }
 
   ausf_profile(const std::string& id) : nf_profile(id) {
-    nf_type   = NF_TYPE_AUSF;
+    nf_type   = "AUSF";
     ausf_info = {};
   }
 
@@ -810,10 +800,13 @@ class ausf_profile : public nf_profile {
 
 class udm_profile : public nf_profile {
  public:
-  udm_profile() : nf_profile(NF_TYPE_UDM) { udm_info = {}; }
+  udm_profile() : nf_profile() {
+    nf_type  = "UDM";
+    udm_info = {};
+  }
 
   udm_profile(const std::string& id) : nf_profile(id) {
-    nf_type  = NF_TYPE_UDM;
+    nf_type  = "UDM";
     udm_info = {};
   }
 
@@ -877,10 +870,13 @@ class udm_profile : public nf_profile {
 
 class udr_profile : public nf_profile {
  public:
-  udr_profile() : nf_profile(NF_TYPE_UDR) { udr_info = {}; }
+  udr_profile() : nf_profile() {
+    nf_type  = "UDR";
+    udr_info = {};
+  }
 
   udr_profile(const std::string& id) : nf_profile(id) {
-    nf_type  = NF_TYPE_UDR;
+    nf_type  = "UDR";
     udr_info = {};
   }
 
@@ -944,10 +940,13 @@ class udr_profile : public nf_profile {
 
 class pcf_profile : public nf_profile {
  public:
-  pcf_profile() : nf_profile(NF_TYPE_PCF) { pcf_info = {}; }
+  pcf_profile() : nf_profile() {
+    nf_type  = "PCF";
+    pcf_info = {};
+  }
 
   pcf_profile(const std::string& id) : nf_profile(id) {
-    nf_type  = NF_TYPE_PCF;
+    nf_type  = "PCF";
     pcf_info = {};
   }
 

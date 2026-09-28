@@ -10,12 +10,10 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 
-#include "api_conversions.hpp"
 #include "logger_base.hpp"
 #include "string.hpp"
 
 using namespace oai::sba;
-using namespace boost::placeholders;
 
 namespace oai::sba {
 
@@ -65,18 +63,18 @@ std::string nf_profile::get_nf_instance_name() const {
 }
 
 //------------------------------------------------------------------------------
-void nf_profile::set_nf_type(const nf_type_t& type) {
+void nf_profile::set_nf_type(const std::string& type) {
   nf_type = type;
 }
 
 //------------------------------------------------------------------------------
-nf_type_t nf_profile::get_nf_type() const {
+std::string nf_profile::get_nf_type() const {
   return nf_type;
 }
 
 //------------------------------------------------------------------------------
 bool nf_profile::set_nf_status(const std::string& status) {
-  Logger::sba_logger().debug("Set NF status to %s", status.c_str());
+  sba_logger().debug("Set NF status to %s", status);
   if (!(boost::iequals(status, "REGISTERED") or
         boost::iequals(status, "UNDISCOVERABLE") or
         boost::iequals(status, "SUSPENDED"))) {
@@ -253,50 +251,47 @@ void nf_profile::get_custom_info(nlohmann::json& c) const {
 
 //------------------------------------------------------------------------------
 void nf_profile::display() {
-  Logger::sba_logger().debug("NF instance info");
-  Logger::sba_logger().debug("\tInstance ID: %s", nf_instance_id.c_str());
-  Logger::sba_logger().debug("\tInstance name: %s", nf_instance_name.c_str());
-  Logger::sba_logger().debug(
-      "\tInstance type: %s", api_conv::nf_type_to_string(nf_type).c_str());
-  Logger::sba_logger().debug("\tStatus: %s", nf_status.c_str());
-  Logger::sba_logger().debug("\tHeartBeat timer: %d", heartBeat_timer);
-  Logger::sba_logger().debug("\tPriority: %d", priority);
-  Logger::sba_logger().debug("\tCapacity: %d", capacity);
+  sba_logger().debug("NF instance info");
+  sba_logger().debug("\tInstance ID: %s", nf_instance_id);
+  sba_logger().debug("\tInstance name: %s", nf_instance_name);
+  sba_logger().debug("\tInstance type: %s", nf_type);
+  sba_logger().debug("\tStatus: %s", nf_status);
+  sba_logger().debug("\tHeartBeat timer: %d", heartBeat_timer);
+  sba_logger().debug("\tPriority: %d", priority);
+  sba_logger().debug("\tCapacity: %d", capacity);
   // SNSSAIs
   if (!custom_info.empty())
-    Logger::sba_logger().debug("\tCustomInfo: %s", custom_info.dump().c_str());
+    sba_logger().debug("\tCustomInfo: %s", custom_info.dump());
   if (!plmn_list.empty()) {
     for (auto s : plmn_list) {
-      Logger::sba_logger().debug("\tPLMN List(MCC, MNC): %d, %s", s.mcc, s.mnc);
+      sba_logger().debug("\tPLMN List(MCC, MNC): %d, %s", s.mcc, s.mnc);
     }
   }
   for (auto s : snssais) {
-    Logger::sba_logger().debug(
-        "\tNNSSAI(SST, SD): %d, %s", s.sst, s.sd.c_str());
+    sba_logger().debug("\tNNSSAI(SST, SD): %d, %s", s.sst, s.sd);
   }
   if (!fqdn.empty()) {
-    Logger::sba_logger().debug("\tFQDN: %s", fqdn.c_str());
+    sba_logger().debug("\tFQDN: %s", fqdn);
   }
   // IPv4 Addresses
   for (auto address : ipv4_addresses) {
-    Logger::sba_logger().debug("\tIPv4 Addr: %s", inet_ntoa(address));
+    sba_logger().debug("\tIPv4 Addr: %s", inet_ntoa(address));
   }
   // ToDo : For ipv6 addresses
   if (!json_data.empty()) {
-    Logger::sba_logger().debug("\tJson Data: %s", json_data.dump().c_str());
+    sba_logger().debug("\tJson Data: %s", json_data.dump());
   }
 
   // NF services
   for (auto service : nf_services) {
-    Logger::sba_logger().debug("\tNF Service: %s", service.to_string().c_str());
+    sba_logger().debug("\tNF Service: %s", service.to_string());
   }
 }
 
 //------------------------------------------------------------------------------
 bool nf_profile::replace_profile_info(
     const std::string& path, const std::string& value) {
-  Logger::sba_logger().debug(
-      "Replace member %s with new value %s", path.c_str(), value.c_str());
+  sba_logger().debug("Replace member %s with new value %s", path, value);
   if (path.compare("nfInstanceName") == 0) {
     nf_instance_name = value;
     return true;
@@ -308,7 +303,7 @@ bool nf_profile::replace_profile_info(
   }
 
   if (path.compare("nfType") == 0) {
-    nf_type = api_conv::string_to_nf_type(value);
+    nf_type = value;
     return true;
   }
 
@@ -317,7 +312,7 @@ bool nf_profile::replace_profile_info(
       heartBeat_timer = std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -327,7 +322,7 @@ bool nf_profile::replace_profile_info(
       priority = (uint16_t) std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -337,7 +332,7 @@ bool nf_profile::replace_profile_info(
       capacity = (uint16_t) std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -349,30 +344,27 @@ bool nf_profile::replace_profile_info(
 
   // Replace an array
   if (path.compare("plmnList") == 0) {
-    Logger::sba_logger().info(
-        "Does not support this operation for ipv4Addresses");
+    sba_logger().info("Does not support this operation for ipv4Addresses");
     return false;
   }
 
   if (path.compare("ipv4Addresses") == 0) {
-    Logger::sba_logger().info(
-        "Does not support this operation for ipv4Addresses");
+    sba_logger().info("Does not support this operation for ipv4Addresses");
     return false;
   }
 
   if (path.compare("ipv6Addresses") == 0) {
-    Logger::sba_logger().info(
-        "Does not support this operation for ipv6Addresses");
+    sba_logger().info("Does not support this operation for ipv6Addresses");
     return false;
   }
 
   if (path.compare("sNssais") == 0) {
-    Logger::sba_logger().info("Does not support this operation for sNssais");
+    sba_logger().info("Does not support this operation for sNssais");
     return false;
   }
 
   if (path.compare("nfServices") == 0) {
-    Logger::sba_logger().info("Does not support this operation for nfServices");
+    sba_logger().info("Does not support this operation for nfServices");
     return false;
   }
 
@@ -382,10 +374,10 @@ bool nf_profile::replace_profile_info(
 //------------------------------------------------------------------------------
 bool nf_profile::add_profile_info(
     const std::string& path, const std::string& value) {
-  Logger::sba_logger().debug(
+  sba_logger().debug(
       "Add an array element (value, array member), or a new member (value, "
       "member):  %s, %s",
-      value.c_str(), path.c_str());
+      value, path);
 
   // update an existing member
   if (path.compare("nfInstanceName") == 0) {
@@ -399,7 +391,7 @@ bool nf_profile::add_profile_info(
   }
 
   if (path.compare("nfType") == 0) {
-    nf_type = api_conv::string_to_nf_type(value);
+    nf_type = value;
     return true;
   }
 
@@ -408,7 +400,7 @@ bool nf_profile::add_profile_info(
       heartBeat_timer = std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -418,7 +410,7 @@ bool nf_profile::add_profile_info(
       priority = (uint16_t) std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -428,7 +420,7 @@ bool nf_profile::add_profile_info(
       capacity = (uint16_t) std::stoi(value);
       return true;
     } catch (const std::exception& err) {
-      Logger::sba_logger().debug("Bad value!");
+      sba_logger().debug("Bad value!");
       return false;
     }
   }
@@ -447,12 +439,11 @@ bool nf_profile::add_profile_info(
         1) {
       memcpy(&addr4, buf_in_addr, sizeof(struct in_addr));
     } else {
-      Logger::sba_logger().warn(
-          "Address conversion: Bad value %s",
-          oai::utils::trim(address).c_str());
+      sba_logger().warn(
+          "Address conversion: Bad value %s", oai::utils::trim(address));
       return false;
     }
-    Logger::sba_logger().debug("Added IPv4 Addr: %s", address.c_str());
+    sba_logger().debug("Added IPv4 Addr: %s", address);
     ipv4_addresses.push_back(addr4);
     return true;
   }
@@ -466,29 +457,28 @@ bool nf_profile::add_profile_info(
         1) {
       memcpy(&addr6, buf_in_addr, sizeof(struct in6_addr));
     } else {
-      Logger::sba_logger().warn(
-          "Address conversion: Bad value %s",
-          oai::utils::trim(address).c_str());
+      sba_logger().warn(
+          "Address conversion: Bad value %s", oai::utils::trim(address));
       return false;
     }
-    Logger::sba_logger().debug("Added IPv6 Addr: %s", address.c_str());
+    sba_logger().debug("Added IPv6 Addr: %s", address);
     ipv6_addresses.push_back(addr6);
     return true;
   }
 
   // add an element to a list of json object
   if (path.compare("sNssais") == 0) {
-    Logger::sba_logger().info("Does not support this operation for sNssais");
+    sba_logger().info("Does not support this operation for sNssais");
     return false;
   }
 
   if (path.compare("nfServices") == 0) {
-    Logger::sba_logger().info("Does not support this operation for nfServices");
+    sba_logger().info("Does not support this operation for nfServices");
     return false;
   }
 
   if (path.compare("plmnList") == 0) {
-    Logger::sba_logger().info("Does not support this operation for plmnList");
+    sba_logger().info("Does not support this operation for plmnList");
     return false;
   }
 
@@ -497,8 +487,7 @@ bool nf_profile::add_profile_info(
 
 //------------------------------------------------------------------------------
 bool nf_profile::remove_profile_info(const std::string& path) {
-  Logger::sba_logger().debug(
-      "Remove an array element or a member: %s", path.c_str());
+  sba_logger().debug("Remove an array element or a member: %s", path);
   if (path.compare("nfInstanceName") == 0) {
     nf_instance_name = "";
     return true;
@@ -510,7 +499,7 @@ bool nf_profile::remove_profile_info(const std::string& path) {
   }
 
   if (path.compare("nfType") == 0) {
-    nf_type = NF_TYPE_UNKNOWN;
+    nf_type = {};
     return true;
   }
 
@@ -539,7 +528,7 @@ bool nf_profile::remove_profile_info(const std::string& path) {
     std::vector<std::string> parts;
     boost::split(parts, path, boost::is_any_of("/"), boost::token_compress_on);
     if (parts.size() != 2) {
-      Logger::sba_logger().warn("Bad value for path: %s ", path.c_str());
+      sba_logger().warn("Bad value for path: %s ", path);
       return false;
     }
     // get and check index
@@ -547,15 +536,15 @@ bool nf_profile::remove_profile_info(const std::string& path) {
     try {
       index = std::stoi(parts.at(1));
     } catch (const std::exception& err) {
-      Logger::sba_logger().warn("Bad value for path: %s ", path.c_str());
+      sba_logger().warn("Bad value for path: %s ", path);
       return false;
     }
 
     if (index >= ipv4_addresses.size()) {
-      Logger::sba_logger().warn("Bad value for path: %s ", path.c_str());
+      sba_logger().warn("Bad value for path: %s ", path);
       return false;
     } else {
-      Logger::sba_logger().debug(
+      sba_logger().debug(
           "Removed IPv4 Addr: %s", inet_ntoa(ipv4_addresses[index]));
       ipv4_addresses.erase(ipv4_addresses.begin() + index);
       return true;
@@ -563,21 +552,21 @@ bool nf_profile::remove_profile_info(const std::string& path) {
   }
 
   if (path.find("sNssais") != std::string::npos) {
-    Logger::sba_logger().info("Does not support this operation for sNssais");
+    sba_logger().info("Does not support this operation for sNssais");
     return false;
   }
 
   if (path.find("nfServices") != std::string::npos) {
-    Logger::sba_logger().info("Does not support this operation for nfServices");
+    sba_logger().info("Does not support this operation for nfServices");
     return false;
   }
 
   if (path.find("plmnList") != std::string::npos) {
-    Logger::sba_logger().info("Does not support this operation for plmnList");
+    sba_logger().info("Does not support this operation for plmnList");
     return false;
   }
 
-  Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+  sba_logger().debug("Member (%s) not found!", path);
   return false;
 }
 
@@ -585,7 +574,7 @@ bool nf_profile::remove_profile_info(const std::string& path) {
 void nf_profile::to_json(nlohmann::json& data) const {
   data["nfInstanceId"]   = nf_instance_id;
   data["nfInstanceName"] = nf_instance_name;
-  data["nfType"]         = api_conv::nf_type_to_string(nf_type);
+  data["nfType"]         = nf_type;
   data["nfStatus"]       = nf_status;
   data["heartBeatTimer"] = heartBeat_timer;
   // SNSSAIs
@@ -688,17 +677,15 @@ void amf_profile::get_amf_info(amf_info_t& info) const {
 //------------------------------------------------------------------------------
 void amf_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tAMF Info");
-  Logger::sba_logger().debug(
-      "\t\tAMF Set ID: %s, AMF Region ID: %s", amf_info.amf_set_id.c_str(),
-      amf_info.amf_region_id.c_str());
+  sba_logger().debug("\tAMF Info");
+  sba_logger().debug(
+      "\t\tAMF Set ID: %s, AMF Region ID: %s", amf_info.amf_set_id,
+      amf_info.amf_region_id);
 
   for (auto g : amf_info.guami_list) {
-    Logger::sba_logger().debug(
-        "\t\tAMF GUAMI List, AMF_ID: %s", g.amf_id.c_str());
-    Logger::sba_logger().debug(
-        "\t\tAMF GUAMI List, PLMN (MCC: %s, MNC: %s)", g.plmn.mcc.c_str(),
-        g.plmn.mnc.c_str());
+    sba_logger().debug("\t\tAMF GUAMI List, AMF_ID: %s", g.amf_id);
+    sba_logger().debug(
+        "\t\tAMF GUAMI List, PLMN (MCC: %s, MNC: %s)", g.plmn.mcc, g.plmn.mnc);
   }
 }
 
@@ -709,7 +696,7 @@ bool amf_profile::replace_profile_info(
   if (result) return true;
   // for AMF info
   if (path.compare("amfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for amfInfo");
+    sba_logger().debug("Do not support this operation for amfInfo");
     return false;
   }
 
@@ -721,7 +708,7 @@ bool amf_profile::replace_profile_info(
       (path.compare("ipv4Addresses") != 0) and
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("amfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -736,7 +723,7 @@ bool amf_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("amfInfo") == 0) {
-    Logger::sba_logger().info("Do not support this operation for amfInfo");
+    sba_logger().info("Do not support this operation for amfInfo");
     return false;
   }
 
@@ -749,7 +736,7 @@ bool amf_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("amfInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -764,7 +751,7 @@ bool amf_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for AMF info
   if (path.compare("amfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for amfInfo");
+    sba_logger().debug("Do not support this operation for amfInfo");
     return false;
   }
 
@@ -777,7 +764,7 @@ bool amf_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("amfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -814,14 +801,13 @@ void smf_profile::get_smf_info(smf_info_t& infos) const {
 //------------------------------------------------------------------------------
 void smf_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tSMF Info");
+  sba_logger().debug("\tSMF Info");
   for (auto s : smf_info.snssai_smf_info_list) {
-    Logger::sba_logger().debug(
-        "\t\tSNSSAI SMF Info List, SNSSAI (SD: %s, SST: %d)",
-        s.snssai.sd.c_str(), s.snssai.sst);
+    sba_logger().debug(
+        "\t\tSNSSAI SMF Info List, SNSSAI (SD: %s, SST: %d)", s.snssai.sd,
+        s.snssai.sst);
     for (auto d : s.dnn_smf_info_list) {
-      Logger::sba_logger().debug(
-          "\t\tSNSSAI SMF Info List, DNN List: %s", d.dnn.c_str());
+      sba_logger().debug("\t\tSNSSAI SMF Info List, DNN List: %s", d.dnn);
     }
   }
 }
@@ -834,7 +820,7 @@ bool smf_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("smfInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for smfInfo");
+    sba_logger().info("Does not support this operation for smfInfo");
     return false;
   }
 
@@ -847,7 +833,7 @@ bool smf_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("smfInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -862,7 +848,7 @@ bool smf_profile::replace_profile_info(
   if (result) return true;
   // for SMF info
   if (path.compare("smfInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for amfInfo");
+    sba_logger().debug("Does not support this operation for amfInfo");
     return false;
   }
 
@@ -875,7 +861,7 @@ bool smf_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("amfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -888,7 +874,7 @@ bool smf_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for SMF info
   if (path.compare("smfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for smfInfo");
+    sba_logger().debug("Do not support this operation for smfInfo");
     return false;
   }
 
@@ -901,7 +887,7 @@ bool smf_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("smfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -940,32 +926,31 @@ void upf_profile::get_upf_info(upf_info_t& infos) const {
 //------------------------------------------------------------------------------
 void upf_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tUPF Info");
+  sba_logger().debug("\tUPF Info");
   for (auto s : upf_info.snssai_upf_info_list) {
-    Logger::sba_logger().debug(
-        "\t\tSNSSAI UPF Info List, SNSSAI (SD: %s, SST: %d)",
-        s.snssai.sd.c_str(), s.snssai.sst);
+    sba_logger().debug(
+        "\t\tSNSSAI UPF Info List, SNSSAI (SD: %s, SST: %d)", s.snssai.sd,
+        s.snssai.sst);
     for (auto d : s.dnn_upf_info_list) {
-      Logger::sba_logger().debug(
-          "\t\tSNSSAI UPF Info List, DNN List: %s", d.dnn.c_str());
+      sba_logger().debug("\t\tSNSSAI UPF Info List, DNN List: %s", d.dnn);
       for (auto dnai : d.dnai_list) {
-        Logger::sba_logger().debug(
-            "\t\tSNSSAI UPF Info List, DNN List, DNAI List: %s", dnai.c_str());
+        sba_logger().debug(
+            "\t\tSNSSAI UPF Info List, DNN List, DNAI List: %s", dnai);
       }
       for (auto nwinstance : d.dnai_nw_instance_list) {
-        Logger::sba_logger().debug(
+        sba_logger().debug(
             "\t\tSNSSAI UPF Info List, DNN List, DNAI NW Instance List: %s : "
             "%s",
-            nwinstance.first.c_str(), nwinstance.second.c_str());
+            nwinstance.first, nwinstance.second);
       }
     }
   }
   if (!upf_info.interface_upf_info_list.empty()) {
     for (auto s : upf_info.interface_upf_info_list) {
-      Logger::sba_logger().debug(
+      sba_logger().debug(
           "\t\tInterface UPF Info List, Interface Type : %s, Network Instance "
           "%s",
-          s.interface_type.c_str(), s.network_instance.c_str());
+          s.interface_type, s.network_instance);
     }
   }
 }
@@ -978,7 +963,7 @@ bool upf_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("upfInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for upfInfo");
+    sba_logger().info("Does not support this operation for upfInfo");
     return false;
   }
 
@@ -991,7 +976,7 @@ bool upf_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("upfInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -1006,7 +991,7 @@ bool upf_profile::replace_profile_info(
   if (result) return true;
   // for UPF info
   if (path.compare("upfInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for amfInfo");
+    sba_logger().debug("Does not support this operation for amfInfo");
     return false;
   }
 
@@ -1019,7 +1004,7 @@ bool upf_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("amfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1032,7 +1017,7 @@ bool upf_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for UPF info
   if (path.compare("upfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for upfInfo");
+    sba_logger().debug("Do not support this operation for upfInfo");
     return false;
   }
 
@@ -1045,7 +1030,7 @@ bool upf_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("upfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1116,17 +1101,15 @@ void ausf_profile::get_ausf_info(ausf_info_t& infos) const {
 //------------------------------------------------------------------------------
 void ausf_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tAUSF Info");
-  Logger::sba_logger().debug("\t\tGroupId: %s", ausf_info.groupid.c_str());
+  sba_logger().debug("\tAUSF Info");
+  sba_logger().debug("\t\tGroupId: %s", ausf_info.groupid);
   for (auto supi : ausf_info.supi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t SupiRanges: Start - %s, End - %s, Pattern - %s",
-        supi.supi_range.start.c_str(), supi.supi_range.end.c_str(),
-        supi.supi_range.pattern.c_str());
+        supi.supi_range.start, supi.supi_range.end, supi.supi_range.pattern);
   }
   for (auto route_ind : ausf_info.routing_indicators) {
-    Logger::sba_logger().debug(
-        "\t\t Routing Indicators: %s", route_ind.c_str());
+    sba_logger().debug("\t\t Routing Indicators: %s", route_ind);
   }
 }
 
@@ -1138,7 +1121,7 @@ bool ausf_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("ausfInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for ausfInfo");
+    sba_logger().info("Does not support this operation for ausfInfo");
     return false;
   }
 
@@ -1151,7 +1134,7 @@ bool ausf_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("ausfInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -1166,7 +1149,7 @@ bool ausf_profile::replace_profile_info(
   if (result) return true;
   // for AUSF info
   if (path.compare("ausfInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for ausfInfo");
+    sba_logger().debug("Does not support this operation for ausfInfo");
     return false;
   }
 
@@ -1179,7 +1162,7 @@ bool ausf_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("ausfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1192,7 +1175,7 @@ bool ausf_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for AUSF info
   if (path.compare("ausfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for ausfInfo");
+    sba_logger().debug("Do not support this operation for ausfInfo");
     return false;
   }
 
@@ -1205,7 +1188,7 @@ bool ausf_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("ausfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1244,40 +1227,35 @@ void udm_profile::get_udm_info(udm_info_t& infos) const {
 //------------------------------------------------------------------------------
 void udm_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tUDM Info");
-  Logger::sba_logger().debug("\t\tGroupId: %s", udm_info.groupid.c_str());
+  sba_logger().debug("\tUDM Info");
+  sba_logger().debug("\t\tGroupId: %s", udm_info.groupid);
   for (auto supi : udm_info.supi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t SupiRanges: Start - %s, End - %s, Pattern - %s",
-        supi.supi_range.start.c_str(), supi.supi_range.end.c_str(),
-        supi.supi_range.pattern.c_str());
+        supi.supi_range.start, supi.supi_range.end, supi.supi_range.pattern);
   }
   for (auto gpsiRange : udm_info.gpsi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t GpsiRanges: Start - %s, End - %s, Pattern - %s",
-        gpsiRange.identity_range.start.c_str(),
-        gpsiRange.identity_range.end.c_str(),
-        gpsiRange.identity_range.pattern.c_str());
+        gpsiRange.identity_range.start, gpsiRange.identity_range.end,
+        gpsiRange.identity_range.pattern);
   }
   for (auto ext_grp_id : udm_info.ext_grp_id_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t externalGroupIdentifiersRanges: Start - %s, End - %s, Pattern - "
         "%s",
-        ext_grp_id.identity_range.start.c_str(),
-        ext_grp_id.identity_range.end.c_str(),
-        ext_grp_id.identity_range.pattern.c_str());
+        ext_grp_id.identity_range.start, ext_grp_id.identity_range.end,
+        ext_grp_id.identity_range.pattern);
   }
   for (auto int_grp_id : udm_info.int_grp_id_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t internalGroupIdentifiersRanges: Start - %s, End - %s, Pattern - "
         "%s",
-        int_grp_id.int_grpid_range.start.c_str(),
-        int_grp_id.int_grpid_range.end.c_str(),
-        int_grp_id.int_grpid_range.pattern.c_str());
+        int_grp_id.int_grpid_range.start, int_grp_id.int_grpid_range.end,
+        int_grp_id.int_grpid_range.pattern);
   }
   for (auto route_ind : udm_info.routing_indicator) {
-    Logger::sba_logger().debug(
-        "\t\t Routing Indicators: %s", route_ind.c_str());
+    sba_logger().debug("\t\t Routing Indicators: %s", route_ind);
   }
 }
 
@@ -1289,7 +1267,7 @@ bool udm_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("udmInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for udmInfo");
+    sba_logger().info("Does not support this operation for udmInfo");
     return false;
   }
 
@@ -1302,7 +1280,7 @@ bool udm_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udmInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -1317,7 +1295,7 @@ bool udm_profile::replace_profile_info(
   if (result) return true;
   // for UDMAUSF info
   if (path.compare("udmInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for udmInfo");
+    sba_logger().debug("Does not support this operation for udmInfo");
     return false;
   }
 
@@ -1330,7 +1308,7 @@ bool udm_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udmInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
   return false;
@@ -1342,7 +1320,7 @@ bool udm_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for UDM info
   if (path.compare("udmInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for udmInfo");
+    sba_logger().debug("Do not support this operation for udmInfo");
     return false;
   }
 
@@ -1355,7 +1333,7 @@ bool udm_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udmInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
   return false;
@@ -1418,31 +1396,28 @@ void udr_profile::get_udr_info(udr_info_t& infos) const {
 //------------------------------------------------------------------------------
 void udr_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tUDR Info");
-  Logger::sba_logger().debug("\t\tGroupId: %s", udr_info.groupid.c_str());
+  sba_logger().debug("\tUDR Info");
+  sba_logger().debug("\t\tGroupId: %s", udr_info.groupid);
   for (auto supi : udr_info.supi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t SupiRanges: Start - %s, End - %s, Pattern - %s",
-        supi.supi_range.start.c_str(), supi.supi_range.end.c_str(),
-        supi.supi_range.pattern.c_str());
+        supi.supi_range.start, supi.supi_range.end, supi.supi_range.pattern);
   }
   for (auto gpsiRange : udr_info.gpsi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t GpsiRanges: Start - %s, End - %s, Pattern - %s",
-        gpsiRange.identity_range.start.c_str(),
-        gpsiRange.identity_range.end.c_str(),
-        gpsiRange.identity_range.pattern.c_str());
+        gpsiRange.identity_range.start, gpsiRange.identity_range.end,
+        gpsiRange.identity_range.pattern);
   }
   for (auto ext_grp_id : udr_info.ext_grp_id_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t externalGroupIdentifiersRanges: Start - %s, End - %s, Pattern - "
         "%s",
-        ext_grp_id.identity_range.start.c_str(),
-        ext_grp_id.identity_range.end.c_str(),
-        ext_grp_id.identity_range.pattern.c_str());
+        ext_grp_id.identity_range.start, ext_grp_id.identity_range.end,
+        ext_grp_id.identity_range.pattern);
   }
   for (auto data_set_id : udr_info.data_set_id) {
-    Logger::sba_logger().debug("\t\t DataSetId: %s", data_set_id.c_str());
+    sba_logger().debug("\t\t DataSetId: %s", data_set_id);
   }
 }
 
@@ -1454,7 +1429,7 @@ bool udr_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("udrInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for udrInfo");
+    sba_logger().info("Does not support this operation for udrInfo");
     return false;
   }
 
@@ -1467,7 +1442,7 @@ bool udr_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udrInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -1482,7 +1457,7 @@ bool udr_profile::replace_profile_info(
   if (result) return true;
   // for UDMAUSF info
   if (path.compare("udrInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for udrInfo");
+    sba_logger().debug("Does not support this operation for udrInfo");
     return false;
   }
 
@@ -1495,7 +1470,7 @@ bool udr_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udrInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1508,7 +1483,7 @@ bool udr_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for UDM info
   if (path.compare("udrInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for udrInfo");
+    sba_logger().debug("Do not support this operation for udrInfo");
     return false;
   }
 
@@ -1521,7 +1496,7 @@ bool udr_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("udrInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
   return false;
@@ -1576,23 +1551,21 @@ void pcf_profile::get_pcf_info(pcf_info_t& infos) const {
 //------------------------------------------------------------------------------
 void pcf_profile::display() {
   nf_profile::display();
-  Logger::sba_logger().debug("\tUDR Info");
-  Logger::sba_logger().debug("\t\tGroupId: %s", pcf_info.groupid.c_str());
+  sba_logger().debug("\tUDR Info");
+  sba_logger().debug("\t\tGroupId: %s", pcf_info.groupid);
   for (auto dnn : pcf_info.dnn_list) {
-    Logger::sba_logger().debug("\t\t DNN: %s", dnn.c_str());
+    sba_logger().debug("\t\t DNN: %s", dnn);
   }
   for (auto supi : pcf_info.supi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t SupiRanges: Start - %s, End - %s, Pattern - %s",
-        supi.supi_range.start.c_str(), supi.supi_range.end.c_str(),
-        supi.supi_range.pattern.c_str());
+        supi.supi_range.start, supi.supi_range.end, supi.supi_range.pattern);
   }
   for (auto gpsiRange : pcf_info.gpsi_ranges) {
-    Logger::sba_logger().debug(
+    sba_logger().debug(
         "\t\t GpsiRanges: Start - %s, End - %s, Pattern - %s",
-        gpsiRange.identity_range.start.c_str(),
-        gpsiRange.identity_range.end.c_str(),
-        gpsiRange.identity_range.pattern.c_str());
+        gpsiRange.identity_range.start, gpsiRange.identity_range.end,
+        gpsiRange.identity_range.pattern);
   }
 }
 
@@ -1604,7 +1577,7 @@ bool pcf_profile::add_profile_info(
 
   // add an element to a list of json object
   if (path.compare("pcfInfo") == 0) {
-    Logger::sba_logger().info("Does not support this operation for pcfInfo");
+    sba_logger().info("Does not support this operation for pcfInfo");
     return false;
   }
 
@@ -1617,7 +1590,7 @@ bool pcf_profile::add_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("pcfInfo") != 0)) {
-    Logger::sba_logger().debug("Add new member: %s", path.c_str());
+    sba_logger().debug("Add new member: %s", path);
     // add new member
     json_data[path] = value;
     return true;
@@ -1632,7 +1605,7 @@ bool pcf_profile::replace_profile_info(
   if (result) return true;
   // for UDMAUSF info
   if (path.compare("pcfInfo") == 0) {
-    Logger::sba_logger().debug("Does not support this operation for pcfInfo");
+    sba_logger().debug("Does not support this operation for pcfInfo");
     return false;
   }
 
@@ -1645,7 +1618,7 @@ bool pcf_profile::replace_profile_info(
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("pcfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
 
@@ -1658,7 +1631,7 @@ bool pcf_profile::remove_profile_info(const std::string& path) {
   if (result) return true;
   // for UDM info
   if (path.compare("pcfInfo") == 0) {
-    Logger::sba_logger().debug("Do not support this operation for pcfInfo");
+    sba_logger().debug("Do not support this operation for pcfInfo");
     return false;
   }
 
@@ -1671,7 +1644,7 @@ bool pcf_profile::remove_profile_info(const std::string& path) {
       (path.compare("priority") != 0) and (path.compare("capacity") != 0) and
       (path.compare("priority") != 0) and (path.compare("nfServices") != 0) and
       (path.compare("pcfInfo") != 0)) {
-    Logger::sba_logger().debug("Member (%s) not found!", path.c_str());
+    sba_logger().debug("Member (%s) not found!", path);
     return false;
   }
   return false;

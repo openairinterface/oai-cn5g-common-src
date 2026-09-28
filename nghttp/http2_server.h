@@ -34,12 +34,12 @@
 // the server's diagnostics under one of its own categories calls
 // set_http2_server_logger() once at startup (before start()); unknown
 // category names fall back to "common" inside the registry.
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 void set_http2_server_logger(const std::string& logger_name);
 const oai::logger::printf_logger& http2_server_logger();
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2
 
 // Forward declarations
 struct http2_connection;

@@ -16,7 +16,7 @@
 
 using namespace oai::common::sbi;
 
-namespace oai::sba {
+namespace oai::nghttp2 {
 
 const std::string MIME_BOUNDARY = "----Boundary";
 
@@ -105,4 +105,4 @@ class http_client : public std::enable_shared_from_this<http_client> {
       const std::string& uri, const std::string& body);
 };
 
-}  // namespace oai::sba
+}  // namespace oai::nghttp2

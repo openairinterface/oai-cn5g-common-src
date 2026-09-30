@@ -48,6 +48,16 @@ void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
   m_DlForwardingUpTnlInformation =
       std::make_optional<UpTransportLayerInformation>(
           dlForwardingUpTnlInformation);
+
+  m_Ie->dLForwardingUP_TNLInformation =
+      (Ngap_UPTransportLayerInformation*) calloc(
+          1, sizeof(Ngap_UPTransportLayerInformation));
+  int ret = m_DlForwardingUpTnlInformation.value().encode(
+      *m_Ie->dLForwardingUP_TNLInformation);
+  if (!ret) {
+    oai::logger::logger_common::ngap().debug(
+        "Encode dLForwardingUP_TNLInformation IE error");
+  }
 }
 //------------------------------------------------------------------------------
 void HandoverCommandTransfer::getDlForwardingUpTnlInformation(

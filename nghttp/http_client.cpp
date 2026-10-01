@@ -144,7 +144,7 @@ class h2_session : public std::enable_shared_from_this<h2_session> {
 
   ~h2_session();
 
-  h2_session(const h2_session&) = delete;
+  h2_session(const h2_session&)            = delete;
   h2_session& operator=(const h2_session&) = delete;
 
   // Called once after make_shared<> — safe to use shared_from_this()

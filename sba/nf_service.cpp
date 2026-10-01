@@ -19,7 +19,7 @@ using namespace boost::placeholders;
 //------------------------------------------------------------------------------
 nf_service::nf_service(
     const std::shared_ptr<nf_event>& ev,
-    const std::shared_ptr<oai::nghttp2::http_client>& client_inst)
+    const std::shared_ptr<sbi_http_client>& client_inst)
     : event_sub_(ev), http_client_inst_(client_inst) {
   generate_uuid();
 }
@@ -62,7 +62,7 @@ bool nf_service::send_nf_registration() {
   oai::logger::logger_common::common().info(
       "Sending NF registration request to NRF, NRF's URI: %s", nrf_uri);
 
-  oai::nghttp2::request http_request = http_client_inst_->prepare_json_request(
+  sbi_http_request http_request = http_client_inst_->prepare_json_request(
       nrf_uri, nf_profile_.value().dump());
   auto http_response = send_with_policy(
       nrf_call_kind::registration, oai::common::sbi::method_e::PUT,
@@ -74,8 +74,7 @@ bool nf_service::send_nf_registration() {
 }
 
 //---------------------------------------------------------------------------------------------
-bool nf_service::registration_succeeded(
-    const oai::nghttp2::response& resp) const {
+bool nf_service::registration_succeeded(const sbi_http_response& resp) const {
   if ((resp.status_code != oai::common::sbi::http_status_code::OK) and
       (resp.status_code != oai::common::sbi::http_status_code::CREATED)) {
     oai::logger::logger_common::common().warn(
@@ -99,7 +98,7 @@ bool nf_service::registration_succeeded(
 
 //---------------------------------------------------------------------------------------------
 void nf_service::on_registration_outcome(
-    bool success, const oai::nghttp2::response& resp) {
+    bool success, const sbi_http_response& resp) {
   (void) resp;
   if (success) {
     start_event_nf_heartbeat();
@@ -110,9 +109,9 @@ void nf_service::on_registration_outcome(
 }
 
 //---------------------------------------------------------------------------------------------
-oai::nghttp2::response nf_service::send_with_policy(
+sbi_http_response nf_service::send_with_policy(
     nrf_call_kind kind, const oai::common::sbi::method_e& method,
-    const oai::nghttp2::request& req) {
+    const sbi_http_request& req) {
   (void) kind;
   return http_client_inst_->send_http_request(method, req);
 }
@@ -128,7 +127,7 @@ bool nf_service::deregister_to_nrf() {
   oai::logger::logger_common::common().info(
       "Sending NF Deregistration request");
 
-  oai::nghttp2::request http_request =
+  sbi_http_request http_request =
       http_client_inst_->prepare_json_request(nrf_uri);
   auto http_response = send_with_policy(
       nrf_call_kind::deregistration, oai::common::sbi::method_e::DELETE,
@@ -188,7 +187,7 @@ void nf_service::trigger_nf_heartbeat_procedure(uint64_t ms) {
   oai::common::sbi::sbi_helper::get_nrf_nf_instance_uri(
       nrf_addr_.value(), nf_instance_id, nrf_uri);
 
-  oai::nghttp2::request http_request =
+  sbi_http_request http_request =
       http_client_inst_->prepare_json_request(nrf_uri, json_data.dump());
   auto http_response = send_with_policy(
       nrf_call_kind::heartbeat, oai::common::sbi::method_e::PATCH,
@@ -287,7 +286,7 @@ void nf_service::discovery_cache_clear() {
 
 //------------------------------------------------------------------------------
 bool nf_service::handle_discovery_response(
-    const oai::nghttp2::response& search_result_resp,
+    const sbi_http_response& search_result_resp,
     const std::string& target_nf_type, const std::string& service_name,
     std::string& endpoint) {
   nlohmann::json search_result = search_result_resp.get_json();
@@ -376,8 +375,8 @@ bool nf_service::discover_nf(
   uri += "?target-nf-type=" + target_nf_type +
          "&requester-nf-type=" + requester_nf_type;
 
-  oai::nghttp2::request req   = http_client_inst_->prepare_json_request(uri);
-  oai::nghttp2::response resp = send_with_policy(
+  sbi_http_request req   = http_client_inst_->prepare_json_request(uri);
+  sbi_http_response resp = send_with_policy(
       nrf_call_kind::discovery, oai::common::sbi::method_e::GET, req);
   if (resp.status_code != oai::common::sbi::http_status_code::OK) {
     oai::logger::logger_common::common().warn(

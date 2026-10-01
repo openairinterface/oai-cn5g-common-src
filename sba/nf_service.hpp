@@ -17,6 +17,16 @@
 
 namespace oai::sba {
 
+#if defined(USE_NGHTTP2_CLIENT) && USE_NGHTTP2_CLIENT
+using sbi_http_client   = oai::nghttp2::http_client;
+using sbi_http_request  = oai::nghttp2::request;
+using sbi_http_response = oai::nghttp2::response;
+#else
+using sbi_http_client   = oai::http::http_client;
+using sbi_http_request  = oai::http::request;
+using sbi_http_response = oai::http::response;
+#endif
+
 // Delay, in seconds, between two NRF registration attempts once the first one
 // has failed. Matches the value the NFs that predate this class use.
 constexpr uint64_t kNrfRegistrationRetryTimerSeconds = 5;
@@ -39,7 +49,7 @@ class nf_service {
  public:
   nf_service(
       const std::shared_ptr<nf_event>& ev,
-      const std::shared_ptr<oai::nghttp2::http_client>& client_inst);
+      const std::shared_ptr<sbi_http_client>& client_inst);
   nf_service(nf_service const&) = delete;
   virtual ~nf_service();
   void operator=(nf_service const&) = delete;
@@ -259,7 +269,7 @@ class nf_service {
    * @return true if @endpoint was filled in
    */
   virtual bool handle_discovery_response(
-      const oai::nghttp2::response& search_result_resp,
+      const sbi_http_response& search_result_resp,
       const std::string& target_nf_type, const std::string& service_name,
       std::string& endpoint);
 
@@ -269,9 +279,9 @@ class nf_service {
    * by @kind -- registration and discovery are usually worth retrying,
    * deregistration on shutdown usually is not.
    */
-  virtual oai::nghttp2::response send_with_policy(
+  virtual sbi_http_response send_with_policy(
       nrf_call_kind kind, const oai::common::sbi::method_e& method,
-      const oai::nghttp2::request& req);
+      const sbi_http_request& req);
 
   /*
    * The port to assume when a discovered ipEndPoint carries none, and the one
@@ -284,7 +294,7 @@ class nf_service {
    * nfStatus == "REGISTERED". An NF that registers against an NRF which
    * answers 201 with an empty body overrides this.
    */
-  virtual bool registration_succeeded(const oai::nghttp2::response& resp) const;
+  virtual bool registration_succeeded(const sbi_http_response& resp) const;
 
   /*
    * Called once per registration attempt with its outcome. Default: arm the
@@ -293,10 +303,10 @@ class nf_service {
    * with its own logging and nothing else.
    */
   virtual void on_registration_outcome(
-      bool success, const oai::nghttp2::response& resp);
+      bool success, const sbi_http_response& resp);
 
   std::shared_ptr<oai::sba::nf_event> event_sub_;
-  std::shared_ptr<oai::nghttp2::http_client> http_client_inst_;
+  std::shared_ptr<sbi_http_client> http_client_inst_;
 
   bs2::connection task_connection;
   bs2::connection retry_nrf_registration_task_connection;

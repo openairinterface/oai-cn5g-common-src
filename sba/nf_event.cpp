@@ -17,3 +17,8 @@ bs2::connection oai::sba::nf_event::subscribe_task_nf_heartbeat(
   };
   return task_tick.connect(f);
 }
+
+//------------------------------------------------------------------------------
+void oai::sba::nf_event::notify_task_tick(uint64_t tick) {
+  task_tick(tick);
+}

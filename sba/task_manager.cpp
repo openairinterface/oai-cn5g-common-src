@@ -54,7 +54,7 @@ void task_manager::manage_tasks() {
                    .count();
 
   while (1) {
-    event_sub_.get()->task_tick(t);
+    event_sub_->notify_task_tick(t);
     t++;
     wait_for_cycle();
     if (terminate) {

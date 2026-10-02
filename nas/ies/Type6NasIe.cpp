@@ -56,10 +56,10 @@ uint8_t Type6NasIe::GetHeaderLength() const {
 
 //------------------------------------------------------------------------------
 bool Type6NasIe::Validate(int len) const {
-  uint16_t ie_len = GetIeLength();
-  if (len < ie_len) {
+  const uint32_t ie_len = GetIeLength();
+  if (len < 0 || static_cast<uint32_t>(len) < ie_len) {
     oai::logger::logger_common::nas().error(
-        "Buffer length is less than the minimum length of this IE (%d "
+        "Buffer length is less than the minimum length of this IE (%u "
         "octet)",
         ie_len);
     return false;

@@ -27,19 +27,7 @@ void HandoverCommandTransfer::setDlForwardingUpTnlInformation(
     const GtpTunnel& upTransportLayerInfo) {
   UpTransportLayerInformation tmp = {};
   tmp.set(upTransportLayerInfo);
-  m_DlForwardingUpTnlInformation =
-      std::make_optional<UpTransportLayerInformation>(tmp);
-
-  m_Ie->dLForwardingUP_TNLInformation =
-      (Ngap_UPTransportLayerInformation*) calloc(
-          1, sizeof(Ngap_UPTransportLayerInformation));
-  int ret = m_DlForwardingUpTnlInformation.value().encode(
-      *m_Ie->dLForwardingUP_TNLInformation);
-  if (!ret) {
-    oai::logger::logger_common::ngap().debug(
-        "Encode dLForwardingUP_TNLInformation IE error");
-    return;
-  }
+  setDlForwardingUpTnlInformation(tmp);
 }
 
 //------------------------------------------------------------------------------

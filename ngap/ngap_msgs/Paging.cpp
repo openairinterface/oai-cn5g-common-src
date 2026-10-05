@@ -144,14 +144,12 @@ bool PagingMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
       } break;
 
       case Ngap_ProtocolIE_ID_id_UERadioCapabilityForPaging: {
-        if (m_PagingIes->protocolIEs.list.array[i]->criticality ==
-                Ngap_Criticality_ignore &&
-            m_PagingIes->protocolIEs.list.array[i]->value.present ==
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
+            ngap_ie->value.present ==
                 Ngap_PagingIEs__value_PR_UERadioCapabilityForPaging) {
           UeRadioCapabilityForPaging capability = {};
           if (!capability.decode(
-                  m_PagingIes->protocolIEs.list.array[i]
-                      ->value.choice.UERadioCapabilityForPaging)) {
+                  ngap_ie->value.choice.UERadioCapabilityForPaging)) {
             oai::logger::logger_common::ngap().error(
                 "Decoded NGAP UERadioCapabilityForPaging IE error");
             return false;
@@ -205,7 +203,6 @@ void PagingMsg::setUePagingIdentity(
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEPagingIdentity IE error");
   ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
-}
 }
 
 //------------------------------------------------------------------------------
@@ -264,7 +261,6 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
         "Encode NGAP TAIListForPaging IE error");
   ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
 }
-}
 
 //------------------------------------------------------------------------------
 void PagingMsg::getTaiListForPaging(std::vector<Tai_t>& list) const {
@@ -306,7 +302,6 @@ void PagingMsg::setPagingDrx(e_Ngap_PagingDRX drx) {
     oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
   ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
 }
-}
 
 //------------------------------------------------------------------------------
 // Paging Priority — mapped from Paging Policy Indicator (TS 23.501 §5.6.3)
@@ -338,7 +333,6 @@ void PagingMsg::setPagingPriority(uint8_t ppi) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PagingPriority IE error");
   ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
-}
 }
 
 //------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ namespace bs2 = boost::signals2;
 
 #include "task_manager.hpp"
 
-namespace oai::event_handling {
+namespace oai::sba {
 
 typedef bs2::signal_type<
     void(uint64_t), bs2::keywords::mutex_type<bs2::dummy_mutex>>::type
@@ -22,6 +22,7 @@ class nf_event {
   nf_event() {};
   nf_event(nf_event const&)       = delete;
   void operator=(nf_event const&) = delete;
+  virtual ~nf_event()             = default;
 
   static nf_event& get_instance() {
     static nf_event instance;
@@ -37,11 +38,13 @@ class nf_event {
    * @param [uint64_t] start:
    * @return void
    */
-  bs2::connection subscribe_task_nf_heartbeat(
+  virtual bs2::connection subscribe_task_nf_heartbeat(
       const task_sig_t::slot_type& sig, uint64_t period, uint64_t start = 0);
+
+  virtual void notify_task_tick(uint64_t tick);
 
  private:
   task_sig_t task_tick;
 };
-}  // namespace oai::event_handling
+}  // namespace oai::sba
 #endif

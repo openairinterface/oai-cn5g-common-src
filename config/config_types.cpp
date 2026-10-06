@@ -709,7 +709,7 @@ database_config::database_config(const std::string& name) {
   m_connection_timeout =
       int_config_value(DATABASE_CONFIG_CONNECTION_TIMEOUT, 300);
 
-  m_database_type.set_validation_regex("mysql|cassandra|mongodb");
+  m_database_type.set_validation_regex("mysql|mongodb");
   m_port.set_validation_interval(0, 65535);
 }
 

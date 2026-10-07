@@ -199,10 +199,11 @@ void PagingMsg::setUePagingIdentity(
   }
 
   ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP UEPagingIdentity IE error");
-  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -256,10 +257,11 @@ void PagingMsg::setTaiListForPaging(const std::vector<Tai_t>& list) {
   }
 
   ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP TAIListForPaging IE error");
-  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -298,9 +300,10 @@ void PagingMsg::setPagingDrx(e_Ngap_PagingDRX drx) {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error("Encode NGAP PagingDRX IE error");
-  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -329,10 +332,11 @@ void PagingMsg::setPagingPriority(uint8_t ppi) {
   }
 
   int ret = ASN_SEQUENCE_ADD(&m_PagingIes->protocolIEs->list, ie);
-  if (ret != 0)
+  if (ret != 0) {
     oai::logger::logger_common::ngap().error(
         "Encode NGAP PagingPriority IE error");
-  ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+    ASN_STRUCT_FREE(asn_DEF_Ngap_PagingIEs, ie);
+  }
 }
 
 //------------------------------------------------------------------------------

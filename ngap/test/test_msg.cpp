@@ -4,11 +4,14 @@
 extern "C" {
 #include "Ngap_InitiatingMessage.h"
 #include "Ngap_NGAP-PDU.h"
+#include "Ngap_ProtocolIE_Container_compat.h"
 }
 #include "UplinkNasTransport.hpp"
 #include "ngap_utils.hpp"
 #include "logger_base.hpp"
 #include <gtest/gtest.h>
+
+#include <arpa/inet.h>
 
 #include <cstring>
 #include <string>
@@ -19,6 +22,8 @@ extern "C" {
 #include "GtpTeid.hpp"
 #include "HandoverCommandTransfer.hpp"
 #include "MbsSessionId.hpp"
+#include "Paging.hpp"
+#include "UeContextReleaseRequest.hpp"
 #include "TransportLayerAddress.hpp"
 #include "UpTransportLayerInformation.hpp"
 
@@ -239,6 +244,98 @@ TEST(TestSuiteNGAPMsg, HandoverCommandTransferForwardingTunnelRoundTrip) {
   uint32_t decoded_teid_value = 0;
   ASSERT_TRUE(decoded_teid.get(decoded_teid_value));
   EXPECT_EQ(decoded_teid_value, kForwardingTeid);
+}
+
+// PAGING: every setter hands its IE over to the message's IE list, which owns
+// it from then on. Set the four IEs the AMF can send, in the object-set order
+// of TS 38.413 §9.4.4, encode, then decode the bytes back. Run under ASan, a
+// setter that frees its IE after adding it fails here.
+TEST(TestSuiteNGAPMsg, PagingRoundTrip) {
+  constexpr uint32_t kTmsi = 3028925983;  // top byte set: 0xb489be1f
+  oai::ngap::Tai_t tai     = {};
+  tai.mcc                  = "208";
+  tai.mnc                  = "95";
+  tai.tac                  = 0xa000;
+
+  uint8_t* encoded = nullptr;
+  int encoded_size = 0;
+  {
+    oai::ngap::PagingMsg source;
+    source.setUePagingIdentity("1", "1", std::to_string(kTmsi));
+    source.setPagingDrx(Ngap_PagingDRX_v128);
+    source.setTaiListForPaging({tai});
+    source.setPagingPriority(1);
+    source.encode2NewBuffer(encoded, encoded_size);
+  }
+  ASSERT_NE(encoded, nullptr);
+  ASSERT_GT(encoded_size, 0);
+
+  Ngap_NGAP_PDU_t* pdu    = nullptr;
+  const asn_dec_rval_t rc = aper_decode(
+      nullptr, &asn_DEF_Ngap_NGAP_PDU, (void**) &pdu, encoded, encoded_size, 0,
+      0);
+  free(encoded);
+  ASSERT_EQ(rc.code, RC_OK);
+  ASSERT_NE(pdu, nullptr);
+
+  // decode() takes ownership of the PDU
+  oai::ngap::PagingMsg decoded;
+  ASSERT_TRUE(decoded.decode(pdu));
+
+  const auto* ies =
+      pdu->choice.initiatingMessage->value.choice.Paging.protocolIEs;
+  ASSERT_NE(ies, nullptr);
+  std::vector<long> ie_ids;
+  for (int i = 0; i < ies->list.count; i++) {
+    ie_ids.push_back(((Ngap_PagingIEs_t*) ies->list.array[i])->id);
+  }
+  const std::vector<long> expected_ids = {
+      Ngap_ProtocolIE_ID_id_UEPagingIdentity, Ngap_ProtocolIE_ID_id_PagingDRX,
+      Ngap_ProtocolIE_ID_id_TAIListForPaging,
+      Ngap_ProtocolIE_ID_id_PagingPriority};
+  EXPECT_EQ(ie_ids, expected_ids);
+
+  std::string set_id, pointer, tmsi;
+  decoded.getUePagingIdentity(set_id, pointer, tmsi);
+  EXPECT_EQ(set_id, "1");
+  EXPECT_EQ(pointer, "1");
+  EXPECT_EQ(std::stoul(tmsi), kTmsi);
+
+  std::vector<oai::ngap::Tai_t> tai_list;
+  decoded.getTaiListForPaging(tai_list);
+  ASSERT_EQ(tai_list.size(), 1u);
+  EXPECT_EQ(tai_list[0].mcc, tai.mcc);
+  EXPECT_EQ(tai_list[0].mnc, tai.mnc);
+  EXPECT_EQ(tai_list[0].tac, tai.tac);
+}
+
+// UE CONTEXT RELEASE REQUEST exactly as PacketRusher sends it: procedure
+// criticality reject where TS 38.413 defines ignore. It must still decode, or
+// the UE never goes to CM-IDLE and can never be paged.
+TEST(TestSuiteNGAPMsg, UeContextReleaseRequestCriticalityReject) {
+  // AMF-UE-NGAP-ID 1, RAN-UE-NGAP-ID 1, PDU session 1, cause radioNetwork
+  // user-inactivity. The third octet is the procedure criticality.
+  std::vector<uint8_t> bytes = hexStringToByteArray(
+      "002a001c000004000a0002000100550002000100850003000001000f40020500");
+
+  Ngap_NGAP_PDU_t* pdu    = nullptr;
+  const asn_dec_rval_t rc = aper_decode(
+      nullptr, &asn_DEF_Ngap_NGAP_PDU, (void**) &pdu, bytes.data(),
+      bytes.size(), 0, 0);
+  ASSERT_EQ(rc.code, RC_OK);
+  ASSERT_NE(pdu, nullptr);
+  ASSERT_EQ(
+      pdu->choice.initiatingMessage->criticality, Ngap_Criticality_reject);
+
+  // decode() takes ownership of the PDU
+  oai::ngap::UeContextReleaseRequestMsg msg;
+  ASSERT_TRUE(msg.decode(pdu));
+  EXPECT_EQ(msg.getAmfUeNgapId(), 1u);
+  EXPECT_EQ(msg.getRanUeNgapId(), 1u);
+
+  e_Ngap_CauseRadioNetwork cause = {};
+  ASSERT_TRUE(msg.getCauseRadioNetwork(cause));
+  EXPECT_EQ(cause, Ngap_CauseRadioNetwork_user_inactivity);
 }
 
 // Placeholder: APER-level round-trip for BroadcastSessionSetupRequest deferred.

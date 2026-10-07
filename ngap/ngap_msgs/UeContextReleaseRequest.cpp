@@ -155,11 +155,11 @@ void UeContextReleaseRequestMsg::addCauseIe() {
 bool UeContextReleaseRequestMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
   ngapPdu = ngapMsgPdu;
   if (ngapPdu->present == Ngap_NGAP_PDU_PR_initiatingMessage) {
+    // TODO: Temporarily disable the procedure criticality check (to work with
+    // PacketRusher)
     if (ngapPdu->choice.initiatingMessage &&
         ngapPdu->choice.initiatingMessage->procedureCode ==
             Ngap_ProcedureCode_id_UEContextReleaseRequest &&
-        ngapPdu->choice.initiatingMessage->criticality ==
-            Ngap_Criticality_ignore &&
         ngapPdu->choice.initiatingMessage->value.present ==
             Ngap_InitiatingMessage__value_PR_UEContextReleaseRequest) {
       m_UEContextReleaseRequestIes = &ngapPdu->choice.initiatingMessage->value

@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstdint>
 
+#include "PagingDrx.hpp"
 #include "NgapMessage.hpp"
 #include "NrPagingEDrxInformation.hpp"
 #include "PagingCause.hpp"
@@ -16,6 +17,7 @@
 #include "PagingPriority.hpp"
 #include "PeipsAssistanceInformation.hpp"
 #include "TaiListforPaging.hpp"
+#include "UeRadioCapabilityForPaging.hpp"
 #include "UePagingIdentity.hpp"
 
 extern "C" {
@@ -56,8 +58,13 @@ class PagingMsg : public NgapMessage {
   void setPagingCause(const PagingCause& value);
   void setPeipsAssistanceInformation(const PeipsAssistanceInformation& value);
 
-  // Paging Origin — not set for 3GPP paging (current scope)
-  // void setPagingOrigin(e_Ngap_PagingOrigin origin); // TODO: non-3GPP
+  // Paging Origin (Optional) — set when the pending data is associated with
+  // non-3GPP access.
+  void setPagingOrigin(e_Ngap_PagingOrigin origin);
+
+  void setUeRadioCapabilityForPaging(
+      const OCTET_STRING_t& ue_radio_capability_for_paging_of_nr,
+      const OCTET_STRING_t& ue_radio_capability_for_paging_of_eutra);
 
  private:
   Ngap_Paging_t* m_PagingIes;
@@ -69,9 +76,10 @@ class PagingMsg : public NgapMessage {
   std::optional<NrPagingEDrxInformation> m_NrPagingEDrxInformation;  // Rel-17
   std::optional<PagingCause> m_PagingCause;                          // Rel-17
   std::optional<PeipsAssistanceInformation>
-      m_PeipsAssistanceInformation;  // Rel-17
-  // TODO: UE Radio Capability for Paging (Optional)
-  // TODO: PagingOrigin not set (3GPP-only paging, current scope)
+      m_PeipsAssistanceInformation;                   // Rel-17
+  std::optional<e_Ngap_PagingOrigin> m_pagingOrigin;  // Optional
+  std::optional<UeRadioCapabilityForPaging>
+      m_ueRadioCapabilityForPaging;  // Optional
   // TODO: Assistance Data for Paging (Optional)
   // TODO: NB-IoT Paging eDRX Information (Optional, Rel 16.14.0)
   // TODO: NB-IoT Paging DRX (Optional, Rel 16.14.0)

@@ -11,6 +11,12 @@
 
 namespace oai::ngap {
 //------------------------------------------------------------------------------
+int ngap_utils::aper_encoded_bits_to_bytes(long encoded_bits) {
+  if (encoded_bits < 0) return -1;
+  return static_cast<int>((encoded_bits + 7) / 8);
+}
+
+//------------------------------------------------------------------------------
 void ngap_utils::print_asn_msg(
     const asn_TYPE_descriptor_t* td, const void* struct_ptr) {
   if (oai::logger::logger_registry::should_log(spdlog::level::debug))

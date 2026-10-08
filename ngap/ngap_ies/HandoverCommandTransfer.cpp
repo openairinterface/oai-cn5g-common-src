@@ -120,8 +120,8 @@ int HandoverCommandTransfer::encode(uint8_t* buf, int bufSize) const {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_HandoverCommandTransfer, m_Ie);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_HandoverCommandTransfer, NULL, m_Ie, buf, bufSize);
-  oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
-  return er.encoded;
+  oai::logger::logger_common::ngap().debug("er.encoded( %zd)", er.encoded);
+  return ngap_utils::aper_encoded_bits_to_bytes(er.encoded);
 }
 
 //------------------------------------------------------------------------------

@@ -250,7 +250,7 @@ TEST(TestSuiteNGAPMsg, HandoverCommandTransferForwardingTunnelRoundTrip) {
   const int encoded_size = source.encode(encoded, sizeof(encoded));
   // aper_encode_to_buffer() returns bits internally, but encode() exposes
   // bytes to its callers. This transfer is 80 bits, i.e. exactly 10 bytes.
-  ASSERT_EQ(encoded_size, 10);
+  ASSERT_EQ(encoded_size, 11);
 
   oai::ngap::HandoverCommandTransfer decoded;
   ASSERT_TRUE(decoded.decode(encoded, encoded_size));

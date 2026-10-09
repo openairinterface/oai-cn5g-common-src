@@ -94,10 +94,10 @@ void from_json(const nlohmann::json& j, AfEventSubscription& o) {
   }
 }
 
-oai::_3gpp::model::AfEvent AfEventSubscription::getEvent() const {
+oai::_3gpp::model::PaAfEvent AfEventSubscription::getEvent() const {
   return m_Event;
 }
-void AfEventSubscription::setEvent(oai::_3gpp::model::AfEvent const& value) {
+void AfEventSubscription::setEvent(oai::_3gpp::model::PaAfEvent const& value) {
   m_Event = value;
 }
 oai::_3gpp::model::AfNotifMethod AfEventSubscription::getNotifMethod() const {

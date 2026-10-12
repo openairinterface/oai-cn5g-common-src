@@ -124,8 +124,8 @@ int PduSessionResourceModifyIndicationUnsuccessfulTransfer::encode(
       &asn_DEF_Ngap_PDUSessionResourceModifyIndicationUnsuccessfulTransfer,
       NULL, m_PduSessionResourceModifyIndicationUnsuccessfulTransferIe, buf,
       bufSize);
-  oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
-  return er.encoded;
+  oai::logger::logger_common::ngap().debug("er.encoded( %zd)", er.encoded);
+  return ngap_utils::aper_encoded_bits_to_bytes(er.encoded);
 }
 
 //------------------------------------------------------------------------------

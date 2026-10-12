@@ -10,6 +10,13 @@ extern "C" {
 #include "logger_base.hpp"
 #include <gtest/gtest.h>
 
+#include <arpa/inet.h>
+
+#include "GtpTeid.hpp"
+#include "HandoverCommandTransfer.hpp"
+#include "TransportLayerAddress.hpp"
+#include "UpTransportLayerInformation.hpp"
+
 #include <cstring>
 #include <string>
 
@@ -33,6 +40,15 @@ class NgapLoggerEnvironment : public ::testing::Environment {
 
 static const ::testing::Environment* const kNgapLogEnv =
     ::testing::AddGlobalTestEnvironment(new NgapLoggerEnvironment);
+
+TEST(TestSuiteNGAPMsg, AperEncodedBitLengthIsConvertedToBytes) {
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(-1), -1);
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(0), 0);
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(1), 1);
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(8), 1);
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(9), 2);
+  EXPECT_EQ(oai::ngap::ngap_utils::aper_encoded_bits_to_bytes(80), 10);
+}
 
 using ::testing::Test;
 
@@ -211,4 +227,47 @@ TEST(TestSuiteNGAPMsg, DistributionSetupRequestDecode) {
 TEST(TestSuiteNGAPMsg, MbsFeatureGateBehavior) {
   SUCCEED() << "Stage 7b implements warn+RETURNok for all gated paths; "
                "protocol-level failure echo deferred";
+}
+
+TEST(TestSuiteNGAPMsg, HandoverCommandTransferForwardingTunnelRoundTrip) {
+  in_addr forwarding_address{};
+  ASSERT_EQ(inet_pton(AF_INET, "192.168.170.134", &forwarding_address), 1);
+
+  oai::ngap::TransportLayerAddress transport_layer_address;
+  transport_layer_address.setIpv4Address(forwarding_address);
+
+  constexpr uint32_t kForwardingTeid = 0x12345678;
+  oai::ngap::GtpTeid gtp_teid;
+  gtp_teid.set(kForwardingTeid);
+
+  oai::ngap::UpTransportLayerInformation forwarding_tunnel;
+  forwarding_tunnel.set(transport_layer_address, gtp_teid);
+
+  oai::ngap::HandoverCommandTransfer source;
+  source.setDlForwardingUpTnlInformation(forwarding_tunnel);
+
+  uint8_t encoded[256]{};
+  const int encoded_size = source.encode(encoded, sizeof(encoded));
+  // aper_encode_to_buffer() returns bits internally, but encode() exposes
+  // bytes to its callers. This transfer is 80 bits, i.e. exactly 10 bytes.
+  ASSERT_EQ(encoded_size, 11);
+
+  oai::ngap::HandoverCommandTransfer decoded;
+  ASSERT_TRUE(decoded.decode(encoded, encoded_size));
+
+  std::optional<oai::ngap::UpTransportLayerInformation> decoded_tunnel;
+  decoded.getDlForwardingUpTnlInformation(decoded_tunnel);
+  ASSERT_TRUE(decoded_tunnel.has_value());
+
+  oai::ngap::TransportLayerAddress decoded_address;
+  oai::ngap::GtpTeid decoded_teid;
+  decoded_tunnel->get(decoded_address, decoded_teid);
+
+  const auto decoded_ipv4 = decoded_address.getIpv4Address();
+  ASSERT_TRUE(decoded_ipv4.has_value());
+  EXPECT_EQ(decoded_ipv4->s_addr, forwarding_address.s_addr);
+
+  uint32_t decoded_teid_value = 0;
+  ASSERT_TRUE(decoded_teid.get(decoded_teid_value));
+  EXPECT_EQ(decoded_teid_value, kForwardingTeid);
 }

@@ -89,8 +89,10 @@ int _5gsMobileIdentity::Decode(const uint8_t* const buf, int len, bool is_iei) {
   switch (octet & 0x07) {
     case kSuci: {
       type_of_identity_ = kSuci;
-      decoded_size +=
+      int decoded_suci_size =
           DecodeSuci(buf + decoded_size, len - decoded_size, ie_len);
+      if (decoded_suci_size == KEncodeDecodeError) return KEncodeDecodeError;
+      decoded_size += decoded_suci_size;
       oai::logger::logger_common::nas().debug(
           "Decoded SUCI (%d octets)", decoded_size);
     } break;
@@ -320,6 +322,11 @@ int _5gsMobileIdentity::DecodeSuci(
 
   switch ((octet & 0x70) >> 4) {
     case kSupiFormatImsi: {
+      if (ie_len < 8) {
+        oai::logger::logger_common::nas().error(
+            "5GSMobilityIdentity SUCI IE length (%d) is too short", ie_len);
+        return KEncodeDecodeError;
+      }
       SUCI_imsi_t supi_format_imsi_tmp = {};
       supi_format_imsi_tmp.supi_format = kSupiFormatImsi;
 

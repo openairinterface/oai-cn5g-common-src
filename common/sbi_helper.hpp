@@ -229,6 +229,39 @@ class sbi_helper {
   // TODO: AUSF: SoR Protection
   // TODO: AUSF: UPU Protection
 
+  // NEF
+  // Northbound API base paths (TS 29.522)
+  static inline const std::string NefMonitoringEventBase =
+      "/3gpp-monitoring-event/";
+  static inline const std::string NefTrafficInfluenceBase =
+      "/3gpp-traffic-influence/";
+  static inline const std::string NefPfdManagementBase =
+      "/3gpp-pfd-management/";
+  static inline const std::string NefBdtBase = "/3gpp-bdt/";
+  static inline const std::string NefQosMonitoringBase =
+      "/3gpp-as-session-with-qos/";
+  static inline const std::string NefAnalyticsBase = "/3gpp-analyticsexposure/";
+
+  // NEF inbound notification endpoint (NEF gives this to AMF/SMF/PCF)
+  // The path is: NefNotifyBase + api_version + "/notify/" + nf_sub_id
+  // e.g.  /nef-notify/v1/notify/amf-sub-abc123
+  static inline const std::string NefNotifyBase       = "/nef-notify/";
+  static inline const std::string NefNotifyPathNotify = "/notify";
+  static inline const std::string NefHealthPath       = "/health";
+  // NNEF PFD Management service paths
+  static inline const std::string NnefEventExposureBase =
+      "/nnef-eventexposure/";
+  static inline const std::string NnefPfdManagementBase =
+      "/nnef-pfdmanagement/";
+  static inline const std::string NnefPfdManagementPathTransactions =
+      "/transactions";
+  static inline const std::string NnefPfdManagementPathApplications =
+      "/applications";
+  static inline const std::string NnefPfdManagementPathPartialPull =
+      "/partial-pull";
+  static inline const std::string NnefPfdManagementPathSubscriptions =
+      "/subscriptions";
+
   // NRF: NF Management Service
   static inline const std::string NrfNfmBase = "/nnrf-nfm/";
   static inline const std::string NrfNfmPathNfInstancesNfInstanceId =
@@ -285,6 +318,12 @@ class sbi_helper {
       "/policies/{polAssoId}";
   static inline const std::string PcfAmPolicyControlPathPoliciesAssoIdUpdate =
       "/policies/{polAssoId}/update";
+  // PCF: Npcf_PolicyAuthorization (TS 29.514)
+  static inline const std::string PcfPolicyAuthBase =
+      "/npcf-policyauthorization/";
+  // PCF: Npcf_BDTPolicyControl (TS 29.554)
+  static inline const std::string PcfBdtPolicyControlBase =
+      "/npcf-bdtpolicycontrol/";
 
   // SMF: SMF PDU Session Service
   static inline const std::string SmfPduSessionBase = "/nsmf-pdusession/";
@@ -810,5 +849,46 @@ class sbi_helper {
   static void parse_query(
       const std::string& query_string,
       std::map<std::string, std::string>& parameters);
+
+  // -----------------------------------------------------------------------
+  // UDSF Nudsf_DR URI helpers (3GPP TS 29.598)
+  // -----------------------------------------------------------------------
+
+  /*
+   * Get UDSF Record URI for a single record (PUT / GET / DELETE)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId    (e.g. "amf-realm")
+   * @param [const std::string&] storage_id: storageId  (e.g. "ue-context")
+   * @param [const std::string&] record_id:  recordId   (SUPI of the UE)
+   * @return Full URI string
+   */
+  static std::string get_udsf_record_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id, const std::string& record_id);
+
+  /*
+   * Get UDSF Records URI for search/list operations (GET with filter)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId
+   * @param [const std::string&] storage_id: storageId
+   * @return URI without trailing record_id (ends at /records)
+   */
+  static std::string get_udsf_records_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id);
+
+  /*
+   * Get UDSF Block URI for a named block within a record (GET / PUT)
+   * @param [const nf_addr_t&] udsf_addr: UDSF address/api_version
+   * @param [const std::string&] realm:      realmId
+   * @param [const std::string&] storage_id: storageId
+   * @param [const std::string&] record_id:  recordId (SUPI)
+   * @param [const std::string&] block_id:   blockId  (e.g. "ue_context")
+   * @return Full URI string
+   */
+  static std::string get_udsf_block_uri(
+      const nf_addr_t& udsf_addr, const std::string& realm,
+      const std::string& storage_id, const std::string& record_id,
+      const std::string& block_id);
 };
 }  // namespace oai::common::sbi

@@ -589,22 +589,21 @@ class sbi_helper {
   static inline const std::string
       UdrDrPathSubscriptionDataGroupDataGroupIdentifier =
           "/subscription-data/group-data/group-identifiers";
-  static inline const std::string UdrDrPathSubscriptionDataUesAmData =
+  static inline const std::string UdrDrPathPolicyDataUesAmData =
       "/policy-data/ues/:ueId/am-data";
-  static inline const std::string UdrDrPathSubscriptionDataUesUePolicySet =
+  static inline const std::string UdrDrPathPolicyDataUesUePolicySet =
       "/policy-data/ues/:ueId/ue-policy-set";
-  static inline const std::string UdrDrPathSubscriptionDataUesSmData =
+  static inline const std::string UdrDrPathPolicyDataUesSmData =
       "/policy-data/ues/:ueId/sm-data";
-  static inline const std::string UdrDrPathSubscriptionDataUesSmDataUsageMonId =
+  static inline const std::string UdrDrPathPolicyDataUesSmDataUsageMonId =
       "/policy-data/ues/:ueId/sm-data/:usageMonId";
   static inline const std::string
-      UdrDrPathSubscriptionDataSponsorConnectivityDataSponsorId =
+      UdrDrPathPolicyDataSponsorConnectivityDataSponsorId =
           "/policy-data/sponsor-connectivity-data/:sponsorId";
-  static inline const std::string UdrDrPathSubscriptionDataPolicyDataBdtData =
+  static inline const std::string UdrDrPathPolicyDataBdtData =
       "/policy-data/bdt-data";
-  static inline const std::string
-      UdrDrPathSubscriptionDataPolicyDataBdtDataBdtReferenceId =
-          "/policy-data/bdt-data/:bdtReferenceId";
+  static inline const std::string UdrDrPathPolicyDataBdtDataBdtReferenceId =
+      "/policy-data/bdt-data/:bdtReferenceId";
   static inline const std::string
       UdrDrPathSubscriptionDataPolicyDataSubsToNotify =
           "/policy-data/subs-to-notify";

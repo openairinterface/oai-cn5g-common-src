@@ -19,7 +19,9 @@
 #ifndef AfEventSubscription_H_
 #define AfEventSubscription_H_
 
-#include "AfEvent.h"
+// TS 29.514 §5.6.3.4 AfEvent, not the identically named TS 29.517
+// (Naf_EventExposure) AfEvent that "AfEvent.h" holds.
+#include "PaAfEvent.h"
 #include "AfNotifMethod.h"
 #include <nlohmann/json.hpp>
 
@@ -60,8 +62,8 @@ class AfEventSubscription {
   /// <summary>
   ///
   /// </summary>
-  oai::_3gpp::model::AfEvent getEvent() const;
-  void setEvent(oai::_3gpp::model::AfEvent const& value);
+  oai::_3gpp::model::PaAfEvent getEvent() const;
+  void setEvent(oai::_3gpp::model::PaAfEvent const& value);
   /// <summary>
   ///
   /// </summary>
@@ -88,7 +90,7 @@ class AfEventSubscription {
   friend void from_json(const nlohmann::json& j, AfEventSubscription& o);
 
  protected:
-  oai::_3gpp::model::AfEvent m_Event;
+  oai::_3gpp::model::PaAfEvent m_Event;
 
   oai::_3gpp::model::AfNotifMethod m_NotifMethod;
   bool m_NotifMethodIsSet;

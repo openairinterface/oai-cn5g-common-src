@@ -21,6 +21,8 @@ file(GLOB PCF_MODEL_SRC_FILES
     ${PCF_MODEL_DIR}/AfEventNotification.cpp
     ${PCF_MODEL_DIR}/AfEventSubscription.cpp
     ${PCF_MODEL_DIR}/AfEvent_anyOf.cpp
+    ${PCF_MODEL_DIR}/PaAfEvent.cpp
+    ${PCF_MODEL_DIR}/PaAfEvent_anyOf.cpp
     ${PCF_MODEL_DIR}/AfNotifMethod.cpp
     ${PCF_MODEL_DIR}/AfNotifMethod_anyOf.cpp
     ${PCF_MODEL_DIR}/AfRequestedData.cpp

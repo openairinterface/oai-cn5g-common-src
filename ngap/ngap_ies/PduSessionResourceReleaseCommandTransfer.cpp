@@ -135,8 +135,8 @@ int PduSessionResourceReleaseCommandTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_PDUSessionResourceReleaseCommandTransfer, NULL,
       m_PduSessionResourceReleaseCommandTransferIe, buf, bufSize);
-  oai::logger::logger_common::ngap().debug("er.encoded( %d)", er.encoded);
-  return er.encoded;
+  oai::logger::logger_common::ngap().debug("er.encoded( %zd)", er.encoded);
+  return ngap_utils::aper_encoded_bits_to_bytes(er.encoded);
 }
 
 //------------------------------------------------------------------------------

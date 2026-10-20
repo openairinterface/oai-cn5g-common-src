@@ -6858,17 +6858,19 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
     u1.b               = 0;
     u1.bf.rule_id_type = b.rule_id_type;
     rule_id_value      = b.rule_id_value;
+    // The length counts the Rule ID Type octet as well as the Rule ID value
+    // (TS 29.244 8.2.80), as load_from() expects
     switch (b.rule_id_type) {
       case pfcp::FAILED_RULE_ID_TYPE_BAR:
-        tlv.set_length(1);
+        tlv.set_length(2);
         break;
       case pfcp::FAILED_RULE_ID_TYPE_PDR:
-        tlv.set_length(2);
+        tlv.set_length(3);
         break;
       case pfcp::FAILED_RULE_ID_TYPE_URR:
       case pfcp::FAILED_RULE_ID_TYPE_FAR:
       case pfcp::FAILED_RULE_ID_TYPE_QER:
-        tlv.set_length(4);
+        tlv.set_length(5);
         break;
       default:
         tlv.set_length(0);
@@ -6895,16 +6897,16 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
     tlv.dump_to(os);
     os.write(reinterpret_cast<const char*>(&u1.b), sizeof(u1.b));
     switch (tlv.get_length()) {
-      case 1: {
+      case 2: {
         uint8_t b = (uint8_t) rule_id_value;
         os.write(reinterpret_cast<const char*>(&b), sizeof(b));
       } break;
-      case 2: {
+      case 3: {
         uint16_t s = (uint16_t) rule_id_value;
         s          = htobe16(s);
         os.write(reinterpret_cast<const char*>(&s), sizeof(s));
       } break;
-      case 4: {
+      case 5: {
         auto l = htobe32(rule_id_value);
         os.write(reinterpret_cast<const char*>(&l), sizeof(l));
       } break;

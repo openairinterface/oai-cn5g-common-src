@@ -230,6 +230,25 @@ class sbi_interface : public local_interface {
   [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };
 
+// Dedicated OAM interface configuration (nfs.<nf>.oam). When enabled, the NF
+// serves its management APIs (e.g. the *-oai configuration services) on this
+// interface instead of the SBI interface.
+class oam_config : public local_interface {
+ private:
+  option_config_value m_enabled{};
+
+ public:
+  oam_config();
+
+  void from_yaml(const YAML::Node& node) override;
+  nlohmann::json to_json() override;
+  bool from_json(const nlohmann::json& json_data) override;
+  [[nodiscard]] std::string to_string(const std::string& indent) const override;
+  void validate() override;
+
+  [[nodiscard]] bool is_enabled() const;
+};
+
 enum class interface_type_e { n1, n4 };
 
 class nf : public config_type {
@@ -238,6 +257,7 @@ class nf : public config_type {
  private:
   sbi_interface m_sbi;
   string_config_value m_host;
+  oam_config m_oam;
 
  public:
   explicit nf(
@@ -252,6 +272,7 @@ class nf : public config_type {
   [[nodiscard]] std::string to_string(const std::string& indent) const override;
   void validate() override;
   [[nodiscard]] const sbi_interface& get_sbi() const;
+  [[nodiscard]] const oam_config& get_oam() const;
   [[nodiscard]] const std::string& get_host() const;
   [[nodiscard]] std::string get_url(bool enable_tls = false) const;
 };

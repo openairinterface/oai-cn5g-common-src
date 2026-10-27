@@ -6862,9 +6862,11 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
     // (TS 29.244 8.2.80), as load_from() expects
     switch (b.rule_id_type) {
       case pfcp::FAILED_RULE_ID_TYPE_BAR:
+      case pfcp::FAILED_RULE_ID_TYPE_SRR:
         tlv.set_length(2);
         break;
       case pfcp::FAILED_RULE_ID_TYPE_PDR:
+      case pfcp::FAILED_RULE_ID_TYPE_MAR:
         tlv.set_length(3);
         break;
       case pfcp::FAILED_RULE_ID_TYPE_URR:
@@ -6924,7 +6926,8 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
     }
     is.read(reinterpret_cast<char*>(&u1.b), sizeof(u1.b));
     switch (u1.bf.rule_id_type) {
-      case pfcp::FAILED_RULE_ID_TYPE_BAR: {
+      case pfcp::FAILED_RULE_ID_TYPE_BAR:
+      case pfcp::FAILED_RULE_ID_TYPE_SRR: {
         if (tlv.get_length() != 2) {
           throw pfcp_tlv_bad_length_exception(
               tlv.type, tlv.get_length(), __FILE__, __LINE__);
@@ -6933,7 +6936,8 @@ class pfcp_failed_rule_id_ie : public pfcp_ie {
         is.read(reinterpret_cast<char*>(&b), sizeof(b));
         rule_id_value = b;
       } break;
-      case pfcp::FAILED_RULE_ID_TYPE_PDR: {
+      case pfcp::FAILED_RULE_ID_TYPE_PDR:
+      case pfcp::FAILED_RULE_ID_TYPE_MAR: {
         if (tlv.get_length() != 3) {
           throw pfcp_tlv_bad_length_exception(
               tlv.type, tlv.get_length(), __FILE__, __LINE__);

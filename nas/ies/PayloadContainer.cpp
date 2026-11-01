@@ -206,9 +206,11 @@ int PayloadContainer::Decode(
   std::vector<PayloadContainerEntry> CONTENT_tmp;
 
   PayloadContainerEntry payloadcontainerentry = {};
+  if (decoded_size >= len) return KEncodeDecodeError;
   DECODE_U8(buf + decoded_size, num_entries, decoded_size);
 
   while (num_entries) {
+    if ((decoded_size + 2) > len) return KEncodeDecodeError;
     uint8_t length_entry = 0;
     DECODE_U8(buf + decoded_size, length_entry, decoded_size);
     uint8_t octet = 0;
@@ -219,13 +221,15 @@ int PayloadContainer::Decode(
 
     IE_t value;
     while (num_optional) {
+      if ((decoded_size + 2) > len) return KEncodeDecodeError;
       DECODE_U8(buf + decoded_size, value.ie_type, decoded_size);
       DECODE_U8(buf + decoded_size, value.ie_len, decoded_size);
 
-      decode_bstring(
+      int decoded_bstring_size = decode_bstring(
           &value.ie_value, value.ie_len, (buf + decoded_size),
           len - decoded_size);
-      decoded_size += value.ie_len;
+      if (decoded_bstring_size < 0) return KEncodeDecodeError;
+      decoded_size += decoded_bstring_size;
       payloadcontainerentry.optionalIE.insert(
           payloadcontainerentry.optionalIE.end(), value);
       num_optional--;

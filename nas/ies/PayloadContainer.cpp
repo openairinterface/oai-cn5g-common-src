@@ -190,6 +190,9 @@ int PayloadContainer::Decode(
   if (decoded_header_size == KEncodeDecodeError) return KEncodeDecodeError;
   decoded_size += decoded_header_size;
   ie_len = GetLengthIndicator();
+  // Restrict this IE's decoding to its declared extent: the buffer may hold
+  // further UL NAS TRANSPORT IEs beyond this Payload Container.
+  len = decoded_header_size + ie_len;
 
   if (type != kMultiplePayloads) {  // not multiple payloads
     uint8_t octet       = 0;
@@ -205,11 +208,11 @@ int PayloadContainer::Decode(
   uint8_t num_optional = {};
   std::vector<PayloadContainerEntry> CONTENT_tmp;
 
-  PayloadContainerEntry payloadcontainerentry = {};
   if (decoded_size >= len) return KEncodeDecodeError;
   DECODE_U8(buf + decoded_size, num_entries, decoded_size);
 
   while (num_entries) {
+    PayloadContainerEntry payloadcontainerentry = {};
     if ((decoded_size + 2) > len) return KEncodeDecodeError;
     uint8_t length_entry = 0;
     DECODE_U8(buf + decoded_size, length_entry, decoded_size);
@@ -218,13 +221,16 @@ int PayloadContainer::Decode(
     DECODE_U8(buf + decoded_size, octet, decoded_size);
     payloadcontainerentry.payloadContainerType = octet & 0x0f;
     num_optional                               = (octet & 0xf0) >> 4;
+    int entry_end                              = decoded_size + length_entry;
+    if (entry_end > len) return KEncodeDecodeError;
 
     IE_t value;
     while (num_optional) {
-      if ((decoded_size + 2) > len) return KEncodeDecodeError;
+      if ((decoded_size + 2) > entry_end) return KEncodeDecodeError;
       DECODE_U8(buf + decoded_size, value.ie_type, decoded_size);
       DECODE_U8(buf + decoded_size, value.ie_len, decoded_size);
 
+      if ((decoded_size + value.ie_len) > entry_end) return KEncodeDecodeError;
       int decoded_bstring_size = decode_bstring(
           &value.ie_value, value.ie_len, (buf + decoded_size),
           len - decoded_size);
@@ -234,10 +240,12 @@ int PayloadContainer::Decode(
           payloadcontainerentry.optionalIE.end(), value);
       num_optional--;
     }
+    if (decoded_size != entry_end) return KEncodeDecodeError;
     CONTENT_tmp.insert(CONTENT_tmp.end(), payloadcontainerentry);
     num_entries--;
   }
-  contents_ = std::optional<std::vector<PayloadContainerEntry>>(contents_);
+  if (decoded_size != len) return KEncodeDecodeError;
+  contents_ = std::optional<std::vector<PayloadContainerEntry>>(CONTENT_tmp);
   oai::logger::logger_common::nas().debug(
       "Decoded %s (len %d)", GetIeName().c_str(), decoded_size);
   return decoded_size;

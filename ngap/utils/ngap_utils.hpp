@@ -19,6 +19,7 @@ class ngap_utils {
  public:
   static void print_asn_msg(
       const asn_TYPE_descriptor_t* td, const void* struct_ptr);
+  static int aper_encoded_bits_to_bytes(long encoded_bits);
   static bool octet_string_2_bstring(
       const OCTET_STRING_t& octet_str, bstring& b_str);
   static bool bstring_2_octet_string(

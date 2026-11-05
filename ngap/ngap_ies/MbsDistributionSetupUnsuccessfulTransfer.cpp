@@ -4,6 +4,8 @@
 
 #include "MbsDistributionSetupUnsuccessfulTransfer.hpp"
 
+#include "ngap_utils.hpp"
+
 namespace oai::ngap {
 
 //------------------------------------------------------------------------------
@@ -29,7 +31,7 @@ int MbsDistributionSetupUnsuccessfulTransfer::encode(
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_MBS_DistributionSetupUnsuccessfulTransfer, nullptr, m_Ie,
       buf, bufSize);
-  return (er.encoded > 0) ? er.encoded : -1;
+  return ngap_utils::aper_encoded_bits_to_bytes(er.encoded);
 }
 
 //------------------------------------------------------------------------------

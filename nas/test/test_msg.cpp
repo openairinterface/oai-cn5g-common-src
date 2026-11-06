@@ -25,7 +25,9 @@
 #include <gtest/gtest.h>
 #include "logger_base.hpp"
 
+#include <algorithm>
 #include <array>
+#include <cstring>
 // ---------------------------------------------------------------------------
 class NasLoggerEnvironment : public ::testing::Environment {
  public:
@@ -1602,4 +1604,35 @@ TEST(
   ASSERT_EQ(parameters.size(), 1u);
   ASSERT_TRUE(parameters[0].Get5qi().has_value());
   EXPECT_EQ(parameters[0].Get5qi().value(), 9);
+}
+
+// A Payload container keeps its own copy of the contents (TS 24.501
+// 9.11.3.39): the caller may reuse or free its buffer afterwards, and a copy
+// of the container encodes the same octets
+TEST(TestSuiteNasMsg, positiveTestingPayloadContainerOwnsContents) {
+  const uint8_t contents[] = {0x2e, 0x02, 0x00, 0xcb, 0x74, 0x00, 0x00};
+  bstring caller_buf       = blk2bstr(contents, sizeof(contents));
+
+  oai::nas::PayloadContainer original;
+  original.SetValue(caller_buf);
+  caller_buf->data[0] = 0xff;  // the caller reuses its buffer
+
+  oai::nas::PayloadContainer copy = original;
+
+  std::array<uint8_t, 16> buf = {};
+  ASSERT_EQ(
+      copy.Encode(buf.data(), static_cast<int>(buf.size()), kN1SmInformation),
+      static_cast<int>(2 + sizeof(contents)));
+  EXPECT_EQ(buf[0], 0x00);  // contents length 7, big-endian
+  EXPECT_EQ(buf[1], 0x07);
+  EXPECT_TRUE(
+      std::equal(contents, contents + sizeof(contents), buf.begin() + 2));
+
+  bstring out = nullptr;
+  ASSERT_TRUE(original.GetValue(out));
+  ASSERT_NE(out, nullptr);
+  ASSERT_EQ(blength(out), static_cast<int>(sizeof(contents)));
+  EXPECT_EQ(memcmp(bdata(out), contents, sizeof(contents)), 0);
+  bdestroy(out);
+  bdestroy(caller_buf);
 }

@@ -60,7 +60,8 @@ void DlNasTransport::SetPayloadContainer(
 //------------------------------------------------------------------------------
 void DlNasTransport::SetPayloadContainer(uint8_t* buf, int len) {
   bstring b = blk2bstr(buf, len);
-  ie_payload_container_.SetValue(b);
+  ie_payload_container_.SetValue(b);  // keeps its own copy
+  bdestroy(b);
 }
 
 //------------------------------------------------------------------------------

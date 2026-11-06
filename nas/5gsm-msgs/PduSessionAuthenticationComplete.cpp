@@ -115,7 +115,6 @@ int PduSessionAuthenticationComplete::Decode(uint8_t* buf, int len) {
   uint8_t octet = 0x00;
   DECODE_U8_VALUE(buf, octet, decoded_size, len);
   oai::logger::logger_common::nas().debug("First option IEI (0x%x)", octet);
-  bool flag = false;
   while ((octet != 0x0)) {
     switch (octet) {
       case kIeiExtendedProtocolConfigurationOptions: {
@@ -131,13 +130,10 @@ int PduSessionAuthenticationComplete::Decode(uint8_t* buf, int len) {
       } break;
 
       default: {
-        // TODO:
-        if (flag) {
-          oai::logger::logger_common::nas().warn(
-              "Unknown IEI 0x%x, stop decoding...", octet);
-          // Stop decoding
-          octet = 0x00;
-        }
+        // Unknown IEI: stop decoding instead of looping on it
+        oai::logger::logger_common::nas().warn(
+            "Unknown IEI 0x%x, stop decoding...", octet);
+        octet = 0x00;
       } break;
     }
   }

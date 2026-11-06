@@ -9,6 +9,7 @@ include_directories(${COMMON_DIR})
 include_directories(${LOGGER_DIR})
 include_directories(${MODEL_DIR})
 include_directories(${NAS_DIR}/5gmm-msgs)
+include_directories(${NAS_DIR}/5gsm-msgs)
 include_directories(${NAS_DIR}/common)
 include_directories(${NAS_DIR}/ies)
 include_directories(${NAS_DIR}/utils)
@@ -18,6 +19,7 @@ include_directories(${UTILS_DIR}/bstr)
 file(GLOB NAS_src_files
     ${NAS_DIR}/common/*.cpp
     ${NAS_DIR}/5gmm-msgs/*.cpp
+    ${NAS_DIR}/5gsm-msgs/*.cpp
     ${NAS_DIR}/ies/*.cpp
     ${NAS_DIR}/utils/*.cpp
     ${NAS_DIR}/utils/*.c

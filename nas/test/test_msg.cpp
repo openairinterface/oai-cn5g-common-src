@@ -13,6 +13,10 @@
 #include "NssrgInformation.hpp"
 #include "NsagInformation.hpp"
 #include "PriorityIndicator.hpp"
+#include "PduSessionAuthenticationComplete.hpp"
+#include "PduSessionModificationCommandReject.hpp"
+#include "PduSessionReleaseComplete.hpp"
+#include "PduSessionReleaseRequest.hpp"
 #include "IeConst.hpp"
 #include "endian.h"
 
@@ -1446,4 +1450,41 @@ TEST(TestSuiteNasMsg, mobileIdentityImeisvValidDecode) {
   int decode_result               = id.Decode(packet, sizeof(packet));
   ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
   EXPECT_EQ(id.GetTypeOfIdentity(), kImeisv);
+}
+
+// =============================================================================
+// 5GSM messages with only TLV/TLV-E optional IEs stop decoding at an IEI they
+// do not know (here 1EH, a TLV) instead of looping on it
+// =============================================================================
+extern std::vector<uint8_t> hexStringToByteArray(const std::string& hexString);
+
+TEST(TestSuiteNasMsg, rel1710PduSessionReleaseRequestUnknownIeiStopsDecoding) {
+  std::vector<uint8_t> packet = hexStringToByteArray("2e0101d11e020000");
+  oai::nas::PduSessionReleaseRequest message = {};
+  EXPECT_EQ(message.Decode(packet.data(), packet.size()), 4);
+}
+
+TEST(TestSuiteNasMsg, rel1710PduSessionReleaseCompleteUnknownIeiStopsDecoding) {
+  std::vector<uint8_t> packet = hexStringToByteArray("2e0101d41e020000");
+  oai::nas::PduSessionReleaseComplete message = {};
+  EXPECT_EQ(message.Decode(packet.data(), packet.size()), 4);
+}
+
+TEST(
+    TestSuiteNasMsg,
+    rel1710PduSessionModificationCommandRejectUnknownIeiStopsDecoding) {
+  // 5GSM cause 1AH (insufficient resources) is mandatory
+  std::vector<uint8_t> packet = hexStringToByteArray("2e0101cd1a1e020000");
+  oai::nas::PduSessionModificationCommandReject message = {};
+  EXPECT_EQ(message.Decode(packet.data(), packet.size()), 5);
+}
+
+TEST(
+    TestSuiteNasMsg,
+    rel1710PduSessionAuthenticationCompleteUnknownIeiStopsDecoding) {
+  // The EAP message (LV-E, 4 octets) is mandatory
+  std::vector<uint8_t> packet =
+      hexStringToByteArray("2e0101c6000402010004" + std::string("1e020000"));
+  oai::nas::PduSessionAuthenticationComplete message = {};
+  EXPECT_EQ(message.Decode(packet.data(), packet.size()), 10);
 }

@@ -194,6 +194,11 @@ class pfcp_grouped_ie : public pfcp_ie {
             tlv.get_type(), tlv.get_length(), __FILE__, __LINE__);
       }
     }
+    // Children must end with the grouped IE (TS 29.244 §8.1.1)
+    if (remaining_size != 0) {
+      throw pfcp_tlv_bad_length_exception(
+          tlv.get_type(), tlv.get_length(), __FILE__, __LINE__);
+    }
   };
 };
 //------------------------------------------------------------------------------

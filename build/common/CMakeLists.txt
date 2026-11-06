@@ -24,6 +24,7 @@ set (LOGGER_DIR     ${SRC_TOP_DIR}/logger)
 set (MODEL_DIR      ${SRC_TOP_DIR}/model)
 set (NAS_DIR        ${SRC_TOP_DIR}/nas)
 set (NGAP_DIR       ${SRC_TOP_DIR}/ngap)
+set (PFCP_DIR       ${SRC_TOP_DIR}/pfcp)
 set (TEST_DIR       ${SRC_TOP_DIR}/test)
 set (UTILS_DIR      ${SRC_TOP_DIR}/utils)
 
@@ -31,6 +32,7 @@ ADD_SUBDIRECTORY(${COMMON_DIR} ${CMAKE_CURRENT_BINARY_DIR}/common)
 ADD_SUBDIRECTORY(${LOGGER_DIR} ${CMAKE_CURRENT_BINARY_DIR}/logger)
 ADD_SUBDIRECTORY(${NAS_DIR} ${CMAKE_CURRENT_BINARY_DIR}/nas)
 ADD_SUBDIRECTORY(${NGAP_DIR} ${CMAKE_CURRENT_BINARY_DIR}/ngap)
+ADD_SUBDIRECTORY(${PFCP_DIR} ${CMAKE_CURRENT_BINARY_DIR}/pfcp)
 ADD_SUBDIRECTORY(${UTILS_DIR} ${CMAKE_CURRENT_BINARY_DIR}/utils)
 # UNIT TESTING, should always be compiled along the main code to let
 # it play its role.

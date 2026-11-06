@@ -5,6 +5,8 @@ extern "C" {
 #include "Ngap_InitiatingMessage.h"
 #include "Ngap_NGAP-PDU.h"
 }
+#include "DownlinkNasTransport.hpp"
+#include "common_defs.hpp"
 #include "UplinkNasTransport.hpp"
 #include "ngap_utils.hpp"
 #include "logger_base.hpp"
@@ -19,6 +21,7 @@ extern "C" {
 
 #include <cstring>
 #include <string>
+#include <vector>
 
 // Rel-17 IE wrappers under test (Stage 10 additions)
 #include "RedCapIndication.hpp"
@@ -270,4 +273,29 @@ TEST(TestSuiteNGAPMsg, HandoverCommandTransferForwardingTunnelRoundTrip) {
   uint32_t decoded_teid_value = 0;
   ASSERT_TRUE(decoded_teid.get(decoded_teid_value));
   EXPECT_EQ(decoded_teid_value, kForwardingTeid);
+}
+
+// Encode() into a buffer too small for the message reports the failure
+// (KEncodeDecodeError) instead of 0 octets, so callers that check for a
+// negative size do not send an empty message
+TEST(TestSuiteNGAPMsg, EncodeIntoTooSmallBufferFails) {
+  std::vector<uint8_t> nas(2048, 0x5a);
+  bstring nas_pdu = blk2bstr(nas.data(), static_cast<int>(nas.size()));
+
+  oai::ngap::DownLinkNasTransportMsg msg;
+  msg.setAmfUeNgapId(1);
+  msg.setRanUeNgapId(1);
+  msg.setNasPdu(nas_pdu);
+  bdestroy(nas_pdu);
+
+  std::vector<uint8_t> buffer(1024, 0);
+  EXPECT_EQ(
+      msg.Encode(buffer.data(), static_cast<int>(buffer.size())),
+      KEncodeDecodeError);
+
+  buffer.resize(4096);
+  const int encoded =
+      msg.Encode(buffer.data(), static_cast<int>(buffer.size()));
+  EXPECT_GT(encoded, 2048);
+  EXPECT_LT(encoded, 4096);
 }

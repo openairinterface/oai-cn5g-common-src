@@ -519,6 +519,89 @@ void sbi_interface::set_url(bool enable_tls) {
   m_url.append(get_host()).append(":").append(std::to_string(get_port()));
 }
 
+//------------------------------------------------------------------------------
+oam_config::oam_config() {
+  m_config_name = "oam";
+  m_enabled     = option_config_value("enabled", false);
+  m_port        = int_config_value("port", 8081);
+  m_port.set_validation_interval(PORT_MIN_VALUE, PORT_MAX_VALUE);
+}
+
+//------------------------------------------------------------------------------
+void oam_config::from_yaml(const YAML::Node& node) {
+  if (node["enabled"]) {
+    m_enabled.from_yaml(node["enabled"]);
+  }
+  local_interface::from_yaml(node);
+}
+
+//------------------------------------------------------------------------------
+nlohmann::json oam_config::to_json() {
+  nlohmann::json json_data               = {};
+  json_data[m_enabled.get_config_name()] = m_enabled.to_json();
+  // same fields as local_interface::to_json(), but the interface_name key is
+  // emitted explicitly since a default constructed member has no config name
+  json_data["interface_name"]         = get_if_name();
+  json_data[m_port.get_config_name()] = m_port.to_json();
+  if (is_local_interface()) {
+    json_data["mtu"]   = get_mtu();
+    json_data["addr4"] = conv::toString(get_addr4());
+  }
+  return json_data;
+}
+
+//------------------------------------------------------------------------------
+bool oam_config::from_json(const nlohmann::json& json_data) {
+  try {
+    if (json_data.find(m_enabled.get_config_name()) != json_data.end()) {
+      m_enabled.from_json(json_data[m_enabled.get_config_name()]);
+    }
+    local_interface::from_json(json_data);
+  } catch (nlohmann::detail::exception& e) {
+    // TODO:
+  } catch (std::exception& e) {
+    // TODO:
+  }
+  return false;
+}
+
+//------------------------------------------------------------------------------
+std::string oam_config::to_string(const std::string& indent) const {
+  std::string out;
+  if (!is_set()) {
+    return "";
+  }
+  std::string inner_indent = add_indent(indent);
+  unsigned int inner_width = get_inner_width(inner_indent.length());
+
+  out.append(indent).append(m_config_name).append(":\n");
+  out.append(inner_indent)
+      .append(fmt::format(
+          BASE_FORMATTER, INNER_LIST_ELEM, m_enabled.get_config_name(),
+          inner_width, m_enabled.get_value() ? "true" : "false"));
+  if (is_enabled()) {
+    out.append(inner_indent)
+        .append(fmt::format(
+            BASE_FORMATTER, INNER_LIST_ELEM, "Port", inner_width,
+            m_port.get_value()));
+    out.append(to_string_for_local(inner_indent));
+  }
+  return out;
+}
+
+//------------------------------------------------------------------------------
+void oam_config::validate() {
+  if (!m_set) return;
+  m_enabled.validate();
+  if (!m_enabled.get_value()) return;
+  local_interface::validate();
+}
+
+//------------------------------------------------------------------------------
+bool oam_config::is_enabled() const {
+  return m_enabled.get_value();
+}
+
 nf::nf(
     const std::string& name, const std::string& host,
     const sbi_interface& sbi) {
@@ -537,12 +620,19 @@ void nf::from_yaml(const YAML::Node& node) {
     m_sbi.m_host = m_host;
     m_sbi.from_yaml(node["sbi"]);
   }
+  if (node["oam"]) {
+    m_oam.m_host = m_host;
+    m_oam.from_yaml(node["oam"]);
+  }
   m_set = true;
 }
 
 nlohmann::json nf::to_json() {
   nlohmann::json json_data           = {};
   json_data[m_sbi.get_config_name()] = m_sbi.to_json();
+  if (m_oam.is_set()) {
+    json_data[m_oam.get_config_name()] = m_oam.to_json();
+  }
   return json_data;
 }
 
@@ -581,6 +671,13 @@ std::string nf::to_string(const std::string& indent) const {
     out.append(m_sbi.to_string(add_indent(inner_indent)));
   }
 
+  if (m_oam.is_set()) {
+    out.append(inner_indent)
+        .append(
+            fmt::format("{} {}\n", OUTER_LIST_ELEM, m_oam.get_config_name()));
+    out.append(m_oam.to_string(add_indent(inner_indent)));
+  }
+
   return out;
 }
 
@@ -588,10 +685,17 @@ void nf::validate() {
   if (!m_set) return;
   m_host.validate();
   m_sbi.validate();
+  if (m_oam.is_set()) {
+    m_oam.validate();
+  }
 }
 
 const sbi_interface& nf::get_sbi() const {
   return m_sbi;
+}
+
+const oam_config& nf::get_oam() const {
+  return m_oam;
 }
 
 const std::string& nf::get_host() const {

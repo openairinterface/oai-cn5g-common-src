@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: LicenseRef-CSSL-1.0
  */
 #include "AuthenticationResponse.hpp"
+#include "EapMessage.hpp"
 #include "AuthenticationFailure.hpp"
 #include "IdentityResponse.hpp"
 #include "_5gsMobileIdentity.hpp"
@@ -1487,4 +1488,12 @@ TEST(
       hexStringToByteArray("2e0101c6000402010004" + std::string("1e020000"));
   oai::nas::PduSessionAuthenticationComplete message = {};
   EXPECT_EQ(message.Decode(packet.data(), packet.size()), 10);
+}
+
+// A type 6 IE decoded with its IEI needs 3 octets of header (IEI and a
+// 2-octet length): 2 octets are refused before the length is read
+TEST(TestSuiteNasMsg, rel1710Type6IeShorterThanItsHeaderIsRejected) {
+  const uint8_t packet[]   = {0x78, 0x00, 0x05};
+  oai::nas::EapMessage eap = {};
+  EXPECT_EQ(eap.Decode(packet, 2, true), KEncodeDecodeError);
 }

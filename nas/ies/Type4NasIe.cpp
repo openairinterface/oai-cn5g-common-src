@@ -70,8 +70,9 @@ bool Type4NasIe::Validate(int len) const {
 }
 
 //------------------------------------------------------------------------------
-bool Type4NasIe::ValidateHeader(int len) const {
-  int header_len = GetHeaderLength();  // Length of IEI/Len
+bool Type4NasIe::ValidateHeader(int len, bool is_iei) const {
+  // The IEI is decoded only if is_iei; iei_ is not set yet
+  int header_len = is_iei ? 2 : 1;  // Length of IEI/Len
   if (len < header_len) {
     oai::logger::logger_common::nas().error(
         "Buffer length is less than the length of the header (IEI/Length) "
@@ -113,7 +114,7 @@ int Type4NasIe::Encode(uint8_t* buf, int len, int& len_pos) const {
 
 //------------------------------------------------------------------------------
 int Type4NasIe::Decode(const uint8_t* const buf, int len, bool is_iei) {
-  if (!ValidateHeader(len)) return KEncodeDecodeError;
+  if (!ValidateHeader(len, is_iei)) return KEncodeDecodeError;
 
   int decoded_size = 0;
   uint8_t octet    = 0;

@@ -78,36 +78,40 @@ int _5gsMobileIdentity::Decode(const uint8_t* const buf, int len, bool is_iei) {
 
   oai::logger::logger_common::nas().debug(
       "Decoded 5GSMobilityIdentity IE length %ld", ie_len);
+  // Restrict decoding to this IE's declared extent
+  len = decoded_size + ie_len;
+
   int decoded_size_tmp = 0;
   uint8_t octet        = 0;
 
-  // Type of Identity
+  // Type of Identity, reject ie_len == 0
+  if (decoded_size >= len) return KEncodeDecodeError;
   DECODE_U8(
       buf + decoded_size, octet,
       decoded_size_tmp);  // Decode but don't increase decoded_size
 
+  int decoded_identity_size = 0;
+
   switch (octet & 0x07) {
     case kSuci: {
       type_of_identity_ = kSuci;
-      int decoded_suci_size =
+      decoded_identity_size =
           DecodeSuci(buf + decoded_size, len - decoded_size, ie_len);
-      if (decoded_suci_size == KEncodeDecodeError) return KEncodeDecodeError;
-      decoded_size += decoded_suci_size;
-      oai::logger::logger_common::nas().debug(
-          "Decoded SUCI (%d octets)", decoded_size);
     } break;
     case k5gGuti: {
       type_of_identity_ = k5gGuti;
-      decoded_size += Decode5gGuti(buf + decoded_size, len - decoded_size);
+      decoded_identity_size =
+          Decode5gGuti(buf + decoded_size, len - decoded_size);
     } break;
     case k5gSTmsi: {
       type_of_identity_ = k5gSTmsi;
-      decoded_size += Decode5gSTmsi(buf + decoded_size, len - decoded_size);
+      decoded_identity_size =
+          Decode5gSTmsi(buf + decoded_size, len - decoded_size);
     } break;
     // TODO: IMEI
     case kImeisv: {
-      type_of_identity_ = kImeisv;
-      decoded_size += DecodeImeisv(buf + decoded_size, ie_len);
+      type_of_identity_     = kImeisv;
+      decoded_identity_size = DecodeImeisv(buf + decoded_size, ie_len);
     } break;
     // TODO: MAC Address
     default: {
@@ -115,6 +119,12 @@ int _5gsMobileIdentity::Decode(const uint8_t* const buf, int len, bool is_iei) {
       return 0;
     }
   }
+
+  // The identity content must occupy exactly its declared extent.
+  if (decoded_identity_size == KEncodeDecodeError ||
+      decoded_size + decoded_identity_size != len)
+    return KEncodeDecodeError;
+  decoded_size += decoded_identity_size;
 
   oai::logger::logger_common::nas().debug(
       "Decoded %s, len (%ld)", GetIeName().c_str(), decoded_size);
@@ -175,6 +185,8 @@ int _5gsMobileIdentity::Decode5gGuti(const uint8_t* const buf, int len) {
 
   int decoded_size = 0;
   uint8_t octet    = 0;
+
+  if (len < k5gsMobileIdentityIe5gGutiLength) return KEncodeDecodeError;
 
   // Decode SUPI format/Type of Identity
   DECODE_U8(buf + decoded_size, octet, decoded_size);  // Type of Identity
@@ -630,6 +642,8 @@ int _5gsMobileIdentity::Decode5gSTmsi(const uint8_t* const buf, int len) {
   int decoded_size            = 0;
   _5G_S_TMSI_t _5g_s_tmsi_tmp = {};
   uint8_t octet               = 0;
+
+  if (len < k5gsMobileIdentityIe5gSTmsiLength) return KEncodeDecodeError;
 
   // Decode SUPI format/Type of Identity
   DECODE_U8(buf + decoded_size, octet, decoded_size);

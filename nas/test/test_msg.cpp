@@ -9,6 +9,7 @@
 #include "RegistrationRequest.hpp"
 #include "SecurityModeComplete.hpp"
 #include "ServiceRequest.hpp"
+#include "PayloadContainer.hpp"
 #include "NssrgInformation.hpp"
 #include "NsagInformation.hpp"
 #include "PriorityIndicator.hpp"
@@ -1319,4 +1320,118 @@ TEST(TestSuiteNasMsg, stage1_5gmmCapabilityOctet7AllRel17Bits) {
   EXPECT_TRUE(cap.SupportsNsag());                // bit 6 = 0x20
   EXPECT_TRUE(cap.SupportsUas());                 // bit 7 = 0x40
   EXPECT_TRUE(cap.SupportsMpsIndicatorUpdate());  // bit 8 = 0x80
+}
+
+// ==========================================================================
+// Payload Container declared-length regression tests
+// The multiple-payloads decoder must bound every read by the IE's declared
+// extent (header length + ie_len) and each entry by its declared 2-octet
+// length (which covers the type octet, the optional IEs and the entry
+// contents), so a malformed container can neither consume bytes beyond its
+// own extent nor run the cursor out of the message buffer.
+// ==========================================================================
+
+// Valid multiple-payloads container: two entries with spec-accurate 2-octet
+// lengths and non-empty contents; entry 1 carries one optional IE, entry 2
+// carries contents only. Decoding must succeed, land exactly on the declared
+// extent and expose the entry contents.
+TEST(TestSuiteNasMsg, payloadContainerValidMultipleEntriesDecode) {
+  // Type-6 IE, no IEI: 2-byte length (16) + content
+  uint8_t packet[] = {
+      0x00, 0x10,              // length = 16
+      0x02,                    // num_entries = 2
+      0x00, 0x08,              // entry 1: length = 8
+      0x11,                    // 1 optional IE, container type 1
+      0x01, 0x02, 0xaa, 0xbb,  // optional IE type 1, 2 B value
+      0xde, 0xad, 0xbe,        // entry 1 contents (3 B)
+      0x00, 0x03,              // entry 2: length = 3
+      0x01,                    // no optional IEs, container type 1
+      0xef, 0xf0,              // entry 2 contents (2 B)
+  };
+
+  oai::nas::PayloadContainer pc = {};
+  int decode_result =
+      pc.Decode(packet, sizeof(packet), false, kMultiplePayloads);
+  ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
+
+  std::vector<oai::nas::PayloadContainerEntry> entries;
+  ASSERT_TRUE(pc.GetValue(entries));
+  ASSERT_EQ(entries.size(), 2);
+  EXPECT_EQ(entries[0].length, 0x08);
+  EXPECT_EQ(entries[0].payloadContainerType, 0x01);
+  ASSERT_EQ(entries[0].optionalIE.size(), 1);
+  EXPECT_EQ(entries[0].optionalIE[0].ie_len, 0x02);
+  ASSERT_TRUE(entries[0].contents != NULL);
+  EXPECT_EQ(blength(entries[0].contents), 3);
+  EXPECT_EQ(static_cast<uint8_t>(bdata(entries[0].contents)[0]), 0xde);
+  EXPECT_EQ(entries[1].length, 0x03);
+  EXPECT_EQ(entries[1].payloadContainerType, 0x01);
+  ASSERT_TRUE(entries[1].optionalIE.empty());
+  ASSERT_TRUE(entries[1].contents != NULL);
+  EXPECT_EQ(blength(entries[1].contents), 2);
+  EXPECT_EQ(static_cast<uint8_t>(bdata(entries[1].contents)[0]), 0xef);
+}
+
+// Optional-IE value exceeding the available message buffer: the entry
+// declares 3 content octets and its single optional IE declares 16 value
+// octets, but the buffer ends right after the IE-length octet. The decoder
+// must reject the message instead of advancing the cursor past the buffer.
+TEST(TestSuiteNasMsg, payloadContainerOptionalIeValueExceedsBuffer) {
+  // Type-6 IE, no IEI: 2-byte length (6) + truncated content
+  uint8_t packet[] = {
+      0x00, 0x06,  // length = 6
+      0x01,        // num_entries = 1
+      0x00, 0x03,  // entry: length = 3
+      0x11,        // 1 optional IE, container type 1
+      0x01, 0x10,  // optional IE type 1, 16 value octets - none present
+  };
+
+  oai::nas::PayloadContainer pc = {};
+  int decode_result =
+      pc.Decode(packet, sizeof(packet), false, kMultiplePayloads);
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// Declared extent shorter than what the entry implies, followed by
+// sufficient trailing bytes: the container declares 4 content octets while
+// its single entry claims 64000 through the 2-octet length, and the bytes
+// of the next message IE are physically present in the buffer. The decoder
+// must reject the container and never consume the trailing bytes as entry
+// data.
+TEST(TestSuiteNasMsg, payloadContainerIeLenTooShortWithTrailingNasData) {
+  // Type-6 IE, no IEI: 2-byte length (4) + 4 content octets + 6 trailing
+  uint8_t packet[] = {
+      0x00, 0x04,                    // length = 4
+      0x01,                          // num_entries = 1
+      0xfa, 0x00,                    // entry: length = 64000 (beyond extent)
+      0x11,                          // 1 optional IE, container type 1
+      0x01,                          // optional IE type
+      0x04, 0xaa, 0xbb, 0xcc, 0xdd,  // trailing bytes of the next message IE
+  };
+
+  oai::nas::PayloadContainer pc = {};
+  int decode_result =
+      pc.Decode(packet, sizeof(packet), false, kMultiplePayloads);
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// Optional IE exceeding its declared entry length: the entry declares 3
+// content octets but its optional IE claims 4 value octets. The value
+// octets are physically present and fit the message extent, so only the
+// entry's own declared bound catches the over-declaration.
+TEST(TestSuiteNasMsg, payloadContainerOptionalIeExceedsEntryLength) {
+  // Type-6 IE, no IEI: 2-byte length (10) + content
+  uint8_t packet[] = {
+      0x00, 0x0a,              // length = 10
+      0x01,                    // num_entries = 1
+      0x00, 0x03,              // entry: length = 3
+      0x11,                    // 1 optional IE, container type 1
+      0x01, 0x04,              // optional IE type 1, 4 value octets
+      0xaa, 0xbb, 0xcc, 0xdd,  // the 4 value octets, present in the message
+  };
+
+  oai::nas::PayloadContainer pc = {};
+  int decode_result =
+      pc.Decode(packet, sizeof(packet), false, kMultiplePayloads);
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
 }

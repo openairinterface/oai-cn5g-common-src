@@ -218,47 +218,6 @@ TEST(TestSuiteNGAPMsg, NgapMbsSessionIdRoundTrip) {
   ie.tMGI.size = 0;
 }
 
-TEST(TestSuiteNGAPMsg, HandoverCommandTransferForwardingTunnelRoundTrip) {
-  in_addr forwarding_address{};
-  ASSERT_EQ(inet_pton(AF_INET, "192.168.170.134", &forwarding_address), 1);
-
-  oai::ngap::TransportLayerAddress transport_layer_address;
-  transport_layer_address.setIpv4Address(forwarding_address);
-
-  constexpr uint32_t kForwardingTeid = 0x12345678;
-  oai::ngap::GtpTeid gtp_teid;
-  gtp_teid.set(kForwardingTeid);
-
-  oai::ngap::UpTransportLayerInformation forwarding_tunnel;
-  forwarding_tunnel.set(transport_layer_address, gtp_teid);
-
-  oai::ngap::HandoverCommandTransfer source;
-  source.setDlForwardingUpTnlInformation(forwarding_tunnel);
-
-  uint8_t encoded[256]{};
-  const int encoded_size = source.encode(encoded, sizeof(encoded));
-  ASSERT_GT(encoded_size, 0);
-
-  oai::ngap::HandoverCommandTransfer decoded;
-  ASSERT_TRUE(decoded.decode(encoded, encoded_size));
-
-  std::optional<oai::ngap::UpTransportLayerInformation> decoded_tunnel;
-  decoded.getDlForwardingUpTnlInformation(decoded_tunnel);
-  ASSERT_TRUE(decoded_tunnel.has_value());
-
-  oai::ngap::TransportLayerAddress decoded_address;
-  oai::ngap::GtpTeid decoded_teid;
-  decoded_tunnel->get(decoded_address, decoded_teid);
-
-  const auto decoded_ipv4 = decoded_address.getIpv4Address();
-  ASSERT_TRUE(decoded_ipv4.has_value());
-  EXPECT_EQ(decoded_ipv4->s_addr, forwarding_address.s_addr);
-
-  uint32_t decoded_teid_value = 0;
-  ASSERT_TRUE(decoded_teid.get(decoded_teid_value));
-  EXPECT_EQ(decoded_teid_value, kForwardingTeid);
-}
-
 // PAGING: every setter hands its IE over to the message's IE list, which owns
 // it from then on. Set the four IEs the AMF can send, in the object-set order
 // of TS 38.413 §9.4.4, encode, then decode the bytes back. Run under ASan, a

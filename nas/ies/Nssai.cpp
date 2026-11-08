@@ -114,6 +114,14 @@ int Nssai::Decode(const uint8_t* const buf, int len, bool is_iei) {
     DECODE_U8(buf + decoded_size, len_snssai, decoded_size);
     length_tmp--;
 
+    if (len_snssai > length_tmp) {
+      oai::logger::logger_common::nas().error(
+          "SNSSAI length (%d) exceeds the remaining IE content length (%d "
+          "octet(s))",
+          len_snssai, length_tmp);
+      return KEncodeDecodeError;
+    }
+
     switch (len_snssai) {
       case 1: {  // Only SST
         // SST
@@ -159,6 +167,11 @@ int Nssai::Decode(const uint8_t* const buf, int len, bool is_iei) {
         DECODE_U24(buf + decoded_size, a.mHplmnSd, decoded_size);
         length_tmp -= 3;
       } break;
+      default: {
+        oai::logger::logger_common::nas().error(
+            "Unsupported SNSSAI length (%d octet(s))", len_snssai);
+        return KEncodeDecodeError;
+      }
     }
 
     s_nssais_.insert(s_nssais_.end(), a);

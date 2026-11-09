@@ -119,7 +119,7 @@ void PduSessionResourceModifyResponseMsg::
       (Ngap_PDUSessionResourceModifyResponseIEs_t*) calloc(
           1, sizeof(Ngap_PDUSessionResourceModifyResponseIEs_t));
   ie->id          = Ngap_ProtocolIE_ID_id_PDUSessionResourceModifyListModRes;
-  ie->criticality = Ngap_Criticality_reject;
+  ie->criticality = Ngap_Criticality_ignore;
   ie->value.present =
       Ngap_PDUSessionResourceModifyResponseIEs__value_PR_PDUSessionResourceModifyListModRes;
 
@@ -208,7 +208,7 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       case Ngap_ProtocolIE_ID_id_RAN_UE_NGAP_ID: {
-        if (ngap_ie->criticality == Ngap_Criticality_reject &&
+        if (ngap_ie->criticality == Ngap_Criticality_ignore &&
             ngap_ie->value.present ==
                 Ngap_PDUSessionResourceModifyResponseIEs__value_PR_RAN_UE_NGAP_ID) {
           if (!NgapUeMessage::m_RanUeNgapId.decode(
@@ -245,11 +245,19 @@ bool PduSessionResourceModifyResponseMsg::decode(Ngap_NGAP_PDU_t* ngapMsgPdu) {
         }
       } break;
       default: {
-        oai::logger::logger_common::ngap().error(
-            "Decoded NGAP Message PDU error");
-
-        return false;
-      }
+        // Skip unprocessed IEs marked ignore (TS 38.413 clause 10.3.4.2)
+        if (ngap_ie->criticality == Ngap_Criticality_ignore) {
+          oai::logger::logger_common::ngap().debug(
+              "Decoded NGAP PDUSessionResourceModifyResponse - ignoring IE "
+              "with ID %ld (criticality: ignore)",
+              ngap_ie->id);
+        } else {
+          oai::logger::logger_common::ngap().error(
+              "Decoded NGAP message PDU error - unknown IE with ID %ld",
+              ngap_ie->id);
+          return false;
+        }
+      } break;
     }
   }
 

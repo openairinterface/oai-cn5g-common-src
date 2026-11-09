@@ -15,6 +15,7 @@
 #include "NsagInformation.hpp"
 #include "PriorityIndicator.hpp"
 #include "PduSessionAuthenticationComplete.hpp"
+#include "PduSessionModificationCommand.hpp"
 #include "PduSessionModificationCommandReject.hpp"
 #include "PduSessionReleaseComplete.hpp"
 #include "PduSessionReleaseRequest.hpp"
@@ -1496,4 +1497,109 @@ TEST(TestSuiteNasMsg, rel1710Type6IeShorterThanItsHeaderIsRejected) {
   const uint8_t packet[]   = {0x78, 0x00, 0x05};
   oai::nas::EapMessage eap = {};
   EXPECT_EQ(eap.Decode(packet, 2, true), KEncodeDecodeError);
+}
+
+// =============================================================================
+// PDU SESSION MODIFICATION COMMAND (TS 24.501 §8.3.9.1): every IE after the
+// header is optional, so each is encoded with its IEI even when it was built
+// without one, as the SMF builds the Session-AMBR, QoS rules and QoS flow
+// descriptions (LV and LV-E IEs in the PDU SESSION ESTABLISHMENT ACCEPT)
+// =============================================================================
+TEST(
+    TestSuiteNasMsg,
+    positiveTestingPduSessionModificationCommandOptionalIesCarryTheirIei) {
+  oai::nas::PduSessionModificationCommand command = {};
+  command.SetHeader(2, 0);
+
+  // 10 Mbps in each direction (unit 06H = 1 Mbps)
+  oai::nas::SessionAmbr session_ambr = {};
+  session_ambr.SetUnitForDownlink(0x06);
+  session_ambr.SetSessionAmbrForDownlink(10);
+  session_ambr.SetUnitForUplink(0x06);
+  session_ambr.SetSessionAmbrForUplink(10);
+  command.SetSessionAmbr(session_ambr);
+
+  oai::nas::AlwaysOnPduSessionIndication always_on = {};
+  always_on.SetApsi(oai::nas::kAlwaysOnPduSessionRequired);
+  command.SetAlwaysOnPduSessionIndication(always_on);
+
+  // Default QoS rule 1: match-all packet filter, precedence 255, QFI 1
+  oai::nas::PacketFilterComponent component = {};
+  component.type = oai::nas::kQosRulePfctiMatchAllType;
+  oai::nas::PacketFilterCreateAndModifyAndReplace match_all = {};
+  match_all.packet_filter_direction = 0b11;  // bidirectional
+  match_all.packet_filter_id        = 1;
+  match_all.content.length          = 1;
+  match_all.content.packet_filter_components.push_back(component);
+  oai::nas::QosRule rule = {};
+  rule.SetQosRuleId(1);
+  rule.SetRuleOperationCode(
+      oai::nas::kQosRuleRuleOperationCodeCreateNewQosRule);
+  rule.SetDqrBit(true);
+  rule.SetNumberOfPacketFilters(1);
+  rule.AddPacketFilterCreateAndModifyAndReplace(match_all);
+  rule.SetPrecedence(0xff);
+  rule.SetQfi(1);
+  oai::nas::QosRules qos_rules = {};
+  qos_rules.Set({rule});
+  command.SetAuthorizedQosRules(qos_rules);
+
+  // QoS flow 1 with 5QI 9
+  oai::nas::QosFlowDescriptionParameter _5qi = {};
+  _5qi.Set5qi(9);
+  oai::nas::QosFlowDescription flow = {};
+  flow.SetQfi(1);
+  flow.SetOperationCode(
+      oai::nas::
+          kQosFlowDescriptionRuleOperationCodeCreateNewQosFlowDescription);
+  flow.SetEBit(true);
+  flow.SetParametersList({_5qi});
+  oai::nas::QosFlowDescriptions flow_descriptions = {};
+  flow_descriptions.Set({flow});
+  command.SetAuthorizedQosFlowDescriptions(flow_descriptions);
+
+  // Header, then IEs 2A, 8-, 7A and 79 with their IEIs
+  const std::vector<uint8_t> expected = hexStringToByteArray(
+      "2e0200cb" + std::string("2a0606000a06000a") + "81" +
+      "7a000901000631310101ff01" + "790006012041010109");
+  std::vector<uint8_t> buf(command.GetLength());
+  ASSERT_EQ(buf.size(), expected.size());
+  ASSERT_EQ(
+      command.Encode(buf.data(), buf.size()),
+      static_cast<int>(expected.size()));
+  EXPECT_EQ(buf[4], kIeiSessionAmbr);
+  EXPECT_EQ(buf[12] >> 4, kIeiAlwaysOnPduSessionIndication);
+  EXPECT_EQ(buf[13], kIeiAuthorizedQosRules);
+  EXPECT_EQ(buf[25], kIeiAuthorizedQosFlowDescriptions);
+  EXPECT_EQ(buf, expected);
+
+  // Decode back without QoS rules: QosRule::Decode skips precedence and QFI
+  std::vector<uint8_t> packet = buf;
+  packet.erase(packet.begin() + 13, packet.begin() + 25);
+  oai::nas::PduSessionModificationCommand decoded = {};
+  ASSERT_EQ(
+      decoded.Decode(packet.data(), packet.size()),
+      static_cast<int>(packet.size()));
+  std::optional<oai::nas::SessionAmbr> got_ambr = std::nullopt;
+  decoded.GetSessionAmbr(got_ambr);
+  ASSERT_TRUE(got_ambr.has_value());
+  EXPECT_EQ(got_ambr.value().GetSessionAmbrForDownlink(), 10);
+  EXPECT_EQ(got_ambr.value().GetSessionAmbrForUplink(), 10);
+  std::optional<oai::nas::AlwaysOnPduSessionIndication> got_always_on =
+      std::nullopt;
+  decoded.GetAlwaysOnPduSessionIndication(got_always_on);
+  ASSERT_TRUE(got_always_on.has_value());
+  EXPECT_TRUE(got_always_on.value().IsApsi());
+  std::optional<oai::nas::QosFlowDescriptions> got_flows = std::nullopt;
+  decoded.GetAuthorizedQosFlowDescriptions(got_flows);
+  ASSERT_TRUE(got_flows.has_value());
+  std::vector<oai::nas::QosFlowDescription> flows = {};
+  got_flows.value().Get(flows);
+  ASSERT_EQ(flows.size(), 1u);
+  EXPECT_EQ(flows[0].GetQfi(), 1);
+  const std::vector<oai::nas::QosFlowDescriptionParameter> parameters =
+      flows[0].GetParametersList();
+  ASSERT_EQ(parameters.size(), 1u);
+  ASSERT_TRUE(parameters[0].Get5qi().has_value());
+  EXPECT_EQ(parameters[0].Get5qi().value(), 9);
 }

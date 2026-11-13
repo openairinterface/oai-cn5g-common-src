@@ -124,7 +124,8 @@ struct gtpc_tlv_bad_length_exception : public gtpc_tlv_exception {
  public:
   gtpc_tlv_bad_length_exception(uint8_t ie_type, uint16_t ie_length) throw()
       : gtpc_tlv_exception(ie_type) {
-    phrase = fmt::format("GTPV2-C IE TLV {} Bad Length {} Exception", ie_type);
+    phrase = fmt::format(
+        "GTPV2-C IE TLV {} Bad Length {} Exception", ie_type, ie_length);
   }
   virtual ~gtpc_tlv_bad_length_exception() throw() {}
 };

@@ -144,7 +144,10 @@ void config::read_from_file(const std::string& file_path) {
 }
 
 void config::to_json(nlohmann::json& json_data) {
-  json_data[m_http_version.get_config_name()] = m_http_version.to_json();
+  if (m_used_config_values.find(NF_CONFIG_HTTP_NAME) !=
+      m_used_config_values.end()) {
+    json_data[m_http_version.get_config_name()] = m_http_version.to_json();
+  }
   json_data[m_log_level_feature.get_config_name()] =
       m_log_level_feature.to_json();
   json_data[m_register_nrf_feature.get_config_name()] =
@@ -159,7 +162,9 @@ void config::to_json(nlohmann::json& json_data) {
 
 bool config::from_json(const nlohmann::json& json_data) {
   try {
-    if (json_data.find(m_http_version.get_config_name()) != json_data.end()) {
+    if (m_used_config_values.find(NF_CONFIG_HTTP_NAME) !=
+            m_used_config_values.end() &&
+        json_data.find(m_http_version.get_config_name()) != json_data.end()) {
       m_http_version.from_json(json_data[m_http_version.get_config_name()]);
     }
 
@@ -203,7 +208,10 @@ bool config::validate() {
     logger::logger_registry::set_level(spdlog::level::from_str(log_level()));
   }
   success &= safe_validate_field(m_register_nrf_feature);
-  success &= safe_validate_field(m_http_version);
+  if (m_used_config_values.find(NF_CONFIG_HTTP_NAME) !=
+      m_used_config_values.end()) {
+    success &= safe_validate_field(m_http_version);
+  }
   success &= safe_validate_field(m_http_request_timeout);
   for (auto& nf : m_nf_map) {
     success &= safe_validate_field(*nf.second);
@@ -246,7 +254,10 @@ std::string config::to_string() const {
   std::string indent = fmt::format("{:<{}}", "", INDENT_WIDTH);
   out.append(m_log_level_feature.to_string(indent));
   out.append(m_register_nrf_feature.to_string(indent));
-  out.append(m_http_version.to_string(indent));
+  if (m_used_config_values.find(NF_CONFIG_HTTP_NAME) !=
+      m_used_config_values.end()) {
+    out.append(m_http_version.to_string(indent));
+  }
   out.append(m_tls_config.to_string(indent));
   out.append(m_http_request_timeout.to_string(indent));
 

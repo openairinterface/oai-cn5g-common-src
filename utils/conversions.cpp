@@ -215,10 +215,15 @@ void conv::hex_str_to_uint8(const char* string, uint8_t* des) {
 std::string conv::url_decode(std::string& value) {
   std::string ret;
   char ch;
-  int ii;
+  int ii = 0;
   for (size_t i = 0; i < value.length(); i++) {
     if (int(value[i]) == 37) {
-      sscanf(value.substr(i + 1, 2).c_str(), "%x", &ii);
+      // Only decode a well-formed "%" followed by two hex digits; otherwise
+      // sscanf would leave ii uninitialized/unassigned and we would read it.
+      if (sscanf(value.substr(i + 1, 2).c_str(), "%x", &ii) != 1) {
+        ret += value[i];
+        continue;
+      }
       ch = static_cast<char>(ii);
       ret += ch;
       i = i + 2;

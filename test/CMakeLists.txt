@@ -19,6 +19,7 @@ include_directories(${LOGGER_DIR})
 include_directories(${MODEL_DIR})
 include_directories(${CONFIG_DIR})
 include_directories(${NAS_DIR}/5gmm-msgs)
+include_directories(${NAS_DIR}/5gsm-msgs)
 include_directories(${NAS_DIR}/common)
 include_directories(${NAS_DIR}/ies)
 include_directories(${NAS_DIR}/utils)
@@ -30,10 +31,15 @@ include_directories(${NGAP_DIR}/utils)
 include_directories(${UTILS_DIR})
 include_directories(${UTILS_DIR}/bstr)
 
+# The NAS library does not build the 5GSM messages (each NF that uses them
+# builds them), so the tests build them here
+file(GLOB NAS_5GSM_MSGS_src_files ${NAS_DIR}/5gsm-msgs/*.cpp)
+
 add_executable(unit_tests 
   main.cpp
   ${NAS_TEST_DIR}/test_msg.cpp
-  ${NGAP_TEST_DIR}/test_msg.cpp) 
+  ${NGAP_TEST_DIR}/test_msg.cpp
+  ${NAS_5GSM_MSGS_src_files}) 
 
 target_link_libraries(unit_tests 
  -Wl,--start-group COMMON  NAS NGAP LOGGER UTILS -lboost_system 

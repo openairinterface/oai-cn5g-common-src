@@ -12,6 +12,9 @@
 #include "NssrgInformation.hpp"
 #include "NsagInformation.hpp"
 #include "PriorityIndicator.hpp"
+#include "PduSessionModificationCommand.hpp"
+#include "QosFlowDescriptions.hpp"
+#include "QosRules.hpp"
 #include "IeConst.hpp"
 #include "endian.h"
 
@@ -1319,4 +1322,65 @@ TEST(TestSuiteNasMsg, stage1_5gmmCapabilityOctet7AllRel17Bits) {
   EXPECT_TRUE(cap.SupportsNsag());                // bit 6 = 0x20
   EXPECT_TRUE(cap.SupportsUas());                 // bit 7 = 0x40
   EXPECT_TRUE(cap.SupportsMpsIndicatorUpdate());  // bit 8 = 0x80
+}
+
+// TS 24.501 Table 8.3.9.1.1: the optional IEs of PDU SESSION MODIFICATION
+// COMMAND are TLV/TLV-E with an IEI. The SMF builds them with the default
+// (IEI-less) constructors, so the setters must add the IEI.
+TEST(TestSuiteNasMsg, PduSessionModificationCommandOptionalIesCarryTheirIei) {
+  oai::nas::PduSessionModificationCommand cmd;
+  cmd.SetHeader(1, 1);
+
+  oai::nas::SessionAmbr ambr;
+  ambr.SetUnitForDownlink(0x06);
+  ambr.SetSessionAmbrForDownlink(400);
+  ambr.SetUnitForUplink(0x06);
+  ambr.SetSessionAmbrForUplink(200);
+  cmd.SetSessionAmbr(ambr);
+
+  oai::nas::QosRule rule;
+  rule.SetQosRuleId(1);
+  rule.SetRuleOperationCode(
+      oai::nas::
+          kQosRuleRuleOperationCodeModifyExistingQosRuleWithoutModifyingPacketFilters);
+  rule.SetNumberOfPacketFilters(0);
+  rule.SetPrecedence(0xff);
+  rule.SetQfi(1);
+  rule.SetLengthIndicator();
+  oai::nas::QosRules rules;
+  rules.Set(std::vector<oai::nas::QosRule>{rule});
+  cmd.SetAuthorizedQosRules(rules);
+
+  // QFI 1, create new QoS flow description, E=1, 5QI 9
+  const uint8_t desc_buf[] = {0x01, 0x20, 0x41, 0x01, 0x01, 0x09};
+  oai::nas::QosFlowDescription desc;
+  ASSERT_GT(desc.Decode(desc_buf, sizeof(desc_buf)), 0);
+  oai::nas::QosFlowDescriptions descs;
+  descs.Set(std::vector<oai::nas::QosFlowDescription>{desc});
+  cmd.SetAuthorizedQosFlowDescriptions(descs);
+
+  uint8_t buf[128] = {};
+  int size         = cmd.Encode(buf, sizeof(buf));
+  ASSERT_GT(size, 4);
+
+  // Header (4 octets), then Session-AMBR (TLV), Authorized QoS rules (TLV-E)
+  // and Authorized QoS flow descriptions (TLV-E), each with its IEI
+  int offset = 4;
+  EXPECT_EQ(buf[offset], kIeiSessionAmbr);
+  offset += 2 + buf[offset + 1];
+  ASSERT_LT(offset, size);
+  EXPECT_EQ(buf[offset], kIeiAuthorizedQosRules);
+  offset += 3 + ((buf[offset + 1] << 8) | buf[offset + 2]);
+  ASSERT_LT(offset, size);
+  EXPECT_EQ(buf[offset], kIeiAuthorizedQosFlowDescriptions);
+  offset += 3 + ((buf[offset + 1] << 8) | buf[offset + 2]);
+  EXPECT_EQ(offset, size);
+
+  oai::nas::PduSessionModificationCommand decoded;
+  ASSERT_GT(decoded.Decode(buf, size), 4);
+  std::optional<oai::nas::SessionAmbr> decoded_ambr;
+  decoded.GetSessionAmbr(decoded_ambr);
+  ASSERT_TRUE(decoded_ambr.has_value());
+  EXPECT_EQ(decoded_ambr.value().GetSessionAmbrForDownlink(), 400);
+  EXPECT_EQ(decoded_ambr.value().GetSessionAmbrForUplink(), 200);
 }

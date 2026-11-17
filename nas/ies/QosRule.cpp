@@ -469,6 +469,21 @@ int QosRule::Decode(const uint8_t* const buf, int len) {
             pf_create_and_modify_and_replace_list);
   }
 
+  // QoS rule precedence, then segregation + QFI: present when the length of
+  // the QoS rule covers them (TS 24.501 9.11.4.13)
+  const int rule_end = 3 + length_;  // QoS rule identifier + length + contents
+  if ((decoded_size < rule_end) and (decoded_size < len)) {
+    uint8_t precedence = 0;
+    DECODE_U8(buf + decoded_size, precedence, decoded_size);
+    precedence_ = std::make_optional<uint8_t>(precedence);
+  }
+  if ((decoded_size < rule_end) and (decoded_size < len)) {
+    uint8_t octet = 0;
+    DECODE_U8(buf + decoded_size, octet, decoded_size);
+    segregation_ = (octet >> 6) & 0x01;
+    qfi_         = std::make_optional<uint8_t>(octet & 0x3f);
+  }
+
   oai::logger::logger_common::nas().debug(
       "Decoded QosRule (len %d)", decoded_size);
   return decoded_size;

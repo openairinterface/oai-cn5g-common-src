@@ -64,6 +64,7 @@ void PduSessionModificationCommand::Get5gsmCause(
 void PduSessionModificationCommand::SetSessionAmbr(
     const SessionAmbr& session_ambr) {
   ie_session_ambr_ = std::make_optional<SessionAmbr>(session_ambr);
+  ie_session_ambr_.value().SetIei(kIeiSessionAmbr);
 }
 
 //------------------------------------------------------------------------------
@@ -103,6 +104,7 @@ void PduSessionModificationCommand::GetAlwaysOnPduSessionIndication(
 void PduSessionModificationCommand::SetAuthorizedQosRules(
     const QosRules& qos_rules) {
   ie_authorized_qos_rules_ = std::make_optional<QosRules>(qos_rules);
+  ie_authorized_qos_rules_.value().SetIei(kIeiAuthorizedQosRules);
 }
 
 //------------------------------------------------------------------------------
@@ -116,6 +118,8 @@ void PduSessionModificationCommand::SetAuthorizedQosFlowDescriptions(
     const QosFlowDescriptions& flow_descriptions) {
   ie_authorized_qos_flow_descriptions_ =
       std::make_optional<QosFlowDescriptions>(flow_descriptions);
+  ie_authorized_qos_flow_descriptions_.value().SetIei(
+      kIeiAuthorizedQosFlowDescriptions);
 }
 
 //------------------------------------------------------------------------------

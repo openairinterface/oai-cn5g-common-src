@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 
 #include "conversions.hpp"
+#include "logger_base.hpp"
 
 using namespace oai::ngap;
 
@@ -41,6 +42,11 @@ bool FiveGSTmsi::set(
 
 //------------------------------------------------------------------------------
 bool FiveGSTmsi::encode(Ngap_FiveG_S_TMSI_t& pdu) const {
+  if (m_TmsiValue.empty()) {
+    oai::logger::logger_common::ngap().warn(
+        "FiveGSTmsi::encode called with empty TMSI value, refusing to encode");
+    return false;
+  }
   m_AmfSetId.encode(pdu.aMFSetID);
   m_AmfPointer.encode(pdu.aMFPointer);
 

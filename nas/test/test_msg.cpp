@@ -13,6 +13,7 @@
 #include "NssrgInformation.hpp"
 #include "NsagInformation.hpp"
 #include "PriorityIndicator.hpp"
+#include "QosRules.hpp"
 #include "IeConst.hpp"
 #include "endian.h"
 
@@ -1446,4 +1447,68 @@ TEST(TestSuiteNasMsg, mobileIdentityImeisvValidDecode) {
   int decode_result               = id.Decode(packet, sizeof(packet));
   ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
   EXPECT_EQ(id.GetTypeOfIdentity(), kImeisv);
+}
+
+// TS 24.501 9.11.4.13: a QoS rule ends with the precedence octet and the
+// segregation + QFI octet when its length covers them
+TEST(TestSuiteNasIe, QosRulesDecodeReadsPrecedenceSegregationAndQfi) {
+  // UE-requested new QoS rule (6.4.2.2): QRI 0, length 6, create new QoS rule,
+  // 1 packet filter (bidirectional, id 1, match-all), precedence 10,
+  // segregation requested, QFI 0
+  const uint8_t buf[] = {0x7a, 0x00, 0x09, 0x00, 0x00, 0x06,
+                         0x21, 0x31, 0x01, 0x01, 0x0a, 0x40};
+  oai::nas::QosRules ie(kIeiRequestedQosRules);
+
+  EXPECT_EQ(ie.Decode(buf, sizeof(buf), true), (int) sizeof(buf));
+
+  std::vector<oai::nas::QosRule> rules;
+  ie.Get(rules);
+  ASSERT_EQ(rules.size(), 1u);
+  EXPECT_EQ(rules[0].GetPrecedence(), std::optional<uint8_t>(10));
+  EXPECT_TRUE(rules[0].GetSegregation());
+  EXPECT_EQ(rules[0].GetQfi(), std::optional<uint8_t>(0));
+}
+
+TEST(TestSuiteNasIe, QosRulesDecodeKeepsTheNextRuleAligned) {
+  // Rule 1 (as the SMF sends the default rule): QRI 1, create new QoS rule,
+  // DQR, 1 match-all packet filter, precedence 255, QFI 1.
+  // Rule 2: QRI 2, delete existing QoS rule (no precedence, no QFI).
+  const uint8_t buf[] = {0x7a, 0x00, 0x0d, 0x01, 0x00, 0x06, 0x31, 0x21,
+                         0x01, 0x01, 0xff, 0x01, 0x02, 0x00, 0x01, 0x40};
+  oai::nas::QosRules ie(kIeiRequestedQosRules);
+
+  EXPECT_EQ(ie.Decode(buf, sizeof(buf), true), (int) sizeof(buf));
+
+  std::vector<oai::nas::QosRule> rules;
+  ie.Get(rules);
+  ASSERT_EQ(rules.size(), 2u);
+  EXPECT_EQ(rules[0].GetPrecedence(), std::optional<uint8_t>(0xff));
+  EXPECT_FALSE(rules[0].GetSegregation());
+  EXPECT_EQ(rules[0].GetQfi(), std::optional<uint8_t>(1));
+  EXPECT_EQ(rules[1].GetQosRuleId(), 2);
+  EXPECT_EQ(
+      rules[1].GetRuleOperationCode(),
+      oai::nas::kQosRuleRuleOperationCodeDeleteExistingQosRule);
+  EXPECT_EQ(rules[1].GetPrecedence(), std::nullopt);
+  EXPECT_EQ(rules[1].GetQfi(), std::nullopt);
+}
+
+TEST(TestSuiteNasIe, QosRuleEncodeDecodeRoundTrip) {
+  oai::nas::QosRule rule;
+  rule.SetQosRuleId(3);
+  rule.SetRuleOperationCode(
+      oai::nas::
+          kQosRuleRuleOperationCodeModifyExistingQosRuleWithoutModifyingPacketFilters);
+  rule.SetPrecedence(20);
+  rule.SetQfi(5);
+  rule.SetLengthIndicator();
+  uint8_t buf[16] = {};
+  int size        = rule.Encode(buf, sizeof(buf));
+  ASSERT_GT(size, 0);
+
+  oai::nas::QosRule decoded;
+
+  EXPECT_EQ(decoded.Decode(buf, size), size);
+  EXPECT_EQ(decoded.GetPrecedence(), std::optional<uint8_t>(20));
+  EXPECT_EQ(decoded.GetQfi(), std::optional<uint8_t>(5));
 }

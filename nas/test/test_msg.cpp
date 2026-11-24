@@ -4,6 +4,7 @@
 #include "AuthenticationResponse.hpp"
 #include "AuthenticationFailure.hpp"
 #include "IdentityResponse.hpp"
+#include "_5gsMobileIdentity.hpp"
 #include "RegistrationAccept.hpp"
 #include "RegistrationComplete.hpp"
 #include "RegistrationRequest.hpp"
@@ -1319,4 +1320,130 @@ TEST(TestSuiteNasMsg, stage1_5gmmCapabilityOctet7AllRel17Bits) {
   EXPECT_TRUE(cap.SupportsNsag());                // bit 6 = 0x20
   EXPECT_TRUE(cap.SupportsUas());                 // bit 7 = 0x40
   EXPECT_TRUE(cap.SupportsMpsIndicatorUpdate());  // bit 8 = 0x80
+}
+
+// ==========================================================================
+// 5GS Mobile Identity declared-length regression tests
+// The dispatcher must bound decoding to the IE's declared extent
+// (header length + ie_len) and reject any identity whose content does
+// not occupy exactly that extent. A containing-buffer length check
+// alone accepts a 5G-S-TMSI declaring fewer than its 7 octets whenever
+// trailing message bytes exist, consuming the following IEs' data.
+// ==========================================================================
+
+// Valid 5G-S-TMSI: declared length 7 and 7 content octets. Decoding must
+// succeed and land exactly on the declared extent.
+TEST(TestSuiteNasMsg, mobileIdentity5gSTmsiValidDecode) {
+  uint8_t packet[] = {
+      0x00, 0x07,              // length = 7
+      0xf4,                    // 0xf0 | k5gSTmsi
+      0x54, 0xc0,              // AMF set id / pointer
+      0x0f, 0x11, 0x22, 0x33,  // 5G-TMSI
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
+  EXPECT_EQ(id.GetTypeOfIdentity(), k5gSTmsi);
+}
+
+// 5G-S-TMSI whose length indicator declares 5 octets while the six bytes
+// of the next message IE are physically present in the buffer: the
+// containing-buffer check alone passes (11 bytes remain), and the decoder
+// would read 2 trailing bytes as 5G-TMSI data and land the cursor inside
+// the neighbour IE. The decoder must reject the identity instead.
+TEST(TestSuiteNasMsg, mobileIdentity5gSTmsiUnderDeclaredWithTrailingData) {
+  uint8_t packet[] = {
+      0x00, 0x05,                          // length = 5 (< 7)
+      0xf4, 0x54, 0xc0, 0x0f, 0x11,        // 5 declared content octets
+      0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff,  // trailing next-IE bytes
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// 5G-S-TMSI over-declared: length 9 with all 9 declared octets present,
+// while the fixed 7-octet layout consumes only 7. Without the exact
+// consumption check the cursor stops 2 octets short of the IE end,
+// desyncing every following IE. The decoder must reject it.
+TEST(TestSuiteNasMsg, mobileIdentity5gSTmsiOverDeclared) {
+  uint8_t packet[] = {
+      0x00, 0x09,              // length = 9
+      0xf4,                    // 0xf0 | k5gSTmsi
+      0x54, 0xc0,              // AMF set id / pointer
+      0x0f, 0x11, 0x22, 0x33,  // 5G-TMSI
+      0xbb, 0xcc,              // 2 stray octets inside the extent
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// Valid 5G-GUTI: declared length 11 and 11 content octets. Decoding must
+// succeed and land exactly on the declared extent.
+TEST(TestSuiteNasMsg, mobileIdentity5gGutiValidDecode) {
+  uint8_t packet[] = {
+      0x00, 0x0b,              // length = 11
+      0xf2,                    // 0xf0 | k5gGuti
+      0x21, 0xf3, 0x54,        // MCC/MNC
+      0x01,                    // AMF region id
+      0x54, 0xc0,              // AMF set id / pointer
+      0x0f, 0x11, 0x22, 0x33,  // 5G-TMSI
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
+  EXPECT_EQ(id.GetTypeOfIdentity(), k5gGuti);
+}
+
+// 5G-GUTI under-declared (length 9) with trailing message bytes: the
+// fixed 11-octet layout has no containing-buffer guard of its own, so
+// without the declared-extent bound the decoder reads 2 bytes beyond the
+// IE (into the next IE, or past the buffer when nothing follows).
+TEST(TestSuiteNasMsg, mobileIdentity5gGutiUnderDeclaredWithTrailingData) {
+  uint8_t packet[] = {
+      0x00, 0x09,        // length = 9 (< 11)
+      0xf2,              // 0xf0 | k5gGuti
+      0x21, 0xf3, 0x54,  // MCC/MNC
+      0x01,              // AMF region id
+      0x54, 0xc0,        // AMF set id / pointer
+      0x0f, 0x11,        // 5G-TMSI (truncated)
+      0xaa, 0xbb,        // trailing next-IE bytes
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// Zero declared length: no type-of-identity octet exists at all, so the
+// type peek itself must not read beyond the declared extent.
+TEST(TestSuiteNasMsg, mobileIdentityZeroLengthRejected) {
+  uint8_t packet[] = {
+      0x00, 0x00,  // length = 0, nothing follows
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  EXPECT_EQ(decode_result, KEncodeDecodeError);
+}
+
+// Valid IMEISV: variable-length identity consuming exactly its declared
+// extent; the exact-consumption check must keep accepting it.
+TEST(TestSuiteNasMsg, mobileIdentityImeisvValidDecode) {
+  uint8_t packet[] = {
+      0x00, 0x09,              // length = 9
+      0x15,                    //  kImeisv
+      0x51, 0x12, 0x34, 0x56,  // IMEI digits
+      0x78, 0x90, 0x12, 0x34,  // IMEI digits + SVN
+  };
+
+  oai::nas::_5gsMobileIdentity id = {};
+  int decode_result               = id.Decode(packet, sizeof(packet));
+  ASSERT_EQ(decode_result, static_cast<int>(sizeof(packet)));
+  EXPECT_EQ(id.GetTypeOfIdentity(), kImeisv);
 }

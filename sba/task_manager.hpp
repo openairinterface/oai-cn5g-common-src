@@ -10,7 +10,7 @@
 #include <linux/types.h>
 #include <sys/timerfd.h>
 
-namespace oai::event_handling {
+namespace oai::sba {
 
 class nf_event;
 class task_manager {
@@ -45,6 +45,6 @@ class task_manager {
   bool terminate;
   bool terminated;
 };
-}  // namespace oai::event_handling
+}  // namespace oai::sba
 
 #endif

@@ -67,7 +67,6 @@ void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfNr(
   tmp.set(capability);
   m_UeRadioCapabilityForPagingOfNr =
       std::optional<UeRadioCapabilityForPagingOfNr>(tmp);
-  m_UeRadioCapabilityForPagingOfEutra = std::nullopt;
 }
 
 //------------------------------------------------------------------------------
@@ -84,8 +83,6 @@ void UeRadioCapabilityForPaging::setUeRadioCapabilityForPagingOfEutra(
   tmp.set(capability);
   m_UeRadioCapabilityForPagingOfEutra =
       std::optional<UeRadioCapabilityForPagingOfEutra>(tmp);
-
-  m_UeRadioCapabilityForPagingOfNr = std::nullopt;
 }
 
 //------------------------------------------------------------------------------

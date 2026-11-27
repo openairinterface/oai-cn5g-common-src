@@ -323,7 +323,7 @@ class sbi_helper {
   static inline const std::string SmfCallbackPathSdmSubscription =
       ":ueId/sdm-notification";
   static inline const std::string SmfCallbackPathN1N2MessageTransferFailure =
-      "/callback/N1N2MsgTxfrFailureNotification/:ueId";
+      "/N1N2MsgTxfrFailureNotification/:ueId";
   static inline const std::string SmfCallbackPathSmPolicyAssociation =
       ":associationId/sm-policy-control-notify";
   // SMF Status Notify

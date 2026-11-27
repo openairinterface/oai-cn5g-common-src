@@ -8,6 +8,8 @@
 #include "Type6NasIe.hpp"
 #include "Struct.hpp"
 
+#include <vector>
+
 constexpr uint8_t kPayloadContainerMinimumLength = 4;
 constexpr uint8_t kPayloadContainerContentMinimumLength =
     kPayloadContainerMinimumLength -
@@ -39,7 +41,7 @@ class PayloadContainer : public Type6NasIe {
   bool GetValue(std::vector<PayloadContainerEntry>& content) const;
 
  private:
-  std::optional<bstring> content_;
+  std::optional<std::vector<uint8_t>> content_;  // own copy of the contents
   std::optional<std::vector<PayloadContainerEntry>> contents_;
 };
 

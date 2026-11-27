@@ -25,7 +25,7 @@ class Type6NasIe : public NasIe {
 
   uint32_t GetIeLength() const override;
   bool Validate(int len) const override;
-  bool ValidateHeader(int len) const;
+  bool ValidateHeader(int len, bool is_iei) const;
 
   void SetIei(uint8_t iei);
 

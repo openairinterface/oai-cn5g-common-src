@@ -4,6 +4,7 @@
 
 #include "3gpp_29.244.hpp"
 
+#include <memory>
 #include <string>
 
 #include "logger_base.hpp"
@@ -26,245 +27,236 @@ using namespace pfcp;
  *  @see    3GPP TS 29.244 V17.10.0 §7.5 (message framing), §8.1 (IE format)
  */
 pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
+  // Each IE is owned until load_from() returns: an IE that throws is freed
   pfcp_tlv tlv;
   tlv.load_from(is);
   if (tlv.length) {
     switch (tlv.type) {
       case PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_START ... PFCP_IE_ENTERPRISE_SPECIFIC_RANGE_END: {
-        pfcp_enterprise_specific_ie* ie = new pfcp_enterprise_specific_ie(tlv);
+        auto ie = std::make_unique<pfcp_enterprise_specific_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATE_PDR: {
-        pfcp_create_pdr_ie* ie = new pfcp_create_pdr_ie(tlv);
+        auto ie = std::make_unique<pfcp_create_pdr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_PDI: {
-        pfcp_pdi_ie* ie = new pfcp_pdi_ie(tlv);
+        auto ie = std::make_unique<pfcp_pdi_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATE_FAR: {
-        pfcp_create_far_ie* ie = new pfcp_create_far_ie(tlv);
+        auto ie = std::make_unique<pfcp_create_far_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_FORWARDING_PARAMETERS: {
-        pfcp_forwarding_parameters_ie* ie =
-            new pfcp_forwarding_parameters_ie(tlv);
+        auto ie = std::make_unique<pfcp_forwarding_parameters_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_DUPLICATING_PARAMETERS: {
-        pfcp_duplicating_parameters_ie* ie =
-            new pfcp_duplicating_parameters_ie(tlv);
+        auto ie = std::make_unique<pfcp_duplicating_parameters_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATE_URR: {
-        pfcp_create_urr_ie* ie = new pfcp_create_urr_ie(tlv);
+        auto ie = std::make_unique<pfcp_create_urr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATE_QER: {
-        pfcp_create_qer_ie* ie = new pfcp_create_qer_ie(tlv);
+        auto ie = std::make_unique<pfcp_create_qer_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATED_PDR: {
-        pfcp_created_pdr_ie* ie = new pfcp_created_pdr_ie(tlv);
+        auto ie = std::make_unique<pfcp_created_pdr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_PDR: {
-        pfcp_update_pdr_ie* ie = new pfcp_update_pdr_ie(tlv);
+        auto ie = std::make_unique<pfcp_update_pdr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_FAR: {
-        pfcp_update_far_ie* ie = new pfcp_update_far_ie(tlv);
+        auto ie = std::make_unique<pfcp_update_far_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_FORWARDING_PARAMETERS: {
-        pfcp_update_forwarding_parameters_ie* ie =
-            new pfcp_update_forwarding_parameters_ie(tlv);
+        auto ie = std::make_unique<pfcp_update_forwarding_parameters_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_BAR_WITHIN_PFCP_SESSION_REPORT_RESPONSE: {
-        pfcp_update_bar_within_pfcp_session_report_response_ie* ie =
-            new pfcp_update_bar_within_pfcp_session_report_response_ie(tlv);
+        auto ie = std::make_unique<
+            pfcp_update_bar_within_pfcp_session_report_response_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_URR: {
-        pfcp_update_urr_ie* ie = new pfcp_update_urr_ie(tlv);
+        auto ie = std::make_unique<pfcp_update_urr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_QER: {
-        pfcp_update_qer_ie* ie = new pfcp_update_qer_ie(tlv);
+        auto ie = std::make_unique<pfcp_update_qer_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REMOVE_PDR: {
-        pfcp_remove_pdr_ie* ie = new pfcp_remove_pdr_ie(tlv);
+        auto ie = std::make_unique<pfcp_remove_pdr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REMOVE_FAR: {
-        pfcp_remove_far_ie* ie = new pfcp_remove_far_ie(tlv);
+        auto ie = std::make_unique<pfcp_remove_far_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REMOVE_URR: {
-        pfcp_remove_urr_ie* ie = new pfcp_remove_urr_ie(tlv);
+        auto ie = std::make_unique<pfcp_remove_urr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REMOVE_QER: {
-        pfcp_remove_qer_ie* ie = new pfcp_remove_qer_ie(tlv);
+        auto ie = std::make_unique<pfcp_remove_qer_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CAUSE: {
-        pfcp_cause_ie* ie = new pfcp_cause_ie(tlv);
+        auto ie = std::make_unique<pfcp_cause_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_SOURCE_INTERFACE: {
-        pfcp_source_interface_ie* ie = new pfcp_source_interface_ie(tlv);
+        auto ie = std::make_unique<pfcp_source_interface_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_F_TEID: {
-        pfcp_fteid_ie* ie = new pfcp_fteid_ie(tlv);
+        auto ie = std::make_unique<pfcp_fteid_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_NETWORK_INSTANCE: {
-        pfcp_network_instance_ie* ie = new pfcp_network_instance_ie(tlv);
+        auto ie = std::make_unique<pfcp_network_instance_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_SDF_FILTER: {
-        pfcp_sdf_filter_ie* ie = new pfcp_sdf_filter_ie(tlv);
+        auto ie = std::make_unique<pfcp_sdf_filter_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_APPLICATION_ID: {
-        pfcp_application_id_ie* ie = new pfcp_application_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_application_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_GATE_STATUS: {
-        pfcp_gate_status_ie* ie = new pfcp_gate_status_ie(tlv);
+        auto ie = std::make_unique<pfcp_gate_status_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_MBR: {
-        pfcp_mbr_ie* ie = new pfcp_mbr_ie(tlv);
+        auto ie = std::make_unique<pfcp_mbr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_GBR: {
-        pfcp_gbr_ie* ie = new pfcp_gbr_ie(tlv);
+        auto ie = std::make_unique<pfcp_gbr_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_QER_CORRELATION_ID: {
-        pfcp_qer_correlation_id_ie* ie = new pfcp_qer_correlation_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_qer_correlation_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_PRECEDENCE: {
-        pfcp_precedence_ie* ie = new pfcp_precedence_ie(tlv);
+        auto ie = std::make_unique<pfcp_precedence_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_TRANSPORT_LEVEL_MARKING: {
-        pfcp_transport_level_marking_ie* ie =
-            new pfcp_transport_level_marking_ie(tlv);
+        auto ie = std::make_unique<pfcp_transport_level_marking_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_VOLUME_THRESHOLD: {
-        pfcp_volume_threshold_ie* ie = new pfcp_volume_threshold_ie(tlv);
+        auto ie = std::make_unique<pfcp_volume_threshold_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_TIME_THRESHOLD: {
-        pfcp_time_threshold_ie* ie = new pfcp_time_threshold_ie(tlv);
+        auto ie = std::make_unique<pfcp_time_threshold_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_MONITORING_TIME: {
-        pfcp_monitoring_time_ie* ie = new pfcp_monitoring_time_ie(tlv);
+        auto ie = std::make_unique<pfcp_monitoring_time_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_SUBSEQUENT_VOLUME_THRESHOLD: {
-        pfcp_subsequent_volume_threshold_ie* ie =
-            new pfcp_subsequent_volume_threshold_ie(tlv);
+        auto ie = std::make_unique<pfcp_subsequent_volume_threshold_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_SUBSEQUENT_TIME_THRESHOLD: {
-        pfcp_subsequent_time_threshold_ie* ie =
-            new pfcp_subsequent_time_threshold_ie(tlv);
+        auto ie = std::make_unique<pfcp_subsequent_time_threshold_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_INACTIVITY_DETECTION_TIME: {
-        pfcp_inactivity_detection_time_ie* ie =
-            new pfcp_inactivity_detection_time_ie(tlv);
+        auto ie = std::make_unique<pfcp_inactivity_detection_time_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REPORTING_TRIGGERS: {
-        pfcp_reporting_triggers_ie* ie = new pfcp_reporting_triggers_ie(tlv);
+        auto ie = std::make_unique<pfcp_reporting_triggers_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REDIRECT_INFORMATION: {
-        pfcp_redirect_information_ie* ie =
-            new pfcp_redirect_information_ie(tlv);
+        auto ie = std::make_unique<pfcp_redirect_information_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REPORT_TYPE: {
-        pfcp_report_type_ie* ie = new pfcp_report_type_ie(tlv);
+        auto ie = std::make_unique<pfcp_report_type_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_OFFENDING_IE: {
-        pfcp_offending_ie_ie* ie = new pfcp_offending_ie_ie(tlv);
+        auto ie = std::make_unique<pfcp_offending_ie_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_FORWARDING_POLICY: {
-        pfcp_forwarding_policy_ie* ie = new pfcp_forwarding_policy_ie(tlv);
+        auto ie = std::make_unique<pfcp_forwarding_policy_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_DESTINATION_INTERFACE: {
-        pfcp_destination_interface_ie* ie =
-            new pfcp_destination_interface_ie(tlv);
+        auto ie = std::make_unique<pfcp_destination_interface_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UP_FUNCTION_FEATURES: {
-        pfcp_up_function_features_ie* ie =
-            new pfcp_up_function_features_ie(tlv);
+        auto ie = std::make_unique<pfcp_up_function_features_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_APPLY_ACTION: {
-        pfcp_apply_action_ie* ie = new pfcp_apply_action_ie(tlv);
+        auto ie = std::make_unique<pfcp_apply_action_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_DOWNLINK_DATA_SERVICE_INFORMATION: {
         //        pfcp_downlink_data_service_information_ie *ie = new
@@ -294,9 +286,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_PFCPSMREQ_FLAGS: {
-        pfcp_pfcpsmreq_flags_ie* ie = new pfcp_pfcpsmreq_flags_ie(tlv);
+        auto ie = std::make_unique<pfcp_pfcpsmreq_flags_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_PFCPSRRSP_FLAGS: {
         //        pfcp_pfcpsrrsp_flags_ie *ie = new
@@ -333,14 +325,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_PACKET_DETECTION_RULE_ID: {
-        pfcp_pdr_id_ie* ie = new pfcp_pdr_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_pdr_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_F_SEID: {
-        pfcp_f_seid_ie* ie = new pfcp_f_seid_ie(tlv);
+        auto ie = std::make_unique<pfcp_f_seid_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_APPLICATION_IDS_PFDS: {
         //        pfcp_application_ids_pfds_ie *ie = new
@@ -355,9 +347,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_NODE_ID: {
-        pfcp_node_id_ie* ie = new pfcp_node_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_node_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_PFD_CONTENTS: {
         //        pfcp_pfd_contents_ie *ie = new pfcp_pfd_contents_ie(tlv);
@@ -366,20 +358,19 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_MEASUREMENT_METHOD: {
-        pfcp_measurement_method_ie* ie = new pfcp_measurement_method_ie(tlv);
+        auto ie = std::make_unique<pfcp_measurement_method_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_USAGE_REPORT_TRIGGER: {
-        pfcp_usage_report_trigger_ie* ie =
-            new pfcp_usage_report_trigger_ie(tlv);
+        auto ie = std::make_unique<pfcp_usage_report_trigger_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_MEASUREMENT_PERIOD: {
-        pfcp_measurement_period_ie* ie = new pfcp_measurement_period_ie(tlv);
+        auto ie = std::make_unique<pfcp_measurement_period_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_FQ_CSID: {
         //        pfcp_fq_csid_ie *ie = new pfcp_fq_csid_ie(tlv);
@@ -388,15 +379,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_VOLUME_MEASUREMENT: {
-        pfcp_volume_measurement_ie* ie = new pfcp_volume_measurement_ie(tlv);
+        auto ie = std::make_unique<pfcp_volume_measurement_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_DURATION_MEASUREMENT: {
-        pfcp_duration_measurement_ie* ie =
-            new pfcp_duration_measurement_ie(tlv);
+        auto ie = std::make_unique<pfcp_duration_measurement_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_APPLICATION_DETECTION_INFORMATION: {
         //        pfcp_application_detection_information_ie *ie = new
@@ -406,15 +396,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_TIME_OF_FIRST_PACKET: {
-        pfcp_time_of_first_packet_ie* ie =
-            new pfcp_time_of_first_packet_ie(tlv);
+        auto ie = std::make_unique<pfcp_time_of_first_packet_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_TIME_OF_LAST_PACKET: {
-        pfcp_time_of_last_packet_ie* ie = new pfcp_time_of_last_packet_ie(tlv);
+        auto ie = std::make_unique<pfcp_time_of_last_packet_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_QUOTA_HOLDING_TIME: {
         //        pfcp_quota_holding_time_ie *ie = new
@@ -440,14 +429,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_START_TIME: {
-        pfcp_start_time_ie* ie = new pfcp_start_time_ie(tlv);
+        auto ie = std::make_unique<pfcp_start_time_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_END_TIME: {
-        pfcp_end_time_ie* ie = new pfcp_end_time_ie(tlv);
+        auto ie = std::make_unique<pfcp_end_time_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_QUERY_URR: {
         //        pfcp_query_urr_ie *ie = new pfcp_query_urr_ie(tlv);
@@ -464,21 +453,21 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_USAGE_REPORT_WITHIN_SESSION_DELETION_RESPONSE: {
-        pfcp_usage_report_within_session_deletion_response_ie* ie =
-            new pfcp_usage_report_within_session_deletion_response_ie(tlv);
+        auto ie = std::make_unique<
+            pfcp_usage_report_within_session_deletion_response_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_USAGE_REPORT_WITHIN_SESSION_REPORT_REQUEST: {
-        pfcp_usage_report_within_session_report_request_ie* ie =
-            new pfcp_usage_report_within_session_report_request_ie(tlv);
+        auto ie = std::make_unique<
+            pfcp_usage_report_within_session_report_request_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_URR_ID: {
-        pfcp_urr_id_ie* ie = new pfcp_urr_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_urr_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_LINKED_URR_ID: {
         //        pfcp_linked_urr_id_ie *ie = new pfcp_linked_urr_id_ie(tlv);
@@ -487,44 +476,40 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_DOWNLINK_DATA_REPORT: {
-        pfcp_downlink_data_report_ie* ie =
-            new pfcp_downlink_data_report_ie(tlv);
+        auto ie = std::make_unique<pfcp_downlink_data_report_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_OUTER_HEADER_CREATION: {
-        pfcp_outer_header_creation_ie* ie =
-            new pfcp_outer_header_creation_ie(tlv);
+        auto ie = std::make_unique<pfcp_outer_header_creation_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CREATE_BAR: {
-        pfcp_create_bar_ie* ie = new pfcp_create_bar_ie(tlv);
+        auto ie = std::make_unique<pfcp_create_bar_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_UPDATE_BAR_WITHIN_PFCP_SESSION_MODIFICATION_REQUEST: {
-        pfcp_update_bar_within_pfcp_session_modification_request_ie* ie =
-            new pfcp_update_bar_within_pfcp_session_modification_request_ie(
-                tlv);
+        auto ie = std::make_unique<
+            pfcp_update_bar_within_pfcp_session_modification_request_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_REMOVE_BAR: {
-        pfcp_remove_bar_ie* ie = new pfcp_remove_bar_ie(tlv);
+        auto ie = std::make_unique<pfcp_remove_bar_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_BAR_ID: {
-        pfcp_bar_id_ie* ie = new pfcp_bar_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_bar_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_CP_FUNCTION_FEATURES: {
-        pfcp_cp_function_features_ie* ie =
-            new pfcp_cp_function_features_ie(tlv);
+        auto ie = std::make_unique<pfcp_cp_function_features_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_USAGE_INFORMATION: {
         //        pfcp_usage_information_ie *ie = new
@@ -543,9 +528,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_UE_IP_ADDRESS: {
-        pfcp_ue_ip_address_ie* ie = new pfcp_ue_ip_address_ie(tlv);
+        auto ie = std::make_unique<pfcp_ue_ip_address_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_PACKET_RATE: {
         //        pfcp_packet_rate_ie *ie = new pfcp_packet_rate_ie(tlv);
@@ -554,15 +539,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_OUTER_HEADER_REMOVAL: {
-        pfcp_outer_header_removal_ie* ie =
-            new pfcp_outer_header_removal_ie(tlv);
+        auto ie = std::make_unique<pfcp_outer_header_removal_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_RECOVERY_TIME_STAMP: {
-        pfcp_recovery_time_stamp_ie* ie = new pfcp_recovery_time_stamp_ie(tlv);
+        auto ie = std::make_unique<pfcp_recovery_time_stamp_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_DL_FLOW_LEVEL_MARKING: {
         //        pfcp_dl_flow_level_marking_ie *ie = new
@@ -582,10 +566,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_MEASUREMENT_INFORMATION: {
-        pfcp_measurement_information_ie* ie =
-            new pfcp_measurement_information_ie(tlv);
+        auto ie = std::make_unique<pfcp_measurement_information_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_NODE_REPORT_TYPE: {
         //        pfcp_node_report_type_ie *ie = new
@@ -605,9 +588,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_UR_SEQN: {
-        pfcp_ur_seqn_ie* ie = new pfcp_ur_seqn_ie(tlv);
+        auto ie = std::make_unique<pfcp_ur_seqn_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_UPDATE_DUPLICATING_PARAMETERS: {
         //        pfcp_update_duplicating_parameters_ie *ie = new
@@ -616,26 +599,24 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_ACTIVATE_PREDEFINED_RULES: {
-        pfcp_activate_predefined_rules_ie* ie =
-            new pfcp_activate_predefined_rules_ie(tlv);
+        auto ie = std::make_unique<pfcp_activate_predefined_rules_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_DEACTIVATE_PREDEFINED_RULES: {
-        pfcp_deactivate_predefined_rules_ie* ie =
-            new pfcp_deactivate_predefined_rules_ie(tlv);
+        auto ie = std::make_unique<pfcp_deactivate_predefined_rules_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_FAR_ID: {
-        pfcp_far_id_ie* ie = new pfcp_far_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_far_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_QER_ID: {
-        pfcp_qer_id_ie* ie = new pfcp_qer_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_qer_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_OCI_FLAGS: {
         //        pfcp_oci_flags_ie *ie = new pfcp_oci_flags_ie(tlv);
@@ -657,14 +638,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_PDN_TYPE: {
-        pfcp_pdn_type_ie* ie = new pfcp_pdn_type_ie(tlv);
+        auto ie = std::make_unique<pfcp_pdn_type_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_FAILED_RULE_ID: {
-        pfcp_failed_rule_id_ie* ie = new pfcp_failed_rule_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_failed_rule_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_TIME_QUOTA_MECHANISM: {
         //        pfcp_time_quota_mechanism_ie *ie = new
@@ -673,16 +654,15 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_USER_PLANE_IP_RESOURCE_INFORMATION: {
-        pfcp_user_plane_ip_resource_information_ie* ie =
-            new pfcp_user_plane_ip_resource_information_ie(tlv);
+        auto ie =
+            std::make_unique<pfcp_user_plane_ip_resource_information_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_USER_PLANE_INACTIVITY_TIMER: {
-        pfcp_user_plane_inactivity_timer_ie* ie =
-            new pfcp_user_plane_inactivity_timer_ie(tlv);
+        auto ie = std::make_unique<pfcp_user_plane_inactivity_timer_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_AGGREGATED_URRS: {
         //        pfcp_aggregated_urrs_ie *ie = new
@@ -713,14 +693,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_RQI: {
-        pfcp_rqi_ie* ie = new pfcp_rqi_ie(tlv);
+        auto ie = std::make_unique<pfcp_rqi_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_QFI: {
-        pfcp_qfi_ie* ie = new pfcp_qfi_ie(tlv);
+        auto ie = std::make_unique<pfcp_qfi_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       //    case PFCP_IE_QUERY_URR_REFERENCE: {
       //        pfcp_query_urr_reference_ie *ie = new
@@ -766,15 +746,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
       //      }
       //      break;
       case PFCP_IE_ETHERNET_PACKET_FILTER: {
-        pfcp_ethernet_packet_filter_ie* ie =
-            new pfcp_ethernet_packet_filter_ie(tlv);
+        auto ie = std::make_unique<pfcp_ethernet_packet_filter_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_MAC_ADDRESS: {
-        pfcp_mac_address_ie* ie = new pfcp_mac_address_ie(tlv);
+        auto ie = std::make_unique<pfcp_mac_address_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       //    case PFCP_IE_C_TAG: {
       //        pfcp_c_tag_ie *ie = new pfcp_c_tag_ie(tlv);
@@ -789,9 +768,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
       //      }
       //      break;
       case PFCP_IE_ETHERTYPE: {
-        pfcp_ethertype_ie* ie = new pfcp_ethertype_ie(tlv);
+        auto ie = std::make_unique<pfcp_ethertype_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       //    case PFCP_IE_PROXYING: {
       //        pfcp_proxying_ie *ie = new pfcp_proxying_ie(tlv);
@@ -800,15 +779,14 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
       //      }
       //      break;
       case PFCP_IE_ETHERNET_FILTER_ID: {
-        pfcp_ethernet_filter_id_ie* ie = new pfcp_ethernet_filter_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_ethernet_filter_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_ETHERNET_FILTER_PROPERTIES: {
-        pfcp_ethernet_filter_properties_ie* ie =
-            new pfcp_ethernet_filter_properties_ie(tlv);
+        auto ie = std::make_unique<pfcp_ethernet_filter_properties_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_SUGGESTED_BUFFERING_PACKETS_COUNT: {
         //        pfcp_suggested_buffering_packets_count_ie *ie = new
@@ -818,15 +796,15 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_USER_ID: {
-        pfcp_user_id_ie* ie = new pfcp_user_id_ie(tlv);
+        auto ie = std::make_unique<pfcp_user_id_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_ETHERNET_PDU_SESSION_INFORMATION: {
-        pfcp_ethernet_pdu_session_information_ie* ie =
-            new pfcp_ethernet_pdu_session_information_ie(tlv);
+        auto ie =
+            std::make_unique<pfcp_ethernet_pdu_session_information_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_ETHERNET_TRAFFIC_INFORMATION: {
         //        pfcp_ethernet_traffic_information_ie *ie = new
@@ -885,9 +863,9 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_FRAMED_ROUTE: {
-        pfcp_framed_route_ie* ie = new pfcp_framed_route_ie(tlv);
+        auto ie = std::make_unique<pfcp_framed_route_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
         //    case PFCP_IE_FRAMED_ROUTING: {
         //        pfcp_framed_routing_ie *ie = new pfcp_framed_routing_ie(tlv);
@@ -901,19 +879,19 @@ pfcp_ie* pfcp_ie::new_pfcp_ie_from_stream(std::istream& is) {
         //      }
         //      break;
       case PFCP_IE_APN_DNN: {
-        pfcp_apn_dnn_ie* ie = new pfcp_apn_dnn_ie(tlv);
+        auto ie = std::make_unique<pfcp_apn_dnn_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_3GPP_INTERFACE_TYPE: {
-        pfcp_3gpp_interface_type_ie* ie = new pfcp_3gpp_interface_type_ie(tlv);
+        auto ie = std::make_unique<pfcp_3gpp_interface_type_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
       case PFCP_IE_S_NSSAI: {
-        pfcp_nssai_ie* ie = new pfcp_nssai_ie(tlv);
+        auto ie = std::make_unique<pfcp_nssai_ie>(tlv);
         ie->load_from(is);
-        return ie;
+        return ie.release();
       } break;
 
       default:

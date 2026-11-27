@@ -4,6 +4,7 @@
 
 #include "NgapMessage.hpp"
 
+#include "common_defs.hpp"
 #include "logger_base.hpp"
 #include "ngap_utils.hpp"
 
@@ -687,6 +688,12 @@ int NgapMessage::Encode(uint8_t* buf, int bufSize) {
   ngap_utils::print_asn_msg(&asn_DEF_Ngap_NGAP_PDU, ngapPdu);
   asn_enc_rval_t er = aper_encode_to_buffer(
       &asn_DEF_Ngap_NGAP_PDU, NULL, ngapPdu, buf, bufSize);
+  // -1 if it does not fit or cannot be encoded
+  if (er.encoded < 0) {
+    oai::logger::logger_common::ngap().error(
+        "Encoding NGAP message failed (buffer of %d octets)", bufSize);
+    return KEncodeDecodeError;
+  }
 
   int encoded_size = (er.encoded + 7) >> 3;
   oai::logger::logger_common::ngap().debug("Encoded size (%d)", encoded_size);

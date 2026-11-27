@@ -10,6 +10,15 @@
 
 using namespace oai::nas;
 
+namespace {
+// Copy of a bstring's octets (empty for a null or empty bstring)
+std::vector<uint8_t> copy_octets(const bstring& b) {
+  if (b == nullptr || bdata(b) == nullptr || blength(b) <= 0) return {};
+  const uint8_t* data = (const uint8_t*) bdata(b);
+  return std::vector<uint8_t>(data, data + blength(b));
+}
+}  // namespace
+
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer() : Type6NasIe() {
   content_  = std::nullopt;
@@ -26,22 +35,22 @@ PayloadContainer::PayloadContainer(uint8_t iei) : Type6NasIe(iei) {
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(const bstring& b) : Type6NasIe() {
-  content_  = std::optional<bstring>(b);
+  content_  = copy_octets(b);
   contents_ = std::nullopt;
   SetLengthIndicator(
-      (blength(b) > kPayloadContainerContentMinimumLength) ?
-          blength(b) :
+      (content_.value().size() > kPayloadContainerContentMinimumLength) ?
+          content_.value().size() :
           kPayloadContainerContentMinimumLength);
 }
 
 //------------------------------------------------------------------------------
 PayloadContainer::PayloadContainer(uint8_t iei, const bstring& b)
     : Type6NasIe(iei) {
-  content_  = std::optional<bstring>(b);
+  content_  = copy_octets(b);
   contents_ = std::nullopt;
   SetLengthIndicator(
-      (blength(b) > kPayloadContainerContentMinimumLength) ?
-          blength(b) :
+      (content_.value().size() > kPayloadContainerContentMinimumLength) ?
+          content_.value().size() :
           kPayloadContainerContentMinimumLength);
 }
 
@@ -81,10 +90,10 @@ PayloadContainer::~PayloadContainer() {}
 
 //------------------------------------------------------------------------------
 void PayloadContainer::SetValue(const bstring& cnt) {
-  content_ = std::optional<bstring>(cnt);
+  content_ = copy_octets(cnt);
   SetLengthIndicator(
-      (blength(cnt) > kPayloadContainerContentMinimumLength) ?
-          blength(cnt) :
+      (content_.value().size() > kPayloadContainerContentMinimumLength) ?
+          content_.value().size() :
           kPayloadContainerContentMinimumLength);
 }
 
@@ -115,7 +124,10 @@ bool PayloadContainer::GetValue(
 //------------------------------------------------------------------------------
 bool PayloadContainer::GetValue(bstring& cnt) const {
   if (content_.has_value()) {
-    cnt = bstrcpy(content_.value());
+    // The caller owns the returned copy
+    cnt = content_.value().empty() ?
+              bfromcstr("") :
+              blk2bstr(content_.value().data(), content_.value().size());
     return true;
   }
   return false;
@@ -134,10 +146,10 @@ int PayloadContainer::Encode(uint8_t* buf, int len, uint8_t type) const {
   encoded_size += encoded_header_size;
 
   if (content_.has_value()) {
-    uint8_t* buf_tmp = (uint8_t*) bdata(content_.value());
-    if (buf_tmp != nullptr)
-      memcpy(buf + encoded_size, buf_tmp, blength(content_.value()));
-    encoded_size += blength(content_.value());
+    if (!content_.value().empty())
+      memcpy(
+          buf + encoded_size, content_.value().data(), content_.value().size());
+    encoded_size += content_.value().size();
   } else if (contents_.has_value()) {
     // Number of entries
     ENCODE_U8(buf + encoded_size, contents_.value().size(), encoded_size);
@@ -192,10 +204,8 @@ int PayloadContainer::Decode(
   ie_len = GetLengthIndicator();
 
   if (type != kMultiplePayloads) {  // not multiple payloads
-    uint8_t octet       = 0;
-    bstring content_tmp = {};
-    content_tmp         = blk2bstr(buf + decoded_size, ie_len);
-    content_            = std::optional<bstring>(content_tmp);
+    content_ =
+        std::vector<uint8_t>(buf + decoded_size, buf + decoded_size + ie_len);
     decoded_size += ie_len;
     return decoded_size;
   }
